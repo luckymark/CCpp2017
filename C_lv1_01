@@ -1,0 +1,26 @@
+#include <cmath>
+#include <cstdio>
+#include <cstring>
+#include <iostream>
+#include <algorithm>
+#include <windows.h>
+using namespace std;
+void work(int num)
+{
+	system("cls");
+	for(int i=1;i<=num;++i) printf(" ");
+	printf("R");
+	Sleep(500);
+}
+int main()
+{
+	for(int i=0;i<=10;++i)
+	{
+		work(i);
+	}
+	for(int i=9;i>=0;--i)
+	{
+		work(i);
+	}
+	return 0;
+}
