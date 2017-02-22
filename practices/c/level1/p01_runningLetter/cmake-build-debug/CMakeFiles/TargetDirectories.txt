@@ -1,0 +1,3 @@
+/media/plusls/MYSDCARD/code/CCpp2017/practices/c/level1/p01_runningLetter/cmake-build-debug/CMakeFiles/edit_cache.dir
+/media/plusls/MYSDCARD/code/CCpp2017/practices/c/level1/p01_runningLetter/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/media/plusls/MYSDCARD/code/CCpp2017/practices/c/level1/p01_runningLetter/cmake-build-debug/CMakeFiles/p01_runningLetter.dir
