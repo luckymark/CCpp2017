@@ -14,10 +14,10 @@ int main()
             cout<<"\b";
         cout<<" "<<word;
     }
-    for(int i = 0; i < 50; ++i)
+    for(int i = 0; i < 70; ++i)
     {
         for(int j = 0; j < 10000000; ++j);
-
+        cout<<"\b ";
         for(int j = 0; j < word_length; ++j)
             cout<<"\b";
         cout<<"\b"<<word<<" ";
