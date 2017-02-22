@@ -1,0 +1,59 @@
+#include <cmath>
+#include <cstdio>
+#include <cstring>
+#include <iostream>
+#include <algorithm>
+#include <ctime>
+char str[900000];
+int opt,rand_seed,l,now;
+using namespace std;//33~126
+int nxt(int x)
+{
+	int mo=23333333;
+	x=(x*rand_seed%mo)^((x*x%mo-233*(x^x-rand_seed)%mo)%mo);
+	x=(x*rand_seed%mo)^((x*x%rand_seed+x*x/rand_seed%mo-rand_seed^(x^x-rand_seed)%mo)%mo);
+	return (x%53+53)%53;
+}
+void encryption()
+{
+	rand_seed=rand()%80+33;
+	l=strlen(str);
+	now=rand_seed;
+	for(int i=0;i<l;++i)
+	{
+		now=nxt(now);
+		str[i]=str[i]+now>126?str[i]-126+33+now:str[i]+now;
+	}
+	putchar(rand_seed);
+	printf("%s",str);
+}
+void decryption()
+{
+	rand_seed=str[0];
+	l=strlen(str+1);
+	now=rand_seed;
+	for(int i=1;i<l;++i)
+	{
+		now=nxt(now);
+		str[i]=str[i]-now<33?str[i]+126-33-now:str[i]-now;
+	}
+	printf("%s",str+1);
+}
+int main()
+{
+	srand((unsigned)time(NULL));
+	printf("your option? 0 for encryption,1 for decryption\n");
+	scanf("%d",&opt);
+	printf("your string?\n");
+	scanf("%s",str);
+	if(opt==0)
+	{
+		encryption();
+	}
+	else
+	{	
+		decryption();
+	}
+	
+	return 0;
+}
