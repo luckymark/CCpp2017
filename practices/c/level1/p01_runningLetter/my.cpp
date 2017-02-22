@@ -1,3 +1,4 @@
+//written on unix
 #include <iostream>
 #include <cstring>
 #include <cstdio>
