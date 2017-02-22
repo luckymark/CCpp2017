@@ -52,6 +52,8 @@
 
 [Pro Git（中文版）](http://git.oschina.net/progit/)
 
+[撸袖子 动手学Git 专治菜鸟](http://igit.linuxtoy.org/contents.html)
+
 [Git远程操作详解 阮一峰](http://www.ruanyifeng.com/blog/2014/06/git_remote.html)
 
 [fork后如何跟上源repo的变化](https://segmentfault.com/q/1010000002590371)
