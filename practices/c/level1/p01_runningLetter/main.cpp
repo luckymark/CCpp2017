@@ -20,7 +20,7 @@ int main()
         cout<<"\b ";
         for(int j = 0; j < word_length; ++j)
             cout<<"\b";
-        cout<<"\b"<<word<<" ";
+        cout<<"\b"<<word;
     }
     return 0;
 }

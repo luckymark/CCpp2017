@@ -1,1 +1,0 @@
-/usr/bin/c++   -g   CMakeFiles/p01_runningLetter.dir/main.cpp.o  -o p01_runningLetter 
