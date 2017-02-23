@@ -14,7 +14,7 @@ void get_prime(){
 				for(int j = 1; j <= cnt_prime; j++){
 						if(i * prime[j] > 2000) break;
 						not_prime[i * prime[j]] = 1;
-						if(i % prime[j]) break;
+						if(i % prime[j] == 0) break;
 				}
 		}
 }
