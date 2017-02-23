@@ -1,0 +1,146 @@
+#include <stdio.h>
+
+#define MAX_SIZE 30
+
+void jud_sign(void);
+void jud_even_num(void);
+void dibisible_by_13(void);
+void leap_year(void);
+void max_two_num(void);
+void max_three_num(void);
+void max(void);
+
+int main(void)
+{
+	char cmd1, cmd2;
+
+	do{
+		printf("Enter your command:\n");
+		printf("'s': sign?\n"
+			"'e': even number?\n"
+			"'d': can be dibisibled by 13?\n"
+			"'l': leap year?\n"
+			"'w': find the max number from two numbers\n"
+			"'h': find the max number from three numbers\n"
+			"'m': find the max number from n numbers\n");
+		scanf("%c", &cmd1);
+		switch(cmd1){
+			case 's': jud_sign(); break;
+			case 'e': jud_even_num(); break;
+			case 'd': dibisible_by_13(); break;
+			case 'l': leap_year(); break;
+			case 'w': max_two_num(); break;
+			case 'h': max_three_num(); break;
+			case 'm': max(); break;
+			default: printf("Illegal input"); break;
+			}
+		printf("Try again?(y/n) ");
+		getchar();
+		while(1){
+			scanf("%c", &cmd2);
+			if(cmd2 == 'n' || cmd2 == 'N' || cmd2 == 'y' || cmd2 == 'Y')
+				break;
+			else
+				printf("Illegal input, try again.\n");
+		}
+	}while (cmd2 == 'y' || cmd2 == 'Y');
+	
+	return 0;	
+}
+
+void jud_sign(void)
+{
+	int n;
+	
+	printf("Enter a number: ");
+	scanf("%d", &n);
+	if (n > 0)
+		printf("+\n");
+	else if (n == 0)
+		printf("0\n");
+	else
+		printf("-\n");
+}
+
+void jud_even_num(void)
+{
+	int n;
+	
+	printf("Enter a number: ");
+	scanf("%d", &n);
+	if(n % 2 == 0)
+		printf("Even number\n");
+	else
+		printf("Not even number\n");
+}
+
+void dibisible_by_13(void)
+{
+	int n;
+	
+	printf("Enter a number: ");
+	scanf("%d", &n);
+	if(n % 13 == 0)
+		printf("%d can be dibisibled by 13\n");
+}
+
+void leap_year(void)
+{
+	int year;
+	
+	printf("Enter a year: ");
+	scanf("%d", &year);
+	if(year % 400 == 0){
+		printf("%d is leap year\n", year);
+		return;
+	}
+	else if(year % 4 == 0){
+		printf("%d is leap year\n", year);
+		return;
+	}
+	else
+		printf("%d is not leap year\n", year);
+}
+
+void max_two_num(void)
+{
+	int a, b;
+	
+	printf("Enter two numbers: ");
+	scanf("%d%d", &a, &b);
+	if(a >= b)
+		printf("%d\n", a);
+	else
+		printf("%d\n", b);	
+}
+
+void max_three_num(void)
+{
+	int a, b, c, max;
+	
+	printf("Enter three numbers: ");
+	scanf("%d%d%d", &a, &b,&c);
+	max = a;
+	if(b > max)
+		max = b;
+	if(c > max)
+		max = c;
+	printf("%d\n", max);
+}
+
+void max(void)
+{
+	int a[MAX_SIZE], max, i;
+	
+	printf("Enter seris of interger (less than 30, 0 to quit): ");
+	for (i = 0; i < MAX_SIZE;	i++){
+		scanf("%d", a[i]);
+		if(a[i] == 0)
+			break;
+	}
+	max = a[0];
+	for(int j = 0; j < i; j++){
+		if(a[j] >= max)
+			max = a[j];
+	}
+}
