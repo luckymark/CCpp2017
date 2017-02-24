@@ -10,25 +10,17 @@ int main(void)
 			a[i][j]='r';
 			b[i][j]=' ';
 		}
-	}
-
-	
+	}	
 	for(i=0;i<5;i++){
 		for(j=0;j<5;j++){
 			if(i!=0&&j==0)printf("\n");
 			printf("%c",a[i][j]);
 			Sleep(450);
-			system("cls");
-
-
-
-			
-			
+			system("cls");		
 			int k ,f;
 			for(k=0;k<=i;k++){
 				for(f=0;f<=j;f++){
 					if(k!=0&&f==0)printf("\n");
-					
 					printf("%c",b[k][f]);
 				}
 			}
