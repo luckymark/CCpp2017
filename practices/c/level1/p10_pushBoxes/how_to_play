@@ -1,0 +1,20 @@
+##push the box##
+
+#install#
+		1.you could use the command 'make' to install the game on your computer.
+		2.***this game could only run on the Unix/Linux system.***
+		3.you may need to install Xcode on your mac.
+
+#play_method#
+		1.you could use up, down, left, right to control the character.
+		2.here are some symbols and their means:
+			@: the character
+			B: the box
+			x: the target
+		3.you could use 'q' to quit the game, but you may lost the data of the current game you play.
+		4.you could use 'a' to play the previous task, and use 'd' to play the next task.
+		5.you could use 'r' to restart the current task.
+		6.the game has a score system and the data was saved in the file named 'score'. if no one have played a task before, the high score will show -1.
+#the_map#
+		1.you may want to edit your own map. you could finish this by creating a file named 'map'+'digit'. And then you should change the 'task_num' in my.c and run the 'make' again.I do want to put 'task_num' in a seperated file, but acctually, it is uesless. then you should create a file called 'mid'+'digit',which is used to suggest the number of the task. you could see 'get_num.sh' if you have some question about this file.
+that's it. have fun...
