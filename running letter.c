@@ -1,17 +1,15 @@
 #include<stdio.h>
 #include<windows.h>
-#define space 50
-void show(char *);
+#define SPACE 50
+void show(char * pos);
 int main() {
 	char pos[102] = { " " };
-	int i=0;
-	while (i < 100) 
+	for(int i=0;i<100;i++)
 	{
 		pos[i] = 'R';
 		show(pos);
 		pos[i] = ' ';
-		i++;
-		if(i==100)			//字母到边界时变为递减
+		if(i==100)			//arrive edge
 			while(i>0)
 			{
 				pos[i] = 'R';
@@ -25,6 +23,6 @@ int main() {
 }
 void show(char *pos) {
 	printf("%s", pos);
-	Sleep(space);
+	Sleep(SPACE);
 	system("cls");
 }
