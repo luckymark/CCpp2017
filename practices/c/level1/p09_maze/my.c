@@ -110,6 +110,15 @@ void work(){
 				}
 		}
 }
+char ch[205];
+void win(){
+		FILE *win = fopen("win","r");
+		while(fgets(ch,sizeof(ch),win) != NULL){
+				//puts(ch);
+				printf("%s",ch);
+		}
+		puts("");
+}
 int main(){
 		map[0] = fopen("map1","r");
 		map[1] = fopen("map2","r");
@@ -118,6 +127,7 @@ int main(){
 		initscr();
 		work();
 		endwin();
-		puts("You win");
+		//puts("You win");
+		win();
 		return 0;
 }
