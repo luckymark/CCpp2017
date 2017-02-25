@@ -1,0 +1,16 @@
+﻿  Feistel.cpp
+c:\users\administrator\documents\visual studio 2017\projects\feistel\feistel\feistel.cpp(11): warning C4603: “_CRT_SECURE_NO_WARNINGS”: 未定义宏或在预编译头使用后定义发生改变
+  c:\users\administrator\documents\visual studio 2017\projects\feistel\feistel\feistel.cpp(11): note: 将宏添加到预编译头中，而不是在此处定义
+  c:\users\administrator\documents\visual studio 2017\projects\feistel\feistel\feistel.cpp(12): note: 使用预编译头
+c:\users\administrator\documents\visual studio 2017\projects\feistel\feistel\feistel.cpp(79): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\administrator\documents\visual studio 2017\projects\feistel\feistel\feistel.cpp(101): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+c:\users\administrator\documents\visual studio 2017\projects\feistel\feistel\feistel.cpp(244): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.14393.0\ucrt\string.h(129): note: 参见“strcpy”的声明
+c:\users\administrator\documents\visual studio 2017\projects\feistel\feistel\feistel.cpp(247): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.14393.0\ucrt\string.h(90): note: 参见“strcat”的声明
+c:\users\administrator\documents\visual studio 2017\projects\feistel\feistel\feistel.cpp(271): warning C4267: “=”: 从“size_t”转换到“unsigned int”，可能丢失数据
+c:\users\administrator\documents\visual studio 2017\projects\feistel\feistel\feistel.cpp(284): warning C4018: “<”: 有符号/无符号不匹配
+c:\users\administrator\documents\visual studio 2017\projects\feistel\feistel\feistel.cpp(304): warning C4267: “=”: 从“size_t”转换到“unsigned int”，可能丢失数据
+c:\users\administrator\documents\visual studio 2017\projects\feistel\feistel\feistel.cpp(316): warning C4018: “<”: 有符号/无符号不匹配
+  Feistel.vcxproj -> C:\Users\Administrator\documents\visual studio 2017\Projects\Feistel\x64\Debug\Feistel.exe
+  Feistel.vcxproj -> C:\Users\Administrator\documents\visual studio 2017\Projects\Feistel\x64\Debug\Feistel.pdb (Partial PDB)
