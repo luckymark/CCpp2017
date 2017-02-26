@@ -1,4 +1,3 @@
-#include <iostream>
 #include<stdio.h>
 #include<windows.h>
 
@@ -10,14 +9,16 @@ int main(int argc, char** argv)
 	while (1)
 	{
 		i+=op;
+		int timepause=25; 
+		int returnpoint=80; 
 		for(int j=0;j<i;j++)
 		{
 			printf(" ");
 		}
 		printf("R");
 		system("cls");
-		Sleep(25);
-		if (i==80)
+		Sleep(timepause);
+		if (i==returnpoint)
 			op=-1;
 		if (i==1)
 			op=1;
