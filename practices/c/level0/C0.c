@@ -1,5 +1,6 @@
 #include <stdio.h>
-main()
+int main()
 {
 	printf("Hello World!I'm rabiribi!");
+	return 0;
 }
