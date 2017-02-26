@@ -38,7 +38,6 @@ int main(void)
 	a[4][3]='P';
 	a[4][4]='*';
 
-//	char registe_r1,registe_r2,registe_r3;
 	int ws=4, ad=3;
 	int steps=0;
 	while(1){
