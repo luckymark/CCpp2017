@@ -6,30 +6,21 @@
 
 int main(int argc, char** argv) 
 {
-		while(1)
+	int i=0,op=1;
+	while (1)
 	{
-	
-		for(int i=0;i<80;i++)
+		i+=op;
+		for(int j=0;j<i;j++)
 		{
-			for(int j=0;j<i;j++)
-			{
-				printf(" ");
-			}
-			printf("R");
-			system("cls");
-			Sleep(25);
+			printf(" ");
 		}
-		
-		for(int i=80;i>0;i--)
-		{
-			for(int j=0;j<i;j++)
-			{
-				printf(" ");
-			}
-			printf("R");
-			system("cls");
-			Sleep(25);
-		}
+		printf("R");
+		system("cls");
+		Sleep(25);
+		if (i==80)
+			op=-1;
+		if (i==1)
+			op=1;
 	}
 	return 0;
 }
