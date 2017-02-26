@@ -6,11 +6,11 @@ int main(void)
 	scanf("%d",&n);
 	if(is_prime(n))
 	{
-		printf("是质数\n");
+		printf("%d is prime.\n",n);
 	}
 	else
 	{
-		printf("不是质数\n");
+		printf("%d isn\'t prime.\n",n);
 	}
 	
 	return 0;
