@@ -8,10 +8,12 @@ int main (void)
 
 	printf("Enter the number of disk to be moved: ");
 	scanf("%d", &n);
-	if(n <= 0)
+	if(n <= 0){
 		printf("Illegal input\n");
-	else
+	}
+	else{
 		move(n, 'A', 'B', 'C');
+	}
 		
 	return 0;
 }
