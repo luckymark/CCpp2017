@@ -11,8 +11,9 @@ int main(void)
 		hundred = i / 100;
 		decade = i / 10 % 10;
 		unit = (i % 100 % 10);
-		if (pow(hundred, 3) + pow(decade, 3) + pow(unit, 3) == i)
+		if (pow(hundred, 3) + pow(decade, 3) + pow(unit, 3) == i){
 			printf("%d ", i);
+		}
 	}
 	
 	return 0;
