@@ -10,8 +10,9 @@ int main(void)
 	clock_t start, finish; //typedef long clock_t;
 	double caculate_time;
 	
-	for (int k = 2; k < MAX_NUM; k++)
+	for (int k = 2; k < MAX_NUM; k++){
 		a[k] = 1;
+	}
 		
 	start = clock();  //start timing
 	for (int i = 2; i < MAX_NUM; i++){
