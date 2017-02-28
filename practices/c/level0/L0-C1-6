@@ -4,7 +4,7 @@ int main()
 	int number[1000];
 	int max=0;
 	int i;
-	for (i=0;i<10;i++)
+	for (i=0;i<1000;i++)
 	{
 		scanf("%d",&number[i]);
 		if(max<number[i])
