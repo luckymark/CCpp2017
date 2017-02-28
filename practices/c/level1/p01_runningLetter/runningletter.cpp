@@ -1,20 +1,20 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<Windows.h>
 
 int main(void)
 {
 	int i , j ;
-	char  a[5][5],  b[5][5];
+	char b[5][5];
 	for( i = 0 ; i<5 ; i++ ){
 		for( j=0 ; j<5 ; j++ ){
-			a[i][j] = 'r' ;
 			b[i][j] = ' ' ;
 		}
 	}	
 	for( i = 0 ; i < 5 ; i++ ){
 		for( j = 0 ; j < 5; j++){
 			if( i != 0 && j== 0 ){printf("\n");}
-			printf( "%c" , a[i][j] );
+			printf( "%c" , 'r' );
 			Sleep( 450 );
 			system("cls");		
 			int k ,f;
