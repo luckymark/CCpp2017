@@ -1,36 +1,37 @@
 #include<stdio.h>
+
 #include<windows.h>
+
 int main(void)
 {
-	int i,j;
 	while(1)
-{
-	for(i=0;i<100;i++)
 	{
-		for(j=0;j<i;j++)
+		for(int i=0;i<100;i++)
 		{
-			printf(" ");
+			for(int j=0;j<i;j++)
+			{
+				printf(" ");
+			}
+			printf("S");
+			Sleep(30);
+			system("cls");
 		}
-		printf("S");
-		Sleep(30);
-		system("cls");
-	}
-	for(i=100;i>=0;i--)
-	{
-		for(j=0;j<i;j++)
+		for(i=100;i>=0;i--)
 		{
-			printf(" ");
+			for(j=0;j<i;j++)
+			{
+				printf(" ");
+			}
+			printf("h");
+			Sleep(30);
+			system("cls");
 		}
-		printf("B");
-		Sleep(30);
-		system("cls");
 	}
-}
-
+	
 	return 0;
 }
 
 
 
-//ÎÒÐèÒª×öµÄ£º½«×ÖÄ¸×óµ½ÓÒ ·µ»ØÀ´
-//¢Ù£º´ò³öÒ»¸ö×ÖÄ¸ 
+//æˆ‘éœ€è¦åšçš„ï¼šå°†å­—æ¯å·¦åˆ°å³ è¿”å›žæ¥
+//â‘ ï¼šæ‰“å‡ºä¸€ä¸ªå­—æ¯ 
