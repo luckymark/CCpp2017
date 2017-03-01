@@ -1,0 +1,204 @@
+#include<stdio.h>
+main()
+{
+	int i;
+	for(i=1;i<=10000;i++)
+	printf("hello ");
+ } 
+ 
+ 
+ 
+#include<stdio.h>
+main()
+{
+	int a;
+	for(a=2;a<=100;a=a+2)
+	printf("%d ",a);
+ } 
+ 
+ 
+ 
+ #include <stdio.h>
+void main()
+{
+	int a,b,c;
+	printf("输入三个数：");
+	scanf("%d %d %d",&a,&b,&c);
+	if(a>b)
+	{
+		if(a>c)
+		printf("最大的为%d",a);
+		else
+		printf("最大的为%d",c);
+	}
+	else
+	{
+		if(b<c)
+		printf("最大的为%d",c);
+		else
+		printf("最大的为%d",b);
+	}
+}
+
+
+#include<stdio.h>
+main()
+{
+	int a;
+	for(a=1;a<=100;a++)
+	{
+		if(a%3==0&&a%5!=0)
+		printf("%d\n",a);
+	}
+}
+
+
+#include<stdio.h>
+void main()
+{
+	int a,b,k;
+	const n=5;
+	int i[n];
+	printf("请输入5个0-9的数：\n");
+	for(a=1;a<=n;a++)
+	{
+		printf("i[%d]=",a);
+	scanf("%d",&i[a]);
+	}
+	for(a=1;a<n;a++)
+      for(b=1;b<=n-a;b++)
+	    if(i[b]>i[b+1])
+	    {
+		  k=i[b];
+		  i[b]=i[b+1];
+		  i[b+1]=k;
+	    }
+for(a=1;a<=n;a++)
+printf("%d\n",i[a]);
+ } 
+ 
+ 
+#include<stdio.h>
+int jc(int a)
+{
+int b=1,i;
+for(i=1;i<=a;i++)
+b*=i;
+return b;
+} 
+ void main()
+ {
+ 	int x,y;
+	printf("输入整数：");
+ 	scanf("%d",&x);
+ 	y=jc(x);
+ 	printf("jc=%d",y);
+ }
+
+
+#include<stdio.h>
+main()
+{
+	int n; 
+	printf("n的值为:");
+    scanf("%d",&n);
+	int i,j,k;
+	int a[n]={0};
+	  for(i=1;i<=n;i++)
+	  {
+		printf("a[%d]:",i);
+	  scanf("%d",&a[i]);
+	  }
+	for(i=1;i<=n-1;i++)
+	for(j=1;j<n-i;j++)
+	if(a[j]<a[j+1])
+	{
+	k=a[j];
+	a[j]=a[j+1];
+	a[j+1]=k;
+	}
+	for(i=1;i<=n;i++)
+	printf("%d\t",a[i]);
+	printf("\n");
+ } 
+ 
+ 
+ #include<stdio.h>
+double zj(float a,float b,float c)
+{
+	float d;
+	if(a<b)
+	{
+		d=a;
+		a=b;
+		b=d;
+		if(a<c)
+		d=a;
+		a=c;
+		c=d;
+	}
+	else
+	{
+		if(a<c)
+		d=a;
+		a=c;
+		c=d;
+	}
+	if(a*a==b*b+c*c)
+	return printf("为直角");
+	else 
+	return printf("不为直角");
+	
+ } 
+ 
+ void main()
+ {
+ 	float x,y,z,m;
+ 	printf("输入三边:\n");
+ 	scanf("%f%f%f",&x,&y,&z);
+ 	m=zj(x,y,z);
+ 	printf("%d",m);
+ }
+ 
+ 
+
+#include<stdio.h>
+main()
+{
+	int a,b,c,d;
+	printf("  *");
+	for(a=1;a<=9;a++)
+	printf("%3d",a);
+	printf("\n");
+	for(a=1;a<=9;a++);
+{   
+printf("%3d",a);
+for(b=1;b<=a;b++)
+{
+c=a*b;
+printf("%3d",c);
+}
+printf("\n");
+}
+	
+#include<stdio.h>
+main()
+{
+	int a;
+	for(a=1;a<+100;a++)
+	if(a%7==0||a%10==7)
+	printf("%d\n",a);
+ } } 
+ 
+ 
+ #include <stdio.h>
+int main()
+{
+	int a;
+	printf("输入年份：");
+	scanf("%d",&a);
+	if(a%400==0||a%100!=0&&a%4==0)
+	printf("a为闰年");
+	else
+	printf("a不为闰年");
+}
