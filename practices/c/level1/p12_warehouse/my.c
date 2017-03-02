@@ -83,6 +83,7 @@ void open_the_data(char name[]){
 				attron(A_REVERSE);
 				print_on_the_botton("fail to open, you need to start a new file");
 				attroff(A_REVERSE);
+				return;
 		}
 
 		int cur = 0;
