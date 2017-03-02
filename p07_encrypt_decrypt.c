@@ -1,5 +1,6 @@
 ﻿#include<stdio.h>
 #include<stdlib.h>
+#include<time.h>
 #define WIDTH 500
 void encrypt(char* pt, int* pt2, int n);	//加密函数
 void decrypt(char* pt, int* pt2, int n);	//解密函数
@@ -8,7 +9,7 @@ int main()
 {
 	char input[WIDTH] = { " " };
 	char num[WIDTH] = { 0 };
-
+	srand(time(NULL));	//用时间初始化随机数种子		
 	for (int i = 0; i < WIDTH - 1; i++)		//随机数组，供加密解密使用
 	{
 		num[i] = (int)rand()%10;
