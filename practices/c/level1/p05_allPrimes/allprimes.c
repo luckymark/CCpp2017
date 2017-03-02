@@ -13,6 +13,7 @@ void printprime(void)
 {
 	int max,i;
 	float delta;
+	
 	scanf("%d",&max);
 	delta=clock();
 	for(i=2;i<=max;i++)
@@ -23,17 +24,15 @@ void printprime(void)
 		}
 	}
 	delta=clock()-delta;
-	printf("\nºÄÊ±%.2f ms\n",delta);
+	printf("\nIt takes %.2f ms\n",delta);
 }
 int is_prime(int n)
 {
-	int i;
-	for(i=2;i<=pow(n,0.5);i++)
+	int j;
+	
+	for(j=2;j<=pow(n,0.5);j++)
 	{
-		if(n%i==0)
-		{
-			return 0;
-		}
+		if(n%j==0)return 0;
 	}
 	return 1;
 }
