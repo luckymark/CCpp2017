@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 int main(void)
 {
 	int year = 0;
+	
 	printf("Please input year:");
 	scanf("%d",&year);
 
