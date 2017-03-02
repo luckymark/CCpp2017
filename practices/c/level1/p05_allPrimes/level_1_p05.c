@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<math.h>
+#include<time.h>
 int prime(int);
 main()
 {
@@ -8,6 +9,8 @@ main()
 		if(prime(i)>0)
 		printf("%d\n",i);
 	}
+	printf("\n");
+	printf("%d",(int)clock());
 }
 
 int prime(int m)
