@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 int main(void)
 {
@@ -8,9 +7,9 @@ int main(void)
 	scanf("%d",&n);
 
 	if (0==n%13)
-		printf("%d ÊÇ13µÄ±¶Êý",n);
+		printf("%d ÃŠÃ‡13ÂµÃ„Â±Â¶ÃŠÃ½",n);
 	else
-		printf("%d ²»ÊÇ13µÄ±¶Êý",n);
+		printf("%d Â²Â»ÃŠÃ‡13ÂµÃ„Â±Â¶ÃŠÃ½",n);
 
 	return 0;
 }
