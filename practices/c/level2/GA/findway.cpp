@@ -7,7 +7,15 @@ int table[1000];
 
 int nodenumber=0;
 
-char a[20][20]=		{'*',' ','*','*','*','*','*','*','*','*','*',' *','*','*','*','*','*','*','*','*',
+int qn =10000;
+
+char way[1000];
+
+
+
+
+
+char a[20][20]=	                	{'*',' ','*','*','*','*','*','*','*','*','*',' *','*','*','*','*','*','*','*','*',
 					'*',' ','*',' ',' ',' ',' ',' ',' ',' ',' ',' ','*','*','*','*',' ','*',' ','*',
 					'*',' ','*',' ','*',' ','*','*','*','*','*',' ','*','*','*','*',' ','*',' ','*',
 					'*',' ','*',' ','*',' ',' ',' ','*','*','*',' ','*','*','*','*',' ','*',' ','*',
@@ -58,12 +66,14 @@ struct node
 	}
 };
 
+node * head;
+
 void node :: setsituation(int chance1, int chance2, int chance3, int chance4)
 {
-	direction_chance1=chance1;
-	direction_chance2=chance2;
-	direction_chance3=chance3;
-	direction_chance4=chance4;
+	direction_chance1 = chance1;
+	direction_chance2 = chance2;
+	direction_chance3 = chance3;
+	direction_chance4 = chance4;
 }
 
 char  judge( node * A )
@@ -72,117 +82,150 @@ char  judge( node * A )
 		A->finalchoes = 'd' ;
 		A->direction_chance1 = 0;
 	}
+
 	else if( A->direction_chance2 == 1 ){
 		A->finalchoes = 's' ;
 		A->direction_chance2 = 0;
 	}
+
 	else if( A->direction_chance3 == 1 ){
 		A->finalchoes = 'a' ;
 		A->direction_chance3 = 0;
 	}
+
 	else if ( A->direction_chance4 == 1){
 		A->finalchoes = 'w' ;
 		A->direction_chance4 = 0;
 	}
+
 	else A ->finalchoes ='\0';
+	
 	return  A->finalchoes;
 }
 
-int detect (node *first)
+char detect (node *first)
 {
 	int n=0;
+	
 	int i=0;
+	
 	int ad=first->ad;
+	
 	int ws=first->ws;
+	
 	int east , south , west , north ;
+	
 	int sum= ws*20 + ad;
-	for (int j = 0; j < nodenumber -1  ; j++ ){
+	
+	for (int j = 0; j < nodenumber -1  ; j++ ){	
 		if( table[j] == sum  ){
 			return 3;
 		}
 	}
+
 	if (first->last != NULL){
-		if(   ad == 0  || a[ws][ad-1] == '*' || (first->last)->finalchoes == 'd' ||first->direction_chance3 == 0 ){
+		
+		if( ad == 0  || a[ws][ad-1] == '*' || (first->last)->finalchoes == 'd' ||first->direction_chance3 == 0 ){
 			west = 0;
 			n++;
 		}
+		
 		else{
 			west = 1;
 			i++;
 		}
+		
 		if( ad == 19 || a[ws][ad+1] == '*'   || (first->last)->finalchoes == 'a'||first->direction_chance1 == 0 ){
 			east = 0;
 			n++;
 		}
+		
 		else{
 			east = 1;
 			i++;
 		}
+		
 		if(  ws == 19 || a[ws+1][ad] == '*' || (first->last)->finalchoes == 'w'||first->direction_chance2==0 ){
 			south = 0;
 			n++;
 		}
+		
 		else{
 			south = 1;
 			i++;
 		}
+		
 		if(  ws == 0 || a[ws-1][ad] == '*' || (first->last)->finalchoes == 's' ||first->direction_chance4==0){
 			north = 0;
 			n++;
 		}
+		
 		else{
 			north = 1;
 			i++;
 		}
+	
 	}
+	
 	else{
+		
 		if( ad == 0  || a[ws][ad-1] == '*'  ||first->direction_chance3 == 0 ){
 			west = 0;
 			n++;
 		}
+		
 		else{
 			west = 1;
 			i++;
 		}
+		
 		if(  ad == 19 || a[ws][ad+1] == '*' ||first->direction_chance1 == 0 ){
 			east = 0;
 			n++;
 		}
+		
 		else{
 			east = 1;
 			i++;
 		}
+		
 		if(  ws == 19 || a[ws+1][ad] == '*' ||first->direction_chance2==0 ){
 			south = 0;
 			n++;
 		}
+		
 		else{
 			south = 1;
 			i++;
 		}
+		
 		if(  ws == 0 || a[ws-1][ad] == '*' ||first->direction_chance4==0 ){
 			north = 0;
 			n++;
 		}
+		
 		else{
 			north = 1;
 			i++;
 		}
+	
 	}
 	
 	if(n==4){
-		first->setsituation( east , south , west , north );
+		
 		return 	3	;	
 	}
 	
 	if(i>=2){
-		first->setsituation( east , south , west , north );
+		first -> setsituation( east , south , west , north );
 		return 2;
 	}
+
 	else{
-		first->setsituation( east , south , west , north );
+		first ->  setsituation( east , south , west , north );
 		return 1;
 	}	
+
 }
 
 node *createnode(node* head1)
@@ -221,6 +264,7 @@ node *createnode(node* head1)
 	
 	table[nodenumber] = ( p->ws ) *20 + ( p->ad ) ;
 	nodenumber++;
+	
 
 	return p;
 }
@@ -229,18 +273,61 @@ int success( node * A)
 {
 	int sum = ( A->ad ) + ( A->ws)*20 ;
 	
-	if( sum == 1 ){
-		return 1;
-	}
+	node * c = head;
+
+	node *B = head->next;
+
+	int i_way=0;
 	
-	else{
-		return 0;
+	if (( sum == 1 && B->direction_chance1 == 0 && B->direction_chance2 == 0 && B->direction_chance3 == 0 && B->direction_chance4 == 0 )){
+		int k=0;
+		
+		while(k<999){
+			way[k]='\0';
+			k++;
+		}
+
+		while(c != A && ( nodenumber < qn ) ){
+				
+			way[i_way] = c->finalchoes;
+			
+			c=c->next;
+			
+			i_way++;
+		}
+		
+		return 2;
 	}
+	else if( sum == 1  ){
+		
+		if (nodenumber<qn){
+			qn=nodenumber;
+			
+			int k=0;
+			while(k<999){
+				way[k]='\0';
+				k++;
+			}
+
+			while(c!=A ){
+				way[i_way]=c->finalchoes;
+				c=c->next;
+				i_way++;
+			}
+			
+		}
+
+		table[nodenumber]=-1;
+		nodenumber--;
+		return 3 ;
+	}
+
+   return 0;
 }
 
 int main()
 {
-	node *head;
+
 
 	head = (node *) malloc( sizeof(node) );
 
@@ -254,6 +341,7 @@ int main()
 	
 	head->ws = 19;
 	head->ad = 4 ;
+	
 
 	detect( head ) ;
 
@@ -263,13 +351,12 @@ int main()
 	while (1){
 
 		q = createnode( p );
+		int yesorno = success( q ) ;
+		if ( yesorno == 2 )break;
 		
-		if ( success( q ) == 1 )break;
-	
-		while( 1  ){
-			
+		while( 1  ){	
 			int m;
-			m=detect(q);
+			m = detect(q);
 			
 			if( m != 3 )break;
 			q = q ->last;
@@ -277,6 +364,7 @@ int main()
 			
 			table[nodenumber] = -1;
 			nodenumber--;
+			
 		}	
 
 		judge( q );
@@ -285,7 +373,7 @@ int main()
 	
 	}
 	
-	printf("%d",clock());
+	printf("%s",way);
 
 	return 0 ;
 }
