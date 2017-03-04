@@ -128,12 +128,10 @@ DWORD WINAPI clocks(LPVOID lpParameter)
 	int i = 0;
 	while (1)
 	{
-		Sleep(250);
-		Sleep(250);
+		Sleep(500);
 		gotoxy(4 * x + 5, 3);
 		printf("Time: %ds", i++);
-		Sleep(250); 
-		Sleep(250);
+		Sleep(500); 
 	}
 }
 
