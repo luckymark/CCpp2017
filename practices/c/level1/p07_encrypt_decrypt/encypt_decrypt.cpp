@@ -4,83 +4,142 @@
 
 #include<stdio.h>
 
-char a[7] ;    //plain text
-int b[6] ;		// encrypted text
+char a[1000] ;    //plain text
 
-void encrypt( char a[] , int b[] );
-void decipher( int b[] );
 
-int main()
+void encypt ( char * );
+
+void decrypt( char * );
+
+int main ( )
 {
-	scanf( "%s" , a);
-	encrypt( a , b );
-	decipher( b );
+	scanf("%s",a);
+	
+	encypt( a );
+	
+	printf("%s\n",a);
+	
+	decrypt( a ) ;
+	
+	printf("%s\n",a);
+	
 	return 0;
 }
 
-void encrypt( char a1[7] ,int b1[6])
+void encypt ( char a[] )
 {
+	char *a1=a;
 	
-	b1[0] = a1[0] + 56;
-	b1[1] = a1[1] + 12;
-	b1[2] = a1[2] + 11;
-	b1[3] = a1[3] + 1111;
-	b1[4] = a1[4] + 1234;
-	b1[5] = a1[5] + 321;
+	while( *a1 != '\0' ){
 	
-	int swap;
+		a1++;
 	
-	swap = b1[0];
-	b1[0] = b1[5];
-	b1[5] = swap;
-
-	swap = b1[4];
-	b1[4] = b1[1];
-	b1[1] = swap;
-
-	swap = b1[2];
-	b1[2] = b1[3];
-	b1[3] = swap;
-
-	printf( "encrypt:" );
-	for(int i = 0 ; i < 6; i++ ){
-		
-		printf("%d" , b1[i] );
 	}
-	printf("\n");
+	
+	a1--;
+
+	if( (a1-a) % 2 == 0 ){
+		
+		while( a1 != a ){
+			
+			char swap;
+			
+			swap = *a+10;
+			
+			*a = *a1+10;
+			
+			*a1 = swap;
+			
+			a++;
+			
+			a1--;
+		}
+			
+	}	
+	else{
+		while( a1  != a + 1 ){
+	
+			char swap;
+			
+			swap = *a+10;
+			
+			*a = *a1+11;
+			
+			*a1 = swap;
+			
+			a++;
+			
+			a1--;
+		}
+		char swap;
+			
+		swap = *a+10;
+			
+		*a = *a1+10;
+			
+		*a1 = swap;
+	}
 	
 }
 
-void decipher( int b1[6] )
+void decrypt( char a[]  )
 {
-	char a1[7];
-
-	int swap;
 	
-	swap = b1[0];
-	b1[0] = b1[5];
-	b1[5] = swap;
-
-	swap = b1[4];
-	b1[4] = b1[1];
-	b1[1] = swap;
-
-	swap = b1[2];
-	b1[2] = b1[3];
-	b1[3] = swap;
-
-	a1[0] = b1[0] - 56;
-	a1[1] = b1[1]-12;
-	a1[2] = b1[2]-11;
-	a1[3] = b1[3]-1111;
-	a1[4] = b1[4]-1234;
-	a1[5] = b1[5]-321;
-	a1[6] = '\0';
-
-
-	printf("decipher:\n");	
-	printf("%s" , a1 );
+	char *a1=a;
 	
-	printf("\n");
+	while( *a1 != '\0' ){
+	
+		a1++;
+	
+	}
+	
+	a1--;
+
+	if( (a1-a) % 2 == 0 ){
+		
+		while( a1 != a ){
+			
+			char swap;
+			
+			swap = *a-10;
+			
+			*a = *a1-10;
+			
+			*a1 = swap;
+			
+			a++;
+			
+			a1--;
+		}
+			
+	}	
+	else{
+		while( a1  != a + 1 ){
+			
+			char swap;
+			
+			swap = *a-11;
+			
+			*a = *a1-10;
+			
+			*a1 = swap;
+			
+			a++;
+			
+			a1--;
+		}
+		char swap;
+			
+		swap = *a-10;
+			
+		*a = *a1-10;
+			
+		*a1 = swap;
+	}
 	
 }
+	
+
+
+
+			

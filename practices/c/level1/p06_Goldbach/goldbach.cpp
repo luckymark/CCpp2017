@@ -1,70 +1,81 @@
 #include<stdio.h>
+#include<math.h>
 
-int main(  )
+int main( void )
 {
 	int p[100];	//put the number(prime numbers)  in to arry 
 	int number;
-	p[0] = 1;
-	p[1] = 2;
-	p[2] = 3;
-	p[3] = 5;
-	p[4] = 7;
 	
-	int i=4;
-	for(number=11;number<=100;number++){
-		int number1=number/2;
-		int k;
-		int flag=0;
-		for(k=2;k<=number1;k++){
-			if(number%k==0){
-				flag=0;
-				break;
-			}
-			flag=1;
-		}
-		if(flag==1){
-			p[i]=number;
-			i++;	
-		}
-	}
-	
-
-	int c_arry,flag2;  // start to prove 
-
-	for( i = 1 ; i <= 100 ; i++ ){
-		for( c_arry = 0 ; c_arry < 100 ; c_arry++ ){
-			flag2 = 0;
-			if( i == p[c_arry] ){
-				printf("%d be proved\n",i);
-				flag2 = 1;
-				break;
-			}
-			if( p[c_arry] > i){
-				break;
-			}
-		}
-		if( flag2 ){continue;}
-		int p_arry = 0 , q_arry = c_arry - 1;
-		while( 1 ){
-			if( p_arry == q_arry ){
-				if( p[p_arry] + p[q_arry] == i ){
-					printf("%d be proved\n",i);
+	int a_arry =0;
+		for(number = 2 ; number <= 100 ; number++ ){
+			int help = sqrt ( number );
+			int identify = 1;
+			for ( int j = 2 ; j <= help ; j++ ){
+				
+				if ( number % j == 0 ){ 
+					identify = 0;		
 					break;
 				}
-
-				p_arry = 0;
-				q_arry-- ;
 			}
-			if( p[p_arry] + p[q_arry] == i ){
-				printf("%d be proved\n",i);
-				break;
-			}
-			else{
-				p_arry++;
-
-			}
-			
+				if ( identify == 1  ){
+					p[a_arry] = number ;
+					a_arry++ ;
+			} 	
 		}
-	}
-	return 0;
+		
+		a_arry--;
+
+		int Prove_Number=4;
+		
+		
+		
+		while( Prove_Number != 102 ){
+			int *q = &p[0] ;
+			int *p1 = &p[a_arry];
+			
+			while( 1 ){
+				
+				int flag=0;
+
+				if( p1 == &p[0] - 1 ){ break;}
+
+				while( q != p1+1 ){
+					if ( *q + *p1 == Prove_Number ){
+						
+						printf("%d is be proved \n " , Prove_Number );
+						
+						flag=1;
+						
+						break;
+					}
+					q++;
+				}
+				
+				if( flag==1 ){break;}
+
+				q = &p[0];
+				
+				p1--;
+
+
+			}
+		
+			Prove_Number=Prove_Number+2;
+	
+		}
+		return 0;
 }
+
+
+
+
+
+			
+			
+
+		
+
+
+
+
+
