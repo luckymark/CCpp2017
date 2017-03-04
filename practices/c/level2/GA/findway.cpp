@@ -15,7 +15,7 @@ char way[1000];
 
 
 
-char a[20][20]=	                	{'*',' ','*','*','*','*','*','*','*','*','*',' *','*','*','*','*','*','*','*','*',
+char a[20][20]=		{'*',' ','*','*','*','*','*','*','*','*','*',' *','*','*','*','*','*','*','*','*',
 					'*',' ','*',' ',' ',' ',' ',' ',' ',' ',' ',' ','*','*','*','*',' ','*',' ','*',
 					'*',' ','*',' ','*',' ','*','*','*','*','*',' ','*','*','*','*',' ','*',' ','*',
 					'*',' ','*',' ','*',' ',' ',' ','*','*','*',' ','*','*','*','*',' ','*',' ','*',
@@ -347,25 +347,36 @@ int main()
 
 	judge ( head ) ;
 
+	
 
 	while (1){
 
 		q = createnode( p );
+
 		int yesorno = success( q ) ;
 		if ( yesorno == 2 )break;
 		
+		int flag=0;
+
 		while( 1  ){	
+			
 			int m;
 			m = detect(q);
 			
 			if( m != 3 )break;
 			q = q ->last;
+			if(  q == head->next && (head->next)->direction_chance1==0&& (head->next)->direction_chance2==0&& (head->next)->direction_chance3==0&& (head->next)->direction_chance4==0 ){
+				flag = 1;
+				break;
+			}
 			free(q->next);
 			
 			table[nodenumber] = -1;
 			nodenumber--;
 			
 		}	
+		
+		if( flag == 1 )break; 
 
 		judge( q );
 
@@ -373,7 +384,8 @@ int main()
 	
 	}
 	
-	printf("%s",way);
+	printf("%s\n",way);
+	printf("%d\n",clock());
 
 	return 0 ;
 }
