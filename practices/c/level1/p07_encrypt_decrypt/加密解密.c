@@ -1,15 +1,13 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<windows.h>
 char coding(char *s)//º”√‹ 
 {
-	int i;
-	int k=strlen(s);
-	for(i=0;i<k;i++)
-	{
-		s[i]=s[i]+3;
-	}
-	return 0;
+	printf("«Î ‰»Î‘¥◊÷∑˚¥Æ\n");
+	char ch;
+	while(ch=getchar());
+
 }
 char uncoding(char *s)//Ω‚√‹ 
 {
@@ -26,8 +24,6 @@ int main(void)
 	char s[100];
 	int i;
 	char a;
-	printf("«Î ‰»Î‘¥◊÷∑˚¥Æ\n");
-	gets(s);
 	printf("«Î—°‘Ò£∫A.º”√‹ B.Ω‚√‹\n");
 	scanf("%c",&a);
 	switch(a)
