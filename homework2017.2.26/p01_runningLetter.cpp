@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+
 int main()
 {
 	const int lenth=80;
