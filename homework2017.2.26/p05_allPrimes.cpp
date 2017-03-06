@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<string.h>
 #include<time.h>
+
 int main(){
  	int i,j=2,prime[1000],numb;
  	clock_t start,endd;
