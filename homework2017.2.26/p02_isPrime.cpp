@@ -1,4 +1,5 @@
 #include<stdio.h>
+
 int main(){
 	int number,i;
 	while (scanf("%d",&number)!=EOF){	
