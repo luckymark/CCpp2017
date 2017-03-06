@@ -1,10 +1,13 @@
 ﻿#include<stdio.h>
 #include<windows.h>
 #define SPACE 50
+
 void show(char *pos);
+
 int main()
 {
 	char pos[102] = { " " };
+	
 	for(int i=0;i<100;i++)
 	{
 		pos[i] = 'R';
