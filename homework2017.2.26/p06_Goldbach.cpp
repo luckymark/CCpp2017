@@ -1,4 +1,5 @@
 #include<stdio.h>
+
 int main(){
   	int i,j=2,numb,prime[100];
  	prime[1]=2;
