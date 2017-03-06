@@ -1,5 +1,7 @@
 #include<stdio.h>
+
 void narcissus(void);
+
 int main(void)
 {
 	narcissus();
@@ -10,6 +12,7 @@ void narcissus(void)
 {
 	int i;
 	int a,b,c;
+	
 	for(i=100;i<1000;i++)
 	{
 		a=i/100;

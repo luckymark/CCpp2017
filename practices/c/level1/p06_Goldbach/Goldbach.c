@@ -1,12 +1,15 @@
 #include<stdio.h>
 #include<math.h>
+
 int is_prime(int n);
 int _prime(int *P);
 void Goldbach(int *P,int n);
+
 int main(void)
 {
 	int prime[100];
 	int max;
+	
 	max=_prime(prime);
     Goldbach(prime,max);
     
@@ -18,6 +21,7 @@ void Goldbach(int *P,int n)
 	int even=4;
 	int i,j;
 	int B;
+	
 	while(even<=100)
 	{
 		B=0;
@@ -45,6 +49,7 @@ void Goldbach(int *P,int n)
 int _prime(int *P)
 {
 	int i,j=0;
+	
 	for(i=2;i<=100;i++)
 	{
 		if(is_prime(i))
@@ -58,6 +63,7 @@ int _prime(int *P)
 int is_prime(int n)
 {
 	int i;
+	
 	for(i=2;i<=pow(n,0.5);i++)
 	{
 		if(n%i==0)

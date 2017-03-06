@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<windows.h>
+
 void running(int col);
+
 int main(void)
 {
 	system("mode con cols=63");
@@ -11,6 +13,7 @@ int main(void)
 void running(int col)
 {
 	int i,j;
+	
 	while(1)
 	{
 		for(i=0;i<=col-1;i++)

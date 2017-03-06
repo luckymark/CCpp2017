@@ -1,9 +1,12 @@
 #include<stdio.h>
 #include<math.h>
+
 int is_prime(int n);
+
 int main(void)
 {
 	int n;
+	
 	scanf("%d",&n);
 	if(is_prime(n))
 	{
@@ -20,6 +23,7 @@ int main(void)
 int is_prime(int n)
 {
 	int i;
+	
 	for(i=2;i<=pow(n,0.5);i++)
 	{
 		if(n%i==0)

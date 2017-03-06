@@ -1,9 +1,12 @@
 #include<stdio.h>
+
 void encrypt(void);
 void decrypt(void);
+
 int main(void)
 {
 	char judge;
+	
 	printf("1.encrypt  2.decrypt  q.quit\n");
 	while((judge=getch())!='q')
 	{
@@ -34,6 +37,7 @@ int main(void)
 void encrypt(void)
 {
 	char ch1;
+	
 	while((ch1=getchar())!=EOF)
 	{
 		if((ch1>=65&&ch1<=87)||(ch1>=97&&ch1<=119))
@@ -61,6 +65,7 @@ void encrypt(void)
 void decrypt(void)
 {
 	char ch2;
+	
 	while((ch2=getchar())!=EOF)
 	{
 		if((ch2>=68&&ch2<=90)||(ch2>=100&&ch2<=122))
