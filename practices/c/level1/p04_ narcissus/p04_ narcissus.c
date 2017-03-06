@@ -4,7 +4,7 @@ int main(void)
 {
 	int i;
 	int a,b,c;
-	for (i=100;i<999;i++){
+	for (i=100;i<1000;i++){
 		c=i%10;
 		b=((i-c)/10)%10;
 		a=(i-b*10-c)/100;

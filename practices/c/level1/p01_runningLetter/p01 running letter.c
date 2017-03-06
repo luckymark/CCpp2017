@@ -3,10 +3,9 @@
 #define TIMES 100
 int main(void)
 {
-	int i,j;
-	
+	int j; 
 	system("mode con  cols=100 lines=28");
-	for(i=1;i<TIMES;i++)
+	for(int i=1;i<TIMES;i++)
 	{
 		for(j=1;j<i;j++)	
 		{
@@ -16,7 +15,7 @@ int main(void)
 		Sleep(20);
 		system("cls");
 	}
-	for(i=TIMES;i>0;i--)
+	for(int i=TIMES;i>0;i--)
 	{
 		for(j=1;j<i;j++)	
 		{
