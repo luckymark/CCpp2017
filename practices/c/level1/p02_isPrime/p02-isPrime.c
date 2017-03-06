@@ -12,7 +12,6 @@ int main()
 		}
 	}
 	
-	}
 	if(infox==-1){
 		printf("是素数\n");
 	}
