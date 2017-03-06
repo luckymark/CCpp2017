@@ -6,13 +6,14 @@ int isPrime(int x);
 int main()
 {
 	int prime[100] = {0};
-	int sum;
-	sum=loadPrime(prime);
+	int n;
+	n=loadPrime(prime);
+	
 	for (int a = 4; a <= 100;a+=2 )
 	{
-		for (int i = 0; i < sum; i++)
+		for (int i = 0; i < n; i++)
 		{
-			for (int j = 0; j < sum; j++)
+			for (int j = 0; j < n; j++)
 			{
 				if (a == prime[i] + prime[j])		//遍历两个100以内的素数组合之和，与a作比较
 				{
@@ -31,6 +32,7 @@ int isPrime(int x)
 {
 	int i;
 	int mark = 0;	//创建标记
+	
 	for (i = 2; i < x; i++)
 	{
 		if (x%i == 0)
@@ -38,7 +40,8 @@ int isPrime(int x)
 			mark = 1;	//若被整除，标记mark为1
 			break;
 		}
-	}if (mark == 1)
+	}
+	if (mark == 1)
 		return 0;
 	else return 1;
 }
