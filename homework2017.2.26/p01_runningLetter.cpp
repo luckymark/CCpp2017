@@ -3,25 +3,25 @@
 
 int main()
 {
-	const int lenth=80;
-	int len_now=0,goBack=0,step;
+	const int LENGTH=80;
+	int lenNow=0,goBack=0,step;
 	while (1)
 	{
 		system("cls");
-		for (step=1;step<len_now;step++){			
+		for (step=1;step<lenNow;step++){			
 			printf(" ");
 		}		
 		printf("R");
 		if (goBack){
-			len_now--;
+			lenNow--;
 		}		
 		else{
-			len_now++;
+			lenNow++;
 		}		
-		if (len_now==lenth){
+		if (lenNow==LENGTH){
 			goBack=1;
 		}		
-		else if (len_now==0){
+		else if (lenNow==0){
 			goBack=0;
 		}		
 		sleep(50);
