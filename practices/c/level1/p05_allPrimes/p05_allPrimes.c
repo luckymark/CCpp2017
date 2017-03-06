@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <time.h>
 #include <math.h>
+#define n 100
 int main()
 {
 	clock_t t1,t2;
 	t1 = clock();
-	int n=1000 ;
 	int nums[n+2] = {0};
 	for(int i=1;i<=n;i++)
 	{
