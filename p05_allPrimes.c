@@ -1,7 +1,7 @@
 ﻿#include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
-int isPrinme(int a);
+int isPrinme(int n);
 int IS(int);
 int main()
 {
@@ -11,7 +11,9 @@ int main()
 	for(int i=2;i<=1000;i++)
 	{
 		if (isPrime(i))
+		{
 			printf("%5d", i);
+		}
 	}
 	t2 = clock();
 	printf("打印时间:%f秒",(double)(t2-t1)/CLOCKS_PER_SEC);
@@ -19,13 +21,13 @@ int main()
 	system("pause");
 	return 0;
 }
-int isPrime(int a) 
+int isPrime(int n) 
 {
 	int mark = 0;
 	
-	for (int i = 2; i < a; i++)
+	for (int i = 2; i < n; i++)
 	{
-		if (a%i == 0)	//用mark标记a已被整除
+		if (n%i == 0)	//用mark标记a已被整除
 		{
 			mark = 1;
 			break;
