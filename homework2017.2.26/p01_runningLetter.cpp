@@ -8,8 +8,9 @@ int main()
 	while (1)
 	{
 		system("cls");
-		for (step=1;step<len_now;step++)
+		for (step=1;step<len_now;step++){			
 			printf(" ");
+		}		
 		printf("R");
 		if (goBack){
 			len_now--;
