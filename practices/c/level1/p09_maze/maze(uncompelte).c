@@ -36,7 +36,7 @@ int main()
 	Sleep(1000);
 	system("cls");
 	int maze[x][y];
-	srand(clock());
+	for(int i=0;i<x;i++) 
 	for(int j=0;j<y;j++)maze[i][j]=1;
 	creatmaze(x,y,maze);
 	return 0;
@@ -53,13 +53,14 @@ int creatmaze(int x,int y,int m[x][y])
 	m[0][0]=0;
 	while(1)
 	{
+		srand(clock());
 		x2=x1;
 		y2=y1;
 		switch(s=rand()%4+1)
 		{
-			case 1:if(x1>2){x1--;x2=x1-1;};break;
+			case 1:if(x1>2){x1--;x2=x1-1;} else continue;break;
 			case 2:x1++;x2=x1+1;break;
-			case 3:if(y1>2){y1--;y2=y1-1;}break;
+			case 3:if(y1>2){y1--;y2=y1-1;} else continue;break;
 			case 4:y1++;y2=y1+1;break;
 			
 		}
@@ -78,9 +79,10 @@ void drmap(int x,int y,int m[x][y])
 	for(int j=0;j<y;j++)
 	{
 		if(m[i][j]==0)putchar(issue[0]);
-		else if(i>1&&j>1&&m[i-1][j]==1&&m[i][j]==1&&m[i+1][j]==1&&m[i][j+1]==1&&m[i][j-1]==1)putchar(issue[2]);
+		/*else if(i>1&&j>1&&m[i-1][j]==1&&m[i][j]==1&&m[i+1][j]==1&&m[i][j+1]==1&&m[i][j-1]==1)putchar(issue[2]);
 		else if(j>1&&m[i][j]==1&&m[i][j-1]==1&&m[i][j+1]==1)putchar(issue[1]);
-		else if(i>1&&m[i][j]==1&&m[i+1][j]==1&&m[i-1][j]==1)putchar(issue[3]);
+		else if(i>1&&m[i][j]==1&&m[i+1][j]==1&&m[i-1][j]==1)putchar(issue[3]);*/
+		if(m[i][j]==1)putchar(issue[5]);
 		if(j==y-1)putchar('\n');
 	}
 }
