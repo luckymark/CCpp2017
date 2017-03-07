@@ -2,7 +2,7 @@
 #include <windows.h>
 #include <stdbool.h>
 #define SIZE 20 
-
+#define SLEEP_TIME 100
 int main()
 {
 	bool flag =true;
@@ -18,6 +18,6 @@ int main()
 			printf(" ");
 		}
 		printf("#\n");
-		Sleep(100);
+		Sleep(SLEEP_TIME);
 	}
 }
