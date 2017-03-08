@@ -19,21 +19,21 @@ int main()
         c = get_command(1);
         switch (*c)
         {
-        case '1':
-            str = "fuck";
-            str = encrypt((const unsigned char *)str, strlen(str));
-            printf("%s\n", str);
-            break;
-        case '2':
-            str = "6676656e";
-            str = (char*)decrypt(str);
-            printf("%s\n", str);
-            break;
-        case '3':
-            exit = 1;
-            break;
-        default:
-            printf("请输入正确的选项\n");
+            case '1':
+                str = "fuck";
+                str = encrypt((const unsigned char *)str, strlen(str));
+                printf("%s\n", str);
+                break;
+            case '2':
+                str = "6676656e";
+                str = (char*)decrypt(str);
+                printf("%s\n", str);
+                break;
+            case '3':
+                exit = 1;
+                break;
+            default:
+                printf("请输入正确的选项\n");
         }
         free(c);
         free_memory();
@@ -54,7 +54,6 @@ char *get_command(int n)
     command = (char *)malloc(sizeof(char) * n);
     for (int i = 0; i < n; ++i)
         command[i] = getchar();
-    putchar(command[0]);
     do
     {
         c = getchar();
