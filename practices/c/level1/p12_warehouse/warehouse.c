@@ -135,6 +135,7 @@ int main(void)
 		printf("\n\t                       1:Show inventory list\n");
 		printf("\t                              2:import\n");
 		printf("\t                              3:export");
+		printf("\t                           4:save and exit");
 		SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY |FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
 
