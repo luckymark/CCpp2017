@@ -7,9 +7,9 @@ int main(void)
 	scanf("%d",&n);
 
 	if (0==n%13)
-		printf("%d ÊÇ13µÄ±¶Êý",n);
+	    printf("%d ÊÇ13µÄ±¶Êý",n);
 	else
-		printf("%d ²»ÊÇ13µÄ±¶Êý",n);
+	    printf("%d ²»ÊÇ13µÄ±¶Êý",n);
 
 	return 0;
 }
