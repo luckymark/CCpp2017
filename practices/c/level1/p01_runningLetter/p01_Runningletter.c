@@ -13,23 +13,23 @@ int main()
         system("cls");
         if(i<16)
         {
-        	for(int j = 0; j < i; j++)
-        	{
-            	printf(" ");
-        	}
-        	printf("%c", c);
-        	Sleep(100);
+            for(int j = 0; j < i; j++)
+            {
+                printf(" ");
+            }
+            printf("%c", c);
+            Sleep(100);
         }
         else
         {
-        	for (int j = 0; j < 31 - i; j++)
-    		{
-		    	printf (" ");
-			}
-			printf ("%c", c);
-			Sleep (100);
-			printf ("\n");
-		}
+            for (int j = 0; j < 31 - i; j++)
+    	    {
+		        printf (" ");
+		    }
+		    printf ("%c", c);
+		    Sleep (100);
+		    printf ("\n");
+	    }
     }
     return 0;
 }
