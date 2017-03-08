@@ -5,13 +5,13 @@ int main(void)
   int i,j;
 
   for(i=1;i<=5;i++){
-    scanf("%d",&j);
-    number[j]=1;
+      scanf("%d",&j);
+      number[j]=1;
   }
 
   for(i=1;i<=9;i++){
-   if(number[i]==0){
-    printf("%d",i);
+      if(number[i]==0){
+      printf("%d",i);
   }
 
   }
