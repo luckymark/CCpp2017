@@ -1,0 +1,4 @@
+## the program use a bfs algorithm to pre-calculate the best answer for the maze, then use the GA algorithm to approximate the answer, output the answer and the time the GA algorithm used.
+## it may take the program a lot of time to calculate the approximated answer.
+## about the map ## 
+	i use # to present the door and the X to present the exit.
