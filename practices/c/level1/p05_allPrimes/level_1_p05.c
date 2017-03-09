@@ -12,9 +12,9 @@ int prime(int m)
 
 main()
 {		
-	double start，finish;
+	double start,finish;
 	start=clock();
-	for(i=2;i<=1000;i++){
+	for(int i=2;i<=1000;i++){
 		if(prime(i)>0){
 		printf("%d\n",i);
 		}
