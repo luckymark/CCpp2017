@@ -4,10 +4,10 @@
 int main()
 {
 	int a;
-	for(a=60;a<150;a++){
-		if(a%6==0){
-			if(a%12==0){
-				if(a%7==0){
+	for(a = 60 ; a < 150 ; a++){
+		if(a%6 == 0){
+			if(a%12 == 0){
+				if(a%7 == 0){
 					printf("%d\n",a);
 				}
 			}
