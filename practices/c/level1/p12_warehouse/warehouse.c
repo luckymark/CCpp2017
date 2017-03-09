@@ -5,17 +5,17 @@
 #include <windows.h>
 #include <malloc.h> 
 /*
-ÊµÏÖÈçÏÂµÄ²Ëµ¥£¨°´Êı×ÖÑ¡Ôñ²Ëµ¥¹¦ÄÜ£©£º
-	1 ÏÔÊ¾´æ»õÁĞ±í
-	2 Èë¿â
-	3 ³ö¿â
-    4 ÍË³ö³ÌĞò
-ÊµÏÖ²Ëµ¥¶ÔÓ¦¹¦ÄÜ£¨Ğè¼ÇÂ¼»õÎïµÄĞÍºÅ¡¢ÊıÁ¿µÈĞÅÏ¢£©£»
-³ÌĞòÆô¶¯Ê±´ÓÎÄ¼şÖĞ¶ÁÈ¡µ±Ç°¿â´æÊı¾İ£¬ÍË³öÊ±±£´æ¿â´æÊı¾İ£»*/
+å®ç°å¦‚ä¸‹çš„èœå•ï¼ˆæŒ‰æ•°å­—é€‰æ‹©èœå•åŠŸèƒ½ï¼‰ï¼š
+	1 æ˜¾ç¤ºå­˜è´§åˆ—è¡¨
+	2 å…¥åº“
+	3 å‡ºåº“
+    4 é€€å‡ºç¨‹åº
+å®ç°èœå•å¯¹åº”åŠŸèƒ½ï¼ˆéœ€è®°å½•è´§ç‰©çš„å‹å·ã€æ•°é‡ç­‰ä¿¡æ¯ï¼‰ï¼›
+ç¨‹åºå¯åŠ¨æ—¶ä»æ–‡ä»¶ä¸­è¯»å–å½“å‰åº“å­˜æ•°æ®ï¼Œé€€å‡ºæ—¶ä¿å­˜åº“å­˜æ•°æ®ï¼›*/
 
 
 
-typedef struct tempname//½á¹¹ part¹¹Ôì 
+typedef struct tempname//ç»“æ„ partæ„é€  
 {
 	int num;
 	char* str;
@@ -24,7 +24,7 @@ typedef struct tempname//½á¹¹ part¹¹Ôì
 
 
 
-void creatlb(part** nd)//³õÊ¼»¯Á´±íÍ· 
+void creatlb(part** nd)//åˆå§‹åŒ–é“¾è¡¨å¤´ 
 {
 	*nd = NULL;
 }
@@ -34,8 +34,8 @@ void disp(part** head)
 	part* cp = *head;
 	while (cp != NULL)
 	{
-		printf("Ãû×ÖÎª%s£¬", cp->str);
-		printf("´æ»õÁ¿Îª%d\n", cp->num);
+		printf("åå­—ä¸º%sï¼Œ", cp->str);
+		printf("å­˜è´§é‡ä¸º%d\n", cp->num);
 		cp = cp->next;
 	}
 	_getch();
@@ -48,7 +48,7 @@ int findname(part** head, char* zfc)
 	int k = 0;
 	while (xp != NULL)
 	{
-		if (strcmp((xp->str),zfc)==0)//Ö»ÒªÓĞÏàÍ¬Ãû×ÖµÄ·µ»Ø¸ÃÏîÔÚÁ´±íÖĞÎ»ÖÃ£¬·ñÔò·µ»Ø-1
+		if (strcmp((xp->str),zfc)==0)//åªè¦æœ‰ç›¸åŒåå­—çš„è¿”å›è¯¥é¡¹åœ¨é“¾è¡¨ä¸­ä½ç½®ï¼Œå¦åˆ™è¿”å›-1
 		{
 			return i;
 		}
@@ -59,15 +59,15 @@ int findname(part** head, char* zfc)
 }
 
 
-void weicha(part** head, part* new_part, int value, char* str)//Î²²å,½«Ò»¸öĞÂµÄ²åÈëÁ´±í
+void weicha(part** head, part* new_part, int value, char* str)//å°¾æ’,å°†ä¸€ä¸ªæ–°çš„æ’å…¥é“¾è¡¨
 {
-	part* cp = *head;//±éÀúÖ¸Õë
+	part* cp = *head;//éå†æŒ‡é’ˆ
 	new_part->num = value;
 	new_part->str = str;
-	if (*head == NULL)//Èç¹ûÎª¿Õ 
+	if (*head == NULL)//å¦‚æœä¸ºç©º 
 	{
-		*head = new_part;//½«Í·Ö¸ÕëÖ¸Ïònew part²¿·Ö
-		new_part->next = NULL;//½«newpart×÷Îªºó²¿·Ö 
+		*head = new_part;//å°†å¤´æŒ‡é’ˆæŒ‡å‘new partéƒ¨åˆ†
+		new_part->next = NULL;//å°†newpartä½œä¸ºåéƒ¨åˆ† 
 	}
 	else
 	{
@@ -89,7 +89,7 @@ int main(void)
 	
 
 
-//ÒÔÏÂÎª¶ÁÈ¡ÎÄ¼ş
+//ä»¥ä¸‹ä¸ºè¯»å–æ–‡ä»¶
 
 
 	FILE *fp = fopen("userinfo.txt", "r");
@@ -108,7 +108,7 @@ int main(void)
 			if(fscanf(fp,"%s %d ",sp,&x)==2)
 			{
 				part* new_part = (part*)malloc(sizeof(part));
-				weicha(&head, new_part, x, sp);//½«store¶ÁÈ¡µÄÖµ²åÈëÁ´±íºó
+				weicha(&head, new_part, x, sp);//å°†storeè¯»å–çš„å€¼æ’å…¥é“¾è¡¨å
 			}
 			
 		}
@@ -120,7 +120,7 @@ int main(void)
 
 
 
-//ÒÔÏÂÎª¿ªÊ¼½çÃæ
+//ä»¥ä¸‹ä¸ºå¼€å§‹ç•Œé¢
 	while (1) 
 	{
 
@@ -134,34 +134,34 @@ int main(void)
 		SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY |FOREGROUND_RED | FOREGROUND_BLUE);
 		printf("\n\t                       1:Show inventory list\n");
 		printf("\t                              2:import\n");
-		printf("\t                              3:export");
+		printf("\t                              3:export\n");
 		printf("\t                           4:save and exit");
 		SetConsoleTextAttribute(handle, FOREGROUND_INTENSITY |FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
 
 
 
-//ÒÔÏÂÎªÓÃ»§½»»¥
+//ä»¥ä¸‹ä¸ºç”¨æˆ·äº¤äº’
 
 
 	
 		char cos = _getch();
 		int slsl;
-		if (cos == '1')//ÏÔÊ¾´æ»õÁĞ±í
+		if (cos == '1')//æ˜¾ç¤ºå­˜è´§åˆ—è¡¨
 		{
 			system("cls");
 			disp(&head);
 
 		}
-		else if (cos == '2')//Èë¿â
+		else if (cos == '2')//å…¥åº“
 		{
 			char* ap=(char*)malloc(60*sizeof(char));
 			system("cls");
-			printf("ÇëÊäÈëÒªÈë¿âÉÌÆ·µÄÃû×Ö:");
+			printf("è¯·è¾“å…¥è¦å…¥åº“å•†å“çš„åå­—:");
 			scanf("%s", ap);
-			printf("ÇëÊäÈëÒªÈë¿âÉÌÆ·µÄÊıÁ¿:");
+			printf("è¯·è¾“å…¥è¦å…¥åº“å•†å“çš„æ•°é‡:");
 			scanf("%d", &slsl);
-			if (findname(&head, ap) != 0)//ÈôÓĞÖØÃûÉÌÆ·´æÔÚ
+			if (findname(&head, ap) != 0)//è‹¥æœ‰é‡åå•†å“å­˜åœ¨
 			{
 
 				_getch();
@@ -177,22 +177,22 @@ int main(void)
 				part* new_part = (part*)malloc(sizeof(part));
 				weicha(&head, new_part, slsl, ap);
 			}
-			printf("ÉÌÆ·ÒÑÈë¿â£¡");
+			printf("å•†å“å·²å…¥åº“ï¼");
 			_getch();
 
 
 
 		}
-		else if (cos == '3')//³ö¿â
+		else if (cos == '3')//å‡ºåº“
 		{
 			char* ap=(char*)malloc(20*sizeof(char));
 			system("cls");
-			printf("ÇëÊäÈëÒª³ö¿âÉÌÆ·µÄÃû×Ö:");
+			printf("è¯·è¾“å…¥è¦å‡ºåº“å•†å“çš„åå­—:");
 			scanf("%s", ap);
 			
-			if (findname(&head, ap) != 0)//ÈôÓĞÖØÃûÉÌÆ·´æÔÚ
+			if (findname(&head, ap) != 0)//è‹¥æœ‰é‡åå•†å“å­˜åœ¨
 			{
-				printf("\nÇëÊäÈëÒª³ö¿âÉÌÆ·µÄÊıÁ¿:");
+				printf("è¯·è¾“å…¥è¦å‡ºåº“å•†å“çš„æ•°é‡:");
 				scanf("%d", &slsl);
 				part* cp = head;
 				for (int i = 1; i<findname(&head, ap); i++)
@@ -202,31 +202,31 @@ int main(void)
 				if (cp->num >= slsl)
 				{
 					cp->num = cp->num - slsl;
-					printf("ÉÌÆ·³ö¿â³É¹¦£¡");
+					printf("å•†å“å‡ºåº“æˆåŠŸï¼");
 					_getch();
 				}
 				else
 				{
-					printf("ÉÌÆ·ÊıÁ¿²»×ã£¡Ä¿Ç°¿âÖĞÖ»ÓĞ%d¸öÉÌÆ·£¡", cp->num);
+					printf("å•†å“æ•°é‡ä¸è¶³ï¼ç›®å‰åº“ä¸­åªæœ‰%dä¸ªå•†å“ï¼", cp->num);
 					_getch();
 				}
 			}
 			else
 			{
-				printf("ÉÌÆ·²»´æÔÚ£¡");
+				printf("å•†å“ä¸å­˜åœ¨ï¼");
 				_getch();
 			}
 
 
 		}
-		else if (cos == '4')//ÍË³ö³ÌĞò
+		else if (cos == '4')//é€€å‡ºç¨‹åº
 		{
 			
 			
 			FILE *op = fopen("userinfo.txt", "w");
 			if (op == NULL)
 			{
-				printf("´Ë´ÎÈë¿â´æ´¢Ê§°Ü£¡");
+				printf("æ­¤æ¬¡å…¥åº“å­˜å‚¨å¤±è´¥ï¼");
 				system("pause");
 				return 0;
 			}
