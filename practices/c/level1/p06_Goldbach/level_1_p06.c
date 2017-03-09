@@ -1,24 +1,22 @@
 #include<stdio.h> 
-#include<math.h> 
+
 int checkprime(int m)
-{
-	int k;int i;
-	k=sqrt(m);
-	for (i=2;i<=k;i++)
-		if (m%i==0) break;
-		if (i>k) return 1;
-		else return 0;
+{	
+	for (int i=2;i*i<=m;i++){
+		if(m%i==0)
+		{return 0;}
+	}
+	return 1;
 }
 
 int main()
 {
-	int a;int prime[100];int b;int c=0;
+	int a;int prime[100];int control_1=0;
 	
 	for(int i=2;i<=100;i++){
-		b=checkprime(i);
-		if(b==1){
-			prime[c]=i;
-			c++;
+		if(checkprime(i)==1){
+			prime[control_1]=i;
+			control_1++;
 		}
 		
 	}
