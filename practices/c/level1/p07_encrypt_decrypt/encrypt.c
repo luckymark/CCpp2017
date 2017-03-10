@@ -9,9 +9,9 @@ int main()
 	printf("Would you want to decrypt(1) or encrypt(2)?");
 	scanf("%d",&choice);
 	if(choice==1){
-		void decrypt();
+		decrypt();
 	}else{
-		void encrypt();
+		encrypt();
 	}
 	return 0;
 }
@@ -61,5 +61,7 @@ void decrypt()
 		putchar(tran[j]);
 	}
 	}
+	
+	return 0;
 }
  
