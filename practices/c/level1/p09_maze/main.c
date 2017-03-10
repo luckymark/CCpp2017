@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "cross_platform.h"
 //函数声明
+void display(char **data, int x, int y);
 
 
 int main()
@@ -12,10 +13,11 @@ int main()
     return 0;
 }
 
-
-
-
-
-
-
-
+void display(char **data, int x, int y)
+{
+    for (int i = 0; i < x; ++i)
+    {
+        for (int j = 0; j < y; ++j)
+            putchar(data[x][y]);
+    }
+}
