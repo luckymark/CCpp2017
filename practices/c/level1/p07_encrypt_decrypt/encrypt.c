@@ -19,7 +19,7 @@ int main()
 
 void encrypt()
 {
-	int i,j=0;
+	int n,j=0;
 	char ch[80],tran[80];
 	printf("input cipher code:");
 	gets(ch);
@@ -30,35 +30,35 @@ void encrypt()
 		}else if((ch[j]>='a')&&(ch[j]<='z')){
 			tran[j]=219-ch[j];	
 		}else {
-			tran[i]=ch[j];		
+			tran[j]=ch[j];		
 		}
 	n=j;
 	printf("\noriginal text:");
 	for(j=0;j<n;j++){
-		putchar(tran[j])
+		putchar(tran[j]);
 	}
 	}
 }
 
 void decrypt()
 {
-	int i,j=0;
+	int n,j=0;
 	char ch[80],tran[80];
 	printf("input original code:");
 	gets(ch);
 	printf("\noriginal code :%s",ch);
-	if(ch[j];ch[j]!='\0'; j++){
+	if(j;ch[j]!='\0'; j++){
 		if((ch[j]>='A')&&(ch[j]<='Z')){
 			tran[j]=155-ch[j]; 
 		}else if((ch[j]>='a')&&(ch[j]<='z')){
 			tran[j]=219-ch[j];	
 		}else {
-			tran[i]=ch[j];		
+			tran[n]=ch[j];		
 		}
 	n=j;
 	printf("\ncipher text:");
 	for(j=0;j<n;j++){
-		putchar(tran[j])
+		putchar(tran[j]);
 	}
 	}
 }
