@@ -1,14 +1,10 @@
 #include <stdio.h>
 #include "encrypt&decrypt.h"
 
-/*char* get_str(int num = 0)
-{
-    int l =
-    char *str = (char*)malloc(sizeof(char) * 128);
-    for()
-}*/
 char *get_command(int n);
 void display_memu();
+char *get_str(int num);
+#define get_str() get_str()
 int main()
 {
     char *c, *str;
@@ -61,3 +57,9 @@ char *get_command(int n)
     } while (c != '\n' && c != EOF);
     return command;
 }
+/*char *get_str(int num)
+{
+    if (num == 0)
+        num = 128;
+    char *str = (char*)malloc(sizeof(char) * num);
+}*/

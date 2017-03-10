@@ -45,7 +45,7 @@ void add_pointer(char *p)
     else if (pointer_num + 1 > pointer_max)
     {
         pointer_max += 32;
-        pointer_data = (char**)realloc(pointer_max, sizeof(char*) * pointer_max);
+        pointer_data = (char**)realloc(p, sizeof(char*) * pointer_max);
     }
     pointer_data[pointer_num] = p;
     ++pointer_num;
