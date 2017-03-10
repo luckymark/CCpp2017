@@ -1,13 +1,23 @@
- 
 #include<stdio.h>
+
+void decrypt(); 
+void encrypt();
+
 int main()
 {
-
+	int choice;
+	printf("Would you want to decrypt(1) or encrypt(2)?");
+	scanf("%d",&choice);
+	if(choice==1){
+		void decrypt();
+	}else{
+		void encrypt();
+	}
 	return 0;
 }
 
 
-int encrypt()
+void encrypt()
 {
 	int i,j=0;
 	char ch[80],tran[80];
@@ -30,7 +40,7 @@ int encrypt()
 	}
 }
 
-int decrypt()
+void decrypt()
 {
 	int i,j=0;
 	char ch[80],tran[80];
