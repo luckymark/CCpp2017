@@ -7,5 +7,6 @@
 
 void cls();
 void print_xy(const char *, int, int, int);
+int get_move();
 
 #endif //NEW_CROSS_PLATFORM_H
