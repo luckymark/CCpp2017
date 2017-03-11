@@ -126,21 +126,37 @@ void print_xy(const char * str, int len, int x, int y)
 
 int get_move()
 {
-    if (getch() == 224)
+    int ret = 0;
+    while (ret == 0)
     {
-        switch (getch())
+        if (getch() == 224)
         {
-            case 72:
-                return 1;
-            case 80:
-                return 2;
-            case 75:
-                return 3;
-            case 77:
-                return 4;
+            switch (getch())
+            {
+                case 72:
+                    ret = 1;
+                    break;
+                case 80:
+                    ret = 2;
+                    break;
+                case 75:
+                    ret = 3;
+                    break;
+                case 77:
+                    ret = 4;
+                    break;
+            }
         }
     }
-    else
-        return 0;
+    return ret;
+}
+void exit_program(int code)
+{
+    cls();
+    exit(code);
+}
+void initialize()
+{
+    cls();
 }
 #endif

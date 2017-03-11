@@ -68,7 +68,7 @@ void read_map()
     FILE *fp = fopen("map.txt", "r");
     for (int i =0; i < map_l; ++i)
     {
-        fgets(map_data[i], map_l * 2 + 2, fp);
+        fgets(map_data[i], map_l * 2 + 1, fp);
         fgetc(fp);
     }
     fclose(fp);
