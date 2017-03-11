@@ -17,8 +17,7 @@ int Abs(int x);
 void lose();//判断失败 
 void print(int x,int y);//更新地图 
 
-int main()
-{
+int main(){
 	//输出游戏说明 
 	printf("\n\n\n\n\n");
 	printf("\t这是一个迷宫游戏！\n");
