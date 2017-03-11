@@ -9,8 +9,8 @@ int is_prime(int n){
     else
         for(int i=2;i<=sqrt(n);i++){
            if(n%i==0){
-            return 0;
-            break;
+              return 0;
+              break;
            }
     }
     return 1;
