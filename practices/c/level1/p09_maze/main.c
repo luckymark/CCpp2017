@@ -31,7 +31,6 @@ int main()
     while(j--)
     {
         next_move = get_move();
-        //char str[128];
         if (next_move != 0 && map_data[now_pos.x + move_data[next_move][0]][now_pos.y + move_data[next_move][1]] != '#')
         {
             map_data[now_pos.x][now_pos.y] = ' ';
@@ -43,8 +42,6 @@ int main()
             draw_queue[draw_now] = now_pos;
             ++draw_now;
         }
-        //sprintf(str, "(%d,%d)\n", now_pos.x, now_pos.y);
-        //print_xy(str, strlen(str), 11, 0);
         draw();
     }
     return 0;
@@ -58,7 +55,7 @@ void read_map()
     FILE *fp = fopen("map.txt", "r");
     for (int i =0; i < map_l; ++i)
     {
-        fgets(map_data[i], map_l * 2 + 1, fp);
+        fgets(map_data[i], map_l * 2 + 2, fp);
         fgetc(fp);
     }
     fclose(fp);
