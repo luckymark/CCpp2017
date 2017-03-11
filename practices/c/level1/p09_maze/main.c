@@ -64,12 +64,11 @@ void read_map()
 {
     map_data = (char**)malloc(sizeof(char*) * map_l);
     for (int i =0; i < map_l; ++i)
-        map_data[i] = (char*)malloc(sizeof(char) * (map_l * 2 + 4));
+        map_data[i] = (char*)malloc(sizeof(char) * (map_l * 2 + 3));
     FILE *fp = fopen("map.txt", "r");
     for (int i =0; i < map_l; ++i)
     {
-        fgets(map_data[i], map_l * 2 + 3, fp);
-        //fgetc(fp);
+        fgets(map_data[i], map_l * 2 + 3, fp);//第二个参数为最多读取数目减1 即多读取2个字符 为了兼容不同系统的换行符
     }
     fclose(fp);
 }
