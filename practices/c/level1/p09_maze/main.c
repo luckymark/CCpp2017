@@ -64,12 +64,12 @@ void read_map()
 {
     map_data = (char**)malloc(sizeof(char*) * map_l);
     for (int i =0; i < map_l; ++i)
-        map_data[i] = (char*)malloc(sizeof(char) * (map_l * 2 + 1));
+        map_data[i] = (char*)malloc(sizeof(char) * (map_l * 2 + 4));
     FILE *fp = fopen("map.txt", "r");
     for (int i =0; i < map_l; ++i)
     {
-        fgets(map_data[i], map_l * 2 + 1, fp);
-        fgetc(fp);
+        fgets(map_data[i], map_l * 2 + 3, fp);
+        //fgetc(fp);
     }
     fclose(fp);
 }
