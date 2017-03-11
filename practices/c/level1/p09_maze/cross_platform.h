@@ -11,5 +11,7 @@
 void cls();
 void print_xy(const char *, int, int, int);
 int get_move();
+void exit_program(int);
+void initialize();
 
 #endif //NEW_CROSS_PLATFORM_H

@@ -17,18 +17,17 @@ struct termios old_set, new_set;
 
 void set_key()
 {
-    printf("\033[?25l");
     if (tcgetattr(STDIN_FILENO, &old_set) != 0)
     {
         printf("读取终端配置失败\n");
-        exit(-1);
+        exit_program(-1);
     }
     new_set = old_set;
     new_set.c_lflag &= ~(ICANON | ECHO | ISIG);//ICANON：标准模式 ECHO：显示 ISIG：中断信号
     if (tcsetattr(STDIN_FILENO, TCSANOW, &new_set) != 0)
     {
         printf("更新终端设置失败\n");
-        exit(-2);
+        exit_program(-2);
     }
 }
 
@@ -40,6 +39,7 @@ void reset_key()
         printf("重置终端设置失败\n");
         exit(-3);
     }
+    cls();
 }
 
 void cls()
@@ -53,39 +53,59 @@ void print_xy(const char * str, int len,int x, int y)
     for (int i = 0; i < len; ++i)
         tmp[i] = str[i];
     tmp[len] = 0;
-    printf("\033[%d;%dH%s", x + 1, y + 1, tmp); //linux奇怪的要求
+    printf("\033[%d;%dH%s\033[?25l", x + 1, y + 1, tmp); //linux奇怪的要求
 }
 
 int getch()
 {
-    set_key();
+    //while(printf("%d\n", getchar()));
     int ret = getchar();
-    reset_key();
     if (ret == 3)
-        exit(1);
+        exit_program(1);
     return ret;
 }
 
 int get_move()
 {
-    if (getch() == 27 && getch() == 91)
+    int ret = 0;
+    while (ret == 0)
     {
-        switch (getch())
+        if (getch() == 27 && getch() == 91)
         {
-            case 65:
-                return 1;
-            case 66:
-                return 2;
-            case 68:
-                return 3;
-            case 67:
-                return 4;
+            switch (getch())
+            {
+                case 65:
+                    ret = 1;
+                    break;
+                case 66:
+                    ret = 2;
+                    break;
+                case 68:
+                    ret = 3;
+                    break;
+                case 67:
+                    ret = 4;
+                    break;
+            }
         }
+        else if (getch() == 27 && getch() == 91 && getch() == 49 && getch() == 53 && getch() == 126)
+            ret = -1;
     }
-    else
-        return 0;
+    //printf("0000000000000000000000000000000000000000(%d)\n", ret);
+    return ret;
 }
 
+void exit_program(int code)
+{
+    reset_key();
+    exit(code);
+}
+
+void initialize()
+{
+    set_key();
+    cls();
+}
 #elif WIN32
 
 #include<windows.h>
