@@ -1,31 +1,35 @@
 #include<stdio.h>
-
 #include<windows.h>
+
+
+void gotoxy(int x, int y)
+{
+	HANDLE hand;
+	COORD where;
+	where.X = x;
+	where.Y = y;
+	hand = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleCursorPosition(hand, where);
+}
+
+
 
 int main(void)
 {
+	system("mode con cols=100 lines=1");
+	int i = 0;
+	int k = 0;
 	while(1)
 	{
-		for(int i=0;i<100;i++)
-		{
-			for(int j=0;j<i;j++)
-			{
-				printf(" ");
-			}
-			printf("S");
-			Sleep(30);
-			system("cls");
-		}
-		for(i=100;i>=0;i--)
-		{
-			for(j=0;j<i;j++)
-			{
-				printf(" ");
-			}
-			printf("h");
-			Sleep(30);
-			system("cls");
-		}
+		gotoxy(i, 0);
+		printf("R");
+		Sleep(50);
+		gotoxy(i, 0);
+		printf(" ");
+		(k % 2 == 0) ? i++ : i--;
+		if (i == 0 || i == 99)k++;
+
+		
 	}
 	
 	return 0;
@@ -33,5 +37,4 @@ int main(void)
 
 
 
-//我需要做的：将字母左到右 返回来
-//①：打出一个字母 
+
