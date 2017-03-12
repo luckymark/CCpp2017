@@ -1,19 +1,17 @@
-#include <iostream>
-#include <cmath>
-#include <ctime>
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdbool.h>
 
-
-using std::cout;
-using std::endl;
 const int num = 100;
 bool* produce_prime(int max_num) //生成小于等于max_num的素数并返回指针
 {
-    if(max_num <=1)
+    if(max_num <= 1)
         return NULL;
-    bool *ret = new bool[max_num+1];
-    for(int i = 0;i <= max_num; ++i)
+    bool *ret = (bool*)malloc(sizeof(bool) * (max_num + 1));
+    for(int i = 0; i <= max_num; ++i)
         ret[i] = true;
-    for(int i = 2;i <= max_num; ++i)
+    for(int i = 2; i <= max_num; ++i)
     {
         if(ret[i])
         {
@@ -25,6 +23,7 @@ bool* produce_prime(int max_num) //生成小于等于max_num的素数并返回�
     ret[1] = false;
     return ret;
 }
+
 int main()
 {
     bool *data = produce_prime(num), result = true;
@@ -40,19 +39,19 @@ int main()
         {
             if(data[i - prime[j]])
             {
-                cout<<i<<"="<<prime[j]<<"+"<<i - prime[j]<<endl;
+                printf("%d = %d + %d\n", i, prime[j], i - prime[j]);
                 break;
             }
             else if(j == count - 1)
             {
-                cout << i << "can't be solve" << endl;
+                printf("%dcan't be solve\n", i);
                 result = false;
             }
         }
     }
     if(result)
-        cout<<"Goldbach Conjecture in 100 is right"<<endl;
+        puts("Goldbach Conjecture in 100 is right");
     else
-        cout<<"Goldbach Conjecture in 100 is wrong"<<endl;
+        puts("Goldbach Conjecture in 100 is wrong");
     return 0;
 }
