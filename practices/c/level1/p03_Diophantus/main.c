@@ -1,9 +1,7 @@
-#include <iostream>
-#include <cmath>
+#include <stdio.h>
+#include <math.h>
+#include <stdbool.h>
 
-using std::cout;
-using std::cin;
-using std::endl;
 bool calc_int(int age)
 {
     int son = age - ((1 / 6.0 + 1 / 12.0 + 1 / 7.0) * age + 5) - 4;
@@ -15,7 +13,6 @@ bool calc_int(int age)
 bool calc_float(double age)
 {
     double son = age - ((1 / 6.0 + 1 / 12.0 + 1 / 7.0) * age + 5) - 4;
-    //cout<< son <<endl;
     if(fabs(son * 2 - age) < 1e-8)
         return true;
     else
@@ -27,7 +24,7 @@ int main()
     {
         if(calc_int(i))
         {
-            cout<<"int:when his son died,his age is "<<i - 4<<endl;
+            printf("int:when his son died,his age is %d\n", i - 4);
             break;
         }
     }
@@ -35,10 +32,9 @@ int main()
     {
         if(calc_float(i))
         {
-            cout<<"float:when his son died,his age is "<<i - 4<<endl;
+            printf("float:when his son died,his age is %d\n", i - 4);
             break;
         }
     }
-    //calc_float(84);
     return 0;
 }
