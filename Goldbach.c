@@ -1,9 +1,36 @@
-#include <iostream>
-using namespace std;
+#include <stdio.h>
+
+/*int pd(int n)
+{
+	for(int i=2;i<=n/2;i++)                    //This program is used for drawing a table
+	{
+		if(n%i==0)
+		return 0;
+	}
+	return 1;
+}
+
+
+int main(int argc, char** argv) 
+{
+	int a[100];
+	int tot=0;
+	printf("a[0]=2\n");
+	for(int i=3;i<100;i++)
+	{
+		if(pd(i))
+		{
+			a[tot++]=i;
+			printf("a[%d]=%d;\n",tot,i);
+		}
+	}
+	return 0;
+}  */
+
 int main()
 {
 	int a[25];        //打表
-	bool Judge = 0;
+	int judge = 0;
 	a[0] = 2;
 	a[1] = 3;
 	a[2] = 5;
@@ -29,7 +56,7 @@ int main()
 	a[22] = 83;
 	a[23] = 89;
 	a[24] = 97;
-	for (int i = 6; i <=100; i+=2)
+	for (int i = 4; i <=100; i+=2)
 	{
 		for (int j = 0; j < 25; j++)
 		{
@@ -37,17 +64,21 @@ int main()
 			{
 				if (a[j] + a[k] == i)
 				{
-					Judge = 1;
+					judge = 1;
 					break;
 				}
 			}
-			if (Judge==1)
+			if (judge==1)
 			{
 				cout << i << "满足哥德巴赫猜想" << endl;
 				break;
 			}
-		}
-		Judge = 0;
+			else if (judge==0)
+			{
+				return -1;
+				printf("Goldbach do not exists");
+			}
+		judge = 0;
 	}
     return 0;
 }

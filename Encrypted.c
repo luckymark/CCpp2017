@@ -1,6 +1,7 @@
 #include <stdio.h> 
 #include <string.h>
 #include <stdlib.h>
+
 void Encrypte(char* p)
 {
 	int i = 0;
@@ -12,6 +13,7 @@ void Encrypte(char* p)
 	}
 	printf("\n");
 }
+
 void Decrypte(char* p)
 {
 	int i = 0;
@@ -23,6 +25,7 @@ void Decrypte(char* p)
 	}
 	printf("\n");
 }
+
 int main()
 {
 	char p[10000];
@@ -38,6 +41,11 @@ int main()
 	else if (Judge == 2)
 	{
 		Decrypte(p);
+	}
+	else
+	{
+		printf("Input Error!");
+		return -1;
 	}
     return 0;
 }

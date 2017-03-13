@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <time.h>
-/*bool pd(int n)
+#include <math.h>
+/*int pd(int n)
 {
-	for(int i=2;i<=n/2;i++)                    //此程序用来打表 
+	for(int i=2;i<=sqrt(n);i++)                    //此程序用来打表 
 	{
 		if(n%i==0)
-		return false;
+		return 0;
 	}
-	return true;
+	return 1;
 }
 
 
