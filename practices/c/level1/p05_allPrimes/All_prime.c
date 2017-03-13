@@ -8,7 +8,7 @@ int main(void)
     printf("2\t");
     int i,number1,number2;
     for(number1 = 2 ; number1 <= MAX ; number1++){
-            int k = sqrt(number1+1);
+            int k = sqrt(number1 + 1);
         for(number2 = 2 ; number2 <= k ; number2++){
             if(number1 % number2 != 0){
                 i=1;
