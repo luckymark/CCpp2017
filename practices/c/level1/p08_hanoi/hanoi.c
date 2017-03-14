@@ -19,5 +19,5 @@ void han(int num, char a, char b, char c)
 		han(num - 1, 'a',' c', 'b');
 		printf("%cÒÆ¶¯µ½%c\n", a, c);
 		han(num - 1, 'b', 'a', 'c');
-		}
+	}
 }

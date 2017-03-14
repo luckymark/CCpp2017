@@ -1,16 +1,17 @@
 #include<stdio.h>
-int main()
+
+void main()
 {
-	int i,j,k,l;
-	for (i = 100;i < 1000;i++)
+	int one, ten, hun;
+
+	for (int num= 100;num < 1000;num++)
 	{
-		k = i % 10;
-		j = (i % 100) / 10;
-		l = i / 100;
-		if (i == (k*k*k) + (j*j*j) + (l*l*l))
+		one = num % 10;
+		ten = (num % 100) / 10;
+		hun = num / 100;
+		if (num == (one*one*one) + (ten*ten*ten) + (hun*hun*hun))
 		{
-			printf("%5d", i);
+			printf("%5d", num);
 		}
 	}
-	return 0;
 }

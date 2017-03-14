@@ -1,4 +1,4 @@
-##define _CRT_SECURE_NO_WARNINGS//大神教的
+#define _CRT_SECURE_NO_WARNINGS//澶х鏁欑殑
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -120,3 +120,4 @@ void turndown()
 		x += 1;
 	}
 }
+
