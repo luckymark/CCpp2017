@@ -4,6 +4,17 @@
 const int MAXN=10000005;
 bool b[MAXN];
 int n,tot,prime[MAXN];
+void get_prime(int n);
+int main(){
+	scanf("%d",&n);
+	int tmp=clock();
+	get_prime(n);
+	for (int i=1;i<=tot;++i) {
+		printf("%d\n",prime[i]);
+	}
+	printf("time=%d ms\n",clock()-tmp);
+	return 0;
+}
 void get_prime(int n) {
 	memset(b,0,sizeof(b)); tot=0;
 	for (int i=2;i<=n;++i) {
@@ -14,11 +25,7 @@ void get_prime(int n) {
 		}
 	}
 }
-int main(){
-	scanf("%d",&n);
-	int tmp=clock();
-	get_prime(n);
-	for (int i=1;i<=tot;++i) printf("%d\n",prime[i]);
-	printf("time=%d ms\n",clock()-tmp);
-	return 0;
-}
+
+/*
+Ugly format
+*/

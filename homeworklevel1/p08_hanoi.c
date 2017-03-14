@@ -11,3 +11,5 @@ int main(){
 	work(n,0,1,2);
 	return 0;
 }
+
+//Nice!
