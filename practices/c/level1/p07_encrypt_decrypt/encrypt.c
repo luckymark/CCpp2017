@@ -24,7 +24,7 @@ void encrypt()
 	printf("input cipher code:");
 	gets(ch);
 	printf("\ncopher code :%s",ch);
-	if(j;ch[j]!='\0'; j++){
+	for(j;ch[j]!='\0'; j++){
 		if((ch[j]>='A')&&(ch[j]<='Z')){
 			tran[j]=155-ch[j]; 
 		}else if((ch[j]>='a')&&(ch[j]<='z')){
@@ -32,11 +32,11 @@ void encrypt()
 		}else {
 			tran[j]=ch[j];		
 		}
-	n=j;
-	printf("\noriginal text:");
-	for(j=0;j<n;j++){
-		putchar(tran[j]);
-	}
+		n=j;
+		printf("\noriginal text:");
+		for(j=0;j<n;j++){
+			putchar(tran[j]);
+		}
 	}
 }
 
@@ -47,7 +47,7 @@ void decrypt()
 	printf("input original code:");
 	gets(ch);
 	printf("\noriginal code :%s",ch);
-	if(j;ch[j]!='\0'; j++){
+	for(j;ch[j]!='\0'; j++){
 		if((ch[j]>='A')&&(ch[j]<='Z')){
 			tran[j]=155-ch[j]; 
 		}else if((ch[j]>='a')&&(ch[j]<='z')){
@@ -55,13 +55,12 @@ void decrypt()
 		}else {
 			tran[n]=ch[j];		
 		}
-	n=j;
-	printf("\ncipher text:");
-	for(j=0;j<n;j++){
-		putchar(tran[j]);
-	}
+		n=j;
+		printf("\ncipher text:");
+		for(j=0;j<n;j++){
+			putchar(tran[j]);
+		}
 	}
 	
-	return 0;
 }
  

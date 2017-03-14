@@ -4,7 +4,7 @@
 
 void mapprint();
 void posation();
-void move() ;
+bool move() ;
 
 struct Point
 {
@@ -14,18 +14,13 @@ struct Point
 
 struct Point target;
 struct Point person;
-
 int main()
 {
 	move;
 	posation();
 	mapprint();
-	while(1)
-	{
-		move();
-	}
+	while(!move());
 	
-
 	return 0;
 }
 
@@ -63,30 +58,29 @@ void posation()
 		
 }
 
-void move()
+bool move()
 {
-	struct Point currentperson = person;
-	
 	if(GetKeyState(VK_UP) < 0){
 		if(map[person.y-1][person.x]==' '){
 			person.y--;
 			map[person.y][person.x]='R';
-			map[person.y++][person.x]=' ';
+			map[person.y+1][person.x]=' ';//注意不能用y++ y的值改变了。 
 		}
-		Sleep(50);
+		Sleep(100);
 		system("cls");
 		mapprint();
 	}
-
+	
 	if(GetKeyState(VK_DOWN) < 0){
 		if(map[person.y+1][person.x]==' '){
 			person.y++;
 			map[person.y][person.x]='R';
-			map[person.y--][person.x]=' ';
+			map[person.y-1][person.x]=' ';
 		}else if(map[person.y+1][person.x]=='P'){
 			printf("you win");
+			return 1;
 		}
-		Sleep(50);
+		Sleep(100);
 		system("cls");
 		mapprint();
 	}	
@@ -95,22 +89,22 @@ void move()
 		if(map[person.y][person.x-1]==' '){
 			person.x--;
 			map[person.y][person.x]='R';
-			map[person.y][person.x++]=' ';
+			map[person.y][person.x+1]=' ';
 		}
-		Sleep(50);
+		Sleep(100);
 		system("cls");
 		mapprint();
 	}	
 
-	if(GetKeyState(VK_LEFT) < 0){
+	if(GetKeyState(VK_RIGHT) < 0){
 		if(map[person.y][person.x+1]==' '){
 			person.x++;
 			map[person.y][person.x]='R';
-			map[person.y][person.x--]=' ';
+			map[person.y][person.x-1]=' ';
 		}
-		Sleep(50);
+		Sleep(100);
 		system("cls");
 		mapprint();
 	}
-		
+	return 0;
 }
