@@ -16,9 +16,9 @@ int main(void)
     }
 
     for(i=0;i<=9;++i){
-        for(j=1;j<=array[i];++j)
+        for(j=1;j<=array[i];++j){
             printf("%d\t",i);
-
+        }
     }
 
     system("pause");
