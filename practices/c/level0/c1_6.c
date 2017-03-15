@@ -1,4 +1,4 @@
-#include <stdio.h>
+c#include <stdio.h>
 int main()
 {
 	int i,n,max_number=0;
