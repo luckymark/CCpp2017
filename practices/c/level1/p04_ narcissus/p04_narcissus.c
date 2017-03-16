@@ -4,10 +4,10 @@ int Power(int x);
 int narcissusChange(int n);
 
 int main() {
-	for (int i = 100; i < 1000; i++) {
-		if (i == narcissusChange(i)) printf("%d\t",i);
-	}
-	return 0;
+    for (int i = 100; i < 1000; i++) {
+        if (i == narcissusChange(i)) printf("%d\t",i);
+    }
+    return 0;
 }
 
 int Power(int x) {

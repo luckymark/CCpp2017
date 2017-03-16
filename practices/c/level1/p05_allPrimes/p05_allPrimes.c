@@ -7,11 +7,11 @@ void init();
 int isPrime[N];
 
 int main() {
-	init();
-	for (int i = 2; i < N; i++) {
-		if (isPrime[i]) printf("%d\t",i);
-	}
-	return 0;
+    init();
+    for (int i = 2; i < N; i++) {
+        if (isPrime[i]) printf("%d\t",i);
+    }
+    return 0;
 }
 
 void init() {

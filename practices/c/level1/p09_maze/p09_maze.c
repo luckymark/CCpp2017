@@ -21,21 +21,21 @@ int destinationX,destinationY;
 int isGet = 0;
 
 int main() {
-	init();
-	
+    init();
+
 // down 258
 // up 259
 // left 260
 // right 261
 
-	while (!isGet) {
-		int k = getch() - 258;
-		mazeMove(k);
-	}
+    while (!isGet) {
+        int k = getch() - 258;
+        mazeMove(k);
+    }
 
-	getch();
-	endwin();
-	return 0;
+    getch();
+    endwin();
+    return 0;
 }
 
 int check(int x,int y) {

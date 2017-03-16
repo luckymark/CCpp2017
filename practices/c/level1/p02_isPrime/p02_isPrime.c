@@ -4,10 +4,10 @@
 int isPrime(int n);
 
 int main () {
-	int n;
-	scanf("%d",&n);
-	if (isPrime(n)) printf("Yes!");
-	else printf("No!");
+    int n;
+    scanf("%d",&n);
+    if (isPrime(n)) printf("Yes!");
+    else printf("No!");
     return 0;
 }
 

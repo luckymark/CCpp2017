@@ -37,21 +37,21 @@ int step = 0;
 int isFinish = 0;
 
 int main() {
-	init();
+    init();
 
-	while (!isFinish) {
-		int k = getch() - 258;
-		if (k == -231) {
-			restart();
-		}
-		boxMove(k);
-	}
-	clear();
-	printw("Congratulation! You use %d steps!",step);
-	refresh();
-	getch();
-	endwin();
-	return 0;
+    while (!isFinish) {
+        int k = getch() - 258;
+        if (k == -231) {
+            restart();
+        }
+        boxMove(k);
+    }
+    clear();
+    printw("Congratulation! You use %d steps!",step);
+    refresh();
+    getch();
+    endwin();
+    return 0;
 }
 
 void mapPut() {

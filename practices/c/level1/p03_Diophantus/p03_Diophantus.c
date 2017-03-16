@@ -3,10 +3,10 @@
 int check(int n);
 
 int main() {
-	for (int i = 1; i <= 1000; i++) {
-		if (check(i)) printf("%d ",i - 4);
-	}
-	return 0;
+    for (int i = 1; i <= 1000; i++) {
+        if (check(i)) printf("%d ",i - 4);
+    }
+    return 0;
 }
 
 int check(int n) {

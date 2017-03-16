@@ -20,24 +20,24 @@ int deIntoEn[62];
 char ch[N];
 
 int main() {
-	init();
-	while (1) {
-		int k;
-		printf("输入要进行的操作序号，1:加密，2:解密，3:退出 : ");
-		scanf("%d",&k);
-		if (k == 1) {
-			encrypt();
-			continue;
-		}
-		if (k == 2) {
-			decrypt();
-			continue;
-		}
-		if (k == 3) {
-			break;
-		}
-	}
-	return 0;
+    init();
+    while (1) {
+        int k;
+        printf("输入要进行的操作序号，1:加密，2:解密，3:退出 : ");
+        scanf("%d",&k);
+        if (k == 1) {
+            encrypt();
+            continue;
+        }
+        if (k == 2) {
+            decrypt();
+            continue;
+        }
+        if (k == 3) {
+            break;
+        }
+    }
+    return 0;
 }
 
 char numToChar(int x) {
