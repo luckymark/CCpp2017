@@ -1,9 +1,7 @@
-#include <iostream>
-#include <cmath>
+#include <stdio.h>
+#include <math.h>
+#include <stdbool.h>
 
-using std::cin;
-using std::cout;
-using std::endl;
 bool is_prime(int num)
 {
     if(num < 2)
@@ -18,11 +16,14 @@ bool is_prime(int num)
 int main()
 {
     int num;
-    cin>>num;
+    scanf("%d", &num);
     if(is_prime(num))
-        cout<<"这是个质数";
+    {
+        puts("这是个质数");
+    }
     else
-        cout<<"这不是质数";
-    cout<<endl;
+    {
+        puts("这不是质数");
+    }
     return 0;
 }
