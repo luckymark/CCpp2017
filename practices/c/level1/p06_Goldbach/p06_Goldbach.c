@@ -2,27 +2,15 @@
 #include <math.h>
 #define N 101
 
-int primes[20];
-int numberOfPrimes;
+int isPrime(int x);
+void init();
+
 struct data {
-	int a,b,c;
+    int a,b,c;
 }a[N];
 
-int isPrime(int x) {
-	for (int i = 2; i <= sqrt(x); i++) {
-		if (x%i == 0) return 0;
-	}
-	return 1;
-}
-
-void init() {
-	numberOfPrimes = 0;
-	for (int i = 3; i < 100; i++) {
-		if (isPrime(i)) {
-			primes[numberOfPrimes++] = i;
-		}
-	}
-}
+int primes[20];
+int numberOfPrimes;
 
 int main() {
 	init();
@@ -62,3 +50,18 @@ int main() {
 	return 0;
 }
     
+int isPrime(int x) {
+    for (int i = 2; i <= sqrt(x); i++) {
+        if (x%i == 0) return 0;
+    }
+    return 1;
+}
+
+void init() {
+    numberOfPrimes = 0;
+    for (int i = 3; i < 100; i++) {
+        if (isPrime(i)) {
+            primes[numberOfPrimes++] = i;
+        }
+    }
+}
