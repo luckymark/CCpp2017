@@ -8,29 +8,25 @@ struct player
 	int y;
 	struct player* next; 
 };	
-int maze[10][10]=
-	{
-		{0,0,0,0,0,0,0,0,0,0},
-		{1,1,1,1,1,0,0,0,0,0},
-		{0,1,0,0,1,1,1,1,0,0},
-		{0,1,0,0,1,0,0,1,0,0},
-		{0,1,1,0,1,0,0,1,1,0},
-		{0,0,1,0,1,1,0,0,1,0},
-		{0,0,1,1,0,1,1,0,1,0},
-		{0,0,0,1,0,0,1,0,0,0},
-		{0,0,0,1,1,1,1,1,1,1},
-		{0,0,0,0,0,0,0,0,0,0},
-	} ;
 void gotoxy(int x,int y);
-int move(struct player* p,int x,int y,int m[x][y]);
+int move(struct player* p,int x,int y,int m[100][100]);
 void keydown(struct player* p);
-void drmap(int x,int y); 
+void drmap(int x,int y,int maze[100][100]); 
 int main()
 {
-	int z;
+	FILE *fp;
+	fp=fopen("mission.txt","r");
+	char m[100]={5};
+	int x,y;
+	int z，maze[100][100],mission=1;
 	system("title Maze");
 	system("mode con cols=64 lines=30");
 	
+	struct player* box;
+	struct player* boxlink;
+	box=(struct player*)malloc(sizeof(struct player));
+	boxlink=box;
+
 	struct player* play;
 	play=(struct player*)malloc(sizeof(struct player));
 	play->x=0;
@@ -38,14 +34,37 @@ int main()
 	play->next=(struct player*)malloc(sizeof(struct player));
 	play->next->x=play->x;
 	play->next->y=play->y;
-	
-	int x=10,y=10;
-	drmap(x,y);
-	z=move(play,x,y,maze); 
-	if(z==1)
+
+	while(mission<=3)
 	{
-		system("cls");
-		puts("You are outing the maze");
+		switch(mission)
+		{
+			case 1:x=21;y=20;break;
+			case 2:x=31;y=30;break;
+			case 3:x=41;y=40;break;
+		}
+		for(int i=0;i<y;i++)
+		{
+			fegts(&m,x,fp);
+			for(int j=0;j<x;j++)
+			{
+				if(m[j]==' ')maze[i][j]=1;
+				else if(m[j]=='#')maze[i][j]=0;
+				else if(m[j]=='*')
+				{
+					box->x=j;
+					box->y=i;
+					box=box->next;
+					box=(struct player*)malloc(sizeof(struct player));
+					maze[i][j]=2;
+				}
+			}
+		}
+		free(box);
+		box=boxlink;
+		drmap(x,y);
+		z=move(play,x,y,maze);
+		if(z==1)system("cls");
 	}
 	return 0;
 }
@@ -62,14 +81,9 @@ void drmap(int x,int y)
 	for(int i=0;i<x;i++)
 	for(int j=0;j<y;j++)
 	{
-		if(maze[i][j]==1)
-		{
-			printf("  ");
-		} 
-		else if(maze[i][j]==0)
-		{
-			printf("��");
-		}
+		if(maze[i][j]==1)printf("  ");
+		else if(maze[i][j]==0)printf("■");
+		else if(maze[i][j]==2)printf("▣")；
 		if(j==y-1)putchar('\n'); 
 	}
 }
@@ -77,7 +91,7 @@ int move(struct player* p,int x,int y,int m[x][y])
 {
 	struct player* temp;
 	gotoxy(p->x,p->y);
-	printf("��") ;
+	printf("●") ;
 	while(1)
 	{
 		do
@@ -90,7 +104,7 @@ int move(struct player* p,int x,int y,int m[x][y])
 		gotoxy(p->x,p->y);
 		printf("  ");
 		gotoxy(temp->x,temp->y);
-		printf("��");
+		printf("●");
 		free(p);
 		p=temp;
 		p->next=(struct player*)malloc(sizeof(struct player)); 
