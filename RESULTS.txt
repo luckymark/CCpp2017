@@ -1,0 +1,3 @@
+LEVEL1 : Steps:11	Cancels:0
+LEVEL2 : Steps:95	Cancels:0
+LEVEL3 : Steps:124	Cancels:6
