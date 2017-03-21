@@ -1,6 +1,6 @@
-#include<cstdio>
-#include<cstdlib>
-#include<cstring>
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
 
 int Length,LastNum;
 long long a[100000],b[100000];
@@ -39,18 +39,29 @@ int main(){
 long long nextPrime(long long x){
 	while(1){
 		int i;
-		for (i=2;i<=x/i;i++)
-			if (x%i==0) break;
-		if (i>x/i) return x;
-		else x++;
+		for (i=2;i<=x/i;i++){
+			if (x%i==0){
+				break;
+			}
+		}
+		if (i>x/i){
+			return x;
+		}
+		else{
+			x++;
+		}
 	}
 }
 long long FORe2(long long  x){
 	long long y=(p-1)*(q-1);
-	if (y%x==0) return -1;
+	if (y%x==0){
+		return -1;
+	}
 	long long i;
 	for (i=y+1;i>0;i+=y)
-		if (i%x==0) break;
+		if (i%x==0){
+			break;
+		}
 	return i>0? i/x:-1;
 }
 long long fastAdd(long long x,long long y){
@@ -60,16 +71,23 @@ long long fastAdd(long long x,long long y){
 		while ((y&1)==0){
 			y>>=1;
 			x=x+x;
-			if (x>=n) x=x-n;
+			if (x>=n){
+				x=x-n;
+			}
 		}
 		result=x;
 		y>>=1;
 		while (y!=0){
 			x=x+x;
-			if (x>=n) x-=n;
-			if ((y&1)!=0)
+			if (x>=n) {
+				x-=n;
+			}
+			if ((y&1)!=0){
 				result+=x;
-			if (result>=n) result-=n;
+			}
+			if (result>=n){
+				result-=n;
+			}
 			y>>=1;
 		}
 	}
@@ -87,8 +105,9 @@ long long fastExp(long long x,long long y){
 		y>>=1;
 		while (y!=0){
 			x=fastAdd(x,x);
-			if ((y&1)!=0)
+			if ((y&1)!=0){
 				result=fastAdd(result,x);
+			}
 			y>>=1;
 		}
 	}

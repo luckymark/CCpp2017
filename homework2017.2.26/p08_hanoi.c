@@ -1,4 +1,4 @@
-#include<cstdio>
+#include<stdio.h>
 
 void hanoi(int n,char from,char mid,char aim);
 int main(){
