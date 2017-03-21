@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-using namespace std;
 typedef long long LL;
 inline int read() {
 	int x=0,f=1; char ch=getchar();

@@ -1,11 +1,8 @@
-#include <ctime>
-#include <cstdio>
+#include <time.h>
+#include <stdio.h>
 #include <conio.h>
-#include <cstdlib>
-#include <cstring>
-#include <iostream>
-#include <algorithm>
-using namespace std;
+#include <stdlib.h>
+#include <string.h>
 typedef long long LL;
 inline int read(){
 	int x=0,f=1; char ch=getchar();
@@ -16,7 +13,7 @@ inline int read(){
 
 const int MAXN=22;
 int n,m,x,y,p,q,a[MAXN][MAXN];
-int rand(int n){ return (rand()<<16|rand())%n+1; }
+int rand(int n);
 int main(){
 	int i,j,k;
 	srand(time(0));
@@ -105,6 +102,7 @@ int main(){
 	
 	return 0;
 }
+int rand(int n){ return (rand()<<16|rand())%n+1; }
 
 /*
 72 80 75 77
