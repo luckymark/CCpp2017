@@ -82,6 +82,8 @@ int move(struct player* p,int x,int y,int m[x][y])
 	{
 		do
 		{ 
+			p->next->x=p->x;
+			p->next->y=p->y; 
 			keydown(p);
 			if((p->next->x)/2==10&&p->next->y==8)return 1;
 		} 
