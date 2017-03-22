@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <stdio.h>
 HANDLE   hStdout;   //定义句柄
-COORD     cursorPos;   //光标位置
+COORD   cursorPos;   //光标位置
 
 void prepare() {
     hStdout   =   GetStdHandle(STD_OUTPUT_HANDLE);   //定义标准输入输出（屏幕）作为目标句柄
