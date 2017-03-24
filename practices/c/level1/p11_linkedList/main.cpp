@@ -25,7 +25,12 @@ int main()
 
 	p=inverted(p,NodeNumber);
 
+	cout<<"***********"<<endl;
+
 	show( p );
+
+	find(p,5 );
+
 
 	cout<<"END"<<endl;
 }

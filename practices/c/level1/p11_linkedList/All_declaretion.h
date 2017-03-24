@@ -14,6 +14,6 @@ void show( Node * start );
 
 Node* inverted(Node* start , int n);
 
-
+int find( Node* start ,  int n );
 
 #endif /* ALL_DECLARETION_H_ */
