@@ -6,9 +6,11 @@ void hanoi(int n,char start,char medium,char end);
 int main()
 {
     int n;
+    
     printf("input n:");
     scanf("%d",&n);
     hanoi(n,'A','B','C');
+    
     return 0;
 }
 
