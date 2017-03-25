@@ -2,6 +2,7 @@
 #include <math.h>
 #define SIZE 10000
 #define SIZE1 10000
+
 void encrypt(void);
 void decrypt(void);
 char array[SIZE];
@@ -69,24 +70,4 @@ void decrypt(void){
             j++;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
