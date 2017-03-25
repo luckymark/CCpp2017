@@ -97,21 +97,33 @@ void go(int x, int y) {
 
 int getkey() {
     if (GetKeyState(VK_UP) < 0)
+    {
         return 1;
+    }
     if (GetKeyState(VK_DOWN) < 0)
+    {
         return 2;
+    }
     if (GetKeyState(VK_LEFT) < 0)
+    {
         return 3;
+    }
     if (GetKeyState(VK_RIGHT) < 0)
+    {
         return 4;
+    }
     return 0;
 }
 
 
 bool check_win() {
     for (int i = 1; i <= tot_aim; i++)
+    {
         if (map[aim[i][0]][aim[i][1]] != 2)
+        {
             return 0;
+        }
+    }
     return 1;
 }
 
@@ -124,13 +136,17 @@ void move() {
     {
         int can = map[man.X + dx[tmp]][man.Y + dy[tmp]];
         if (!can)
+        {
             return;
+        }
         bo_go = 0;
         if (can == 2)
         {
             int front = map[man.X + dx[tmp] * 2][man.Y + dy[tmp] * 2];
             if ((front == 0) || (front == 2))
+            {
                 return;
+            }
             bo_go = 1;
         }
         go(man.X, man.Y);
@@ -146,6 +162,7 @@ void move() {
             map[man.X][man.Y] = 1;
         }
         for (int i = 1; i <= tot_aim; i++)
+        {
             if (map[aim[i][0]][aim[i][1]] != 2)
             {
                 if ((aim[i][0] != man.X) || (aim[i][1] != man.Y))
@@ -154,6 +171,7 @@ void move() {
                     printf("X");
                 }
             }
+        }
         ans++;
         if (check_win())
         {
@@ -177,7 +195,9 @@ int main() {
         {
             move();
             if (bo_win)
+            {
                 break;
+            }
             Sleep(100);
         }
     }

@@ -59,13 +59,21 @@ void go(int x, int y) {
 
 int getkey() {
 	if (GetKeyState(VK_UP) < 0)
+	{
 		return 1;
+	}
 	if (GetKeyState(VK_DOWN) < 0)
+	{
 		return 2;
+	}
 	if (GetKeyState(VK_LEFT) < 0)
+	{
 		return 3;
+	}
 	if (GetKeyState(VK_RIGHT) < 0)
+	{
 		return 4;
+	}
 	return 0;
 }
 
@@ -79,7 +87,9 @@ void move() {
 	if (tmp)
 	{
 		if (!check(man.X + dx[tmp], man.Y + dy[tmp]))
+		{
 			return;
+		}
 		go(man.X, man.Y);
 		putchar(' ');
 		man.X += dx[tmp];	man.Y += dy[tmp];
@@ -103,7 +113,9 @@ int main() {
 	{
 		move();
 		if (flag)
+		{
 			break;
+		}
 		Sleep(100);
 	}
 	go(0, 20);

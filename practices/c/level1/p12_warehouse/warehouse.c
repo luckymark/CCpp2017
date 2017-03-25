@@ -38,7 +38,9 @@ void init() {
         tot++;
         int len = strlen(s);
         for (int i = 0; i < len; i++)
+        {
             stock[tot].name[i] = s[i];
+        }
         scanf("%d", &stock[tot].num);
     }
     fclose(stdin);
@@ -57,7 +59,9 @@ bool cmp(int x, int y) {
     int len1 = strlen(stock[x].name);
     int len2 = strlen(stock[y].name);
     if (len1 != len2)
+    {
         return 0;
+    }
     return memcmp(stock[x].name, stock[y].name, sizeof(stock[x].name)) == 0;
 }
 
@@ -76,10 +80,16 @@ int main() {
         {
             system("cls");
             if (tot == 0)
+            {
                 puts("Your stock is empty.");
+            }
             for (int i = 1; i <= tot; i++)
+            {
                 if (stock[i].num)
+                {
                     printf("%s %d\n", stock[i].name, stock[i].num);
+                }
+            }
             break;
         }
         case 3:
@@ -89,12 +99,14 @@ int main() {
             scanf("%s", stock[tot].name);
             scanf("%d", &stock[tot].num);
             for (int i = 1; i < tot; i++)
+            {
                 if (cmp(i, tot))
                 {
                     stock[i].num += stock[tot].num;
                     tot--;
                     break;
                 }
+            }
             break;
         }
         case 4:
@@ -104,6 +116,7 @@ int main() {
             scanf("%s", stock[tot].name);
             scanf("%d", &stock[tot].num);
             for (int i = 1; i < tot; i++)
+            {
                 if (cmp(i, tot))
                 {
                     if (stock[i].num < stock[tot].num)
@@ -114,6 +127,7 @@ int main() {
                     stock[i].num -= stock[tot].num;
                     break;
                 }
+            }
             tot--;
             break;
         }
@@ -122,8 +136,12 @@ int main() {
             system("cls");
             freopen("stock.in", "w", stdout);
             for (int i = 1; i <= tot; i++)
+            {
                 if (stock[i].num)
+                {
                     printf("%s %d\n", stock[i].name, stock[i].num);
+                }
+            }
             fclose(stdout);
             return 0;
             break;
