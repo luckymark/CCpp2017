@@ -1,95 +1,65 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<conio.h>
-// 目前该程序还无法正常运行，debug了一周了，总是调试正常，运行出错。。。 
+
 typedef struct goods
 {
 	char name[16],size[4];
 	long long int amount;
-	struct goods * next;
+	
 }GOODS;
 
 void menu(GOODS * Goods,int * n);
 void write(GOODS * Goods,int n);
-void display(GOODS * Goods);
-void input(GOODS * Goods,int * n);
-void output(GOODS * Goods,int * n);
+void display(GOODS * Goods,int n);
+void input(GOODS** Goods,int * n);
+void output(GOODS** Goods,int * n);
 long long int is_num(void);
-GOODS * move(GOODS * Goods,int n); 
-void add(GOODS** head,char * ch1,long long int n,char * ch2);
 
-int main(void)
-{
+int main(void){
 	FILE *fp;
 	int max,i;
 	
 	fp=fopen("warehouse.txt","r");
-	fscanf(fp,"%d\n",&max);
+	fscanf(fp,"%d",&max);
 	
-	GOODS * list, * head, * q;
-	head=NULL;
-	q=(GOODS *)malloc(sizeof(GOODS *));
-	list=(GOODS *)malloc(sizeof(GOODS *));
-	for(i=0;i<max;i++)
-	{
-
-		if(0==i)
-		{
-			head=list;
-			
-		}
-		else
-		{
-			list->next=q;
-			list=q;
-		}
-		fscanf(fp,"%s\n",(list->name));
+	GOODS list[100];
+	for(i=0;i<max;i++){
+		fscanf(fp,"%s",list[i].name);
 		system("pause");
-		fscanf(fp,"%lld\n",&(list->amount));
-		
-		fscanf(fp,"%s\n",(list->size));
-		
-		q=(GOODS *)malloc(sizeof(GOODS *));
-		
-		
+		fscanf(fp,"%lld",&list[i].amount);
+		system("pause");
+		fscanf(fp,"%s",(list[i].size));
 	}
-	
-	if(NULL!=head)
-	{
-		list->next=NULL;
+	for(;i<100;i++){
+		list[i].amount=0;
 	}
-	
-	free(q);
-	q=NULL;
 	fclose(fp);
 
-	menu(head,&max);
+	menu(list,&max);
 	
 	return 0;
 }
-void menu(GOODS * Goods,int * n)
-{
+void menu(GOODS * Goods,int * n){
 	char judge;
 
-	do
-	{
+	do{
 		system("cls");
 		printf("Welcome to warehouse!\n");
 		printf("What do you want to do\n");
 		printf("2.display\t3.input\n");
 		printf("4.output\t 5.quit\n");
 		judge=getch();
-		switch(judge)
-		{
+		switch(judge){
 			case '2':
-				display(Goods);
+				display(Goods,*n);
 				system("pause");
 				break;
 			case '3':
-				input(Goods,n);
+				input(&Goods,n);
 				break;
 			case '4':
-				output(Goods,n);
+				output(&Goods,n);
 				break;
 			case '5':
 				return;
@@ -100,140 +70,97 @@ void menu(GOODS * Goods,int * n)
 		write(Goods,*n);
 	}while(judge!='5');
 }
-void display(GOODS * Goods)
-{
-	GOODS * cp;
-	int i=0;
-	
-	cp=Goods;
+void display(GOODS * Goods,int n){
 	system("cls");
-	while(NULL!=cp)
-	{
-		printf("%d.%15s:%d\tSize:%c\n",i+1,cp->name,cp->amount,cp->size);
-		cp=cp->next;
-		i++;
+	for(int i=0;i<n;i++){
+		if(0==Goods[i].amount)continue;
+		printf("%d.%15s:%d\tSize:%s\n",i+1,Goods[i].name,Goods[i].amount,Goods[i].size);
+	
 	}
-	
-	return;
 }
-void write(GOODS * Goods,int n)
-{
+void write(GOODS * Goods,int n){
 	FILE * fp;
-	GOODS * cp;
 	
-	cp=Goods;
 	fp=fopen("warehouse.txt","w");
 	fprintf(fp,"%d\n",n);
-	while(cp!=NULL)
-	{
-		fprintf(fp,"%s\n",cp->name);
-		fprintf(fp,"%lld\n",cp->amount);
-		fprintf(fp,"%s\n",cp->size);
-		cp=cp->next;
+	for(int i=0;i<n;i++){
+		if(0==Goods[i].amount)continue;
+		fprintf(fp,"%s\n",Goods[i].name);
+		fprintf(fp,"%lld\n",Goods[i].amount);
+		fprintf(fp,"%s\n",Goods[i].size);
 	}
 	fclose(fp);
 }
-void input(GOODS * Goods,int * n)
-{
+void input(GOODS** Goods,int * n){
 	int judge;
-	GOODS * cp, * q;
-	char Name[16],Size[4];
-	long long int Amount;
 	
-		
-	do
-	{
-		display(Goods);
+	do{
+		display(*Goods,*n);
 		printf("Which do you want to input?(enter the number)\n");
 		printf("0 to quit\n");
-		if(1==scanf("%d",&judge))
-		{
+		if(1==scanf("%d",&judge)){
 			fflush(stdin);
 			if(0==judge)return;
-			cp=move(Goods,judge);
-			if(NULL==cp)
-			{
-				
+			if(0==(*Goods)[judge-1].amount){
 				printf("Do you want to add a kind of new goods?(y to continue)\n");
-				if(getch()=='y')
-				{
+				if(getch()=='y'){
 					printf("Please enter the name:(in 15 words)\n");
-					fgets(Name,15,stdin);
+					scanf("%s",(*Goods)[judge-1].name);
 					printf("Please enter the amount\n");
-					Amount=is_num();
+					(*Goods)[judge-1].amount=is_num();
 					printf("Please enter the size(s/m/l)\n");
 					fflush(stdin);
-					fgets(Size,4,stdin);
-					add(&cp,Name,Amount,Size);
-					if(NULL==Goods)
-					{
-						Goods=cp;
-					}
-					
+					scanf("%s",(*Goods)[judge-1].size);	
 				}
-				*n=*n+1;
-				
+				*n=*n+1;	
 			}
-			else
-			{
-				printf("How many %s do you want?\n",cp->name);
-				cp->amount=cp->amount+is_num();
+			else{
+				printf("How many %s do you want?\n",(*Goods)[judge-1].name);
+				(*Goods)[judge-1].amount=(*Goods)[judge-1].amount+is_num();
 			}
 		}
-		
+		write(*Goods,*n);
 	}while(0!=judge);
 	
 
 }
-void output(GOODS * Goods,int * n)
-{
+void output(GOODS** Goods,int * n){
 	int judge;
-	GOODS * cp;
 	long long int delta;
-	
-	do
-	{
-		display(Goods);
+	do{
+		display(*Goods,*n);
 		printf("Which do you want to output?(enter the number)\n");
 		printf("0 to quit\n");
-		fflush(stdin);
-		if(1==scanf("%d",&judge))
-		{
+		if(1==scanf("%d",&judge)){
 			fflush(stdin);
 			if(0==judge)return;
-			cp=move(Goods,judge);
-			if(NULL==cp)
-			{	
-				printf("Error!\n");
-				system("pause");
+			if(0==(*Goods)[judge-1].amount){
+				
+				printf("error\n");
+				system("pause");	
 			}
-			else
-			{
-				printf("How many %s do you want?\n",cp->name);
+			else{
+				printf("How many %s do you want to out put?\n",(*Goods)[judge+1].name);
 				delta=is_num();
-				if(delta<=cp->amount)
-				{
-					cp->amount=cp->amount-delta;
+				if(delta<(*Goods)[judge-1].amount){
+					(*Goods)[judge-1].amount=(*Goods)[judge-1].amount-is_num();
 				}
-				else
-				{
-					printf("Error!\n");
-					system("pause");
+				else{
+					(*Goods)[judge-1].amount=0;
 				}
 			}
 		}
-		
+		write(*Goods,*n);
 	}while(0!=judge);
-}
-long long int is_num(void)
-{
-	long long int n;
-	int right;
 	
 
+}
+long long int is_num(void){
+	long long int n;
+	int right;
+
 	right=scanf("%lld",&n);
-	while(0==right)
-	{
+	while(0==right){
 		printf("Error,please enter again.\n");
 		fflush(stdin);
 		right=scanf("%lld",&n);
@@ -241,61 +168,5 @@ long long int is_num(void)
 	
 	if(n>=0)return n;
 	else return 0;
-}
-GOODS * move(GOODS * Goods,int n)
-{
-	GOODS * cp;
-	int i;
 	
-	cp=Goods;
-	for(i=0;i<n-1;i++)
-	{
-		if(NULL==cp)
-		{
-			return NULL;
-		}
-		cp=cp->next;
-	}
-	
-	return cp;
-}
-void add(GOODS** head,char * ch1,long long int n,char ch2[4])
-{
-	GOODS * cp;
-	
-	cp=(GOODS *)malloc(sizeof(GOODS *));
-	if(NULL==*head)
-	{
-		*head=cp;
-		cp->next=NULL;
-	}
-	else
-	{
-		cp->next=(*head)->next;
-		(*head)->next=cp;
-	}
-	for(int i=0;ch1[i]!='\0';i++)
-	{
-		if(ch1[i]!='\n')
-		{
-			(cp->name)[i]=ch1[i];
-		}
-		else
-		{
-			(cp->name)[i]='\0';
-		}
-	}
-	cp->amount=n;
-	for(int i=0;ch2[i]!='\0';i++)
-	{
-		if(ch2[i]!='\n')
-		{
-			(cp->size)[i]=ch2[i];
-		}
-		else
-		{
-			(cp->size)[i]='\0';
-		}
-	}
-
 }
