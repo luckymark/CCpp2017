@@ -1,6 +1,8 @@
 #include<stdio.h>
 void move(int a, char from, char to);
+int i = 1;
 void hanoi(int x, char from, char by, char to);
+#include<stdlib.h>
 void main()
 {
 	int n;
@@ -9,11 +11,13 @@ void main()
 	scanf_s("%d", &n);
 	printf("圆盘移动情况如下：");
 	hanoi(n,a,b,c);
+	system("pause");
 }
 
 void move(int a, char from, char to)
 {
-	printf("第%d个盘从%c->%c\n",a, from, to);
+	printf("第%d步:第%d个盘从%c->%c\n",i,a, from, to);
+	i++;
 }
 
 void hanoi(int x, char from, char by, char to)
