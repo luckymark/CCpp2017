@@ -1,12 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void Init_list();
-void Build_list();
-void Printf_list();
-void Overturn_list();
-void Search_list(int x);
-
 struct node
 {
     int data;
@@ -14,6 +8,12 @@ struct node
 }*head_ptr,*pre_ptr;
 
 
+void Init_list();
+void Build_list();
+void Printf_list();
+void Overturn_list();
+void Search_list(int x);
+void free_list(struct node* head);
 
 int main(void)
 {
@@ -31,10 +31,12 @@ int main(void)
     {
     case 1:
        Printf_list();
+       free_list(head_ptr);
        break;
     case 2:
        Overturn_list();
        Printf_list();
+       free_list(head_ptr);
        break;
     case 3:
 
@@ -42,10 +44,13 @@ int main(void)
        scanf("%d",&x);
        fflush(stdin);
        Search_list(x);
+       free_list(head_ptr);
        break;
     case 4:
+        free_list(head_ptr);
         break;
     default:
+        free_list(head_ptr);
         printf("error\n");
     }
 
@@ -150,6 +155,15 @@ void Search_list(int x)
     }
 }
 
-
+void free_list(struct node* head)
+{
+    while(head!=NULL)
+    {
+        struct node* tem=head->next;
+        free(head);
+        head=tem;
+    }
+    
+}
 
 
