@@ -34,6 +34,7 @@ int main(void)
        break;
     case 2:
        Overturn_list();
+       Printf_list();
        break;
     case 3:
 
@@ -138,14 +139,14 @@ void Search_list(int x)
         if(ptr->data == x)
         {
             seache_result=1;
-            printf("%d",turn);
+            printf("%d\n",turn);
         }
         ptr=ptr->next;
         ++turn;
     }
     if(seache_result==0)
     {
-        printf("-1");
+        printf("-1\n");
     }
 }
 
