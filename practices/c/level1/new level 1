@@ -1,0 +1,225 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char *argv[]) 
+{
+	
+	printf("add:1，decode:2：");
+	int choose;
+	scanf("%d",&choose);
+	if(choose==1)
+	{
+		char add[30],*a;
+	    a=add;
+	    printf("add：");
+	    scanf("%s",add);
+	    while(*a!='\0')
+	    {
+		    *a=*a+'B'-'m';
+		    a++;
+	    }
+	printf("%s",add);
+	}
+	
+	else if(choose==2)
+	{
+		char decode[30],*b;
+	    b=decode;
+	    printf("decode：");
+	    scanf("%s",decode);
+	    while(*b!='\0')
+	    {
+		    *b=*b+'m'-'B';
+		    b++;
+	    }
+	printf("%s",decode);
+	}
+	
+	else
+	{
+		printf("error");
+	}
+	return 0;
+}
+
+
+
+#include<stdio.h>
+int main()
+{
+	int life,tn,qn,ds,son;
+	printf("age may be：");
+    for(life=1;life++;life<=100)
+    {
+    	tn=life/6;
+    	qn=life/12;
+    	ds=life/7;
+    	son=life/2;
+    	
+		if(life==tn+qn+ds+5+son+4&&life%84==0)
+    	{
+    		printf("%d",life);
+		}
+	}
+}
+
+
+
+#include<stdio.h>
+int main()
+{
+	int a,b,c;
+	printf("primes from 2-1000：2\t");
+	for(a=3;a<=1000;a++)
+	{
+		c=0;
+		for(b=2;b<a;b++)
+		{
+			if(a%b!=0)
+			c++;
+		}
+		if(c==a-2)
+		{
+			printf("%d\t",a);
+		}
+	}
+}
+
+
+
+#include<stdio.h>
+int sushu(int a)
+{
+	int b, c=0;
+	for(b=2;b<a;b++)
+	{
+	    if(a%b!=0)
+	    c++;
+	}
+	if(c==a-2)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+int main()
+{
+	int i,j;
+	for(i=4;i<=100;i+=2)
+	{
+		for(j=2;j<=i/2;j++)
+		{
+			if(sushu(j)&&sushu(i-j))
+			printf("%d=%d+%d\t",i,j,i-j);
+		}
+	}
+	return 0;
+}
+
+
+
+
+#include<stdio.h>
+
+void move(int n,int x,int y,int z)
+{
+	if(n==1)
+	{
+		printf("%c->%c\n",x,z);
+	}
+	else
+	{
+		move(n-1,x,z,y);
+		printf("%c->%c\n",x,z);
+		move(n-1,y,x,z);
+	}
+}
+void main()
+{
+	int h; 
+	printf("\ninputnumber:\n");
+	scanf("%d",&h);
+	printf("the step to moving %2d diskes:\n",h);
+	move(h,'a','b','c');
+}
+
+
+
+#include<stdio.h>
+int main()
+{
+	int a,i,b;
+	b=0;
+	printf("print the letter：");
+	scanf("%d",&a);
+	for(i=2;i<a;i++)
+	{
+		if(a%i!=0)
+		b++;
+	}
+	if(b==a-2)
+	{
+		printf("a is prime"); 
+	}
+	else
+	{
+		printf("a isnt prime");
+	}
+}
+
+
+
+#include<stdio.h>
+int main()
+{
+	int shuixianhua,bai,shi,ge;
+	printf("the narcissus：");
+	for(shuixianhua=100;shuixianhua<1000;shuixianhua++)
+	{
+		bai=shuixianhua/100;
+		shi=(shuixianhua-100*bai)/10;
+		ge=shuixianhua%10;
+		
+		if(shuixianhua==ge*ge*ge+shi*shi*shi+bai*bai*bai)
+		{
+			printf("%d\t",shuixianhua);
+		}
+	}
+}
+
+
+
+#include <stdio.h>
+#include <windows.h>
+
+int main()
+{
+    int i,j;
+    for (i=0;i<31;i++)
+    {
+        system("cls");
+        for(j=0;j<i;j++)
+        {
+            printf(" ");
+        }
+        printf("a");
+        Sleep(100);
+    }
+    
+	for(i =30;i>= 0;i--)
+    {
+    	system("cls");
+    	for(j=0; j<i;j++)
+    	{
+		    printf(" ");
+		}
+		printf("a");
+		Sleep(100);
+	}
+}
