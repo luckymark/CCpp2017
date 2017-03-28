@@ -7,7 +7,12 @@
 #define BG 178  //box on goal-4
 #define W 219  //wall-5
 #define PG 232  //player on goal-6
-
+/*todolist
+1.read map;
+2.print map&you;
+3.move it:1)input;2)canyoumove?;
+4.judge if you win;
+5.score;*/ 
 void gotoxy(int x,int y);
 void print_map(void);
 void print_block(int n);

@@ -1,5 +1,11 @@
 //win10系统会出现排版问题，把四种方块改成127以内的字符方可正常使用 
 //写迷宫地图的时候忘记可以直接从文档中读取了。。看到推箱子才想起来。。 
+/*todolist
+1.read map;
+2.print map&you;
+3.move it:1)input;2)canyoumove?;
+4.judge if you win;
+5.score;*/ 
 #include<stdio.h>
 #include<windows.h>
 #define W 219 

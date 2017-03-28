@@ -1,7 +1,12 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<conio.h>
-
+/*todolist
+1.read datas;
+2.界面;
+3.input&处理;
+4.处理数据; 
+5.write to file;*/ 
 typedef struct goods
 {
 	char name[16],size[4];
