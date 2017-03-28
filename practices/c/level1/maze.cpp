@@ -2,7 +2,7 @@
 #include<conio.h>
 #include<stdlib.h>
 int i,j;
-char a[21][43];
+char a[21][43];static int count=0;
 void map()
 {
     for(i=0;i<21;i++)
@@ -63,11 +63,11 @@ void prt()
         }
         printf("\n");
     }
-    printf("Move the spot \"x\" to the place \"o\" with \"wasd\"");
+    printf("Move the spot \"x\" to the place \"o\" with \"wasd\"\nTotal move:%d\n",count);
 }
 void mov()
 {
-    i=1;j=2;
+	i=1;j=2;
     while(true)
     {
         if(i==19 and j==40)
@@ -76,6 +76,7 @@ void mov()
             system("cls");
             prt();
             printf("Yes!!!");
+            count++;
             break;
         }
         else
@@ -92,6 +93,7 @@ void mov()
                 i--;
                 a[i][j]='o';
                 system("cls");
+                count++;
                 prt();
             }
             else if(b==115)
@@ -104,11 +106,12 @@ void mov()
                 i++;
                 a[i][j]='o';
                 system("cls");
+                count++;
                 prt();
             }
             else if(b==97)
             {
-                if(a[i][j-2]=='*' and a[i][j-1]=='*')
+                if(a[i][j-2]=='*' or a[i][j-1]=='*')
                 {
                     continue;
                 }
@@ -116,11 +119,12 @@ void mov()
                 j-=2;
                 a[i][j]='o';
                 system("cls");
+                count++;
                 prt();
             }
             else if(b==100)
             {
-                if(a[i][j+2]=='*' and a[i][j+1]=='*')
+                if(a[i][j+2]=='*' or a[i][j+1]=='*')
                 {
                     continue;
                 }
@@ -128,6 +132,7 @@ void mov()
                 j+=2;
                 a[i][j]='o';
                 system("cls");
+                count++;
                 prt();
             }
             
