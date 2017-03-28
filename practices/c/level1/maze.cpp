@@ -59,7 +59,7 @@ void prt()
     {
         for(int n=0;n<43;n++)
         {
-            printf("%d",a[m][n]);
+            printf("%c",a[m][n]);
         }
         printf("\n");
     }
@@ -108,7 +108,7 @@ void mov()
             }
             else if(b==97)
             {
-                if(a[i][j-2]=='*')
+                if(a[i][j-2]=='*' and a[i][j-1]=='*')
                 {
                     continue;
                 }
@@ -120,7 +120,7 @@ void mov()
             }
             else if(b==100)
             {
-                if(a[i][j+2]=='*')
+                if(a[i][j+2]=='*' and a[i][j+1]=='*')
                 {
                     continue;
                 }
