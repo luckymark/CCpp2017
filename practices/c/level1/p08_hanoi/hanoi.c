@@ -1,23 +1,28 @@
 #include<stdio.h>
-void han(int num, char a, char b, char c);
+#include<windows.h>
+void gotoxy(int x, int y);
 
 int main()
 {
-	int num;
-	printf("请输入您想移动的汉诺塔圆环个数：");
-	scanf_s("%d", &num);
-	printf("移动顺序为：\n");
-	han(num, 'a',' b',' c');
+	boundry();
+
 }
 
-void han(int num, char a, char b, char c)
+void boundry()
 {
-	if (num == 1) {
-		printf("%c移动到%c\n", a, c);
-	}
-	else {
-		han(num - 1, 'a',' c', 'b');
-		printf("%c移动到%c\n", a, c);
-		han(num - 1, 'b', 'a', 'c');
-	}
+	gotoxy(20, 20);
+	printf("1");
+	gotoxy(20, 22);
+	printf("2");
+	gotoxy(20, 24);
+	printf("3");
+	gotoxy(20, 26);
+	printf("4");
+}
+void gotoxy(int x, int y)//指定显示位置
+{
+	COORD c;
+	c.X = x;
+	c.Y = y;
+	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
