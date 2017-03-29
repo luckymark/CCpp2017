@@ -19,8 +19,8 @@ int main()
 			if (i%j == 0) {
 				break;
 			}
-			else{
-				if (i == j + 1){
+			else {
+				if (i == j + 1) {
 					printf("%d  is a Prime.", i);
 					break;
 				}
@@ -29,7 +29,8 @@ int main()
 			}
 		}
 
-		if (i > j + 1)
+		if (i > j + 1) {
 			printf("%d  is not a Prime.", i);
+		}
 	}
 }

@@ -16,7 +16,7 @@ void turnleft();
 void turnright();
 
 
-char A[8][8];
+char map[8][8];
 int x = 4, y = 4;
 char step;
 
@@ -24,7 +24,7 @@ int main()
 {
 	int i = 0;
 	char *p;
-	p = A;
+	p = map;
 	FILE *fp;
 	fp = fopen("pushbox_0.txt", "rb");
 
@@ -38,16 +38,16 @@ int main()
 
 
 	//小人、箱子初始位置
-	A[x][y] = r;
-	A[5][4] = b;
-	A[4][3] = b;
-	A[3][3] = b;
-	A[3][5] = b;
+	map[x][y] = r;
+	map[5][4] = b;
+	map[4][3] = b;
+	map[3][3] = b;
+	map[3][5] = b;
 	show();
 	//操作判断
-	
+
 	do {
-		step=_getch();
+		step = _getch();
 		putchar(step);
 		switch (step)
 		{
@@ -64,9 +64,9 @@ int main()
 			turnright();
 			break;
 		}
-	} 
+	}
 	//结束标志
-	while ((A[4][1]!= (char)254) || (A[1][3]!= (char)254) || (A[3][6] != (char)254) || (A[6][4] != (char)254));
+	while ((map[4][1] != (char)254) || (map[1][3] != (char)254) || (map[3][6] != (char)254) || (map[6][4] != (char)254));
 	system("cls");
 	printf("you have win!\n");
 	system("pause");
@@ -78,39 +78,39 @@ void show()
 	system("chcp 437");
 	for (int i = 0;i < 8;i++) {
 		for (int j = 0;j < 8;j++) {
-			if (A[i][j] == 'w') {
+			if (map[i][j] == 'w') {
 				printf("%c", 219);
 			}
-			else if (A[i][j] == 'l' || A[i][j] == ' ') {
+			else if (map[i][j] == 'l' || map[i][j] == ' ') {
 				printf("%c", 255);
 			}
 			else
-				printf("%c", A[i][j]);
+				printf("%c", map[i][j]);
 			if (j == 7) {
 				printf("\n");
 			}
 		}
 	}
 }
-	
+
 
 
 
 void turnup()
 {
-	if ((A[x - 1][y] == (char)254)&&(A[x - 2][y] == 'l'))
+	if ((map[x - 1][y] == (char)254) && (map[x - 2][y] == 'l'))
 	{
-			system("cls");
-			A[x][y] = 'l';
-			A[x - 1][y] = 208;
-			A[x - 2][y] = 254;
-			x -= 1;
-			show();
-	}
-	else if (A[x - 1][y] == 'l') {
 		system("cls");
-		A[x][y] = 'l';
-		A[x - 1][y] = 208;
+		map[x][y] = 'l';
+		map[x - 1][y] = 208;
+		map[x - 2][y] = 254;
+		x -= 1;
+		show();
+	}
+	else if (map[x - 1][y] == 'l') {
+		system("cls");
+		map[x][y] = 'l';
+		map[x - 1][y] = 208;
 		x -= 1;
 		show();
 	}
@@ -118,20 +118,20 @@ void turnup()
 
 void turndown()
 {
-	if ((A[x+1][y] == (char)254)&&(A[x + 2][y] == 'l'))
+	if ((map[x + 1][y] == (char)254) && (map[x + 2][y] == 'l'))
 	{
-			putchar(step);
-			system("cls");
-			A[x][y] = 'l';
-			A[x + 1][y] = 208;
-			A[x + 2][y] = 254;
-			x += 1;
-			show();
-	}
-	else if (A[x + 1][y] == 'l') {
+		putchar(step);
 		system("cls");
-		A[x][y] = 'l';
-		A[x + 1][y] = 208;
+		map[x][y] = 'l';
+		map[x + 1][y] = 208;
+		map[x + 2][y] = 254;
+		x += 1;
+		show();
+	}
+	else if (map[x + 1][y] == 'l') {
+		system("cls");
+		map[x][y] = 'l';
+		map[x + 1][y] = 208;
 		x += 1;
 		show();
 	}
@@ -139,19 +139,19 @@ void turndown()
 
 void turnleft()
 {
-	if ((A[x][y - 1] == (char)254) && (A[x][y - 2] == 'l'))
+	if ((map[x][y - 1] == (char)254) && (map[x][y - 2] == 'l'))
 	{
 		system("cls");
-		A[x][y] = 'l';
-		A[x][y - 1] = 208;
-		A[x][y - 2] = 254;
+		map[x][y] = 'l';
+		map[x][y - 1] = 208;
+		map[x][y - 2] = 254;
 		y -= 1;
 		show();
 	}
-	else if (A[x][y - 1] == 'l') {
+	else if (map[x][y - 1] == 'l') {
 		system("cls");
-		A[x][y] = 'l';
-		A[x][y - 1] = 208;
+		map[x][y] = 'l';
+		map[x][y - 1] = 208;
 		y -= 1;
 		show();
 	}
@@ -159,20 +159,21 @@ void turnleft()
 
 void turnright()
 {
-	if ((A[x][y + 1] == (char)254) && (A[x][y + 2] == 'l'))
+	if ((map[x][y + 1] == (char)254) && (map[x][y + 2] == 'l'))
 	{
 		system("cls");
-		A[x][y] = 'l';
-		A[x][y + 1] = 208;
-		A[x][y + 2] = 254;
+		map[x][y] = 'l';
+		map[x][y + 1] = 208;
+		map[x][y + 2] = 254;
 		y += 1;
 		show();
 	}
-	else if (A[x][y + 1] == 'l') {
+	else if (map[x][y + 1] == 'l') {
 		system("cls");
-		A[x][y] = 'l';
-		A[x][y + 1] = 208;
+		map[x][y] = 'l';
+		map[x][y + 1] = 208;
 		y += 1;
 		show();
 	}
 }
+

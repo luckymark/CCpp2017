@@ -4,9 +4,9 @@ int fan();
 void input();
 void show();
 void divided5();
+void Free();
 
-
-static int i = 1,a;
+static int i = 1, a;
 int *K;
 struct slist {
 	long int value;
@@ -22,7 +22,7 @@ int main(void)
 	int  k;
 
 	printf("if you want to input data, please input any key,otherwise 2：");
-	while (getchar() != '2'){
+	while (getchar() != '2') {
 		printf("data:");
 		input();
 	}
@@ -42,13 +42,13 @@ int main(void)
 		printf("Here are the datas （反序后）:\n");
 		show();
 	}
-	else if(i==2){
+	else if (i == 2) {
 		printf("Here are the datas （反序后）:\n");
 		printf("第1一个数据为%d\n", prev->value);
 	}
 
 	divided5();
-	free(cur);
+	Free();
 }
 
 
@@ -60,11 +60,11 @@ int fan()
 		cur = prev->next;
 		next = cur->next;
 	}
-	else if(NULL == head->next) {
+	else if (NULL == head->next) {
 		prev = head;
 		cur = prev->next;
 	}
-	
+
 	i = i - 1;
 	prev->next = NULL;
 	prev->number = i;
@@ -80,7 +80,7 @@ int fan()
 			next = next->next;
 		}
 		else {
-			return K=cur;
+			return K = cur;
 		}
 	}
 }
@@ -136,5 +136,17 @@ void divided5()
 			cur = cur->next;
 		}
 
+	}
+}
+
+void Free()
+{
+	if (head != NULL) {
+		cur = head;
+		while (cur != NULL) {
+			prev = cur;
+			cur = prev->next;
+			free(prev);
+		}
 	}
 }

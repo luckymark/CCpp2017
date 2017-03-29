@@ -1,4 +1,4 @@
-#include<stdio.h>
+ï»¿#include<stdio.h>
 #include<windows.h>
 void gotoxy(int x, int y);
 
@@ -19,7 +19,7 @@ void boundry()
 	gotoxy(20, 26);
 	printf("4");
 }
-void gotoxy(int x, int y)//Ö¸¶¨ÏÔÊ¾Î»ÖÃ
+void gotoxy(int x, int y)//Ö¸å…‰æ ‡æŽ§åˆ¶å‡½æ•°
 {
 	COORD c;
 	c.X = x;
