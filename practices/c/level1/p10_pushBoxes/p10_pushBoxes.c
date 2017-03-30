@@ -434,10 +434,10 @@ void move(void)
 			}
 		}
 		show_map();
-		if (map[2][2] == 5 && map[3][2] == 5 && map[3][3] == 5) {
+		if (map[5][1] == 5 && map[6][1] == 5 && map[6][2] == 5&&map[6][3]==5&&map[6][4]==5) {
 			system("cls");
-			gotoxy(35, 15);
-			printf("Congratulations!\n");
+			gotoxy(0, 5);
+			printf("strong pig!\n");
 			break;
 		}
 	}
