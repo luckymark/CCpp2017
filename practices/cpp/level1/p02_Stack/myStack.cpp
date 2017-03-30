@@ -1,7 +1,7 @@
 #include<iostream>
 #include<conio.h>
 #include<windows.h>
-#include"Queue.h"
+#include"IntStack.h"
 /*todolist
 1.append;
 2.pop;
@@ -11,39 +11,39 @@ int main(){
 	using std::cout;
 	using std::cin;
 	char ch;
-	double n;
-	Queue queue;
-	
+	int n;
+	IntStack stack;
+
 	do{
 		system("cls");
-		cout<<"The queue:\n";
-		if(!queue.isNull()){
-			queue.disp();
+		cout<<"The stack:\n";
+		if(!stack.isNull()){
+			stack.disp();
 		}
 		else{
-			cout<<"Null\n";
+			std::cout<<"Null\n";
 		}
 		cout<<"What do you want to do?\n";
-		cout<<"1.append  2.pop  q.quit\n";
+		cout<<"1.push  2.pop  q.quit\n";
 		ch=getch();
 		switch(ch){
 			case '1':
-				if(!queue.isFull()){
+				if(!stack.isFull()){
 					cout<<"Please enter a number:\n";
 					cin>>n;
-					queue.append(n);
+					stack.push(n);	
 				}
 				else{
-					cout<<"The queue is full\n";
+					cout<<"The stack is full\n";
 					system("pause");
 				}
 				break;
 			case '2':
-				if(!queue.isNull()){
-					queue.pop();
+				if(!stack.isNull()){
+					stack.pop();
 				}
 				else{
-					cout<<"The queue is null\n";
+					cout<<"The stack is null\n";
 					system("pause");
 				}
 				break;

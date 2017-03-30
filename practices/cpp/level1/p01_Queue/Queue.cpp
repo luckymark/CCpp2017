@@ -1,29 +1,24 @@
 #include "Queue.h"
 #include<iostream>
-using namespace std;
-void Queue::initialize(){
-	head=tail=0;
-	for(int i=0;i<30;i++){
-		data[i]=0;
-	}
-}
+using std::cout;
+using std::endl;
 void Queue::disp(){
 	if(head<tail){
-		cout<<'|';
+		cout<<"head"<<'|';
 		for(int i=head;i<tail;i++){
 			cout<<data[i]<<'|';
 		}
-		cout<<endl;
+		cout<<"tail"<<endl;
 	}
 	else{
-		cout<<'|';
+		cout<<"head"<<'|';
 		for(int i=head;i<30;i++){
 			cout<<data[i]<<'|';
 		}
 		for(int i=0;i<tail;i++){
 			cout<<data[i]<<'|';
 		}
-		cout<<endl;
+		cout<<"tail"<<endl;
 	}
 }
 void Queue::append(double item){
@@ -34,6 +29,13 @@ void Queue::append(double item){
 	else{
 		++tail;
 	}
+	if(tail==head){
+		flag1=1;
+	}
+	else{
+		flag1=0;
+	}
+	flag2=0;
 }
 void Queue::pop(){
 	data[head]=0;
@@ -43,12 +45,19 @@ void Queue::pop(){
 	else{
 		head++;
 	}
+	if(head==tail){
+		flag2=1;
+	}
+	else{
+		flag2=0;
+	}
+	flag1=0;
 }
 bool Queue::isNull(){
-	if(0==data[head])return true;
+	if(flag2)return true;
 	return false;
 }
 bool Queue::isFull(){
-	if(data[tail]!=0)return true;
+	if(flag1)return true;
 	return false;
 }
