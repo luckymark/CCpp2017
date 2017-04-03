@@ -8,28 +8,40 @@
  */
 
 #include<iostream>
+
 #include"DNA.h"
 #include"fun.h"
+#include<cstdlib>
+#include<time.h>
 
-#define AmountOfSample  20
+#define AmountOfSample  200
 
 using namespace std ;
 
+int seed = 0 ;
 
+int seedfun()
+{
+	if( seed == 10000000  )
+		seed = 0 ;
+	seed=seed+100;;
+	return time(0)+seed;
+}
 
 int main()
 {
+	int time1 = time(0);
+
 	DNA amount[AmountOfSample] ;
 
 	for(int i = 0 ; i < AmountOfSample ; i ++ ){
-
 		DNA temp ;
-
 		amount[i] =  temp ;
-
 	}
 
 	int k = 0 ;
+
+	DNA* mid = amount ;
 
 	while(1){
 
@@ -39,27 +51,42 @@ int main()
 
 			yorn = amount[i].TestFit();
 
+			k = i ;
+
 			if(yorn == 1)break;
 
-			k = i ;
 		}
+
 
 		if(yorn == 1)break;
 
-		aver(amount);
+		aver(mid,AmountOfSample);
 
-		NaturalSelect(amount);
+		NaturalSelect(mid);
 
-		cross(amount);
+		cross(mid);
 
-		vary(amount) ;
+		vary(mid) ;
+
 
 	}
+
+	int wayo[100];
 
 	for(int j = 0 ;j< LengthOfDNA ; j++){
-		cout<<amount[k].a[j]<<endl;
+
+		wayo[j]=amount[k].gitbit(j);
 	}
+
+	way(wayo);
+
+	int time2 = time(0);
+
+	cout<<endl<<time2-time1<<endl;
+
 	return 0 ;
 }
+
+
 
 

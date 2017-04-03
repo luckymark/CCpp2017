@@ -6,61 +6,64 @@
  */
 #include<time.h>
 #include<stdlib.h>
-
-#define AmountOfSample 20
+#include"DNA.h"
+#define AmountOfSample 200
 
 void NaturalSelect( DNA* A )
 {
+	srand((int)time(0));
+
 	DNA *B =  A;
 
-	DNA *C = A ;
-
 	int sum = 0 ;
-	float flag[AmountOfSample] ;
+	int flag[AmountOfSample] ;
 
 	for(int i=0;i<AmountOfSample;i++){
-			sum = sum + A->getsource();
+			sum = sum + A[i].getsource();
 			flag[i]=sum;
 		}
 
-	int repoduce[AmountOfSample] ;
+	int repoduce[AmountOfSample] = {0} ;
 
-	int c =0;
+
 
 	int j =0;
 	while(j < AmountOfSample ){
-		srand((int)time(0));
 
-		float index = rand() % sum ;
+
+		int index = rand() % sum ;
 
 		int k =0 ;
 
 		while(1){
 			if(index <= flag[k] ){
-				repoduce[c] = k ;
-				c++;
+				repoduce[k] ++ ;
 				break;
 			}
 			k++;
 		}
+
 		j++;
 	}
 
-	DNA temp[AmountOfSample] ;
+	DNA tem[AmountOfSample] ;
 
 	j = 0 ;
+
+	int k = 0 ;
 
 	while(j < AmountOfSample){
 
 		for( int i = 0; i < repoduce[j] ; i++  ){
-			temp[i]=B;
+			tem[k]=*B;
+			k++;
 		}
 		j++;
 		B++;
 	}
 
 	for(j = 0 ; j < AmountOfSample ; j++  ){
-		A[j] = temp[j] ;
+		A[j] = tem[j] ;
 	}
 
 }

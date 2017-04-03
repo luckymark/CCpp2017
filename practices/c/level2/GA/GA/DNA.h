@@ -5,7 +5,6 @@
  *      Author: mark
  */
 #define LengthOfDNA   100
-
 #ifndef DNA_H_
 #define DNA_H_
 class DNA
@@ -13,13 +12,15 @@ class DNA
 
 public:
 
-	DNA() ;
+	DNA();
 
 	int TestFit();
 
 	int getsource();
 
-	~DNA();
+	int gitbit(int i);
+
+	void setbit(int i , int j);
 
 private:
 
@@ -27,28 +28,15 @@ private:
 
 	int source ;
 
-	int Number;
+	int x  ;
 
-	char map[10][10]={'#','#','#','#','#','#','#','#','#','#',
-					  '#',' ',' ',' ',' ',' ',' ',' ','#','#',
-					  '@',' ','#','#','#','#','#',' ','#','#',
-					  '#',' ','#',' ','#',' ','#',' ','#','#',
-					  '#',' ',' ',' ',' ',' ','#',' ','#','#',
-					  '#',' ','#',' ','#',' ','#',' ','#','#',
-					  '#',' ','#','#','#',' ','#',' ','#','#',
-					  '#',' ','#',' ','#',' ','#',' ','#','#',
-					  '#',' ',' ','#','#',' ',' ',' ',' ','$',
-					  '#','#','#','#','#','#','#','#','#','#',
-					};
-	int x = 9 ;
+	int y  ;
 
-	int y = 8 ;
+	int Destinationx ;
 
-	int Destinationx = 0;
+	int Destinationy ;
 
-	int Destinationy = 2;
 
-	\
 };
 
 #endif /* DNA_H_ */

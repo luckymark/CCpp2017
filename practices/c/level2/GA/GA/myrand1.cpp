@@ -5,14 +5,16 @@
  *      Author: mark
  */
 #include<stdlib.h>
+#include<time.h>
+#include"fun.h"
 
-bool myrand1(int up , int down )
+bool myrand1(int down , int up )
 {
-	srand((int)time(0));
+	srand(seedfun());
 
-	int number = rand()% down ;
+	int number = rand()% up ;
 
-	if( number == up ) return true ;
+	if( number == down ) return true ;
 
 	return false ;
 

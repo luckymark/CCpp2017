@@ -12,11 +12,14 @@
 #include<iostream>
 #include<stdlib.h>
 #include<time.h>
+#include"fun.h"
 using namespace std ;
 
-void myran(int MIN ,int MAX , int b[MAX-MIN+1] )
+void myrand(int MIN ,int MAX , int b[] )
 {
-	int a[MAX-MIN+1];
+	int number = MAX-MIN+1;
+
+	int a[number];
 
 	int c = 0 ;
 
@@ -25,12 +28,9 @@ void myran(int MIN ,int MAX , int b[MAX-MIN+1] )
 		c++ ;
 	}
 
-	int number = MAX-MIN+1 ;
-
 	int k = 0;
-
+	srand(seedfun());
 	while( number !=0 ){
-		srand((int)time(0));
 		int i = rand() % number ;
 
 		b[k] = a[i] ;
@@ -44,10 +44,6 @@ void myran(int MIN ,int MAX , int b[MAX-MIN+1] )
 		}
 
 		number -- ;
-	}
-
-	for( int i = 0; i<=MAX-MIN ; i ++ ){
-		cout<<b[i]<<endl;
 	}
 
 }

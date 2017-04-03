@@ -7,7 +7,8 @@
 
 #ifndef FUN_H_
 #define FUN_H_
-#define AmountOfSample  20
+
+#include"DNA.h"
 
 void myrand(int MIN , int MAX , int b[]);
 
@@ -21,7 +22,9 @@ void vary (DNA* A ) ;
 
 bool myrand1(int up , int down);
 
+int seedfun();
 
+void way(int *way);
 
 
 
