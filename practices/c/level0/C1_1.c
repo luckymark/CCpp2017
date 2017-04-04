@@ -20,16 +20,16 @@ int main()
 		printf("a为0");
 	}
 	
-    printf("\n");
+        printf("\n");
 	
 	if (b==0)
-    {
+        {
     	printf("a为偶数");
 	}
 	else
 	{
-		printf("a为奇数");
-  }
+        printf("a为奇数");
+        }
 	
-    return 0;
+        return 0;
 }
