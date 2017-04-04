@@ -2,12 +2,14 @@
 
 int main()
 {
-	int i=1;
-	printf(" \t1\t2\t3\t4\t5\t6\t7\t8\t9\n");
-	
-	for(i;i<10;i++)
+	int n=2;
+	for(n;n<101;n++)
 	{
-		printf("%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\n",i,i,i*2,i*3,i*4,i*5,i*6,i*7,i*8,i*9);
+		if(n%2==0)
+		{
+		    printf("%d\t",n);
+		}
 	}
+	
 	return 0;
 }
