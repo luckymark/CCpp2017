@@ -27,8 +27,8 @@ int main()
 			}
 		}
 		if(changed==0)
-			{break;
-			}
+		{break;
+		}
 	}
 	
 	for(i=1;i<=5;i++)
