@@ -6,7 +6,7 @@ int main()
 	
     for (;i<=10000;i++)
     {
-    printf("你好！\t");
+        printf("你好！\t");
     }
     return 0;
 }
