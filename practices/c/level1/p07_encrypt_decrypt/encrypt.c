@@ -1,4 +1,4 @@
-#include<stdio.h>
+#include<stdio.h>//?”–Œ Ã‚ 
 
 void decrypt(); 
 void encrypt();
