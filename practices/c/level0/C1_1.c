@@ -24,11 +24,11 @@ int main()
 	
 	if (b==0)
         {
-    	printf("a为偶数");
+		printf("a为偶数");
 	}
 	else
 	{
-        printf("a为奇数");
+		printf("a为奇数");
         }
 	
         return 0;
