@@ -1,9 +1,15 @@
-#include <cstring>
-#include "Queue.h"
+#include <cstdlib>
 #include <iostream>
+#include "Queue.h"
+
+Queue::Queue(int x){
+	element=(int *)malloc(sizeof(int)*x);
+}
+Queue::~Queue(){
+	free(element);
+}
 
 void Queue::clear(){
-	memset(element,0,sizeof(element));
 	head=tail=0;
 }
 

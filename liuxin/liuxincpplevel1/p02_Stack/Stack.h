@@ -1,5 +1,7 @@
 const int MAXSTACK=200005;
 class Stack{
+private:
+	int tot,*element;
 public:
 	Stack(int x=MAXSTACK);
 	~Stack();
@@ -8,8 +10,5 @@ public:
 	int top();
 	bool IsFull();
 	bool IsEmpty();
-private:
-	int *a;
-	int tot;
 };
 

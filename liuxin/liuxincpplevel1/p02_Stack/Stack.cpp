@@ -3,15 +3,15 @@
 
 Stack::Stack(int x){
 	tot=0;
-	a=(int *)malloc(sizeof(int)*x); 
+	element=(int *)malloc(sizeof(int)*x); 
 }
 
 Stack::~Stack(){
-	free(a);
+	free(element);
 }
 
 void Stack::push(int x){
-	a[tot++]=x;
+	element[tot++]=x;
 }
 
 void Stack::pop(){
@@ -19,7 +19,7 @@ void Stack::pop(){
 }
 
 int Stack::top(){
-	return a[tot-1];
+	return element[tot-1];
 }
 
 bool Stack::IsFull(){

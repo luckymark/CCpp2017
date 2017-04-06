@@ -1,8 +1,10 @@
 const int MAXQUEUE=200005;
 class Queue{
 private:	
-	int head=0,tail=0,element[MAXQUEUE];
-public:	
+	int head,tail,*element;
+public:
+	Queue(int x=MAXQUEUE);
+	~Queue();
 	void clear();
 	void pop();
 	void append(int x);
