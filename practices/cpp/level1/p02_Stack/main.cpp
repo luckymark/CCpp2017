@@ -13,6 +13,10 @@ Stack stack;
 void main()
 {
 	using namespace std;
+	cout << "Input the size of stack:" << endl;
+	int n;
+	cin >> n;
+	stack.create(n);
 	while (1) {
 		system("cls");
 		cout << "Please input the option you want to do:" << endl;
