@@ -1,52 +1,38 @@
 #include<cstdio>
+#include"Stack.h"
 using namespace std;
 
-#define SIZE 100
+int Stack::pop(){
+	return s[--p];
+}
 
-class Stack
-{
-	public:
-		int s[SIZE],p;
-		
-		Stack(){
-			p=0;
-		}
-		
-		int operator [] (int x){
-			return s[x];
-		}
-		
-		int pop(){
-			return s[--p];
-		}
-		
-		bool push(int x){
-			if(p<SIZE){
-				s[p++]=x;
-				return 1;
-			}
-			else{
-				return 0;
-			}
-		}
-		
-		bool empty(){
-			return p==0;
-		}
-		
-		bool full(){
-			return p==SIZE;
-		}
-		
-		void clear(){
-			while(p){
-				pop();
-			}
-		}
-};
+bool Stack::push(int x){
+	if(p<len){
+		s[p++]=x;
+		return 1;
+	}
+	else{
+		return 0;
+	}
+}
+
+bool Stack::empty(){
+	return p==0;
+}
+
+bool Stack::full(){
+	return p==len;
+}
+
+void Stack::clear(){
+	while(p){
+		pop();
+	}
+}
+
 int main()
 {
-	Stack st;
+	Stack st(100);
 	
 	int op;/*
 	op==0 pop;
@@ -98,15 +84,6 @@ int main()
 		}
 		else{
 			st.clear();
-		}
-		for(int i=0;i<st.p-1;++i){
-			printf("%d ",st[i]);
-		}
-		if(!st.empty()){
-			printf("%d\n",st[st.p-1]);
-		}
-		else{
-			puts("The Stack is Empty.");
 		}
 	}
 	return 0;
