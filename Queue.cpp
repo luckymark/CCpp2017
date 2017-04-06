@@ -1,52 +1,37 @@
-#include<cstdio>
-#include<cstring>
+#include <cstdio>
+#include "Queue.h"
 using namespace std;
 
-#define SIZE 100
+bool Queue::append(int x){
+	if(cnt<SIZE){
+		q[tail]=x;
+		tail=(tail+1)%(SIZE+1);
+		++cnt;
+		return 1;
+	}
+	return 0;
+}
 
-class Queue{
-	public:
-		int q[SIZE+1],head,tail,cnt;
-		
-		Queue(){
-			head=tail=cnt=0;
-		}
-		
-		int operator [] (int x){
-			return q[x];
-		}
-		
-		bool append(int x){
-			if(cnt<SIZE){
-				q[tail]=x;
-				tail=(tail+1)%(SIZE+1);
-				++cnt;
-				return 1;
-			}
-			return 0;
-		}
-		
-		int pop(){
-			int Prehead=head;
-			head=(head+1)%(SIZE+1);
-			--cnt;
-			return q[Prehead];
-		}
-		
-		bool empty(){
-			return cnt==0;
-		}
-		
-		bool full(){
-			return cnt==SIZE;
-		}
-		
-		void clear(){
-			while(cnt){
-				pop();
-			}
-		}
-};
+int Queue::pop(){
+	int Prehead=head;
+	head=(head+1)%(SIZE+1);
+	--cnt;
+	return q[Prehead];
+}
+
+bool Queue::empty(){
+	return cnt==0;
+}
+
+bool Queue::full(){
+	return cnt==SIZE;
+}
+
+void Queue::clear(){
+	while(cnt){
+		pop();
+	}
+}
 
 int main(){
 	Queue Q;
@@ -101,15 +86,6 @@ int main(){
 		}
 		else{
 			Q.clear();
-		}
-		if(Q.empty()){
-			puts("The Queue is Empty.");
-			continue;
-		}
-		int j=Q.head;
-		while(j!=Q.tail){
-			printf("%d%c",Q[j],j==(Q.tail+SIZE)%(SIZE+1) ? '\n' : ' ');
-			j=(j+1)%(SIZE+1);
 		}
 	}
 	return 0;
