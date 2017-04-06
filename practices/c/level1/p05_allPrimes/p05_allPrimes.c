@@ -6,27 +6,22 @@ int main()
 {
 	clock_t t1,t2;
 	t1 = clock();
-	int nums[n+2] = {0};
-	for(int i=1;i<=n;i++)
-	{
-		nums[i]=i;
-	}
-	
+	int nums[n+2] = {0};	
 	for(int i=2;i<n+1;i++)
 	{
-		if(nums[i] != 0)
+		if(!nums[i])
 		{
 			for(int j=2*i;j<n+1;j+=i)
 			{
-				nums[j]=0;
+				nums[j]=1;
 			}
 		}
 	}
 	for(int i=2; i<n+1; i++)
 	{
-		if(nums[i] != 0)
+		if(nums[i] != 1)
 		{
-			printf("%d ",nums[i]);
+			printf("%d ",i);
 		 } 
 	}
 	
