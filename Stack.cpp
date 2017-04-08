@@ -2,34 +2,6 @@
 #include"Stack.h"
 using namespace std;
 
-int Stack::pop(){
-	return s[--p];
-}
-
-bool Stack::push(int x){
-	if(p<len){
-		s[p++]=x;
-		return 1;
-	}
-	else{
-		return 0;
-	}
-}
-
-bool Stack::empty(){
-	return p==0;
-}
-
-bool Stack::full(){
-	return p==len;
-}
-
-void Stack::clear(){
-	while(p){
-		pop();
-	}
-}
-
 int main()
 {
 	Stack st(100);
@@ -37,8 +9,8 @@ int main()
 	int op;/*
 	op==0 pop;
 	op==1 push;
-	op==2 empty;
-	op==3 full;
+	op==2 isEmpty;
+	op==3 isFull;
 	op==4 clear;
 	*/
 	
@@ -52,7 +24,7 @@ int main()
 	for(int i=1;i<=n;++i){
 		scanf("%d",&op);
 		if(op==0){
-			if(st.empty()){
+			if(st.isEmpty()){
 				puts("The Stack is Empty.");
 			}
 			else{
@@ -67,7 +39,7 @@ int main()
 			}
 		}
 		else if(op==2){
-			if(st.empty()){
+			if(st.isEmpty()){
 				puts("The Stack is Empty.");
 			}
 			else{
@@ -75,7 +47,7 @@ int main()
 			}
 		}
 		else if(op==3){
-			if(st.full()){
+			if(st.isFull()){
 				puts("The Stack is Full.");
 			}
 			else{

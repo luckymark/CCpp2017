@@ -18,9 +18,9 @@ int main(){
 void Eratosthenes(){
 	for(int i=2;i<MAXP;i++){
 		if(!isNotPrime[i]){
-    		prime[num_prime++]=i;
+			prime[num_prime++]=i;
 		}
-    	for(int j=0;j<num_prime && i*prime[j]<MAXP;++j){
+		for(int j=0;j<num_prime && i*prime[j]<MAXP;++j){
 			isNotPrime[i*prime[j]]=1;
 			if(!(i%prime[j])){
 				break;
