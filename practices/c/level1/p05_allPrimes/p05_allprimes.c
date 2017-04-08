@@ -21,8 +21,19 @@ int main(  )
 		}
 		if( flag == 1 )printf("%d ",number);
 	}
+
 	printf("%d", clock() );
+	
 	return 0;
 
 
 }
+
+//This is a way which is not good ,and I have modified acorrding to new 
+
+//way , please read other txt in this folder . Thank you .
+
+
+
+
+
