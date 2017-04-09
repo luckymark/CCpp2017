@@ -1,5 +1,3 @@
-#include<cstdio>
-using namespace std;
 class Stack
 {
 	private:
@@ -25,32 +23,3 @@ class Stack
 		bool isFull();
 		void clear();
 };
-
-int Stack::pop(){
-	return s[--p];
-}
-
-bool Stack::push(int x){
-	if(p<capability){
-		s[p++]=x;
-		return 1;
-	}
-	else{
-		return 0;
-	}
-}
-
-bool Stack::isEmpty(){
-	return p==0;
-}
-
-bool Stack::isFull(){
-	return p==capability;
-}
-
-void Stack::clear(){
-	while(p){
-		pop();
-	}
-}
-
