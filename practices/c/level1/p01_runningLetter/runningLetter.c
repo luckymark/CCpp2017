@@ -1,15 +1,15 @@
 #include<stdio.h>
 #include<windows.h>
-#define boundry 80
+#define BOUNDRY 80
 
 void move(int m);
 
 void main()
 {
-	for ( int i = 0;i < boundry;i++) {
+	for ( int i = 0;i < BOUNDRY;i++) {
 		move(i);
 	}
-	for (int i = boundry;i >= 0;i--) {
+	for (int i = BOUNDRY;i >= 0;i--) {
 		move(i);
 	}
 }

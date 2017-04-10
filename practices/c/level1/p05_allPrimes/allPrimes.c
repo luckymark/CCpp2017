@@ -1,7 +1,12 @@
-#include<stdio.h>
+﻿#include<stdio.h>
+#include <time.h>
 
 int main()
 {
+	clock_t start, finish;
+	double duration;
+
+	start = clock();
 	printf("     2");
 	for (int i = 2;i <= 1000;i++)
 	{
@@ -20,4 +25,7 @@ int main()
 			}
 		}
 	}
+	finish = clock();
+	duration = (finish - start)*1.0 / CLOCKS_PER_SEC;
+	printf("\n程序运行时间为：%lfs", duration);
 }
