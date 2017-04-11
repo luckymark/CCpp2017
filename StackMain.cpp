@@ -1,5 +1,5 @@
-#include<cstdio>
-#include"Stack.h"
+#include <cstdio>
+#include "Stack.h"
 using namespace std;
 
 int main()
