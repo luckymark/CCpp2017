@@ -10,7 +10,7 @@ using namespace std ;
 
 void SafeArry::put(int number , int value)
 {
-	if(number >= k  ){
+	if(number >= k || number < 0  ){
 		cout<<"sorry over "<<endl;
 	}
 	else{
@@ -20,7 +20,7 @@ void SafeArry::put(int number , int value)
 
 int SafeArry::get(int number)
 {
-	if(number >= k){
+	if(number >= k || number < 0  ){
 		cout<<"ilegal visit"<<endl;
 		return 0;
 	}
