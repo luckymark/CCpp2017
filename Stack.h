@@ -5,18 +5,8 @@ class Stack
 		int p,capability;
 		
 	public:
-		Stack(int capability){
-			p=0;
-			this->capability=capability;
-			if(capability){
-				s=new int[capability];
-			}
-		}
-		~Stack(){
-			if(capability){
-				delete[] s;
-			}
-		}
+		Stack(int capability);
+		~Stack();
 		int pop();
 		bool push(int x);
 		bool isEmpty();

@@ -1,5 +1,19 @@
 #include "Stack.h"
 
+Stack::Stack(int capability){
+	p=0;
+	this->capability=capability;
+	if(capability){
+		s=new int[capability];
+	}
+}
+
+Stack::~Stack(){
+	if(capability){
+		delete[] s;
+	}
+}
+
 int Stack::pop(){
 	return s[--p];
 }
