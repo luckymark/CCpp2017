@@ -21,34 +21,34 @@ int n = 0;
 
 int main() {
 	init();
-	while (1) {
+	int flag = 1;
+	while (flag) {
 		printf("\n选择所需功能:\n");
 		printf(" 1:显示存货列表\n 2:入库\n 3:出库\n 0:退出程序\n");
 		int k;
 		scanf("%d",&k);
-		if (k == 0) {
-			quiteProgram();
-			break;
-		}
-		if (k == 1) {
-			displayList();
-			continue;
-		}
-		if (k == 2) {
-			printf("输入入库货物名:\n");
-			scanf("%s",name);
-			printf("输入入库货物数量:\n");
-			scanf("%d",&num);
-			pushList();
-			continue;
-		}
-		if (k == 3) {
-			printf("输入出库货物名:\n");
-			scanf("%s",name);
-			printf("输入出库货物数量:\n");
-			scanf("%d",&num);
-			popList();
-			continue;
+		switch (k) {
+			case 0:
+				quiteProgram();
+				flag = 0;
+				break;
+			case 1:
+				displayList();
+				break;
+			case 2:
+				printf("输入入库货物名:\n");
+				scanf("%s",name);
+				printf("输入入库货物数量:\n");
+				scanf("%d",&num);
+				pushList();
+				break;
+			case 3:
+				printf("输入出库货物名:\n");
+				scanf("%s",name);
+				printf("输入出库货物数量:\n");
+				scanf("%d",&num);
+				popList();
+				break;
 		}
 	}
 
