@@ -1,15 +1,23 @@
 #include <stdio.h>
 
-int hanoi(int n, int )
+void hanoi(int n, char from, char to, char depend_on)
 {
-
-    return 0;
+    if (n > 1)
+    {
+        hanoi(n - 1, from, depend_on, to);
+        printf("%c->%c\n", from, to);
+        hanoi(n-1, depend_on, to, from);
+    }
+    else
+    {
+        printf("%c->%c\n", from, to);
+    }
 }
 
 int main()
 {
     int n;
     scanf("%d", &n);
-    printf("%d\n", hanoi())
-    return 0;
+    hanoi(n, 'A', 'B', 'C');
+    return 0; 
 }
