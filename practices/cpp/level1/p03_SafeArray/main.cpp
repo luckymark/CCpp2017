@@ -4,7 +4,6 @@
  *  Created on: 2017年3月30日
  *      Author: mark
  */
-
 #include<iostream>
 #include"SafeArry.h"
 #include<time.h>
@@ -20,10 +19,9 @@ int main()
 
 	cin>>number ;
 
-
 	SafeArry a(number);
 
-	for(int i = 0 ; i< 100 ; i++ ){
+	for(int i = 0 ; i< number ; i++ ){
 		srand(time(0));
 		a.put(i,rand());
 	}
