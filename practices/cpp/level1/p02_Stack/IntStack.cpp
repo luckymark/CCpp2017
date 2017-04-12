@@ -2,8 +2,16 @@
 #include<iostream>
 using std::cout;
 using std::endl;
+IntStack::IntStack(int item){
+	len=item;
+	int *p=new int[item];
+	data=p;
+}
 void IntStack::disp(){
 	cout<<"top\n";
+	if(flag){
+		cout<<data[top]<<endl;
+	}
 	for(int i=top-1;i>=0;i--){
 		cout<<data[i]<<endl;
 	}
@@ -11,7 +19,7 @@ void IntStack::disp(){
 }
 void IntStack::push(int item){
 	data[top]=item;
-	if(top<99){
+	if(top<len-1){
 		++top;
 	}
 	else{
@@ -19,8 +27,9 @@ void IntStack::push(int item){
 	}
 }
 void IntStack::pop(){
-	if(99==top){
+	if(len-1==top&&flag){
 		flag=0;
+		return;
 	}
 	--top;
 }

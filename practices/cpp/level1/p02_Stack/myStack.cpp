@@ -12,7 +12,9 @@ int main(){
 	using std::cin;
 	char ch;
 	int n;
-	IntStack stack;
+	cout<<"Please enter the size of you stack\n";
+	cin>>n;
+	IntStack stack(n);
 
 	do{
 		system("cls");

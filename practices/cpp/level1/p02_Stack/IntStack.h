@@ -4,10 +4,12 @@
 class IntStack
 {
 	private:
-		int data[100]={0};
+		int *data;
 		int top=0;
 		bool flag=0;
+		int len;
 	public:
+		IntStack(int item=100);
 		bool isFull();
 		bool isNull();
 		void disp();
