@@ -48,6 +48,7 @@ int& safearray::operator[](int n)
 
 safearray & safearray::operator=(const safearray & a)
 {
+	delete arr;
 	num = a.num;
 	arr = new int[num];
 	for (int i = 0; i < num; ++i)
