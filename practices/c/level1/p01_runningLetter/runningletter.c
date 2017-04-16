@@ -25,7 +25,7 @@ int main(void)
 			printf( "%c" , 'r' );
 
             Sleep( STOP );
-			system("cls");
+            system("cls");
 
 			int k ,f;
 
