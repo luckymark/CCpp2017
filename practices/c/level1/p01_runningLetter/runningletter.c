@@ -29,10 +29,10 @@ int main(void)
 
 			int k ,f;
 
-        for( k = 0 ; k<= i ; k++ ){
+            for( k = 0 ; k<= i ; k++ ){
 
                 for( f=0 ; f<=j ; f++ ){
-					if(k != 0 && f == 0){
+                    if(k != 0 && f == 0){
                         printf("\n"); 
                     }
                                         
