@@ -6,15 +6,15 @@
 
 int main(void)
 {
-	int i , j ;
-	char b[5][5];
+    int i , j ;
+    char b[5][5];
 
     for( i = 0 ; i<5 ; i++ ){
 
         for( j=0 ; j<5 ; j++ ){
             b[i][j] = ' ' ;
-		}
-	}
+        }
+    }
 
     for(i = 0 ; i < 5 ; i++) {
 
@@ -27,7 +27,7 @@ int main(void)
             Sleep( STOP );
             system("cls");
 
-			int k ,f;
+            int k ,f;
 
             for( k = 0 ; k<= i ; k++ ){
 
@@ -37,13 +37,13 @@ int main(void)
                     }
                                         
                     printf("%c", b[k][f]);
-				}
-			}
-		}
-	}
-	printf("\n over \n");
+                }
+            }
+        }
+    }
+    printf("\n over \n");
 
 }
 
 
-	
+    

@@ -10,21 +10,21 @@ using namespace std;
 
 int find(Node* p , int n)
 {
-	int  count = 1 ;
-	int flag = 0 ;
+    int  count = 1 ;
+    int flag = 0 ;
 
-	while(p != NULL ){
-		if(p->Data==5){
-			cout<<count<<endl;
-			flag = 1 ;
-		}
-		p = p->Next;
-		count++ ;
-	}
+    while(p != NULL ){
+        if(p->Data==5){
+            cout<<count<<endl;
+            flag = 1 ;
+        }
+        p = p->Next;
+        count++ ;
+    }
 
-	if(flag == 0) return -1 ;
+    if(flag == 0) return -1 ;
 
-	return 0;
+    return 0;
 
 }
 

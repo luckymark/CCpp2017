@@ -11,9 +11,9 @@
 class Node
 {
 public:
-	int Data ;
+    int Data ;
 
-	Node * Next;
+    Node * Next;
 
 };
 

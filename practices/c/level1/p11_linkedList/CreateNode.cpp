@@ -15,37 +15,37 @@ using namespace std;
 
 Node* CreateNode(int a )
 {
-			Node *p = new Node ;
-			Node *retpoint=p;
+            Node *p = new Node ;
+            Node *retpoint=p;
 
-			cout<<"please input the value."<<endl;
+            cout<<"please input the value."<<endl;
 
-			int temp ;
-			cin>>temp;
+            int temp ;
+            cin>>temp;
 
-			p->Data = temp ;
+            p->Data = temp ;
 
-			if( a == 1 )return p;
+            if( a == 1 )return p;
 
-			int j = a - 1 ;
+            int j = a - 1 ;
 
-			for( int i = 0 ; i < j ; i++  ){
-				Node *q = new Node ;
+            for( int i = 0 ; i < j ; i++  ){
+                Node *q = new Node ;
 
                 cout<<"please input the value."<<endl;
 
                 int temp ;
-				cin>>temp;
+                cin>>temp;
 
-				q->Data = temp ;
-				p->Next=q;
+                q->Data = temp ;
+                p->Next=q;
 
-				p = q ;
-			}
+                p = q ;
+            }
 
-			p->Next = NULL ;
+            p->Next = NULL ;
 
-			return retpoint ;
+            return retpoint ;
 }
 
 

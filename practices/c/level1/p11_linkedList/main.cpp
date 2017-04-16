@@ -11,28 +11,28 @@ using namespace std ;
 
 int main()
 {
-	int NodeNumber ;
+    int NodeNumber ;
 
-	cout<<"How many numbers do you want?"<<endl;
+    cout<<"How many numbers do you want?"<<endl;
 
-	cin>>NodeNumber;
+    cin>>NodeNumber;
 
-	Node* p;
+    Node* p;
 
-	p = CreateNode(NodeNumber);
+    p = CreateNode(NodeNumber);
 
-	show ( p ) ;
+    show ( p ) ;
 
-	p=inverted(p,NodeNumber);
+    p=inverted(p,NodeNumber);
 
-	cout<<"***********"<<endl;
+    cout<<"***********"<<endl;
 
-	show( p );
+    show( p );
 
-	find(p,5 );
+    find(p,5 );
 
 
-	cout<<"END"<<endl;
+    cout<<"END"<<endl;
 }
 
 
