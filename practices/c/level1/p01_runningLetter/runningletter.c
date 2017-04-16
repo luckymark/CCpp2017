@@ -12,7 +12,7 @@ int main(void)
     for( i = 0 ; i<5 ; i++ ){
 
         for( j=0 ; j<5 ; j++ ){
-			b[i][j] = ' ' ;
+            b[i][j] = ' ' ;
 		}
 	}
 
@@ -22,7 +22,7 @@ int main(void)
             if(i != 0 && j== 0) {
                 printf("\n");
             }
-            printf( "%c" , 'r' );
+            printf("%c" , 'r');
 
             Sleep( STOP );
             system("cls");
