@@ -16,8 +16,8 @@ int main(void)
 	}
 		
 	for(i = 0 ; i < 5 ; i++) {	
-		for( j = 0 ; j < 5; j++) {
-			
+
+        for( j = 0 ; j < 5; j++) {	
 			if(i != 0 && j== 0) { 
 				printf("\n");
 			}
@@ -36,11 +36,8 @@ int main(void)
 		}
 	}
 	printf("\n over \n");
+			
 }
-			
 
-		
-			
-			
 
 	
