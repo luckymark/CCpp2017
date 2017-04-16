@@ -27,21 +27,16 @@ int main(void)
 	
 
 	int ws = 19, ad = 4;  //the position of player;
-
 	int ws1 = 2 , ad1 = 1 ; //the postion of box; 
-
 	int steps = 0;
 	
 	while(1){
-		
 		char direction;
 		
 		for(int i = 0 ; i < 20 ; i++ ){
 			
 			for(int j = 0; j < 20 ; j++){
-				
-				if( i != 0 && j == 0)printf( "\n" );
-				
+				if(i != 0 && j == 0)printf( "\n" );
 				printf("%c" , a[i][j]);
 			}
 		}
@@ -49,77 +44,46 @@ int main(void)
 		if(a[0][1] == '#'){ break; }
 		
 		fflush(stdin);
-		
 		direction = getchar();
 		
-		if(direction == 'w' && ws!=0 && a[ws-1][ad] != '*' ){
+		if(direction == 'w' && ws!=0 && a[ws-1][ad] != '*') {
 			
-			if(a[ws-1][ad] == '#' && (a[ws-2][ad]== ' ' || a[ws-2][ad]== '@' ) ){
-				
+			if(a[ws-1][ad] == '#' && (a[ws-2][ad]== ' ' || a[ws-2][ad]== '@')){
 				ws1 -- ;  
-				
 				a[ws][ad] = ' ';
-				
 				ws-- ;
-				
 				steps ++ ;
-			
-			}
-			
-			else if( a[ws-1][ad] != '#' ){
-				
+			} else if (a[ws-1][ad] != '#'){
 				a[ws][ad]=' ';
-				
 				steps++;
-				
 				ws--;
 			}
 		}
 	
-		if( direction == 's' && ws != 19 && a[ws+1][ad] != '*'){
+		if(direction == 's' && ws != 19 && a[ws+1][ad] != '*'){
 			
-			if(a[ws+1][ad] == '#' && ( a[ws+2][ad]== ' ' || a[ws+2][ad] == '@') ){
-				
+			if(a[ws+1][ad] == '#' && ( a[ws+2][ad]== ' ' || a[ws+2][ad] == '@')){
 				ws1++;
-				
 				a[ws][ad] = ' ';
-				
 				ws++;
-				
 				steps++;
-			
-			}
-			
-			else if(a[ws+1][ad] != '#' ){
-				
+			} else if (a[ws+1][ad] != '#' ){
 				a[ws][ad]=' ';
-				
 				steps++;
-				
 				ws++;
 			}
 		}
 		
-		if(direction=='a' && ad != 0 && a[ws][ad-1] != '*'){
+        if(direction=='a' && ad != 0 && a[ws][ad-1] != '*'){
 			
 			if(a[ws][ad-1] == '#' && ( a[ws][ad-2]== ' ' ||a[ws][ad-2]== '@' )){
-				
 				ad1--;
-				
 				a[ws][ad] = ' ';
-				
 				ad--;
-				
 				steps++;
-			
-			}
-			
-			else if(a[ws][ad-1] != '#' ){
-				
+			} else if (a[ws][ad-1] != '#' ){
 				a[ws][ad]=' ';
-				
 				steps++;
-				
 				ad--;
 			}
 		}
@@ -127,37 +91,26 @@ int main(void)
 		if(direction=='d'&& ad!=19 && a[ws][ad+1]!='*'){
 			
 			if(a[ws][ad+1] == '#' && ( a[ws][ad+2]== ' ' ||a[ws][ad+2]== '@') ){
-				
 				ad1++;
-				
 				a[ws][ad] = ' ';
-				
 				ad++;
-				
 				steps++;
-			
-			}
-			
-			else if(a[ws][ad+1] != '#' ){
-				
+			} else if (a[ws][ad+1] != '#' ){
 				a[ws][ad]=' ';
-				
 				steps++;
-				
 				ad++;
 			}
 		
 		}
 		
 		a[ws][ad] = 'P';
-		
 		a[ws1][ad1] = '#';
 		
 		system("cls");
 		
 	}
-
-	printf("\nCongruatulaton you come out this maze with %d steps\n",steps);
+	
+    printf("\nCongruatulaton you come out this maze with %d steps\n",steps);
 	
 	return 0;
 }

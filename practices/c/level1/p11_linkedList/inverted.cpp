@@ -13,55 +13,35 @@ Node* inverted(Node* start,int n)
 {
 
 	Node* p = start ;
-
 	Node* address[n];
-
 	int i=0;
 
-	while ( p != NULL ) {
-
+	while (p != NULL) {
 		address[i] = p ;
-
 		if(p->Next == NULL )break;
-
 		p = p->Next ;
-
 		i++;
-
 	}
 
 	Node* ret = p;
-
 	p = start ;
-
-	Node* temp =NULL;
-
-	int count=0;
+	Node* temp = NULL;
+	int count = 0;
 
 	while(p != NULL){
-
 		temp = p->Next;
 
-		if(address[count]==p){
-
+        if(address[count] == p ){
 			p->Next = NULL ;
-
-		}
-
-		else{
-
+		} else {
 			p->Next = address[count] ;
-
 			count++;
-
 		}
 
 		p=temp;
 
 	}
 
-
-	return ret ;
-
+    return ret ;
 }
 

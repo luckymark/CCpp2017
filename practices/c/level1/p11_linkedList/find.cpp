@@ -11,7 +11,6 @@ using namespace std;
 int find(Node* p , int n)
 {
 	int  count = 1 ;
-
 	int flag = 0 ;
 
 	while(p != NULL ){
@@ -23,7 +22,7 @@ int find(Node* p , int n)
 		count++ ;
 	}
 
-	if( flag == 0 ) return -1 ;
+	if(flag == 0) return -1 ;
 
 	return 0;
 

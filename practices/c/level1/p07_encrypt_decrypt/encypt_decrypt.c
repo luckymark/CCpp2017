@@ -29,54 +29,35 @@ int main ( )
 void encypt ( char a[] )
 {
 	char *a1=a;
-	
-	while( *a1 != '\0' ){
-	
+
+	while(*a1 != '\0'){
 		a1++;
-	
 	}
-	
+
 	a1--;
 
-	if( (a1-a) % 2 == 0 ){
-		
-		while( a1 != a ){
-			
+	if((a1-a) % 2 == 0){
+		while(a1 != a){
 			char swap;
-			
 			swap = *a+10;
-			
 			*a = *a1+10;
-			
 			*a1 = swap;
-			
 			a++;
-			
 			a1--;
 		}
-			
-	}	
-	else{
-		while( a1  != a + 1 ){
-	
+	} else {
+		while(a1  != a + 1) {
 			char swap;
-			
 			swap = *a+10;
-			
 			*a = *a1+11;
-			
 			*a1 = swap;
-			
 			a++;
-			
 			a1--;
 		}
+
 		char swap;
-			
 		swap = *a+10;
-			
 		*a = *a1+10;
-			
 		*a1 = swap;
 	}
 	
@@ -84,62 +65,42 @@ void encypt ( char a[] )
 
 void decrypt( char a[]  )
 {
-	
 	char *a1=a;
-	
+
 	while( *a1 != '\0' ){
-	
 		a1++;
-	
 	}
-	
+
 	a1--;
 
 	if( (a1-a) % 2 == 0 ){
-		
 		while( a1 != a ){
-			
 			char swap;
-			
 			swap = *a-10;
-			
 			*a = *a1-10;
-			
 			*a1 = swap;
-			
 			a++;
-			
 			a1--;
 		}
-			
-	}	
-	else{
-		while( a1  != a + 1 ){
-			
+	} else {
+		while(a1  != a + 1) {
 			char swap;
-			
 			swap = *a-11;
-			
 			*a = *a1-10;
-			
 			*a1 = swap;
-			
 			a++;
-			
 			a1--;
 		}
+
 		char swap;
-			
 		swap = *a-10;
-			
 		*a = *a1-10;
-			
 		*a1 = swap;
 	}
-	
+
 }
-	
 
 
 
-			
+
+

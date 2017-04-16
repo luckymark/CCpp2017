@@ -3,7 +3,7 @@
 #include<Windows.h>
 int main(void)
 {
-	
+
 	char a[20][20]={'*',' ','*','*','*','*','*','*','*','*','*',' *','*','*','*','*','*','*','*','*',
 					'*',' ','*',' ',' ',' ',' ',' ',' ',' ',' ',' ','*','*','*','*',' ','*',' ','*',
 					'*',' ','*',' ','*',' ','*','*','*','*','*',' ','*','*','*','*',' ','*',' ','*',
@@ -25,74 +25,53 @@ int main(void)
 					'*',' ',' ',' ',' ',' ',' ','*','*',' ',' ',' ',' ','*','*',' ',' ',' ','*','*',
 					'*','*','*','*','P','*','*','*','*','*','*','*','*','*','*','*','*','*','*','*',
 	};
-	
-
 	int ws=19, ad=4;
-	
 	int steps=0;
-	
-	while(1){
-		
+
+    while(1){
 		char direction;
-		
-		for(int i=0;i<20;i++){
-			
-			for(int j=0; j<20;j++){
-				
-				if(i!=0&&j==0)printf("\n");
-				
+		for (int i = 0 ; i < 20 ; i++) {
+
+            for (int j = 0 ; j < 20 ; j++) {
+				if(i != 0 && j == 0 )printf("\n");
 				printf("%c",a[i][j]);
 			}
 		}
-		
 		printf(" \n %d , %d  \n\n", ws, ad);
-		
+
 		if(a[0][1]=='P')break;
-		
+
 		fflush(stdin);
-		
 		direction=getchar();
-		
+
 		if(direction=='w'&&ws!=0&&a[ws-1][ad]!='*'){
-			
 			a[ws][ad]=' ';
-			
 			steps++;
-			
 			ws--;
 		}
-		
+
 		if(direction=='s'&&ws!=19&&a[ws+1][ad]!='*'){
-			
 			a[ws][ad]=' ';
-			
 			steps++;
-			
 			ws++;
 		}
-		
+
 		if(direction=='a'&&ad!=0&&a[ws][ad-1]!='*'){
-			
 			a[ws][ad]=' ';
-			
 			steps++;
-			
 			ad--;
 		}
-		
+
 		if(direction=='d'&&ad!=19&&a[ws][ad+1]!='*'){
-			
 			a[ws][ad]=' ';
-			
 			steps++;
-			
 			ad++;
 		}
-		
+
 		a[ws][ad]='P';
-		
+
 		system("cls");
-		
+
 	}
 	
 	printf("\nCongruatulaton you come out this maze with %d steps\n",steps);
