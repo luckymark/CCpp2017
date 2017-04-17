@@ -34,11 +34,11 @@ int Queue::front(){
 	return element[head+1];
 }
 
-bool Queue::isfull(){
+bool Queue::IsFull(){
 	return (tail)%MAXQUEUE==head;
 }
 
-bool Queue::isempty(){
+bool Queue::IsEmpty(){
 	return head==tail;
 }
 

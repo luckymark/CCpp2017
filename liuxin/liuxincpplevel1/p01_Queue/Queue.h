@@ -9,7 +9,7 @@ public:
 	void pop();
 	void append(int x);
 	int front();
-	bool isfull();
-	bool isempty();
+	bool IsFull();
+	bool IsEmpty();
 };
 
