@@ -27,13 +27,13 @@ int main()
 		{
 			x = i;								//此时将i的值赋值给x并将其输出
 			printf("%d\n", x);
-		 }
+		}
 	}							
-		end = clock();							//记录结束时间
-		printf("%lf\n", (end - begin)/1000);	//输出运行总时间
+	end = clock();							//记录结束时间
+	printf("%lf\n", (end - begin)/1000);	//输出运行总时间
 
-		getchar();								//暂停
-		return 0;
+	getchar();								//暂停
+	return 0;
 }
 	
 
