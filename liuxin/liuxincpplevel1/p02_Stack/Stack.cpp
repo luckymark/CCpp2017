@@ -1,16 +1,21 @@
 #include <cstdlib>
+#include <iostream>
 #include "Stack.h"
 
 Stack::Stack(int x){
 	tot=0;
-	element=(int *)malloc(sizeof(int)*x); 
+	element=new int[num=x];
 }
 
 Stack::~Stack(){
-	free(element);
+	delete[] element;
 }
 
 void Stack::push(int x){
+	if (tot==num) {
+		std::cerr<<"Full!!Can't add anymore!\n"<<std::endl;
+		return;
+	}
 	element[tot++]=x;
 }
 
@@ -23,7 +28,7 @@ int Stack::top(){
 }
 
 bool Stack::IsFull(){
-	return tot==MAXSTACK;
+	return tot==num;
 }
 
 bool Stack::IsEmpty(){

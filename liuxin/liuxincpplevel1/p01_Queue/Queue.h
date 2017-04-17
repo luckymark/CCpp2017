@@ -1,7 +1,7 @@
 const int MAXQUEUE=200005;
 class Queue{
 private:	
-	int head,tail,*element;
+	int head,tail,len,*element;
 public:
 	Queue(int x=MAXQUEUE);
 	~Queue();

@@ -5,11 +5,11 @@
 
 SafeArray::SafeArray(int x){
 	tot=x;
-	element=(int *)malloc(sizeof(int)*x);
+	element=new int[x];
 }
 
 SafeArray::~SafeArray(){
-	free(element);
+	delete[] element;
 }
 
 int& SafeArray::operator [](int x){

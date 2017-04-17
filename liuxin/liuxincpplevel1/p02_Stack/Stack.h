@@ -1,7 +1,7 @@
 const int MAXSTACK=200005;
 class Stack{
 private:
-	int tot,*element;
+	int tot,num,*element;
 public:
 	Stack(int x=MAXSTACK);
 	~Stack();
