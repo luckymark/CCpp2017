@@ -1,0 +1,37 @@
+# Project: ScoreManagement
+# Makefile created by Dev-C++ 5.5.3
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = ScoreManagementMain.o Student.o Course.o System.o
+LINKOBJ  = ScoreManagementMain.o Student.o Course.o System.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW32/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW32/mingw32/lib" -static-libstdc++ -static-libgcc
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW32/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW32/lib/gcc/mingw32/4.7.2/include/c++"
+BIN      = ScoreManagement.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+ScoreManagementMain.o: ScoreManagementMain.cpp
+	$(CPP) -c ScoreManagementMain.cpp -o ScoreManagementMain.o $(CXXFLAGS)
+
+Student.o: Student.cpp
+	$(CPP) -c Student.cpp -o Student.o $(CXXFLAGS)
+
+Course.o: Course.cpp
+	$(CPP) -c Course.cpp -o Course.o $(CXXFLAGS)
+
+System.o: System.cpp
+	$(CPP) -c System.cpp -o System.o $(CXXFLAGS)
