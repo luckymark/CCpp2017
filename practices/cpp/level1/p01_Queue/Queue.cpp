@@ -1,26 +1,26 @@
-#include "queue.h"
+#include "Queue.h"
 #include <iostream>
 
 using namespace std;
 
-queue::queue():i(0)
+Queue::queue():i(0)
 {
     //ctor
 }
 
-queue::~queue()
+Queue::~queue()
 {
     //dtor
 }
 
-void queue::append(int number)
+void Queue::append(int number)
 {
     data[i]=number;
     i++;
     if(i==10)i=0;
 }
 
-void queue::pop()
+void Queue::pop()
 {
     for(int j = 0 ; j < 10 ; j++){
 		cout << data[j] <<endl;
@@ -28,7 +28,7 @@ void queue::pop()
 
 }
 
-bool queue::IsEmpty()
+bool Queue::IsEmpty()
 {
     if(i == 0)
     {
@@ -38,7 +38,7 @@ bool queue::IsEmpty()
     return false;
 }
 
-bool queue::IsFull()
+bool Queue::IsFull()
 {
     if(i == 10)return true;
     return false;
