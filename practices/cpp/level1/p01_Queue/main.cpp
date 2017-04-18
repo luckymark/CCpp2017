@@ -1,11 +1,11 @@
 #include <iostream>
-#include "queue.h"
+#include "Queue.h"
 
 using namespace std;
 
 int main()
 {
-    queue Queue;
+    Queue queue;
     int choice;
 
     while(1){
@@ -17,19 +17,19 @@ int main()
         for(int i=0;i<=9;i++){
         int number;
         cin>>number;
-        Queue.append(number);
+        queue.append(number);
         }
     }
 
     else if(choice == 2)
     {
-        Queue.pop();
+        queue.pop();
     }
 
     else if(choice == 3)
     {
-        Queue.IsFull();
-        Queue.IsEmpty();
+        queue.IsFull();
+        queue.IsEmpty();
     }
 
     else if(choice == 4)
