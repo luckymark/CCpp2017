@@ -2,15 +2,15 @@
 #define QUEUE_H
 
 
-class queue
+class Queue
 {
     public:
-        queue();
+        Queue();
         void append(int number);
         void pop();
         bool IsEmpty();
         bool IsFull();
-        virtual ~queue();
+        virtual ~Queue();
 
     private:
         int data[10];
