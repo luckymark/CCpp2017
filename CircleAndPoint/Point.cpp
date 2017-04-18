@@ -11,5 +11,5 @@ void Point::move(int delta_x,int delta_y){
 }
 
 void Point::print(){
-	printf("Ô²ÐÄ:(%d,%d)",x,y);
+	printf("the Centre of the Circle:(%d,%d)",x,y);
 }

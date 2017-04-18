@@ -11,5 +11,5 @@ void Circle::move(int delta_x,int delta_y){
 
 void Circle::print(){
 	p.print();
-	printf(",°ë¾¶:%d\n",r);
+	printf(", Radius:%d\n",r);
 }
