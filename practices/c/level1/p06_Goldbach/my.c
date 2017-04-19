@@ -19,10 +19,10 @@ int main(){
 	int flag = 1;
 	for(int i = 4; i <= 100; i += 2){
 		int cur = 0;
-		for(int j = 2; j <= i-2; j++) if(!not_prime[j] && !not_prime[i-j]){
-			//cout << j << " " << i-j << endl;
-			//printf("%d %d",i,i-j);
-			cur = 1; break;
+		for(int j = 2; j <= i-2; j++){
+			if(!not_prime[j] && !not_prime[i-j]){
+				cur = 1; break;
+			}
 		}
 		if(cur == 0){
 			flag = 0; break;

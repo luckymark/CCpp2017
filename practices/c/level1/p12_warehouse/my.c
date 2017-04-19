@@ -214,24 +214,27 @@ void get_input(){
 				 break;
 			default: break;
 		}
-	} else if(c == '1'){
-		open_the_data("data");
-	} else if(c == '2'){
-		save_the_data("data");
-	}else if(c == '3'){
-		put_in_out(1);
-	}else if(c == '4'){
-		put_in_out(-1);
-	}else if(c == '5'){
-		open_the_data("tmp");
-		save_the_data("data");
-		endwin();
-		system("rm -r tmp");
-		exit(0);
-	}else if(c == '6'){
-		save_the_data("tmp");
-		init();
-		open_the_data("tmp");
+	} else {
+		switch(c){
+			case '1': open_the_data("data");
+				  break;
+			case '2': save_the_data("data");
+				  break;
+			case '3': put_in_out(1);
+				  break;
+			case '4': put_in_out(-1);
+				  break;
+			case '5': open_the_data("tmp");
+				  save_the_data("data");
+				  endwin();
+				  system("rm -r tmp");
+				  exit(0);
+				  break;
+			case '6': save_the_data("tmp");
+				  init();
+				  open_the_data("tmp");
+				  break;
+		}
 	}
 }
 void work(){
