@@ -9,15 +9,17 @@ using namespace std;
 //const int menu_width;
 static const int menu_size = 9;
 static const int str_max_len = 30;
-static const char menu[menu_size][str_max_len] = {"|open(1)|",
-										   "|save(2)|",
-										   "|add stu(3)|",
-										   "|del stu(4)|",
-										   "|add subject(5)|",
-										   "|del subject(6)|",
-										   "|modify stu(7)|",
-										   "|quit(8)|",
-										   "|refresh(9)|"};
+static const char menu[menu_size][str_max_len] = {
+	"|open(1)|",
+	"|save(2)|",
+	"|add stu(3)|",
+	"|del stu(4)|",
+	"|add subject(5)|",
+	"|del subject(6)|",
+	"|modify stu(7)|",
+	"|quit(8)|",
+	"|refresh(9)|"
+};
 
 static WINDOW *list_window,*content,*command;
 static int list_window_lines;
