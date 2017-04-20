@@ -1,5 +1,5 @@
 #include <cstdio>
-#include "main.h"
+#include "circle.h"
 using namespace std;
 
 int main()
@@ -14,15 +14,4 @@ int main()
     Point p1(p);
     printf("%lf %lf", p1.x, p1.y);
     return 0;
-}
-
-Point::Point(const double &x, const double &y)
-{
-    this->x = x;
-    this->y = y;
-}
-
-void Circle::move(const Point &p)
-{
-    this->centre_point = p;
 }
