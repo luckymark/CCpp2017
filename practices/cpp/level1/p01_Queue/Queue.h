@@ -13,7 +13,7 @@ class Queue
         virtual ~Queue();
 
     private:
-        int data[10];
+        int data[100];
         int i;
 };
 
