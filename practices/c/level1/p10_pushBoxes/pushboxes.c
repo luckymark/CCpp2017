@@ -16,6 +16,7 @@ int move(struct player* p,struct player* box,struct player* target,int x,int y,i
 int keydown(struct player* p);
 int boxmove(struct player* box,struct player* tempbox,int z,int maze[100][100],int i);
 void drmap(int x,int y,int maze[100][100]); 
+void add(struct player* p,int mission,int i,int j);
 int main()
 {
 	FILE *fp,*record;
@@ -42,8 +43,6 @@ int main()
 	 if((record=fopen("record.txt","r"))==NULL)for(int i=0;i<3;i++)highscore[i]=0;
 	 else fscanf(record,"%d %d %d",&highscore[0],&highscore[1],&highscore[2]);
 	 fclose(record);
-	//puts("This ganme only have three missions.\n It will begin after three seconds");
-	//Sleep(3000);
 	system("cls");
 	for(;mission<=3;mission++)
 	{
@@ -58,7 +57,6 @@ int main()
 		for(int i=0;i<y;i++)
 		{
 			fgets(m,x+2,fp);
-			//puts(m);
 			for(int j=0;j<x;j++)
 			{
 				if(m[j]==' ')maze[i][j]=1;
@@ -69,13 +67,16 @@ int main()
 					boxlink->x=j;
 					boxlink->y=i;
 					maze[i][j]=2;
+					/*
 					if(boxes!=3)
 					{
 						boxlink->next=(struct player*)malloc(sizeof(struct player));
 						boxlink=boxlink->next;
 					}
-					else if(mission!=1&&boxes!=3)boxlink=box->next; 
+					else if(mission!=1&&boxes!=3)boxlink=boxlink->next; 
 					else if(boxes==3)boxlink->next=NULL;
+					*/
+					add(boxlink,mission,boxes,1)
 				}
 				else if(m[j]=='x')
 				{
@@ -83,6 +84,7 @@ int main()
 					targetlink->x=j;
 					targetlink->y=i;
 					maze[i][j]=3;
+					/*
 					if(targets!=3&&mission==1)
 					{
 						targetlink->next=(struct player*)malloc(sizeof(struct player));
@@ -90,7 +92,9 @@ int main()
 					}
 					else if(targets!=3&&mission!=1)targetlink=targetlink->next;
 					else if(targets==3)targetlink->next=NULL;
-				}
+					*/
+					add(targetlink,mission,targets,2)
+					}
 				else if(m[j]=='s')
 				{
 					play->x=j;
@@ -112,7 +116,7 @@ int main()
 			gotoxy(30,15);
 			puts("The Next mission will be started after 2 seconds");
 		}
-		if(100-step>highscore[mission-1])
+		if(1000-step>highscore[mission-1])
 			{			
 				gotoxy(30,16);
 				puts("You break the record in this mission");
@@ -267,16 +271,16 @@ int keydown(struct player* p)
 	char ch=getch();
 	switch(ch)
 	{
-		case'A':
-		case'a':p->next->x=p->x-1;z=1;break;
-		case'D':
-		case'd':p->next->x=p->x+1;z=2;break;
-		case'W':
-		case'w':p->next->y=p->y-1;z=3;break;
-		case'S':
-		case's':p->next->y=p->y+1;z=4;break; 
-		case'R':
-		case'r':z=5;
+		case 'A':
+		case 'a':p->next->x=p->x-1;z=1;break;
+		case 'D':
+		case 'd':p->next->x=p->x+1;z=2;break;
+		case 'W':
+		case 'w':p->next->y=p->y-1;z=3;break;
+		case 'S':
+		case 's':p->next->y=p->y+1;z=4;break; 
+		case 'R':
+		case 'r':z=5;
 	}
 	return z;
 	
@@ -310,4 +314,23 @@ int boxmove(struct player* box,struct player* tempbox,int z,int maze[100][100],i
 		return 1;
 	}
 	else return 0;
+}
+void add(struct player* p,int mission,int i,int j)
+{
+	if(j==1)
+	{
+		if(i!=3)
+		{
+			p->next=(struct player*)malloc(sizeof(struct player));
+			p=p->next;
+		}
+	}
+	else if(j==2)
+	{
+		if(i!=3&&mission==1)
+		p->next=(struct player*)malloc(sizeof(struct player));
+		p=p->next;
+	}
+	else if(mission!=1&&i!=3)p=p->next; 
+	else if(i==3)p->next=NULL;
 }

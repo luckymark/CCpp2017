@@ -53,9 +53,9 @@ int main()
 
 void gotoxy(int x, int y)
 {
-COORD pos = {x,y};
-HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-SetConsoleCursorPosition(hOut, pos);
+	COORD pos = {x,y};
+	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleCursorPosition(hOut, pos);
 }
 void drmap(int x,int y)
 {
@@ -68,7 +68,7 @@ void drmap(int x,int y)
 		} 
 		else if(maze[i][j]==0)
 		{
-			printf("¡ö");
+			printf("â– ");
 		}
 		if(j==y-1)putchar('\n'); 
 	}
@@ -77,7 +77,7 @@ int move(struct player* p,int x,int y,int m[x][y])
 {
 	struct player* temp;
 	gotoxy(p->x,p->y);
-	printf("¡ñ") ;
+	printf("â—") ;
 	while(1)
 	{
 		do
@@ -92,7 +92,7 @@ int move(struct player* p,int x,int y,int m[x][y])
 		gotoxy(p->x,p->y);
 		printf("  ");
 		gotoxy(temp->x,temp->y);
-		printf("¡ñ");
+		printf("â—");
 		free(p);
 		p=temp;
 		p->next=(struct player*)malloc(sizeof(struct player)); 

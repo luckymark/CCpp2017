@@ -16,8 +16,6 @@ int main()
 			
 		}
 		if(j!=1)printf(" %d",n);
-		//else printf(" %d",n);
-		//if(i==n-1)printf(" %d",n);
 	}
 	printf("\n%d millisceonds",clock());
 	return 0;
