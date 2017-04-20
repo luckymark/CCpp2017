@@ -1,4 +1,4 @@
-// Puzzle.cpp : 定义控制台应用程序的入口点。
+// Puzzle.c
 //
 
 /* code:	Puzzle Game for Kira
@@ -135,7 +135,7 @@ DWORD WINAPI clocks(LPVOID lpParameter)
 	}
 }
 
-int main(void)
+int main(int argc, char** argv)
 {
 	system("color 0f");
 	while (1)

@@ -50,10 +50,10 @@ int main(int argc, char** argv)
 {
 	long len = 1000000;//about 8min
 	int primeList[80000];
-	linked *current, *head, *temp, *currenthead;
+	linked *current, *head, *temp, *currentHead;
 	current = creat(len);
 	head = current;
-	currenthead = head;
+	currentHead = head;
 
 	puts("Working...");
 	
@@ -68,7 +68,7 @@ int main(int argc, char** argv)
 		{
 			temp = current->next;
 
-			while (temp->data % currenthead->data == 0)//Delete this number
+			while (temp->data % currentHead->data == 0)//Delete this number
 			{
 				current->next = temp->next;
 				temp = temp->next;
@@ -89,8 +89,8 @@ int main(int argc, char** argv)
 			}
 		}
 
-		currenthead = currenthead->next;
-		current = currenthead;
+		currentHead = currentHead->next;
+		current = currentHead;
 	}
 
 	FILE *fpt;
