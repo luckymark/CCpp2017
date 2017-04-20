@@ -17,12 +17,12 @@ void Queue::append(int number)
 {
     data[i]=number;
     i++;
-    if(i==10)i=0;
+    if(i==100)i=0;
 }
 
 void Queue::pop()
 {
-    for(int j = 0 ; j < 10 ; j++){
+    for(int j = 0 ; j < 100 ; j++){
 		cout << data[j] <<endl;
 	}
 
@@ -40,7 +40,7 @@ bool Queue::IsEmpty()
 
 bool Queue::IsFull()
 {
-    if(i == 10)return true;
+    if(i == 100)return true;
     return false;
 }
 
