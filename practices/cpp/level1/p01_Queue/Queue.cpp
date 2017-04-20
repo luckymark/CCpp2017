@@ -3,12 +3,12 @@
 
 using namespace std;
 
-Queue::queue():i(0)
+Queue::Queue():i(0)
 {
     //ctor
 }
 
-Queue::~queue()
+Queue::~Queue()
 {
     //dtor
 }
