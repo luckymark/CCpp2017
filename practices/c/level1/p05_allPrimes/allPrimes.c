@@ -2,7 +2,7 @@
 #include <math.h>
 #include <time.h>
 #include <string.h>
-int d[1000], tot = 0;
+int prime[1000], total = 0;
 int bo[1000];
 clock_t start, end;
 
@@ -13,21 +13,23 @@ int main() {
 	for (i = 2; i <= 1000; i++)
 	{
 		if (!bo[i])
-			{
-				d[++tot] = i;
-			}
-		int j;
-		for (j = 1; j <= tot; j++)
 		{
-			if (i * d[j] > 1000)
+			prime[++total] = i;
+		}
+		int j;
+		for (j = 1; j <= total; j++)
+		{
+			if (i * prime[j] > 1000)
 				break;
-			bo[i * d[j]] = 1;
-			if (i % d[j] == 0)
+			bo[i * prime[j]] = 1;
+			if (i % prime[j] == 0)
 				break;
 		}
 	}
-	for (i = 1; i <= tot; i++)
-		printf("%d\n", d[i]);
+	for (i = 1; i <= total; i++)
+	{
+		printf("%d\n", prime[i]);
+	}
 	end = clock();
 	printf("Used %d ms.\n", end - start);
 	return 0;

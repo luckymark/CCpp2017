@@ -25,9 +25,9 @@ void getmap(int level) {
     const char sux[4] = ".in";
     sprintf(sread + 4, "%d", level);
     for (int i = 5; i <= 8; i++)
-        {
-            sread[i] = sux[i - 5];
-        }
+    {
+        sread[i] = sux[i - 5];
+    }
 
     freopen(sread, "r", stdin);
     for (int i = 0; i < 10; i++)
@@ -59,6 +59,7 @@ void prepare() {
     for (int i = 0; i < 10; i++)
     {
         for (int j = 0; j < 20; j++)
+        {
             switch (map[i][j])
             {
             case 0:
@@ -83,6 +84,7 @@ void prepare() {
                 break;
             }
             }
+        }
         puts("");
     }
     go(1, 1); printf("%c", 2);
@@ -110,8 +112,12 @@ int getkey() {
 
 bool check_win() {
     for (int i = 1; i <= tot_aim; i++)
+    {
         if (map[aim[i][0]][aim[i][1]] != 2)
+        {
             return 0;
+        }
+    }
     return 1;
 }
 
@@ -119,7 +125,7 @@ bool check_win() {
 int nowans = 0;
 void move() {
     int tmp = getkey();
-    bool bo_go;
+    bool bo_go = 0;
     if (tmp)
     {
         int can = map[man.X + dx[tmp]][man.Y + dy[tmp]];
@@ -146,6 +152,7 @@ void move() {
             map[man.X][man.Y] = 1;
         }
         for (int i = 1; i <= tot_aim; i++)
+        {
             if (map[aim[i][0]][aim[i][1]] != 2)
             {
                 if ((aim[i][0] != man.X) || (aim[i][1] != man.Y))
@@ -154,6 +161,7 @@ void move() {
                     printf("X");
                 }
             }
+        }
         ans++;
         if (check_win())
         {

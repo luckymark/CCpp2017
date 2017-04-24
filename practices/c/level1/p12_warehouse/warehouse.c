@@ -28,18 +28,20 @@ struct item {
     char name[1000];
 } stock[3000];
 
-char s[1000];
-int tot = 0;
+char str[1000];
+int total = 0;
 
 void init() {
     freopen("stock.in", "r", stdin);
-    while (scanf("%s", s) != EOF)
+    while (scanf("%s", str) != EOF)
     {
-        tot++;
-        int len = strlen(s);
+        total++;
+        int len = strlen(str);
         for (int i = 0; i < len; i++)
-            stock[tot].name[i] = s[i];
-        scanf("%d", &stock[tot].num);
+        {
+            stock[total].name[i] = str[i];
+        }
+        scanf("%d", &stock[total].num);
     }
     fclose(stdin);
     freopen("CON", "r", stdin);
@@ -75,55 +77,69 @@ int main() {
         case 2:
         {
             system("cls");
-            if (tot == 0)
+            if (total == 0)
+            {
                 puts("Your stock is empty.");
-            for (int i = 1; i <= tot; i++)
+            }
+            for (int i = 1; i <= total; i++)
+            {
                 if (stock[i].num)
+                {
                     printf("%s %d\n", stock[i].name, stock[i].num);
+                }
+            }
             break;
         }
         case 3:
         {
             system("cls");
-            tot++;
-            scanf("%s", stock[tot].name);
-            scanf("%d", &stock[tot].num);
-            for (int i = 1; i < tot; i++)
-                if (cmp(i, tot))
+            total++;
+            scanf("%s", stock[total].name);
+            scanf("%d", &stock[total].num);
+            for (int i = 1; i < total; i++)
+            {
+                if (cmp(i, total))
                 {
-                    stock[i].num += stock[tot].num;
-                    tot--;
+                    stock[i].num += stock[total].num;
+                    total--;
                     break;
                 }
+            }
             break;
         }
         case 4:
         {
             system("cls");
-            tot++;
-            scanf("%s", stock[tot].name);
-            scanf("%d", &stock[tot].num);
-            for (int i = 1; i < tot; i++)
-                if (cmp(i, tot))
+            total++;
+            scanf("%s", stock[total].name);
+            scanf("%d", &stock[total].num);
+            for (int i = 1; i < total; i++)
+            {
+                if (cmp(i, total))
                 {
-                    if (stock[i].num < stock[tot].num)
+                    if (stock[i].num < stock[total].num)
                     {
                         puts("There are not enough such items.");
                         break;
                     }
-                    stock[i].num -= stock[tot].num;
+                    stock[i].num -= stock[total].num;
                     break;
                 }
-            tot--;
+            }
+            total--;
             break;
         }
         case 5:
         {
             system("cls");
             freopen("stock.in", "w", stdout);
-            for (int i = 1; i <= tot; i++)
+            for (int i = 1; i <= total; i++)
+            {
                 if (stock[i].num)
+                {
                     printf("%s %d\n", stock[i].name, stock[i].num);
+                }
+            }
             fclose(stdout);
             return 0;
             break;

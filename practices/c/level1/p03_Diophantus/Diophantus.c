@@ -2,7 +2,9 @@
 int main() {
 	int i;
 	for (i = 30; i <= 10000; i++)
+	{
 		if (i % 12 == 0)
+		{
 			if (i % 7 == 0)
 			{
 				int n = i;
@@ -12,5 +14,7 @@ int main() {
 					break;
 				}
 			}
+		}
+	}
 	return 0;
 }
