@@ -2,42 +2,38 @@
 #include <math.h>
 #include <string.h>
 #include <stdbool.h>
-int d[1000], tot;
-bool bo[1000];
-bool get[1000];
+int prime[1000], total;
+bool bo_prime[1000];
+bool bo_get[1000];
 int main() {
-	memset(bo, 0, sizeof(bo));
+	memset(bo_prime, 0, sizeof(bo_prime));
 	for (int i = 2; i <= 100; i++)
 	{
-		if (!bo[i])
+		if (!bo_prime[i])
 		{
-			d[++tot] = i;
+			prime[++total] = i;
 		}
 		int j;
-		for (j = 1; j <= tot; j++)
+		for (j = 1; j <= total; j++)
 		{
-			if (i * d[j] > 100)
-			{
+			if (i * prime[j] > 100)
 				break;
-			}
-			bo[i * d[j]] = 1;
-			if (i % d[j] == 0)
-			{
+			bo_prime[i * prime[j]] = 1;
+			if (i % prime[j] == 0)
 				break;
-			}
 		}
 	}
-	memset(get, 0, sizeof(get));
-	for (int i = 1; i <= tot; i++)
+	memset(bo_get, 0, sizeof(bo_get));
+	for (int i = 1; i <= total; i++)
 	{
-		for (int j = i; j <= tot; j++)
+		for (int j = i; j <= total; j++)
 		{
-			get[d[i] + d[j]] = 1;
+			bo_get[prime[i] + prime[j]] = 1;
 		}
 	}
 	for (int i = 2; i <= 50; i++)
 	{
-		if (!get[i * 2])
+		if (!bo_get[i * 2])
 		{
 			puts("False");
 			return 0;

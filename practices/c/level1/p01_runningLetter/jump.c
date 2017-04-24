@@ -1,6 +1,7 @@
+
 #include <windows.h>
 #include <stdio.h>
-HANDLE   hStdout;   //定义句柄
+HANDLE  hStdout;   //定义句柄
 COORD   cursorPos;   //光标位置
 
 void prepare() {

@@ -36,6 +36,7 @@ void prepare() {
 	{
 		int j;
 		for (j = 0; j < 19; j++)
+		{
 			if (map[i][j])
 			{
 				printf(" ");
@@ -44,10 +45,13 @@ void prepare() {
 			{
 				printf("#");
 			}
+		}
 		puts("");
 	}
-	go(1, 1); printf("%c", 2);
-	go(17, 8); printf("O");
+	go(1, 1);
+	printf("%c", 2);
+	go(17, 8);
+	printf("O");
 }
 
 void go(int x, int y) {
@@ -59,21 +63,13 @@ void go(int x, int y) {
 
 int getkey() {
 	if (GetKeyState(VK_UP) < 0)
-	{
 		return 1;
-	}
 	if (GetKeyState(VK_DOWN) < 0)
-	{
 		return 2;
-	}
 	if (GetKeyState(VK_LEFT) < 0)
-	{
 		return 3;
-	}
 	if (GetKeyState(VK_RIGHT) < 0)
-	{
 		return 4;
-	}
 	return 0;
 }
 
@@ -87,12 +83,11 @@ void move() {
 	if (tmp)
 	{
 		if (!check(man.X + dx[tmp], man.Y + dy[tmp]))
-		{
 			return;
-		}
 		go(man.X, man.Y);
 		putchar(' ');
-		man.X += dx[tmp];	man.Y += dy[tmp];
+		man.X += dx[tmp];
+		man.Y += dy[tmp];
 		go(man.X, man.Y);
 		printf("%c", 2);
 		if ((man.X == 17) && (man.Y == 8))
@@ -113,9 +108,7 @@ int main() {
 	{
 		move();
 		if (flag)
-		{
 			break;
-		}
 		Sleep(100);
 	}
 	go(0, 20);

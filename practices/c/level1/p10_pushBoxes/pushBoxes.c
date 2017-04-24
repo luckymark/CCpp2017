@@ -25,9 +25,9 @@ void getmap(int level) {
     const char sux[4] = ".in";
     sprintf(sread + 4, "%d", level);
     for (int i = 5; i <= 8; i++)
-        {
-            sread[i] = sux[i - 5];
-        }
+    {
+        sread[i] = sux[i - 5];
+    }
 
     freopen(sread, "r", stdin);
     for (int i = 0; i < 10; i++)
@@ -59,6 +59,7 @@ void prepare() {
     for (int i = 0; i < 10; i++)
     {
         for (int j = 0; j < 20; j++)
+        {
             switch (map[i][j])
             {
             case 0:
@@ -83,6 +84,7 @@ void prepare() {
                 break;
             }
             }
+        }
         puts("");
     }
     go(1, 1); printf("%c", 2);
@@ -97,21 +99,13 @@ void go(int x, int y) {
 
 int getkey() {
     if (GetKeyState(VK_UP) < 0)
-    {
         return 1;
-    }
     if (GetKeyState(VK_DOWN) < 0)
-    {
         return 2;
-    }
     if (GetKeyState(VK_LEFT) < 0)
-    {
         return 3;
-    }
     if (GetKeyState(VK_RIGHT) < 0)
-    {
         return 4;
-    }
     return 0;
 }
 
@@ -131,22 +125,18 @@ bool check_win() {
 int nowans = 0;
 void move() {
     int tmp = getkey();
-    bool bo_go;
+    bool bo_go = 0;
     if (tmp)
     {
         int can = map[man.X + dx[tmp]][man.Y + dy[tmp]];
         if (!can)
-        {
             return;
-        }
         bo_go = 0;
         if (can == 2)
         {
             int front = map[man.X + dx[tmp] * 2][man.Y + dy[tmp] * 2];
             if ((front == 0) || (front == 2))
-            {
                 return;
-            }
             bo_go = 1;
         }
         go(man.X, man.Y);
@@ -195,9 +185,7 @@ int main() {
         {
             move();
             if (bo_win)
-            {
                 break;
-            }
             Sleep(100);
         }
     }
