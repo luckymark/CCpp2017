@@ -15,9 +15,12 @@ int main(void)
 		getchar();
 	}
 	if (check(num))
+	{
 		printf("\n%d is a prime", num);
-	else
+	}
+	else{
 		printf("\n%d is not a prime", num);
+	}
 	getchar();
 	return 0;
 }
@@ -25,7 +28,11 @@ int main(void)
 bool check(int n)
 {
 	for (int i = 2; i < n; ++i)
+	{
 		if (!(n%i))
+		{
 			return false;
+		}
+	}
 	return true;
 }
