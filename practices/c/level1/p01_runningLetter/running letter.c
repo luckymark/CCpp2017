@@ -9,21 +9,21 @@ int main(void)
     int a=0;
     for(;a<100;++a)
     {
-    system("cls");
-    Sleep(100);
-    int i=0;
-    for(;i<a;++i)
-    printf(" ");
-    printf("%c",ch);
+        system("cls");
+        Sleep(100);
+        int i=0;
+        for(;i<a;++i)
+        printf(" ");
+        printf("%c",ch);
     }
     for(;!(a<0);a--)
     {
-    system("cls");
-    Sleep(100);
-    int i=0;
-    for(;i<a;++i)
-    printf(" ");
-    printf("%c",ch);
+        system("cls");
+        Sleep(100);
+        int i=0;
+        for(;i<a;++i)
+        printf(" ");
+        printf("%c",ch);
     }
     return 0;
 }
