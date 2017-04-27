@@ -6,7 +6,9 @@
 void Classes::showList(){
 	printf("studentNumber       name                grade\n");
 	for (int i=1;i<=totalNumber;i++){
-		printf("%-20s%-20s%-5d\n",student[i].studentNumber,student[i].name,student[i].grade);
+		if (student[i].name[0]!=0){
+			printf("%-20s%-20s%-5d\n",student[i].studentNumber,student[i].name,student[i].grade);		
+		}
 	}
 }
 		
