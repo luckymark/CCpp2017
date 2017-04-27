@@ -5,20 +5,17 @@ Canvas::Canvas(int capability){
 	End=0;
 	if(capability){
 		shapes=new Shape*[capability];
-		tag=new int[capability];
 	}
 }
 
 Canvas::~Canvas(){
 	if(capability){
 		delete []shapes;
-		delete []tag;
 	}
 }
 
 void Canvas::insert(Shape* shape,int tag){
 	shapes[End]=shape;
-	this->tag[End++]=tag;
 }
 
 void Canvas::draw(){

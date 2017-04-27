@@ -3,7 +3,6 @@
 class Canvas{
 	private:
 		Shape** shapes;
-		int* tag;
 		int capability,End;
 	public:
 		Canvas(int capability);
