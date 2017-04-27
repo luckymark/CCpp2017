@@ -6,5 +6,5 @@ class Rect: public Shape{
 	public:
 		Rect(int lenx,int leny,int x,int y);
 		~Rect();
-		void draw();
+		virtual void draw();
 };

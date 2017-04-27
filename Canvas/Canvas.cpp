@@ -23,14 +23,6 @@ void Canvas::insert(Shape* shape,int tag){
 
 void Canvas::draw(){
 	for(int i=0;i<End;++i){
-		if(tag[i]==0){
-			((Point*)shapes[i])->draw();
-		}
-		else if(tag[i]==1){
-			((Circle*)shapes[i])->draw();
-		}
-		else{
-			((Rect*)shapes[i])->draw();
-		}
+		shapes[i]->draw();
 	}
 }

@@ -9,7 +9,5 @@ Rect::Rect(int lenx,int leny,int x,int y): Shape(x,y){
 Rect::~Rect(){}
 
 void Rect::draw(){
-	printf("Rect: the Length of X: %d, the Length of Y: %d, the Lowerleft Point of the Rect: ",lenx,leny);
-	drawPoint();
-	puts("");
+	printf("Rect: the Length of X: %d, the Length of Y: %d, the Lowerleft Point of the Rect: (%d,%d)\n",lenx,leny,x,y);
 }

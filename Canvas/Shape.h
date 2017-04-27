@@ -2,11 +2,11 @@
 #define _SHAPE_H_
 
 class Shape{
-	private:
+	protected:
 		int x,y;
 	public:
 		Shape(int x,int y);
 		~Shape(){}
-		void drawPoint();
+		virtual void draw() = 0;
 };
 #endif

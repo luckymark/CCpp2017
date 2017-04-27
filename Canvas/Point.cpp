@@ -6,7 +6,5 @@ Point::Point(int x,int y): Shape(x,y){}
 Point::~Point(){}
 
 void Point::draw(){
-	printf("Point:");
-	drawPoint();
-	puts("");
+	printf("Point:(%d,%d)\n",x,y);
 }

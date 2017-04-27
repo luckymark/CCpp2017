@@ -1,4 +1,7 @@
 #include "Canvas.h"
+#include "Point.h"
+#include "Circle.h"
+#include "Rect.h"
 #include <cstdio>
 using namespace std;
 

@@ -6,5 +6,5 @@ class Circle: public Shape{
 	public:
 		Circle(int r,int x,int y);
 		~Circle();
-		void draw();
+		virtual void draw();
 };

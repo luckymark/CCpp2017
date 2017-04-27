@@ -8,7 +8,5 @@ Circle::Circle(int r,int x,int y): Shape(x,y){
 Circle::~Circle(){}
 
 void Circle::draw(){
-	printf("Circle: Radius: %d, the Centre of the Circle: ",r);
-	drawPoint();
-	puts("");
+	printf("Circle: Radius: %d, the Centre of the Circle: (%d,%d)\n",r,x,y);
 }

@@ -1,6 +1,4 @@
-#include "Point.h"
-#include "Circle.h"
-#include "Rect.h"
+#include "Shape.h"
 
 class Canvas{
 	private:
@@ -9,6 +7,7 @@ class Canvas{
 		int capability,End;
 	public:
 		Canvas(int capability);
+		~Canvas();
 		void insert(Shape* shape,int tag);
 		void draw();
 };
