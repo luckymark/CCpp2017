@@ -12,7 +12,7 @@ struct player
 	struct player* next; 
 };	
 void gotoxy(int x,int y);
-int move(struct player* p,struct player* box,struct player* target,int x,int y,int mission,int m[100][100])
+int move(struct player* p,struct player* box,struct player* target,int x,int y,int mission,int m[100][100]);
 int keydown(struct player* p);
 int boxmove(struct player* box,struct player* tempbox,int z,int maze[100][100],int i);
 void drmap(int x,int y,int maze[100][100]); 
@@ -67,7 +67,7 @@ int main()
 					boxlink->x=j;
 					boxlink->y=i;
 					maze[i][j]=2;
-					/*
+					
 					if(boxes!=3)
 					{
 						boxlink->next=(struct player*)malloc(sizeof(struct player));
@@ -75,8 +75,8 @@ int main()
 					}
 					else if(mission!=1&&boxes!=3)boxlink=boxlink->next; 
 					else if(boxes==3)boxlink->next=NULL;
-					*/
-					add(boxlink,mission,boxes,1)
+					
+					//add(boxlink,mission,boxes,1);
 				}
 				else if(m[j]=='x')
 				{
@@ -84,7 +84,7 @@ int main()
 					targetlink->x=j;
 					targetlink->y=i;
 					maze[i][j]=3;
-					/*
+					
 					if(targets!=3&&mission==1)
 					{
 						targetlink->next=(struct player*)malloc(sizeof(struct player));
@@ -92,9 +92,9 @@ int main()
 					}
 					else if(targets!=3&&mission!=1)targetlink=targetlink->next;
 					else if(targets==3)targetlink->next=NULL;
-					*/
-					add(targetlink,mission,targets,2)
-					}
+					
+					//add(targetlink,mission,targets,2);
+				}
 				else if(m[j]=='s')
 				{
 					play->x=j;
@@ -117,11 +117,11 @@ int main()
 			puts("The Next mission will be started after 2 seconds");
 		}
 		if(1000-step>highscore[mission-1])
-			{			
-				gotoxy(30,16);
-				puts("You break the record in this mission");
-				highscore[mission-1]=1000-step;			
-			}
+		{		
+			gotoxy(30,16);
+			puts("You break the record in this mission");
+			highscore[mission-1]=1000-step;			
+		}
 		gotoxy(30,17);
 		printf("In this mission you score is %d,record is %d\n",1000-step,highscore[mission-1]);
 		Sleep(2000);
@@ -146,11 +146,12 @@ COORD pos = {x,y};
 HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 SetConsoleCursorPosition(hOut, pos);
 }
+
 void drmap(int x,int y,int maze[100][100])
 {
 	for(int i=0;i<y;i++)
 	for(int j=0;j<x;j++)
-	{
+	{ 
 		if(maze[i][j]==1)printf(" ");
 		else if(maze[i][j]==0)printf("#");
 		else if(maze[i][j]==2)printf("O");
@@ -317,20 +318,17 @@ int boxmove(struct player* box,struct player* tempbox,int z,int maze[100][100],i
 }
 void add(struct player* p,int mission,int i,int j)
 {
-	if(j==1)
+	if(j==1&&i!=3)
 	{
-		if(i!=3)
-		{
-			p->next=(struct player*)malloc(sizeof(struct player));
-			p=p->next;
-		}
-	}
-	else if(j==2)
-	{
-		if(i!=3&&mission==1)
 		p->next=(struct player*)malloc(sizeof(struct player));
 		p=p->next;
 	}
-	else if(mission!=1&&i!=3)p=p->next; 
+	else if(j==2&&i!=3&&mission==1)
+	{
+		p->next=(struct player*)malloc(sizeof(struct player));
+		p=p->next;
+	}
+
+	if(mission!=1&&i!=3)p=p->next; 
 	else if(i==3)p->next=NULL;
 }
