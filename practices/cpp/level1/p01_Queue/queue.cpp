@@ -5,7 +5,6 @@ class queue
 {
     private:
         int p[100];
-        int temp;
         static int number;
     public:
         void append()
