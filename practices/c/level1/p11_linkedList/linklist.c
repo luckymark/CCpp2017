@@ -12,7 +12,7 @@ node*init(node*phead)
 	phead = NULL;
 }
 
-node*addback(node*phead, int newdata)
+node*add_back(node*phead, int newdata)
 {
 	node*pnew = (node*)malloc(sizeof(node));
 	pnew->data = newdata;
@@ -120,7 +120,7 @@ int main()
 	for (int i = 0; i < number; i++) {
 		printf("please input the %dth number:", i);
 		scanf("%d", &newdata);
-		phead = addback(phead, newdata);
+		phead = add_back(phead, newdata);
 	}
 
 	showall(phead);
