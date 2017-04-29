@@ -8,7 +8,7 @@ class InStack
         int number;
         int max;
     public:
-        A(int q=100)
+        InStack(int q=100)
         {
             p=new int[q];
             max=q;
@@ -19,11 +19,13 @@ class InStack
             int q;
             cout<<"Enter a integer"<<endl;
             cin>>q;
-            if(number>0)
+            if(number<100)
             {
                 for(int i=number;i>0;i--)p[number]=p[number-1];
                 p[0]=q;
+                number++;
             }
+            
         }
         void pop()
         {
@@ -48,7 +50,7 @@ class InStack
             }
             else 
             {
-                cout<<"This stack has "<<number<<" integers";
+                cout<<"This stack has "<<number<<" integers"<<endl;
                 return 1;
             }
         }
@@ -57,10 +59,9 @@ class InStack
 int main()
 {
     int n,p,d=1;
-    cout<<"How much do you want?"<<endl<<"--If you don't want choose you can enter q "
-    <<endl<<"It's will use default value 100"<<endl
-    if(scanf("%d",&n)==1)InStack example(n);
-    else Instack example();
+    cout<<"How much do you want?"<<endl;
+    while(scanf("%d",&n)!=1)continue;
+    InStack example(n);
 
     while(d)
     {
@@ -75,7 +76,7 @@ int main()
             case 1:example.push();break;
             case 2:example.pop();break;
             case 3:example.check();break;
-            case 4;d=0;break;
+            case 4:d=0;break;
         }
     }
 
