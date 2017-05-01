@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1493616077 source:d:\oi\code\circleandpoint\circle.cpp
+	<cstdio>
+	"Circle.h"
+
+1493615703 d:\oi\code\circleandpoint\circle.h
+	"Point.h"
+
+1493613349 d:\oi\code\circleandpoint\point.h
+
+1493616286 source:d:\oi\code\circleandpoint\main.cpp
+	<cstdio>
+	"Circle.h"
+	"point.h"
+
+1493613508 source:d:\oi\code\circleandpoint\point.cpp
+	"Point.h"
+
