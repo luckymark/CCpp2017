@@ -34,7 +34,15 @@ void main()
 		case 1:
 			system("cls");
 			show();
-			break;
+			int nn;
+			printf("返回上一层请按1，否则结束程序\n");
+			scanf("%d", &nn);
+			if (nn == 1) {
+				break;
+			}
+			else {
+				exit(0);
+			}
 		case 2:
 			system("cls");
 			input();
@@ -85,31 +93,31 @@ void input()
 {
 	int compare = 0;
 	xinxi *p;
-	p = 
+	p =
 		head->next;
 	printf("please input name\n");
 	scanf("%s", name);
 	printf("pleade input num\n");
-		scanf_s("%d", &num);
-		while (p != NULL) {
-			if (strcmp(p->name, name) == 0) {
-				compare = 1;
-				p->num += num;
-			}
-			p =
-				p->next;
+	scanf_s("%d", &num);
+	while (p != NULL) {
+		if (strcmp(p->name, name) == 0) {
+			compare = 1;
+			p->num += num;
 		}
-		if (compare == 0) {
-			xinxi *pp;
-			pp = (xinxi*)malloc(sizeof(xinxi));
-			strcpy(p->name ,name);
-			p->num = num;
-			pp->next =
-				head->next;
-			head->next =
-				pp;
-			n++;
-		}
+		p =
+			p->next;
+	}
+	if (compare == 0) {
+		xinxi *new_p;
+		new_p = (xinxi*)malloc(sizeof(xinxi));
+		strcpy(new_p->name, name);
+		new_p->num = num;
+		new_p->next =
+			head->next;
+		head->next =
+			new_p;
+		n++;
+	}
 }
 
 void output()
