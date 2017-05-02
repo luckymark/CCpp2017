@@ -1,7 +1,6 @@
 #include<iostream>
 #include<conio.h>
-#include<windows.h>
-#include"IntStack.h"
+#include"Stack.h"
 /*todolist
 1.append;
 2.pop;
@@ -14,7 +13,7 @@ int main(){
 	int n;
 	cout<<"Please enter the size of you stack\n";
 	cin>>n;
-	IntStack stack(n);
+	Stack<int> stack(n);
 
 	do{
 		system("cls");
