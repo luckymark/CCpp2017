@@ -1,7 +1,17 @@
-#include "SafeArray.h"
-#include <cstring>
-#include <iostream>
+#ifndef SAFE_ARRAY_H_INCLUDED
 
+#define SAFE_ARRAY_H_INCLUDED
+template <class Type>
+class SafeArray{
+	private:
+		Type *w;
+		int size;
+	public:
+		SafeArray();
+		SafeArray(int _size);
+		~SafeArray();
+		Type& operator [] (int idx);
+};
 
 template <class Type>
 SafeArray<Type>::SafeArray(int _size):size(_size){
@@ -23,3 +33,5 @@ Type& SafeArray<Type>:: operator [] (int idx){
 	}
 	return w[idx];
 }
+
+#endif
