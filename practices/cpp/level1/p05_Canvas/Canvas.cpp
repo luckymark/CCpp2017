@@ -98,6 +98,11 @@ public:
 			pr[i].show();
 		}
 	}
+	~Canvas()
+	{
+		delete[] pc;
+		delete[] pr;
+	}
 };
 
 int main()
