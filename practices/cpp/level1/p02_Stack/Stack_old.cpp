@@ -1,22 +1,4 @@
-#ifndef STACK_H_INCLUDED
-#define STACK_H_INCLUDED
-
-//#define MAX_SIZE 100
-template <class Type>
-class Stack{
-	private:
-		Type *w;
-		int top;
-		int size;
-	public:
-		Stack(int _size = 100);
-		void push(Type x);
-		Type pop();
-		bool is_full();
-		bool is_empty();
-		~Stack();
-};
-
+#include "Stack.h"
 template <class Type>
 Stack<Type>::Stack(int _size):size(_size){
 	top = 0;
@@ -38,15 +20,10 @@ Type Stack<Type>::pop(){
 	return w[--top];
 }
 
-template <class Type>
 bool Stack<Type>::is_full(){
 	return top == size;
 }
 
-template <class Type>
 bool Stack<Type>::is_empty(){
 	return top == 0;
 }
-
-
-#endif
