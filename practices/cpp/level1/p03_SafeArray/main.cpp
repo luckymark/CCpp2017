@@ -9,7 +9,7 @@ int main(){
 	
 	cout<<"Please enter the size of your array:\n";
 	cin>>n;
-	Array array(n);
+	Array<double> array(n);
 	do{
 		system("cls");
 		cout<<"What do you want:\n";
