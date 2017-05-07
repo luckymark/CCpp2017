@@ -1,77 +1,89 @@
 #include<iostream>
 using namespace std;
 
-class Queue {
+class queue {
 private:
-	int num[100];
-	int app_num;
-	int pop_num;
-	int *p;
+	struct node {
+		int num;
+		struct node* next;
+	};
+	int len, count;
+	struct node *head, *p, *p_new, *temp;
 public:
-	Queue();
+	queue();
 	void append();
 	void pop();
 	bool if_full();
 	bool if_empty();
-};
+}Queue;
 
-Queue::Queue()
+queue::queue()
 {
-	num[100] = { 0 };
-	app_num = 0;
-	pop_num = 0;
-	p = num;
+	head = NULL;
+	len = 100;
+	count = 0;
 }
-void Queue::append()
+void queue::append()
 {
-	for (int i = 0; i < 100; i++) {
-		num[i] = i;
-		app_num++;
-		cout << num[i]<<"\t";
+	head=p_new = new(struct node);
+	int i = 1;
+	p_new->num = i;
+	while (count != 99) {
+		i++;
+		p = p_new;
+		p_new = new(struct node);
+		p_new->num = i;
+		p->next =
+			p_new;
+		count++;
+	}
+	p_new->next=
+		NULL;
+	p = head;
+	while (p != NULL) {
+		cout << p->num << endl;
+		p = p->next;
+	}
+	cout << "it's full now" << endl;
+}
+void queue::pop()
+{
+	while (count != 0) {
+		temp = head->next;
+		head->next =
+			head->next->next;
+		free(temp);
+		count--;
 	}
 }
-
-void Queue::pop()
+bool queue::if_full()
 {
-	for (int i = 1; i < 101; i++) {
-		p++;
-		pop_num++;
-	}
-}
-
-bool Queue::if_full()
-{
-	if (app_num == 100) {
+	if (count == len) {
 		return true;
 	}
 	else {
 		return false;
 	}
 }
-
-bool Queue::if_empty()
+bool queue::if_empty()
 {
-	if (pop_num == 100||app_num==0) {
+	if (count == 0) {
 		return true;
 	}
 	else {
 		return false;
 	}
 }
-
-Queue queue;
 void main()
 {
-	if (queue.if_empty()){
-		cout << "The queue is now empty." << endl;
+	queue();
+	if (Queue.if_empty()) {
+		Queue.append();
 	}
-		queue.append();
-		cout << "\n";
-	if (queue.if_full()) {
-		cout << "The queue is now full." << endl;
-		queue.pop();
-	if (queue.if_empty()){
-		cout << "The queue is now empty." << endl;
-		}
+	if (Queue.if_full()) {
+		Queue.pop();
+	}
+	else {
+		cout << "it's empty now"<< endl;
 	}
 }
