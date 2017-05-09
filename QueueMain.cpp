@@ -57,5 +57,14 @@ int main(){
 			q.clear();
 		}
 	}
+	
+	Queue_Iterator<int> a=q.begin();
+	Queue_Iterator<int> b=q.end();
+	a==b;
+	a!=b;
+	for(Queue_Iterator<int> it=q.begin();it!=q.end();++it){
+		printf("%d ",*it);
+	}
+	puts("");
 	return 0;
 }
