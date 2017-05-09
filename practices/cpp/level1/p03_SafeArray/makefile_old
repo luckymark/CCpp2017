@@ -1,0 +1,9 @@
+main: main.o SafeArray.o
+	clang++ main.o SafeArray.o -g -o main.out
+	make clean
+main.o: main.cpp
+	clang++ -c -g main.cpp
+SafeArray.o: SafeArray.cpp SafeArray.h
+	clang++ -c -g SafeArray.cpp
+clean: 
+	rm *.o

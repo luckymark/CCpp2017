@@ -1,0 +1,12 @@
+#install#
+		1.you could use the command 'make' to install the game on your computer.
+		2.***this game could only run on the Unix/Linux system.***
+		3.you may need to install Xcode on your mac.
+#how_to_play#
+		you could use up, down, left, right to move the character witch is presented by the symbol '@'.
+		the symbol '#' shows the wall and the character cannot go through it.
+		when you meet some special symbol, such as '%', '*', they are actually the portal and you could press the botton 'x' to go through the portal.
+#inportant# when you see the symbol '^', that is the gate for you to leave, which means you could win the game.
+
+that's it. 
+have fun...
