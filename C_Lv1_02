@@ -1,0 +1,22 @@
+#include <cmath>
+#include <cstdio>
+#include <cstring>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int n;
+int main()
+{
+	scanf("%d",&n);
+	int top=sqrt(n);
+	for(int i=2;i<=top;++i)
+	{
+		if(n%i==0)
+		{
+			printf("Its not a prime\n");
+			return 0;
+		}
+	}
+	printf("Its a prime");
+	return 0;
+}

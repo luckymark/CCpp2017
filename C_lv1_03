@@ -1,0 +1,34 @@
+#include <cmath>
+#include <cstdio>
+#include <cstring>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+bool ok(int x)
+{
+	if(x==84)
+	{
+		x=x;
+		x=x;
+		x++;
+		x--;
+	}
+	if(x%12) return 0;
+	if(x%7) return 0;
+	int fa=x/6+x/12+x/7+5;
+	int son=x-fa-4;
+	return x==2*son;
+	
+}
+int main()
+{
+	for(int i=5;i<=2000;++i)
+	{
+		if(ok(i))
+		{
+			printf("He is %d when his son died\n",i-4);
+			return 0;
+		}
+	}
+	return 0;
+}

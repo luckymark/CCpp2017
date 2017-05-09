@@ -1,0 +1,24 @@
+#include <cmath>
+#include <cstdio>
+#include <cstring>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int n;
+void dfs(int now,int mid,int to,int n)
+{
+	if(n==1)
+	{
+		printf("move %d :from %c to %c\n",n,'A'+now-1,'A'+to-1);
+		return;
+	}
+	dfs(now,to,mid,n-1);
+	printf("move %d :from %c to %c\n",n,'A'+now-1,'A'+to-1);
+	dfs(mid,now,to,n-1);
+}
+int main()
+{
+	scanf("%d",&n);
+	dfs(1,2,3,n);
+	return 0;
+}
