@@ -1,0 +1,6 @@
+#include<stdio.h>
+int main() 
+{
+	printf("hello world Im Rainbow\n");
+	return 0;
+}
