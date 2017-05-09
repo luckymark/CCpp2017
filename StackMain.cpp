@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-	Stack st(100);
+	Stack<int> st(100);
 	
 	int op;/*
 	op==0 pop;

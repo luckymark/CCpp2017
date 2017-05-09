@@ -3,7 +3,7 @@
 using namespace std;
 
 int main(){
-	Queue q;
+	Queue<int,100> q;
 	
 	int op;/*
 	op==0 pop;
