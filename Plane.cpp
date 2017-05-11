@@ -9,6 +9,7 @@
 		}
 		pointX = -width / 2;
 		pointY = -height + 100;
+		this->width = width;
 		draw(mainWindow);
 	}
 
@@ -16,14 +17,21 @@
 
 	void Plane::MoveLeft(sf::RenderWindow &mainWindow)
 	{
-		pointX = pointX+ 30;
-		draw(mainWindow);
+		if (pointX<0)
+		{
+			pointX = pointX + 30;
+			draw(mainWindow);
+		
+		}
 		Sleep(50);
 	}
 	void Plane::MoveRight(sf::RenderWindow &mainWindow)
 	{
-		pointX = pointX - 30;
-		draw(mainWindow);
+		if (pointX>-width+50)
+		{
+			pointX = pointX - 30;
+			draw(mainWindow);	
+		}
 		Sleep(50);
 	}
 	void Plane::draw(sf::RenderWindow &mainWindow)
@@ -36,4 +44,5 @@
 		
 	}
 
+	
 
