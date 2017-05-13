@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "Plane.h"
+extern sf::RenderWindow mainWindow;
 
-	Plane::Plane(int width,int height,sf::RenderWindow &mainWindow)
+	Plane::Plane(int width,int height)
 	{
 		if (image.loadFromFile("images/plane1.png") != true)
 		{
@@ -10,39 +11,38 @@
 		pointX = -width / 2;
 		pointY = -height + 100;
 		this->width = width;
-		draw(mainWindow);
+		draw();
 	}
 
 
 
-	void Plane::MoveLeft(sf::RenderWindow &mainWindow)
+	void Plane::MoveLeft()
 	{
 		if (pointX<0)
 		{
-			pointX = pointX + 30;
-			draw(mainWindow);
+			pointX = pointX +50;
+			draw();
 		
 		}
 		Sleep(50);
 	}
-	void Plane::MoveRight(sf::RenderWindow &mainWindow)
+	void Plane::MoveRight()
 	{
-		if (pointX>-width+50)
+		if (pointX>-width+80)
 		{
-			pointX = pointX - 30;
-			draw(mainWindow);	
+			pointX = pointX - 50;
+			draw();	
 		}
 		Sleep(50);
 	}
-	void Plane::draw(sf::RenderWindow &mainWindow)
+	void Plane::draw()
 	{
-		mainWindow.clear();
 		sf::Sprite sprite(image);
 		sprite.setOrigin(pointX, pointY);
 		mainWindow.draw(sprite);
-		mainWindow.display();
-		
 	}
 
-	
+	float Plane::pointX = 0;
+	float Plane::pointY = 0;
+	float Plane::width = 0;
 
