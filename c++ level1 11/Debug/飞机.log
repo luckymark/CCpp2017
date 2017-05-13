@@ -1,0 +1,12 @@
+﻿  正在跳过...(未检测到相关更改)
+  stdafx.cpp
+  ObjectManager.cpp
+e:\program\c++ level 11\飞机\game.h(2): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+  Bullet.cpp
+e:\program\c++ level 11\飞机\game.h(2): warning C4067: 预处理器指令后有意外标记 - 应输入换行符
+  正在生成代码...
+  正在跳过...(未检测到相关更改)
+  main.cpp
+  game.cpp
+  飞机.vcxproj -> E:\program\c++ level 11\Debug\飞机.exe
+  飞机.vcxproj -> E:\program\c++ level 11\Debug\飞机.pdb (Full PDB)
