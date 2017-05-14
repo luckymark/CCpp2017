@@ -130,7 +130,6 @@ Director::~Director(){
 	for(int i = 0; i < stuff.size(); i++){
 		if(stuff[i] != NULL){
 			delete stuff[i];
-			cerr << "stuff" << i << "deleted" << endl;
 		}
 	}
 }

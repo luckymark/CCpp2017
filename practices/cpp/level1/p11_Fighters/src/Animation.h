@@ -57,6 +57,7 @@ class Animation{
 		float 			stop_ratio;	 	//the ratio of the speed down
 		sf::Vector2f		acceleration;		//store the vector of acceleration ( pixel/(second^2) )
 		int 			affect_flag;
+		int 			sound_flag;
 	public:
 		Animation();
 		Animation(  string frame_setting_file_name,	// 1) path & filename
@@ -86,6 +87,7 @@ class Animation{
 		void set_max_speed(float maxx);			// use to set the max speed
 		void set_play_flag(int f);			// play_flag表示是否正在播放
 		void set_stop_ratio(float f);
+		void set_sound_flag(int f);
 
 		sf::Vector2f get_core_position();		// 用于更新Item的位置
 		sf::Vector2f get_speed();

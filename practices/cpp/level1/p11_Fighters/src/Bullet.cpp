@@ -4,6 +4,7 @@ Bullet::Bullet(int kind, string item_setting, string bullet_setting):Item(kind,i
 	memset(max_speed,0,sizeof(max_speed));
 	memset(acceleration,0,sizeof(acceleration));
 	aim = sf::Vector2f(0,0);
+	sound_flag = 0;
 
 	set_bullet_from_setting(bullet_setting);
 }
@@ -11,6 +12,7 @@ Bullet::Bullet(int kind, string item_setting, string bullet_setting, sf::Vector2
 	memset(max_speed,0,sizeof(max_speed));
 	memset(acceleration,0,sizeof(acceleration));
 	aim = sf::Vector2f(0,0);
+	sound_flag = 0;
 
 	set_bullet_from_setting(bullet_setting);
 }
@@ -57,12 +59,18 @@ void Bullet::Action(sf::Time dt, sf::Vector2f pos){
 		}
 	}
 	if(cur_animation == 0){
+		if(sound_flag){
+			animation[cur_animation].set_sound_flag(0);
+		}else {
+			animation[cur_animation].set_play_flag(1);
+		}
 		animation[cur_animation].set_play_flag(1);
 		animation[cur_animation].set_speed(speed);
 		animation[cur_animation].set_core_position(position);
 		animation[cur_animation].set_max_speed(max_speed[0]);
 		animation[cur_animation].set_acceleration(direction * acceleration[cur_animation]);
 		animation[cur_animation].set_stop_ratio(1);
+		sound_flag = 1;
 	}
 	next(dt);
 }

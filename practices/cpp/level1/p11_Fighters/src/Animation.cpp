@@ -22,6 +22,11 @@ Animation::Animation(){
 	stop_ratio = 1;
 	acceleration = sf::Vector2f(0,0);
 	affect_flag = 0;
+	sound_flag = 1;
+}
+
+void Animation::set_sound_flag(int f){
+	sound_flag = f;
 }
 
 Animation::Animation( string frame_setting_file_name, string sound_file_name){
@@ -142,7 +147,7 @@ void Animation::set_speed(sf::Vector2f sp){
 }
 
 sf::Sprite* Animation::begin_cur_display(){
-	if(sound.getStatus() == 0)sound.play();
+	if(sound.getStatus() == 0 && sound_flag)sound.play();
 	sequence[cur_frame].set_core_position(core_position);
 	return sequence[cur_frame].display();
 }

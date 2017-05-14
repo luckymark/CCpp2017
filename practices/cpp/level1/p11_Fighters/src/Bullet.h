@@ -8,6 +8,7 @@ class Bullet: public Item{
 		float 		max_speed[2];
 		float 		acceleration[2];
 		sf::Vector2f 	aim;
+		int 		sound_flag;
 	public:
 		Bullet(int kind, string item_setting, string bullet_setting);
 		Bullet(int kind, string item_setting, string bullet_setting, sf::Vector2f pos);
