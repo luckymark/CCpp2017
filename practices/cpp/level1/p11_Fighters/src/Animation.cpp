@@ -9,9 +9,33 @@ using namespace std;
 void Animation::set_stop_ratio(float f){
 	stop_ratio = f;
 }
-Animation::Animation( string frame_setting_file_name, string sound_file_name){
+
+Animation::Animation(){
+	sequence.clear();
+	cur_time.restart();
+	last_time = cur_time.getElapsedTime();
 	play_flag = 0;
 	cur_frame = 0;
+	core_position = sf::Vector2f(0,0);
+	speed = sf::Vector2f(0,0);
+	max_speed = 0;
+	stop_ratio = 1;
+	acceleration = sf::Vector2f(0,0);
+	affect_flag = 0;
+}
+
+Animation::Animation( string frame_setting_file_name, string sound_file_name){
+	sequence.clear();
+	cur_time.restart();
+	last_time = cur_time.getElapsedTime();
+	play_flag = 0;
+	cur_frame = 0;
+	core_position = sf::Vector2f(0,0);
+	speed = sf::Vector2f(0,0);
+	max_speed = 0;
+	stop_ratio = 1;
+	acceleration = sf::Vector2f(0,0);
+	affect_flag = 0;
 
 	set_sound(sound_file_name); 		
 	set_sequence(frame_setting_file_name);
@@ -28,6 +52,10 @@ void Animation::set_sound(const string &sound_file_name){
 
 void Animation::set_sequence(const string &frame_setting_file_name){
 	FILE *in = fopen(frame_setting_file_name.c_str(), "r");
+	if(in == NULL){
+		cerr << "fail to open " << frame_setting_file_name << endl;
+		exit(0);
+	}
 	sequence.clear();
 	char image_file_name[1005];
 	char image_info_file_name[1005];
@@ -50,6 +78,10 @@ void Animation::set_sequence(const string &frame_setting_file_name){
 }
 
 void Animation::update_last_time(){
+	if((long long)sequence.size() == 0) {
+		cerr << " zero length sequence in Animation.cpp " << endl;
+		exit(0);
+	}
 	last_time = sound_buffer.getDuration() / (long long)sequence.size();
 }
 
@@ -64,7 +96,7 @@ void Animation::initlize(){
 
 float length2(sf::Vector2f vec){
 
-	return vec.x*vec.x + vec.y*vec.y;
+	return vec.x*vec.x + vec.y*vec.y + 0.01;
 }
 
 void Animation::set_max_speed(float sp){
@@ -87,7 +119,7 @@ void Animation::next_frame(sf::Time dt){
 	if(cur_time.getElapsedTime() < last_time) return;
 	cur_frame++;
 	if(cur_frame >= sequence.size()){
-		//play_flag = 0;
+		play_flag = 0;
 		cur_frame = 0;
 		initlize();
 		return;
@@ -132,3 +164,12 @@ sf::Vector2f Animation::get_core_position(){
 	return core_position;
 }
 
+void Animation::be_affected(Animation *other){
+	int flag = sequence[cur_frame].is_in(&(other -> sequence[other -> cur_frame]));
+	flag |= other -> sequence[other -> cur_frame].is_in(&(sequence[cur_frame]));
+	affect_flag = flag;
+}
+
+int Animation::is_affect(){
+	return affect_flag;
+}

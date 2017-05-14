@@ -35,7 +35,10 @@ struct Prop{
 	Buff buff;
 	int kind;
 	int num;
-	Prop(){}
+	Prop(){
+		kind = 0;
+		num = 0;
+	}
 	Prop(Buff buff,int num):buff(buff),num(num){}
 };
 
@@ -62,7 +65,12 @@ struct Skill{
 	float speed;
 	float acceleration;
 	int which_animation;
-	Skill(){}
+	Skill(){
+		cost = 0;
+		speed = 0;
+		acceleration = 0;
+		which_animation = 0;
+	}
 	Skill(Buff buff,int cost,int speed,int acceleration,int which)
 		:buff(buff),cost(cost),speed(speed),acceleration(acceleration),which_animation(which){}
 };

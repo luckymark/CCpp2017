@@ -100,13 +100,14 @@ int main(){
 #include <iostream>
 #include <cmath>
 using namespace std;
+Director director;
 int main(){
 	//Character my(0,"../data/character/item_setting","../data/character/character_setting");
 	//my.set_position(sf::Vector2f(400.0,400.0));
 	//my.set_toward(0);
-	Director director;
 	director.set_world("setting");
-	director.new_stuff(0,sf::Vector2f(400.0,400.0));
+	director.new_stuff(0,sf::Vector2f(400.0,400.0),sf::Vector2f(0,0));
 	director.main_loop();
 	return 0;
+
 }

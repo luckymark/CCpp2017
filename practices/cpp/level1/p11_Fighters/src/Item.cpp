@@ -1,21 +1,83 @@
 #include "Item.h"
+
+Animation* Item::get_cur_animation(){
+	//return animation + cur_animation;
+	return &animation[cur_animation];
+}
+
+void Item::set_direction(sf::Vector2f dir){
+	direction = dir;
+}
+
+sf::Vector2f Item::get_request_direction(){
+	return request_direction;
+}
+
+void Item::set_speed(sf::Vector2f sp){
+	speed = sp;
+}
+sf::Vector2f Item::get_position(){
+	return position;
+}
 Item::Item(int kind, string item_setting_name){
 	toward = 0;
+	item_kind = 0;
+	animation = NULL;
+	animation_num = 0;
+	position = sf::Vector2f(0,0);
+	speed = sf::Vector2f(0,0);
+	stop_ratio = 1;
 	cur_animation = 0;
+	default_animation = 0;
+	is_on_ground = 0;
+	dead_flag = 0;
+	request = -1;
+	request_flag = 0;
+	direction = sf::Vector2f(0,0);
+	request_direction = sf::Vector2f(0,0);
+
 	item_kind = kind;
-	position.x = position.y = 0.0;
 	get_setting(item_setting_name);
 }
 Item::Item(int kind, string item_setting_name, sf::Vector2f pos){
 	toward = 0;
+	item_kind = 0;
+	animation = NULL;
+	animation_num = 0;
+	position = sf::Vector2f(0,0);
+	speed = sf::Vector2f(0,0);
+	stop_ratio = 1;
 	cur_animation = 0;
+	default_animation = 0;
+	is_on_ground = 0;
+	dead_flag = 0;
+	request = -1;
+	request_flag = 0;
+	direction = sf::Vector2f(0,0);
+	request_direction = sf::Vector2f(0,0);
+
 	item_kind = kind;
+	request_flag = dead_flag = 0;
 	position = pos;
 	get_setting(item_setting_name);
 }
 Item::Item(int kind, string item_setting_name, sf::Vector2f pos, int dir){
 	toward = 0;
+	item_kind = 0;
+	animation = NULL;
+	animation_num = 0;
+	position = sf::Vector2f(0,0);
+	speed = sf::Vector2f(0,0);
+	stop_ratio = 1;
 	cur_animation = 0;
+	default_animation = 0;
+	is_on_ground = 0;
+	dead_flag = 0;
+	request = -1;
+	request_flag = 0;
+	direction = sf::Vector2f(0,0);
+	request_direction = sf::Vector2f(0,0);
+
 	item_kind = kind;
 	position = pos;
 	get_setting(item_setting_name);
@@ -58,8 +120,13 @@ void Item::get_setting(string item_setting_name){
 	fscanf(in," %d", &animation_num);
 	if(animation != NULL){
 		delete[] animation;
+		animation = NULL;
 	}
 	animation = new Animation[animation_num];
+	if(animation == NULL){
+		cerr << "fail to get mem" << endl;
+		exit(0);
+	}
 
 	char tmp[1005];
 	for(int i = 0; i < animation_num; i++){
@@ -96,5 +163,6 @@ void Item::update_position(){
 }
 
 Item::~Item(){
-	delete[] animation;
+	if(animation != NULL)
+		delete[] animation;
 }

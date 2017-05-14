@@ -1,5 +1,5 @@
-main: main.cpp Animation.o Frame.o Item.o Character.o Director.o Player.o
-	clang++ main.cpp Item.o Animation.o Frame.o Character.o Director.o Player.o -F /Library/Frameworks -framework sfml-audio -framework sfml-window -framework sfml-graphics -framework     sfml-system -framework OpenGL -framework GLUT -o main.cpp.out -g
+main: main.cpp Animation.o Frame.o Item.o Character.o Director.o Player.o Bullet.o
+	clang++ main.cpp Item.o Animation.o Frame.o Character.o Director.o Player.o Bullet.o -F /Library/Frameworks -framework sfml-audio -framework sfml-window -framework sfml-graphics -framework     sfml-system -framework OpenGL -framework GLUT -o main.cpp.out -g
 
 Director.o: Director.cpp Director.h 
 	clang++ -I /usr/local/include Director.cpp -c -g
@@ -13,11 +13,14 @@ Animation.o: Animation.cpp Animation.h
 Frame.o: Frame.cpp Frame.h
 	clang++ -I /usr/local/include Frame.cpp -c -g
 
-Character.o: Character.cpp Item.h
+Character.o: Character.cpp Character.h
 	clang++ -I /usr/local/include Character.cpp -c -g
 
-Player.o: Item.h Player.cpp
+Player.o: Player.h Player.cpp
 	clang++ -I /usr/local/include Player.cpp -c -g
+
+Bullet.o: Bullet.h Bullet.cpp
+	clang++ -I /usr/local/include Bullet.cpp -c -g
 
 
 template: main.cpp

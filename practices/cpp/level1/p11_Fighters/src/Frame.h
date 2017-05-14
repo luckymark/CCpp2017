@@ -20,6 +20,7 @@
      这个类的名字暗示着对游戏中一切事件的掌控。2333333
 
   8) 其实还可以对Animation类做进一步的抽象，但是现在暂时不想
+  9) 最后，我们将Animation类之间的接触判断，下放到Frame类来计算
 ******************************************************************************************/
 #ifndef FRAME_H_
 #define FRAME_H_
@@ -64,6 +65,7 @@ class Frame{ //帧
 		//void initlize();				//make everything be ready
 		sf::Sprite* display();					//display this Frame on a specific window
 		int is_in(const sf::Vector2f &point);		//to check if a point is in this Frame
+		int is_in(Frame *other);
 
 		void set_image(string image_file_name);		//these functions are used to set something about the image
 		void set_image_info(string image_info_flie_name);

@@ -30,6 +30,7 @@
 #include <SFML/Window.hpp>
 
 #include "Frame.h"
+#include "Concept.h"
 
 #include <string>
 #include <utility>
@@ -55,8 +56,9 @@ class Animation{
 		float			max_speed;		//store the max_speed that the animation could deal with
 		float 			stop_ratio;	 	//the ratio of the speed down
 		sf::Vector2f		acceleration;		//store the vector of acceleration ( pixel/(second^2) )
+		int 			affect_flag;
 	public:
-		Animation(){}
+		Animation();
 		Animation(  string frame_setting_file_name,	// 1) path & filename
 			    string sound_file_name );		// 2) need a setting a file which store a list of images *****
 
@@ -71,7 +73,7 @@ class Animation{
 
 
 		//void affect_others(Animation *other);		/******* get some impact on others *******/
-		//void be_affected(){} /************/		/*留由后续开发Item时继续补充*/
+		void be_affected(Animation *other);		/*留由后续开发Item时继续补充*/
 
 
 		void set_sound(const string &sound_file_name);	// use to set sound
@@ -87,6 +89,8 @@ class Animation{
 
 		sf::Vector2f get_core_position();		// 用于更新Item的位置
 		sf::Vector2f get_speed();
+
+		int is_affect();
 
 
 		~Animation(){}
