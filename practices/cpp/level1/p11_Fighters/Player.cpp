@@ -1,13 +1,10 @@
 #include "Player.h"
 
-Player::Player()
+Player::Player(ResourseHolder<sf::Texture,Resourse::identifier>& resourse)
 {
-	if (!texture.loadFromFile("C:\\Users\\q9160\\Desktop\\Iphone.png"))
-	{
-		//
-	}
-	sprite.setTexture(texture);
-	sprite.setPosition(720.f, 682.f);
+	
+	sprite.setTexture(resourse.get(Resourse::identifier::Airplane));
+	sprite.setPosition(240.f, 582.f);
 	speed = 500;
 }
 
@@ -31,3 +28,4 @@ sf::Sprite & Player::Sprite()
 	return sprite;
 	// TODO: insert return statement here
 }
+

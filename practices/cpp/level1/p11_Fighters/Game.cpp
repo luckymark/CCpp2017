@@ -65,8 +65,8 @@ void Game::update(sf::Time deltatime)
 	}
 	switch (IisLshift)
 	{
-	case true:player.SetSpeed(500); break;
-	case false:player.SetSpeed(250); break;
+	case true:player.SetSpeed(250); break;
+	case false:player.SetSpeed(650); break;
 	}
 	player.Move(movement, deltatime);
 }
@@ -74,13 +74,19 @@ void Game::update(sf::Time deltatime)
 void Game::render()
 {
 	window.clear();
+	window.draw(bgi);
 	window.draw(player.Sprite());
 	window.display();
 }
 
-Game::Game():window(sf::VideoMode(1440,900),"Iphone War"),player()
+Game::Game():window(sf::VideoMode(1440,800),"Iphone War")
 {
-	if (!music.openFromFile("C:\\Users\\q9160\\Desktop\\上海アリス幻樂団 - U.N.オーエンは彼女なのか？.wav"))
+	resourse.load(Resourse::Airplane, "Airplane.png");
+	resourse.load(Resourse::Landscape, "Landscape.jpg");
+	player=resourse;
+	bgi.setTexture(resourse.get(Resourse::identifier::Landscape));
+	bgi.setPosition(0.f, 0.f);
+	if (!music.openFromFile("上海アリス幻樂団 - U.N.オーエンは彼女なのか？.wav"))
 	{
 		//
 	}

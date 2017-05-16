@@ -2,13 +2,16 @@
 #ifndef GAME_H_
 #define GAME_H_
 #include"Player.h"
-#include<SFML\Audio.hpp>
+#include"YOUneedTHIS.h"
+#include"ResourseHolder.h"
 class Game
 {
 private:
 	sf::RenderWindow window;
 	sf::Music music;
+	ResourseHolder<sf::Texture,Resourse::identifier> resourse;
 	Player player;
+	sf::Sprite bgi;
 private:
 	bool IisUp;
 	bool IisDown;
