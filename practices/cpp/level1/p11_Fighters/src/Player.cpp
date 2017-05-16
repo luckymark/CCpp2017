@@ -30,7 +30,7 @@ void Player::Action(sf::Time dt, sf::Vector2f mouse_position){
 	set_shot_direction(mouse_position);
 	if(bullte_clock.getElapsedTime().asSeconds() > 0.3 && sf::Mouse::isButtonPressed(sf::Mouse::Left)){
 		fire(1);
-		cerr << mouse_position.x << " " << mouse_position.y << endl;
+		//cerr << mouse_position.x << " " << mouse_position.y << endl;
 		bullte_clock.restart();
 	}else {
 		fire(0);

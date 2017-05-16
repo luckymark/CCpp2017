@@ -109,6 +109,7 @@ void Animation::set_max_speed(float sp){
 }
 
 void Animation::next_frame(sf::Time dt){
+	//if(play_flag == 0) return;
 	core_position += speed * dt.asSeconds();
 	speed += acceleration * dt.asSeconds();
 

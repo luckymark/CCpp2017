@@ -44,7 +44,6 @@ class Character: public Item{
 		void use_prop(int key);
 		void add_prop(int key, Prop prop);
 
-
 		void use_skill(int key);
 
 

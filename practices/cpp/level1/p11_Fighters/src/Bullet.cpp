@@ -31,13 +31,24 @@ int Bullet::is_dead(){
 
 void Bullet::be_impacted_from(Item *other){
 	animation[cur_animation].be_affected(other -> get_cur_animation());
-	if(animation[cur_animation].is_affect()){
+	if(other -> get_kind() == 2){//Room
+		if(!animation[cur_animation].is_affect()){
+			if(cur_animation == 0){
+				cur_animation = 1;
+				animation[cur_animation].initlize();
+				animation[cur_animation].set_play_flag(1);
+				animation[cur_animation].set_max_speed(0);
+				animation[cur_animation].set_acceleration(sf::Vector2f(0,0));
+			}
+		}
+	}
+	/*if(animation[cur_animation].is_affect()){
 		cur_animation = 1;
 		animation[cur_animation].set_core_position(position);
 		animation[cur_animation].set_max_speed(0);
 		animation[cur_animation].set_acceleration(sf::Vector2f(0,0));
 		animation[cur_animation].set_play_flag(1);
-	}
+	}*/
 }
 
 int Bullet::has_request(){
@@ -49,10 +60,10 @@ int Bullet::get_request(){
 }
 
 void Bullet::Action(sf::Time dt, sf::Vector2f pos){
+	animation[cur_animation].set_core_position(position);
+	next(dt);
 	if(cur_animation == 1){
 		if(animation[cur_animation].is_playing() == 0){
-			//dead_flag = 0;
-			//dead_request = -1;
 			dead_flag = 1;
 			request = -1;
 			request_flag = 0;
@@ -66,12 +77,11 @@ void Bullet::Action(sf::Time dt, sf::Vector2f pos){
 		}
 		animation[cur_animation].set_play_flag(1);
 		animation[cur_animation].set_speed(speed);
-		animation[cur_animation].set_core_position(position);
 		animation[cur_animation].set_max_speed(max_speed[0]);
 		animation[cur_animation].set_acceleration(direction * acceleration[cur_animation]);
 		animation[cur_animation].set_stop_ratio(1);
 		sound_flag = 1;
 	}
-	next(dt);
 }
+
 

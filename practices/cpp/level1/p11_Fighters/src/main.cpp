@@ -107,6 +107,7 @@ int main(){
 	Director director;
 	director.set_world("setting");
 	director.new_stuff(0,sf::Vector2f(400.0,400.0),sf::Vector2f(0,0));
+	director.new_stuff(2,sf::Vector2f(0,0),sf::Vector2f(0,0));
 	director.main_loop();
 	return 0;
 

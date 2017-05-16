@@ -1,6 +1,7 @@
 #include "Director.h"
 #include "Player.h"
 #include "Bullet.h"
+#include "Room.h"
 #include <iostream>
 using namespace std;
 
@@ -48,15 +49,15 @@ void Director::world_loop(){
 	clear_request();
 	for(int i = 0; i < stuff.size(); i++)
 		for(int j = i + 1; j < stuff.size(); j++){
-			//stuff[j] -> be_impacted_from(stuff[i]);
-			//stuff[i] -> be_impacted_from(stuff[j]);
+			stuff[j] -> be_impacted_from(stuff[i]); ///
+			stuff[i] -> be_impacted_from(stuff[j]); ///
 		}
-	clean_stuff();
 	for(int i = 0; i < stuff.size(); i++){
 		float x = sf::Mouse::getPosition(window).x;
 		float y = sf::Mouse::getPosition(window).y;
 		stuff[i] -> Action(clock.getElapsedTime(),sf::Vector2f(x,y));
 	}
+	clean_stuff();
 	get_request();
 }
 void Director::main_loop(){
@@ -107,14 +108,17 @@ void Director::new_stuff(int x,sf::Vector2f request_place, sf::Vector2f dir){
 		case 0: tmp = new Player(sample_type[x], string(tt[0]), string(tt[1]), request_place);
 			tmp -> set_direction(dir);
 			break;
-		case 4: //tmp = new Boss(sample_type[x], sample[x], request_place);
-			break;
-		case 2: //tmp = new Normal(sample_type[x], sample[x], request_place);
-			break;
-		case 3: //tmp = new Subject(sample_type[x], sample[x], request_place);
-			break;
 		case 1: tmp = new Bullet(sample_type[x], string(tt[0]), string(tt[1]), request_place);
 			tmp -> set_direction(dir);
+			break;
+		case 2: tmp = new Room(sample_type[x], string(tt[0]), string(tt[1]), request_place);
+			break;
+		case 3: //tmp = new Normal(sample_type[x], sample[x], request_place);
+			break;
+		case 4: //tmp = new Object(sample_type[x], sample[x], request_place);
+			break;
+		case 5: //tmp = new Boss(sample_type[x], sample[x], request_place);
+			break;
 	}
 	if(tmp != NULL) 
 		stuff.push_back(tmp);

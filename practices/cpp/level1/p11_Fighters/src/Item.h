@@ -34,11 +34,11 @@ using namespace std;
 
 
 //Player 0
-//Normal 1 
-//Boss   2
-//Object 3
-//Bullet 4
-//Edge 	 5
+//Bullet 1 
+//Room 	 2 
+//Normal 3 
+//Object 4
+//Boss   5
 class Item{
 	protected:
 		int 		toward; 		// 0 forward, 1 back, 2 left, 3 right.
@@ -81,13 +81,13 @@ class Item{
 		virtual int 	get_request(){return request;}
 		Animation 	*get_cur_animation();
 
-		void be_impacted_from(Item* other){}
+		virtual void be_impacted_from(Item* other){}
 
 		virtual void Action(sf::Time dt,sf::Vector2f pos){}
 		virtual void use_skill(int which){}		//留给character使用的接口
 		virtual void walk(){}
 
-		sf::Sprite* display();
+		virtual sf::Sprite* display();
 		void next(sf::Time dt);
 		void update_position();
 		void update_speed();

@@ -61,7 +61,7 @@ void Frame::set_image_info(string image_info_file_name){
 }
 
 void Frame::set_core_position(sf::Vector2f position){
-	cerr << position.x << " " << position.y << endl;
+	//cerr << position.x << " " << position.y << endl;
 	core_position = position;
 	update_draw_position();
 }
