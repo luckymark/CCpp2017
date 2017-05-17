@@ -1,18 +1,23 @@
 #ifndef PLANE_H
 #include "stdafx.h"
+#include "bullet.h"
 #include <SFML/Graphics.hpp>
 #define PLANE_H
 class plane {
 
 	public:
-		
-		plane(int x, int y,char type);
-		void setPlane(int x,int y);
+		plane(float x, float y,char type);
+		void setPlane(float x,float y);
+		void movePlane(float x, float y);
 		void showPlane(sf::RenderWindow &thisWindow);
+		void Fire();
+		void moveBullet();
 	protected:
+		bullet plane_bullet;
 		sf::Texture plane_texture;
 		sf::Sprite plane_sprite;
-		int x, y;
+		float x, y;
+
 };
 
 #endif
