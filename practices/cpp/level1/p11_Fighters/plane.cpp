@@ -9,13 +9,13 @@ class AMMO
         Sprite pic;
         bool live;
     public:
-        AMMO(const Texture & texture,const IntRect & rectangle )
+        AMMO(const Texture & texture)
         {
-            pic.setTexture(texture,rectangle);
+            pic.setTexture(texture);
             live=false;
         }
         
-}
+};
 int main()
 {
     float speed;
@@ -63,7 +63,7 @@ int main()
             exit=true;
             circle.setPosition(sprite.getPosition().x,sprite.getPosition().y);
         }
-        if(exit==true)circle.move(1,0);
+        if(exit==true)circle.move(5,0);
         else exit=false;
         //background.clear(Color::Red);
        // background.draw(back);
