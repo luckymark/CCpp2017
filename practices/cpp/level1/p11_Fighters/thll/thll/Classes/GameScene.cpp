@@ -4,8 +4,6 @@
 
 USING_NS_CC;
 
-
-
 Scene* GameScene::createScene()
 {
 	auto scene = Scene::create();
@@ -28,7 +26,8 @@ bool GameScene::init()
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto visibleOrigin = Director::getInstance()->getVisibleOrigin();
 
-	plane = Sprite::create("plane1.png");
+	auto plane = Sprite::create("hero1.png");
+	plane->setTag(PLANE_TAG);
 	plane->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 	plane->setAnchorPoint(Vec2(0.5, 0.5));
 
@@ -43,6 +42,8 @@ bool GameScene::init()
 	dispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	this->scheduleUpdate();
+	this->schedule(schedule_selector(GameScene::bulletCreate), 0.1);
+	this->schedule(schedule_selector(GameScene::bulletMove), 0.05);
 
 	return true;
 }
@@ -78,6 +79,9 @@ void GameScene::keyPressedDuration(EventKeyboard::KeyCode keyCode)
 {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	auto visibleOrigin = Director::getInstance()->getVisibleOrigin();
+	auto winSize = Director::getInstance()->getWinSize();
+
+	auto plane = this->getChildByTag(PLANE_TAG);
 
 	int offsetX = 0, offsetY = 0;
 	switch (keyCode)
@@ -104,18 +108,17 @@ void GameScene::keyPressedDuration(EventKeyboard::KeyCode keyCode)
 
 	float sizeX = plane->getContentSize().width, sizeY = plane->getContentSize().height / 2.0;
 
-	// TODO: why the width is not the same as i think?
-	if (totX >  visibleSize.width - sizeX / 8)
+	if (totX >  winSize.width - sizeX)
 	{
-		totX = visibleSize.width - sizeX / 8;
+		totX = winSize.width - sizeX;
 	}
 	else if (totX < sizeX)
 	{
 		totX = sizeX;
 	}
-	if (totY > visibleSize.height - sizeY)
+	if (totY > winSize.height - sizeY)
 	{
-		totY = visibleSize.height - sizeY;
+		totY = winSize.height - sizeY;
 	}
 	else if (totY < sizeY)
 	{
@@ -147,27 +150,38 @@ bool GameScene::isKeyPressed(EventKeyboard::KeyCode keyCode)
 	return keys[keyCode];
 }
 
-bool GameScene::isMoveToCorner(EventKeyboard::KeyCode keyCode)
+void GameScene::bulletCreate(float f)
 {
-	int offsetX = 0, offsetY = 0;
-	switch (keyCode)
+
+	auto key_z = EventKeyboard::KeyCode::KEY_Z;
+	auto plane = this->getChildByTag(PLANE_TAG);
+
+	if (isKeyPressed(key_z))
 	{
-	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
-		offsetX = -OFFSET;
-		break;
-	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-		offsetX = OFFSET;
-		break;
-	case EventKeyboard::KeyCode::KEY_UP_ARROW:
-		offsetY = OFFSET;
-		break;
-	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
-		offsetY = -OFFSET;
-		break;
-	default:
-		offsetX = 0;
-		offsetY = 0;
-		break;
+		auto bullet = Sprite::create("bullet.png");
+
+		bullet->setPosition(plane->getPositionX(), plane->getPositionY() + 30);
+		bullet->setTag(BULLET_TAG);
+
+		this->addChild(bullet);
+		this->bulletList.pushBack(bullet);
 	}
-	return true;
+
+}
+
+void GameScene::bulletMove(float f)
+{
+	auto winSize = Director::getInstance()->getWinSize();
+
+	for (int i = 0; i < bulletList.size(); i++)
+	{
+		auto bullet = bulletList.at(i);
+		bullet->setPositionY(bullet->getPositionY() + 3);
+		if (bullet->getPositionY() > winSize.height)
+		{
+			bulletList.eraseObject(bullet);
+			bullet->removeFromParent();
+			i--;
+		}
+	}
 }

@@ -1,6 +1,9 @@
 #ifndef _GAME_SCENE_H_
 #define _GAME_SCENE_H_
 
+#define PLANE_TAG 103
+#define BULLET_TAG 107
+
 #include "cocos2d.h"
 #include <map>
 
@@ -17,9 +20,14 @@ public:
 
 
 private:
-	cocos2d::Sprite* plane;
 
 	std::map<cocos2d::EventKeyboard::KeyCode, bool> keys;
+
+	cocos2d::Vector<cocos2d::Sprite* > bulletList;
+
+	void bulletCreate(float f);
+
+	void bulletMove(float f);
 
 	void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 
@@ -28,8 +36,6 @@ private:
 	bool isKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode);
 
 	void keyPressedDuration(cocos2d::EventKeyboard::KeyCode keyCode);
-
-	bool isMoveToCorner(cocos2d::EventKeyboard::KeyCode keyCode);
 };
 
 #endif
