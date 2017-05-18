@@ -2,8 +2,10 @@
 #include <SFML/Audio.hpp>
 # include<iostream>
 #define BulMoveSpeed  0.7
-#define PlaMoveSpeed   0.6
+#define EneAiecraftSpeed 0.2
+#define PlaMoveSpeed   0.3
 # include<time.h>
+
 //子弹的类
 class EnemyAircraft{
 public :
@@ -23,6 +25,7 @@ public :
 
             }
 };
+
 //敌机的类
 class Bullet{
 public:
@@ -71,9 +74,6 @@ int MoveSprite(sf::Sprite &myplane)
 
 int main()
 {
-             srand(time(0));
-             int num_ene_aircraft = (rand()%18)+1;
-             int pst_ene_aircraft = rand()%1326;
 
             //设置飞机位置，大小，窗口
             sf::RenderWindow window(sf::VideoMode(1400,900),"The plane!");
@@ -98,77 +98,76 @@ int main()
             background_music.setLoop(true);
 
 
+            //设置输出窗口
+            while (window.isOpen())
+            {
+                        srand(time(0));
+                        int num_ene_aircraft = (rand()%18)+1;
+                        int pst_ene_aircraft = rand()%1326;
+
+                        sf::Event event;
+                        while (window.pollEvent(event))
+                            {
+                                    if (event.type == sf::Event::Closed)
+                                        window.close();
+                            }
 
 
-        //设置输出窗口
-        while (window.isOpen())
-        {
+                        //声明敌机
+                        EnemyAircraft enemy_aircra;
+                        enemy_aircra.ene_aircraft.setPosition(pst_ene_aircraft,0);
+                        sf::Vector2f position_ene_air = enemy_aircra.ene_aircraft.getPosition();
 
-                    sf::Event event;
-                    while (window.pollEvent(event))
-                        {
-                                if (event.type == sf::Event::Closed)
-                                    window.close();
-                        }
+                        while(position_ene_air.y<900)
+                            {
+                                enemy_aircra.ene_aircraft.move(0,EneAiecraftSpeed);
+                                position_ene_air = enemy_aircra.ene_aircraft.getPosition();
+                                window.draw(enemy_aircra.ene_aircraft);
+                                window.display();
 
-                    //移动飞机
-                    MoveSprite(myplane);
-                    window.clear(sf::Color::White);
-                    window.draw(myplane);
-
-                    //声明子弹，并且设置子弹的位置，显示子弹
-                   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Home))
-                    {
-
-                                // 产 生三个子弹
-                                Bullet *p = new Bullet[3];
-                                sf::Vector2f position = myplane.getPosition();
-                                p[1].bullet.setPosition(position.x+41.4,position.y-45);
-                                p[0].bullet.setPosition(position.x-5,position.y-30);
-                                p[2].bullet.setPosition(position.x+87.8,position.y-30);
-
-                                sf::Vector2f  position_bu = p[1].bullet.getPosition();
-                                while(position_bu.y>0)
+                                //声明子弹，并且设置子弹的位置，显示子弹
+                                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Home))
                                     {
 
-                                                p[1].bullet.move(0,-BulMoveSpeed);
-                                                p[0].bullet.move(0,-BulMoveSpeed);
-                                                p[2].bullet.move(0,-BulMoveSpeed);
-                                                position_bu = p[1].bullet.getPosition();
+                                                // 产 生三个子弹
+                                                Bullet *p = new Bullet[3];
+                                                sf::Vector2f position = myplane.getPosition();
+                                                p[1].bullet.setPosition(position.x+41.4,position.y-45);
+                                                p[0].bullet.setPosition(position.x-5,position.y-30);
+                                                p[2].bullet.setPosition(position.x+87.8,position.y-30);
 
-                                                window.draw(p[1].bullet);
-                                                window.draw(p[0].bullet);
-                                                window.draw(p[2].bullet);
-                                                window.display();
+                                                sf::Vector2f  position_bu = p[1].bullet.getPosition();
+                                                while(position_bu.y>0)
+                                                    {
 
-                                                window.clear(sf::Color::White);
-                                                window.draw(myplane);
+                                                                p[1].bullet.move(0,-BulMoveSpeed);
+                                                                p[0].bullet.move(0,-BulMoveSpeed);
+                                                                p[2].bullet.move(0,-BulMoveSpeed);
+                                                                enemy_aircra.ene_aircraft.move(0,EneAiecraftSpeed);
+                                                                MoveSprite(myplane);
+                                                                position_bu = p[1].bullet.getPosition();
 
-                                    }
+                                                                window.draw(p[1].bullet);
+                                                                window.draw(p[0].bullet);
+                                                                window.draw(p[2].bullet);
+                                                                window.draw(enemy_aircra.ene_aircraft);
+                                                                window.display();
 
-                        delete[] p;
-                   }
+                                                                window.clear(sf::Color::White);
+                                                                window.draw(myplane);
+
+                                                    }
+
+                                                delete[] p;
+                                        }
+
+                                window.clear(sf::Color::White);
+                                window.draw(myplane);
+                                MoveSprite(myplane);
+                        }
 
 
-                    //声明敌机
-                    EnemyAircraft enemy_aircra;
-                    enemy_aircra.ene_aircraft.setPosition(pst_ene_aircraft,0);
-
-                    sf::Vector2f position_ene_air = enemy_aircra.ene_aircraft.getPosition();
-                    while(position_ene_air.y<900){
-
-                            enemy_aircra.ene_aircraft.move(0,-BulMoveSpeed);
-                            window.draw(enemy_aircra.ene_aircraft);
-                            window.display();
-
-                            window.clear(sf::Color::White);
-                            window.draw(myplane);
-                    }
-
-                    window.draw(enemy_aircra.ene_aircraft);
-                    window.display();
-
-        }
+            }
 
         return 0;
 }
