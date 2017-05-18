@@ -147,6 +147,10 @@ void Animation::set_speed(sf::Vector2f sp){
 	speed = sp;
 }
 
+void Animation::set_length(int key,sf::Vector2f len){
+	sequence[key].set_length(len);
+}
+
 sf::Sprite* Animation::begin_cur_display(){
 	if(sound.getStatus() == 0 && sound_flag)sound.play();
 	sequence[cur_frame].set_core_position(core_position);
@@ -160,6 +164,7 @@ void Animation::end_cur_display(){
 
 void Animation::set_core_position(sf::Vector2f pos){
 	core_position = pos;
+	sequence[cur_frame].set_core_position(pos);
 }
 
 void Animation::set_play_flag(int f){

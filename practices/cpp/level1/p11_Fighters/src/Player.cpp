@@ -17,15 +17,6 @@ Player::Player(int kind, string name, string character_setting, sf::Vector2f pos
 	bullte_clock.restart();
 }
 
-float length(sf::Vector2f a){
-	return sqrt(a.x*a.x + a.y*a.y);
-}
-
-void Player::set_shot_direction(sf::Vector2f pos){
-	shot_direction = pos - position;
-	if(length(shot_direction) != 0) shot_direction /= length(shot_direction);
-}
-
 void Player::Action(sf::Time dt, sf::Vector2f mouse_position){
 	set_shot_direction(mouse_position);
 	if(bullte_clock.getElapsedTime().asSeconds() > 0.3 && sf::Mouse::isButtonPressed(sf::Mouse::Left)){

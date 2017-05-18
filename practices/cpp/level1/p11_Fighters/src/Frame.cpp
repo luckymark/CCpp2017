@@ -25,9 +25,9 @@ Frame::Frame( string image_file_name, string image_info_file_name ){
 
 void Frame::update_draw_position(){
 	x[0] = core_position.x - del_position.x;
-	x[1] = x[0] + image.getSize().x;
+	x[1] = x[0] + image.getSize().x;//length.x;
 	y[0] = core_position.y - del_position.y;
-	y[1] = y[0] + image.getSize().y;
+	y[1] = y[0] + image.getSize().y;//length.y;
 	sprite.setPosition(core_position - del_position);
 }
 
@@ -46,6 +46,13 @@ void Frame::set_image(string image_file_name){
 	}
 	sprite.setTexture(texture);
 	sprite.setTextureRect(sf::IntRect(0,0,image.getSize().x, image.getSize().y));
+	//length = image.getSize();
+	length.x = image.getSize().x;
+	length.y = image.getSize().y;
+}
+
+void Frame::set_length(sf::Vector2f len){
+	length = len;
 }
 
 void Frame::set_image_info(string image_info_file_name){
@@ -72,6 +79,8 @@ int Frame::is_in(const sf::Vector2f &point){
 }
 
 int Frame::is_in(Frame *other){
-	return (core_position.x <= (other -> x[1]) && core_position.x >= (other -> x[0]))
-		&&(core_position.y <= (other -> y[1]) && core_position.y >= (other -> y[0]));
+	return 	   (core_position.x <= other -> x[1])
+	       	&& (core_position.x >= other -> x[0])
+		&& (core_position.y <= other -> y[1])
+	       	&& (core_position.y >= other -> y[0]);
 }

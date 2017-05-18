@@ -36,9 +36,11 @@ using namespace std;
 //Player 0
 //Bullet 1 
 //Room 	 2 
-//Normal 3 
+//Enemy  3 //means normal enemy
 //Object 4
 //Boss   5
+enum {Player_type, Bullet_type, Room_type, Enemy_type, Object_type, Boss_type} item_type;
+
 class Item{
 	protected:
 		int 		toward; 		// 0 forward, 1 back, 2 left, 3 right.
@@ -79,7 +81,7 @@ class Item{
 		sf::Vector2f 	get_position();
 		sf::Vector2f 	get_request_direction();
 		virtual int 	get_request(){return request;}
-		Animation 	*get_cur_animation();
+		Animation* 	get_cur_animation();
 
 		virtual void be_impacted_from(Item* other){}
 

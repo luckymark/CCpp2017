@@ -2,11 +2,6 @@
 #define CHARACTER_H_
 
 #include "Item.h"
-
-#include <SFML/Graphics.hpp>
-//#include <SFML/Vector2.hpp>
-#include <SFML/Window.hpp>
-
 #include "Concept.h"
 #include "Animation.h"
 
@@ -23,11 +18,15 @@ static const int diry[10]={1,-1,0,0,0,0,0,0};
 
 class Character: public Item{
 	protected:
-		Magic 	life;
-		Magic 	magic;
-		Skill 	skill[max_skill_num];
-		Buff	*buff[max_skill_num];	//用于储存当前的状态
-		Bag	bag;			//用于储存当前的物品
+		Magic 		life;
+		Magic 		magic;
+		Skill 		skill[max_skill_num];
+		vector<Buff*>	buff;			//用于储存当前的状态
+		Bag		bag;			//用于储存当前的物品
+
+		sf::Vector2f 	shot_direction;
+		int 		bullte;
+		sf::Clock	bullte_clock;
 		void set_null();
 	public:
 		Character(int kind, string item_setting, string character_setting);
@@ -38,14 +37,15 @@ class Character: public Item{
 
 		void set_life(int key,int val);
 		void set_magic(int key,int val);
+		void set_shot_direction(sf::Vector2f pos);
 		void set_skill(int key, Skill Sk);
+
 		void add_buff(Buff bf);
 		void clear_buff();
-		void use_prop(int key);
 		void add_prop(int key, Prop prop);
+		void use_prop(int key);
 
 		void use_skill(int key);
-
 
 		virtual ~Character();
 };

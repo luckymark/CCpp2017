@@ -10,8 +10,22 @@
 
 class Room: public Item{
 	public:
-		Room(int kind, string item_setting_name, sf::Vector2f pos);
-		Room(int kind, string item_setting_name, string room_name, sf::Vector2f pos);
+		Room(int 		kind,
+	             string 		item_setting_name, 
+		     sf::Vector2f 	pos);
+
+		Room(int 		kind, 
+		     string 		item_setting_name, 
+		     string 		room_name, 
+		     sf::Vector2f 	pos);
+
+		Room(int 		kind,
+	  	     string 		item_setting_name, 
+		     string 		room_name, 
+		     sf::Vector2f 	pos,
+		     sf::Vector2f	size);
+		
+		void set_edge(sf::Vector2f len);
 };
 
 #endif

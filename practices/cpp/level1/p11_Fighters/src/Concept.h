@@ -16,63 +16,11 @@
 #include <SFML/Window.hpp>
 using namespace std;
 
-struct Buff{
-	//0 speed_up;
-	//1 speed_up_ratio;
-	//2 life_up & attack
-	//3 life_grow_speed_up;
-	//4 magic_power_up;
-	//5 magic_power_grow_speed_up;
-	//6 silence_time;
-	//7 dizziness_time;
+#include "Buff.h"
+#include "Prop.h"
+#include "Magic.h"
+#include "Bag.h"
+#include "Skill.h"
 
-	int w[10];
-	sf::Clock clock;
-	float duration_time;
-};
-
-struct Prop{
-	Buff buff;
-	int kind;
-	int num;
-	Prop(){
-		kind = 0;
-		num = 0;
-	}
-	Prop(Buff buff,int num):buff(buff),num(num){}
-};
-
-const int max_bag_size = 15;
-struct Bag{
-	Prop w[max_bag_size];
-};
-
-struct Magic{
-	int w[3];
-	Magic(int x=0,int y=0,int z=0){
-		w[0] = x;
-		w[1] = y;
-		w[2] = z;
-	}
-	// 0 power
-	// 1 power_lim
-	// 2 power_grow_speed
-};
-
-struct Skill{
-	Buff buff;
-	int cost;
-	float speed;
-	float acceleration;
-	int which_animation;
-	Skill(){
-		cost = 0;
-		speed = 0;
-		acceleration = 0;
-		which_animation = 0;
-	}
-	Skill(Buff buff,int cost,int speed,int acceleration,int which)
-		:buff(buff),cost(cost),speed(speed),acceleration(acceleration),which_animation(which){}
-};
 
 #endif

@@ -48,6 +48,7 @@ class Frame{ //帧
 
 		sf::Vector2f 	core_position;			// 1) this store the core position of the frame
 								// 2) draw_position = core_position - del_position
+		sf::Vector2f 	length;
 
 		void update_draw_position(); 			//use the core_position and the del_position to update the draw_position
 
@@ -66,8 +67,8 @@ class Frame{ //帧
 
 		void set_image(string image_file_name);		//these functions are used to set something about the image
 		void set_image_info(string image_info_flie_name);
-
 		void set_core_position(sf::Vector2f position); 	//set the core_position
+		void set_length(sf::Vector2f len);
 
 		~Frame(){}
 };

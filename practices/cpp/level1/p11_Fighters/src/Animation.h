@@ -88,6 +88,7 @@ class Animation{
 		void set_play_flag(int f);			// play_flag表示是否正在播放
 		void set_stop_ratio(float f);
 		void set_sound_flag(int f);			//设置是否播放声音
+		void set_length(int key, sf::Vector2f len);
 
 		sf::Vector2f get_core_position();		// 用于更新Item的位置
 		sf::Vector2f get_speed();

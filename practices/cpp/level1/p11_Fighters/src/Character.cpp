@@ -1,9 +1,17 @@
 #include "Character.h"
+#include <cmath>
+
+float length(sf::Vector2f a){
+	return sqrt(a.x*a.x + a.y*a.y);
+}
 
 void Character::set_null(){
-	for(int i = 0; i < max_skill_num; i++){
-		buff[i] = NULL;
-	}
+	buff.clear();
+}
+
+void Character::set_shot_direction(sf::Vector2f pos){
+	shot_direction = pos - position;
+	if(length(shot_direction) != 0) shot_direction /= length(shot_direction);
 }
 
 Character::Character(int kind, string name, string character_setting):Item(kind,name){
@@ -53,26 +61,23 @@ void Character::set_skill(int key, Skill sk){
 
 
 void Character::add_buff(Buff bf){
-	for(int i = 0; i < max_skill_num; i++){
-		if(buff[i] == NULL){
-			buff[i] = new Buff;
-			(*buff[i]) = bf;
-			buff[i] -> clock.restart();
-			return;
-		}
+	Buff *tmp = NULL;
+	tmp = new Buff;
+	if(tmp != NULL){
+		*tmp = bf;
+		tmp -> clock.restart();
+		buff.push_back(tmp);
 	}
-	cerr << "buff pos run out" << endl;
 }
 
 void Character::clear_buff(){
-	for(int i = 0; i < max_skill_num; i++){
-		if(buff[i] != NULL){
-			sf::Time dur_time = buff[i] -> clock.getElapsedTime();
-			if(dur_time.asSeconds() > (buff[i] -> duration_time)){
-				delete buff[i];
-				buff[i] = NULL;
-			}
-
+	for(vector<Buff*>::iterator it = buff.begin(); it != buff.end(); ){
+		sf::Time dur_time = (*it) -> clock.getElapsedTime();
+		if(dur_time.asSeconds() > ((*it) -> duration_time)){
+			delete *it;
+			it = buff.erase(it);
+		}else {
+			it++;
 		}
 	}
 }
@@ -115,10 +120,8 @@ void Character::use_skill(int which){
 
 
 Character::~Character(){
-	for(int i = 0; i < max_skill_num; i++){
-		if(buff[i] != NULL){
-			delete buff[i];
-		}
+	for(int i = 0; i < buff.size(); i++){
+		delete buff[i];
 	}
 }
 

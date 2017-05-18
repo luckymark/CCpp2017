@@ -30,6 +30,7 @@ int Bullet::is_dead(){
 }
 
 void Bullet::be_impacted_from(Item *other){
+	animation[cur_animation].set_core_position(position);
 	animation[cur_animation].be_affected(other -> get_cur_animation());
 	if(other -> get_kind() == 2){//Room
 		if(!animation[cur_animation].is_affect()){
