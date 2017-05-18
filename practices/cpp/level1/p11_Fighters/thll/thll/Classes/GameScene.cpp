@@ -1,6 +1,10 @@
 #include "GameScene.h"
+
 #define OFFSET 5
+
 USING_NS_CC;
+
+
 
 Scene* GameScene::createScene()
 {
@@ -25,7 +29,8 @@ bool GameScene::init()
 	auto visibleOrigin = Director::getInstance()->getVisibleOrigin();
 
 	plane = Sprite::create("plane1.png");
-	plane->setPosition(Vec2(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2));
+	plane->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	plane->setAnchorPoint(Vec2(0.5, 0.5));
 
 	this->addChild(plane);
 
@@ -50,6 +55,7 @@ void GameScene::update(float  delta)
 	auto right = EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
 	auto up = EventKeyboard::KeyCode::KEY_UP_ARROW;
 	auto down = EventKeyboard::KeyCode::KEY_DOWN_ARROW;
+
 	if (isKeyPressed(left))
 	{
 		keyPressedDuration(left);
@@ -70,6 +76,9 @@ void GameScene::update(float  delta)
 
 void GameScene::keyPressedDuration(EventKeyboard::KeyCode keyCode)
 {
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto visibleOrigin = Director::getInstance()->getVisibleOrigin();
+
 	int offsetX = 0, offsetY = 0;
 	switch (keyCode)
 	{
@@ -91,9 +100,28 @@ void GameScene::keyPressedDuration(EventKeyboard::KeyCode keyCode)
 		break;
 	}
 
-	auto moveTo = MoveTo::create(0.1 /* times*/, Vec2(plane->getPositionX() + offsetX, plane->getPositionY() + offsetY));
-	plane->runAction(moveTo);
+	float totX = plane->getPositionX() + offsetX, totY = plane->getPositionY() + offsetY;
 
+	float sizeX = plane->getContentSize().width, sizeY = plane->getContentSize().height / 2.0;
+
+	// TODO: why the width is not the same as i think?
+	if (totX >  visibleSize.width - sizeX / 8)
+	{
+		totX = visibleSize.width - sizeX / 8;
+	}
+	else if (totX < sizeX)
+	{
+		totX = sizeX;
+	}
+	if (totY > visibleSize.height - sizeY)
+	{
+		totY = visibleSize.height - sizeY;
+	}
+	else if (totY < sizeY)
+	{
+		totY = sizeY;
+	}
+	plane->setPosition(Vec2(totX, totY));
 }
 
 void GameScene::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
@@ -117,4 +145,29 @@ void GameScene::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
 bool GameScene::isKeyPressed(EventKeyboard::KeyCode keyCode)
 {
 	return keys[keyCode];
+}
+
+bool GameScene::isMoveToCorner(EventKeyboard::KeyCode keyCode)
+{
+	int offsetX = 0, offsetY = 0;
+	switch (keyCode)
+	{
+	case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+		offsetX = -OFFSET;
+		break;
+	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+		offsetX = OFFSET;
+		break;
+	case EventKeyboard::KeyCode::KEY_UP_ARROW:
+		offsetY = OFFSET;
+		break;
+	case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+		offsetY = -OFFSET;
+		break;
+	default:
+		offsetX = 0;
+		offsetY = 0;
+		break;
+	}
+	return true;
 }

@@ -28,6 +28,8 @@ private:
 	bool isKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode);
 
 	void keyPressedDuration(cocos2d::EventKeyboard::KeyCode keyCode);
+
+	bool isMoveToCorner(cocos2d::EventKeyboard::KeyCode keyCode);
 };
 
 #endif
