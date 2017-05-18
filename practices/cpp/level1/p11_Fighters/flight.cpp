@@ -2,8 +2,11 @@
 #include <SFML/Audio.hpp>
 # include<iostream>
 #define BulMoveSpeed  0.7
-#define EneAiecraftSpeed 0.2
-#define PlaMoveSpeed   0.3
+#define EneAiecraftSpeedD 0.4
+#define EneAiecraftSpeedLR 4
+# define EneAiecraftSpeedlr 0.08
+#define EneAiecraftSpeedd 0.1
+#define PlaMoveSpeed   0.5
 # include<time.h>
 
 //子弹的类
@@ -118,9 +121,23 @@ int main()
                         enemy_aircra.ene_aircraft.setPosition(pst_ene_aircraft,0);
                         sf::Vector2f position_ene_air = enemy_aircra.ene_aircraft.getPosition();
 
-                        while(position_ene_air.y<900)
+                        while(position_ene_air.y<900&&position_ene_air.x>0&&position_ene_air.x<1325)
                             {
-                                enemy_aircra.ene_aircraft.move(0,EneAiecraftSpeed);
+
+                                int ene_move_dir = (rand()%3)-1;
+
+                                switch (ene_move_dir)
+                                    {
+                                            case -1 :
+                                                enemy_aircra.ene_aircraft.move(-EneAiecraftSpeedLR,0);
+                                                break;
+                                            case 0 :
+                                                enemy_aircra.ene_aircraft.move(0,EneAiecraftSpeedD);
+                                                break;
+                                            case 1:
+                                                enemy_aircra.ene_aircraft.move(EneAiecraftSpeedLR,0);
+                                                break;
+                                    }
                                 position_ene_air = enemy_aircra.ene_aircraft.getPosition();
                                 window.draw(enemy_aircra.ene_aircraft);
                                 window.display();
@@ -143,7 +160,18 @@ int main()
                                                                 p[1].bullet.move(0,-BulMoveSpeed);
                                                                 p[0].bullet.move(0,-BulMoveSpeed);
                                                                 p[2].bullet.move(0,-BulMoveSpeed);
-                                                                enemy_aircra.ene_aircraft.move(0,EneAiecraftSpeed);
+                                                                switch (ene_move_dir)
+                                                                    {
+                                                                            case -1 :
+                                                                                    enemy_aircra.ene_aircraft.move(-EneAiecraftSpeedlr,0);
+                                                                                    break;
+                                                                            case 0 :
+                                                                                    enemy_aircra.ene_aircraft.move(0,EneAiecraftSpeedd);
+                                                                                    break;
+                                                                            case 1:
+                                                                                    enemy_aircra.ene_aircraft.move(EneAiecraftSpeedlr,0);
+                                                                                    break;
+                                                                    }
                                                                 MoveSprite(myplane);
                                                                 position_bu = p[1].bullet.getPosition();
 
