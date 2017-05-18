@@ -1,13 +1,17 @@
 #include<iostream>
 #include<cstdio>
+#include<vector>
+#include<string>
 using namespace std;
+template<typename T>
 class InStack
 {
     private:
-        int *p;
+        void *p;
         int number;
         int max;
     public:
+        
         InStack(int q=100)
         {
             p=new int[q];
