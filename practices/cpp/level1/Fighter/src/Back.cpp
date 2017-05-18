@@ -2,7 +2,7 @@
 
 Back::Back()
 {
-   texture.loadFromFile("back.jpg");
+   texture.loadFromFile("resource/image/back.jpg");
 
 }
 

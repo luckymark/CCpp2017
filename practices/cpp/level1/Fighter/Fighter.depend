@@ -987,28 +987,39 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1494943631 source:h:\c++\fighter\main.cpp
+1495079328 source:h:\c++\fighter\main.cpp
 	<SFML/Audio.hpp>
 	<SFML/Graphics.hpp>
+	<windows.h>
 	"Music.h"
 	"Back.h"
 	"Hero.h"
+	"Bullet.h"
 
 1494897085 h:\c++\fighter\include\music.h
 	<SFML/Audio.hpp>
 
-1494852689 source:h:\c++\fighter\src\music.cpp
+1494948137 source:h:\c++\fighter\src\music.cpp
 	"Music.h"
 
 1494894916 h:\c++\fighter\include\back.h
 	<SFML/Graphics.hpp>
 
-1494896389 source:h:\c++\fighter\src\back.cpp
+1494947183 source:h:\c++\fighter\src\back.cpp
 	"Back.h"
 
-1494943624 h:\c++\fighter\include\hero.h
+1494952742 h:\c++\fighter\include\hero.h
 	<SFML/Graphics.hpp>
 
-1494899626 source:h:\c++\fighter\src\hero.cpp
+1495079445 source:h:\c++\fighter\src\hero.cpp
 	"Hero.h"
+
+1495040421 source:h:\c++\fighter\src\bullet.cpp
+
+1495040421 h:\c++\fighter\include\bullet.h
+
+1495036932 h:\c++\fighter\include\gun.h
+	<SFML/Graphics.hpp>
+	"Hero.h"
+	"Bullet.h"
 

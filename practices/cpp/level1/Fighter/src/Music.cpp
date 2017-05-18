@@ -2,7 +2,7 @@
 
 Music::Music()
 {
-    bgm.openFromFile("music.wav");
+    bgm.openFromFile("resource/music/music.wav");
 }
 
 Music::~Music()
