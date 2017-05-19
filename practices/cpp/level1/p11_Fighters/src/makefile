@@ -1,6 +1,6 @@
-main: main.cpp Animation.o Item.o Character.o Director.o Player.o Bullet.o Room.o 
+main: main.cpp Animation.o Item.o Character.o Director.o Player.o Bullet.o Room.o Enemy.o
 	clang++ main.cpp Item.o Animation.o Frame.o Character.o Director.o Player.o Bullet.o Room.o \
-		Bag.o Prop.o Magic.o Skill.o Buff.o\
+		Bag.o Prop.o Magic.o Skill.o Buff.o Enemy.o\
 		-F /Library/Frameworks -framework sfml-audio -framework sfml-window -framework sfml-graphics \
 		-framework sfml-system -framework OpenGL -framework GLUT -o main.cpp.out -g
 
@@ -9,6 +9,9 @@ Director.o: Director.cpp Director.h
 
 Player.o: Player.h Player.cpp Item.o Character.o
 	clang++ -I /usr/local/include Player.cpp -c -g
+
+Enemy.o: Enemy.h Enemy.cpp Item.o Character.o
+	clang++ -I /usr/local/include Enemy.cpp -c -g
 
 Character.o: Character.cpp Character.h Item.o
 	clang++ -I /usr/local/include Character.cpp -c -g

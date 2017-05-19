@@ -9,24 +9,37 @@ void Character::set_null(){
 	buff.clear();
 }
 
+
+void Character::animation_init(){
+	animation[cur_animation].set_speed(speed);
+	animation[cur_animation].set_core_position(position);
+	animation[cur_animation].set_max_speed(skill[0].speed);
+	animation[cur_animation].set_acceleration(direction * skill[0].acceleration);
+}
+
 void Character::set_shot_direction(sf::Vector2f pos){
 	shot_direction = pos - position;
 	if(length(shot_direction) != 0) shot_direction /= length(shot_direction);
 }
 
-Character::Character(int kind, string name, string character_setting):Item(kind,name){
-	set_null();
-	set_character_from_setting(character_setting);
-}
-Character::Character(int kind, string name, string character_setting, sf::Vector2f pos):Item(kind,name,pos){
-	set_null();
-	set_character_from_setting(character_setting);
-}
+Character::Character(int kind, string name, string character_setting)
+	:Item(kind,name){
+		set_null();
+		set_character_from_setting(character_setting);
+		animation_init();
+	}
+Character::Character(int kind, string name, string character_setting, sf::Vector2f pos)
+	:Item(kind,name,pos){
+		set_null();
+		set_character_from_setting(character_setting);
+		animation_init();
+	}
 Character::Character(int kind, string name, string character_setting, sf::Vector2f pos, int dir)
 	:Item(kind,name,pos,dir){
-	set_null();
-	set_character_from_setting(character_setting);
-}
+		set_null();
+		set_character_from_setting(character_setting);
+		animation_init();
+	}
 
 void Character::set_character_from_setting(string character_setting){
 	FILE *in = fopen(character_setting.c_str(), "r");

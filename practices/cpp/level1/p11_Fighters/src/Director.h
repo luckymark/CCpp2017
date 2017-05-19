@@ -21,6 +21,9 @@ class Director{
 		sf::Clock		clock;
 		sf::Event		event;
 
+		sf::Vector2f		player_position;
+		int 			player_key;
+
 	public:
 		Director();
 		void set_world(string setting);
@@ -31,6 +34,8 @@ class Director{
 		void fill_request();
 		void get_request();
 		void clear_request();
+		void update_player_position();
+		int get_player_key();
 		~Director();
 };
 

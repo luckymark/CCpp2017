@@ -1,21 +1,24 @@
 #include <cmath>
 #include "Player.h"
 
-Player::Player(int kind, string name, string character_setting):Character(kind,name,character_setting){
-	shot_direction = sf::Vector2f(0,0);
-	bullte = 0;
-	bullte_clock.restart();
-}
-Player::Player(int kind, string name, string character_setting, sf::Vector2f pos) :Character(kind,name,character_setting,pos){
-	shot_direction = sf::Vector2f(0,0);
-	bullte = 0;
-	bullte_clock.restart();
-}
-Player::Player(int kind, string name, string character_setting, sf::Vector2f pos, int dir) :Character(kind,name,character_setting,pos,dir){
-	shot_direction = sf::Vector2f(0,0);
-	bullte = 0;
-	bullte_clock.restart();
-}
+Player::Player(int kind, string name, string character_setting)
+	:Character(kind,name,character_setting){
+		shot_direction = sf::Vector2f(0,0);
+		bullte = 0;
+		bullte_clock.restart();
+	}
+Player::Player(int kind, string name, string character_setting, sf::Vector2f pos) 
+	:Character(kind,name,character_setting,pos){
+		shot_direction = sf::Vector2f(0,0);
+		bullte = 0;
+		bullte_clock.restart();
+	}
+Player::Player(int kind, string name, string character_setting, sf::Vector2f pos, int dir) 
+	:Character(kind,name,character_setting,pos,dir){
+		shot_direction = sf::Vector2f(0,0);
+		bullte = 0;
+		bullte_clock.restart();
+	}
 
 void Player::Action(sf::Time dt, sf::Vector2f mouse_position){
 	set_shot_direction(mouse_position);
@@ -26,7 +29,7 @@ void Player::Action(sf::Time dt, sf::Vector2f mouse_position){
 	}else {
 		fire(0);
 	}
-//	fire(0);
+	//	fire(0);
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
 		set_direction(sf::Vector2f(0,1));

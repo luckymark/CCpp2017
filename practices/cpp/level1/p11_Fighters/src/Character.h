@@ -32,6 +32,7 @@ class Character: public Item{
 		Character(int kind, string item_setting, string character_setting);
 		Character(int kind, string item_setting, string character_setting, sf::Vector2f pos);
 		Character(int kind, string item_setting, string character_setting, sf::Vector2f pos, int dir);
+		void animation_init();
 
 		void set_character_from_setting(string character_setting);
 

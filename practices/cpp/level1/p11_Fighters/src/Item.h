@@ -19,7 +19,6 @@
 
 
 #include <SFML/Graphics.hpp>
-//#include <SFML/Vector2.hpp>
 #include <SFML/Window.hpp>
 
 #include "Concept.h"

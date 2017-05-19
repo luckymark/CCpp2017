@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Bullet.h"
 #include "Room.h"
+#include "Enemy.h"
 #include <iostream>
 using namespace std;
 
@@ -13,6 +14,8 @@ Director::Director(){
 	sample.clear();
 	sample_type.clear();
 	clock.restart();
+	player_position = sf::Vector2f(-1,-1);
+	player_key = -1;
 }
 
 void Director::clean_stuff(){
@@ -55,7 +58,12 @@ void Director::world_loop(){
 	for(int i = 0; i < stuff.size(); i++){
 		float x = sf::Mouse::getPosition(window).x;
 		float y = sf::Mouse::getPosition(window).y;
-		stuff[i] -> Action(clock.getElapsedTime(),sf::Vector2f(x,y));
+		if(stuff[i] -> get_kind() == Player_type){
+			stuff[i] -> Action(clock.getElapsedTime(),sf::Vector2f(x,y));
+			update_player_position();
+		}else {
+			stuff[i] -> Action(clock.getElapsedTime(),player_position);
+		}
 	}
 	clean_stuff();
 	get_request();
@@ -70,6 +78,7 @@ void Director::main_loop(){
 				case sf::Event::Closed:
 					window.close();
 					break;
+				default: break;
 			}
 		}
 		window.clear(sf::Color(100,100,100));
@@ -80,6 +89,22 @@ void Director::main_loop(){
 		}
 		window.display();
 	}
+}
+
+void Director::update_player_position(){
+	player_position = stuff[get_player_key()] -> get_position();
+}
+
+int Director::get_player_key(){
+	if(player_key == -1){
+		for(int i = 0; i < stuff.size(); i++){
+			if(stuff[i] -> get_kind() == Player_type){ //0
+				player_key = i;
+				return i;
+			}
+		}
+	}
+	return player_key;
 }
 
 void Director::set_world(string setting){
@@ -113,7 +138,7 @@ void Director::new_stuff(int x,sf::Vector2f request_place, sf::Vector2f dir){
 			break;
 		case 2: tmp = new Room(sample_type[x], string(tt[0]), string(tt[1]), request_place);
 			break;
-		case 3: //tmp = new Normal(sample_type[x], sample[x], request_place);
+		case 3: tmp = new Enemy(sample_type[x], string(tt[0]), string(tt[1]), request_place);
 			break;
 		case 4: //tmp = new Object(sample_type[x], sample[x], request_place);
 			break;
