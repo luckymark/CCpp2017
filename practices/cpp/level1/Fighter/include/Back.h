@@ -8,10 +8,6 @@ class Back
         Back();
         virtual ~Back();
         sf::Sprite Get_sprite();
-        void view_back();
-
-    protected:
-
     private:
         sf::Texture texture;
         sf::Sprite sprite;

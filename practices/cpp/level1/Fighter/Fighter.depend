@@ -987,7 +987,7 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1495130288 source:h:\c++\fighter\main.cpp
+1495259023 source:h:\c++\fighter\main.cpp
 	<SFML/Audio.hpp>
 	<SFML/Graphics.hpp>
 	<windows.h>
@@ -996,6 +996,7 @@
 	"Hero.h"
 	"Bullet.h"
 	"Enemy.h"
+	"World.h"
 
 1494897085 h:\c++\fighter\include\music.h
 	<SFML/Audio.hpp>
@@ -1003,16 +1004,19 @@
 1494948137 source:h:\c++\fighter\src\music.cpp
 	"Music.h"
 
-1494894916 h:\c++\fighter\include\back.h
+1495258932 h:\c++\fighter\include\back.h
 	<SFML/Graphics.hpp>
 
-1494947183 source:h:\c++\fighter\src\back.cpp
+1495258954 source:h:\c++\fighter\src\back.cpp
 	"Back.h"
 
-1494952742 h:\c++\fighter\include\hero.h
+1495259482 h:\c++\fighter\include\hero.h
 	<SFML/Graphics.hpp>
+	"World.h"
+	"Back.h"
+	"Bullet.h"
 
-1495079445 source:h:\c++\fighter\src\hero.cpp
+1495258563 source:h:\c++\fighter\src\hero.cpp
 	"Hero.h"
 
 1495113878 source:h:\c++\fighter\src\bullet.cpp
@@ -1032,4 +1036,10 @@
 
 1495129049 source:h:\c++\fighter\src\enemy.cpp
 	"Enemy.h"
+
+1495255871 h:\c++\fighter\include\world.h
+	<SFML/Graphics.hpp>
+
+1495258647 source:h:\c++\fighter\src\world.cpp
+	"World.h"
 

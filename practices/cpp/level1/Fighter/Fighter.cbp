@@ -53,12 +53,14 @@
 		<Unit filename="include/Enemy.h" />
 		<Unit filename="include/Hero.h" />
 		<Unit filename="include/Music.h" />
+		<Unit filename="include/World.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Back.cpp" />
 		<Unit filename="src/Bullet.cpp" />
 		<Unit filename="src/Enemy.cpp" />
 		<Unit filename="src/Hero.cpp" />
 		<Unit filename="src/Music.cpp" />
+		<Unit filename="src/World.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

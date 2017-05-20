@@ -31,25 +31,47 @@ sf::Sprite Hero::Get_hero()
 void Hero::hero_move(sf::Sprite &sprit)
 {
     hero_position=sprit.getPosition();
-     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)&&(hero_position.x>130))
+    sf::Sprite backes=B.Get_sprite();
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)&&(hero_position.x>130))
         {
-
-           sprit.move(-1,0 );
-        }
+           World::window.clear();
+           sprit.move(-1,0 );        }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&&(hero_position.x<725))
         {
-
+           World::window.clear();
            sprit.move(1, 0);
         }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)&&(hero_position.y>-30))
         {
-
+           World::window.clear();
            sprit.move(0, -1);
         }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)&&(hero_position.y<840))
         {
-
+           World::window.clear();
            sprit.move(0, 1);
         }
+    World::window.draw(backes);
+    World::window.draw(sprit);
+}
 
+void Hero::fire(sf::Sprite &sprit)
+{
+   if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+        {
+         Bullet   *p=new Bullet(hero_position.x+60,hero_position.y-20);
+         sf::Sprite bullet=p->Get_bullet();
+//         sf::Vector2f bullet_position=bullet.getPosition();
+         for(int i=0;i<=300;i++){
+              bullet.move(0,-3);
+              World::window.draw(bullet);
+              World::window.display();
+              World::window.clear();
+//              World::window.draw(backes);
+              World::window.draw(sprit);
+//              World::window.draw(enemy.Get_enemy());
+              Hero::hero_move(sprit);
+           }
+          delete p;
+        }
 }
