@@ -145,16 +145,26 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\Bullet.cpp" />
+    <ClCompile Include="..\Classes\EnemyPlane.cpp" />
+    <ClCompile Include="..\Classes\EnemyPlaneLayer.cpp" />
     <ClCompile Include="..\Classes\GameMenu.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
+    <ClCompile Include="..\Classes\SelfPlaneLayer.cpp" />
+    <ClCompile Include="..\Classes\SelfPlane.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\Bullet.h" />
+    <ClInclude Include="..\Classes\EnemyPlane.h" />
+    <ClInclude Include="..\Classes\EnemyPlaneLayer.h" />
     <ClInclude Include="..\Classes\GameMenu.h" />
     <ClInclude Include="..\Classes\GameScene.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
+    <ClInclude Include="..\Classes\SelfPlaneLayer.h" />
+    <ClInclude Include="..\Classes\SelfPlane.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

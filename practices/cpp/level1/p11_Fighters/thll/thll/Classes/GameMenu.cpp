@@ -42,7 +42,7 @@ bool GameMenu::init()
 
 void GameMenu::menuStartCallBack(Ref* ref)
 {
-	auto game = GameScene::createScene();
+	auto game = GameScene::create();
 	
 	Director::getInstance()->replaceScene(game);
 }
