@@ -73,7 +73,6 @@ class Animation{
 								// note that we don't need to stop a image by ourself
 
 
-		//void affect_others(Animation *other);		/******* get some impact on others *******/
 		void be_affected(Animation *other);		/*留由后续开发Item时继续补充*/
 
 

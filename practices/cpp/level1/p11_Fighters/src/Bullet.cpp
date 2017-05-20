@@ -43,6 +43,17 @@ void Bullet::be_impacted_from(Item *other){
 				animation[cur_animation].set_acceleration(sf::Vector2f(0,0));
 			}
 		}
+	}else if(other -> get_kind() == 3){ // enemy
+		if(animation[cur_animation].is_affect()){
+			if(cur_animation == 0){
+				cur_animation = 1;
+				sound_flag = 0;
+				animation[cur_animation].initlize();
+				animation[cur_animation].set_play_flag(1);
+				animation[cur_animation].set_max_speed(0);
+				animation[cur_animation].set_acceleration(sf::Vector2f(0,0));
+			}
+		}
 	}
 	/*if(animation[cur_animation].is_affect()){
 		cur_animation = 1;
