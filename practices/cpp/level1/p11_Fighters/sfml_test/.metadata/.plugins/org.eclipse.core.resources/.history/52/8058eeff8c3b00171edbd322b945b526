@@ -1,0 +1,18 @@
+/*
+ * computercontrol.cpp
+ *
+ *  Created on: 2017年5月18日
+ *      Author: mark
+ */
+#include"advanced.h"
+#include <SFML/System.hpp>
+void computercontrol(Flight &flight)
+{
+	while(1){
+		flight.control2();
+		sf::sleep(sf::seconds(1));
+	}
+}
+
+
+

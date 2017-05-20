@@ -1,0 +1,64 @@
+14:36:58 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../t.cpp:14:0:
+../bullet2.h:53:13: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int size = 0;
+             ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:37:04 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
+14:41:52 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../control.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control.d" -MT"control.d" -o "control.o" "../control.cpp"
+../control.cpp: In member function ‘int Flight::control()’:
+../control.cpp:32:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+Finished building: ../control.cpp
+ 
+Building file: ../control2.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control2.d" -MT"control2.d" -o "control2.o" "../control2.cpp"
+Finished building: ../control2.cpp
+ 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../t.cpp:14:0:
+../bullet2.h:53:13: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int size = 0;
+             ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:41:59 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
+14:50:55 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
+14:51:02 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
+14:51:21 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
+14:51:24 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.

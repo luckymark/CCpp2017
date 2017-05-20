@@ -1,0 +1,58 @@
+/*
+ * t.cpp
+ *
+ *  Created on: 2017年5月5日
+ *      Author: mark
+ */
+
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include<iostream>
+#include"advanced.h"
+#include"flight.h"
+#include"map.h"
+#define WIDE 1300
+#define HIGH 1000
+
+int main()
+{
+
+    sf::RenderWindow window(sf::VideoMode(WIDE,HIGH), "Fly to Dream");
+
+    Flight MyFlight("image.jpg");
+    Flight EnemeyFlight;
+    Map map("map.jpg");
+
+
+    sf::Thread thread(&computercontrol,EnemeyFlight);
+
+    thread.launch();
+
+
+    while (window.isOpen())
+    {
+
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+
+            if (event.type == sf::Event::Closed)
+            	window.close();
+        }
+
+        MyFlight.control();
+
+        //线程：控制敌机，动作（不包括发子弹）；
+
+
+        window.clear(sf::Color::Black);
+
+        window.draw(map.Getsprite());
+        window.draw(MyFlight.GetSprite());
+        window.draw(EnemeyFlight.GetSprite());
+
+        window.display();
+    }
+
+    return 0;
+}

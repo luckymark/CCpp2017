@@ -1,0 +1,40 @@
+/*
+ * bullet2.h
+ *
+ *  Created on: 2017年5月18日
+ *      Author: mark
+ */
+
+#ifndef BULLET2_H_
+#define BULLET2_H_
+#include"bullet.h"
+#include<iostream>
+using namespace std ;
+class ArrayBullet
+{
+public:
+	void add(int x , int y){
+		bullet a(1);
+		a.set(x,y);
+		A.push_back(a);
+		size = A.size();
+	}
+	void add_e(int x , int y){
+		bullet a('a');
+		a.set(x,y);
+		A.push_back(a);
+		size = A.size();
+	}
+
+	void control
+
+
+private:
+	vector <bullet>A ;
+	int size = 0;
+};
+
+
+
+
+#endif /* BULLET2_H_ */

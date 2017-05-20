@@ -1,0 +1,41 @@
+/*
+ * control2.cpp
+ *
+ *  Created on: 2017年5月18日
+ *      Author: mark
+ */
+#include"advanced.h"
+#include"flight.h"
+#include<time.h>
+#include<stdlib.h>
+void Flight::control2()
+{
+	srand(time(0));
+	int choice = rand(0);
+	switch (choice){
+	case 1 :
+			if(sprite.getPosition().y>0)
+			sprite.move(0,-1);
+			break;
+	case 2 :
+			if(sprite.getPosition().y<666)
+			sprite.move(0,1);
+			break;
+	case 3 :
+			if(sprite.getPosition().x<1225)
+			sprite.move(1,0);
+			break;
+	case 4 :
+			if(sprite.getPosition().x>0)
+			sprite.move(-1,0);
+			break;
+	case 5 :
+		break;
+	default:
+		break;
+	}
+
+}
+
+
+

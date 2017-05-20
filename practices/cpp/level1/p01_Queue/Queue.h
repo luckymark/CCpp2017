@@ -25,9 +25,8 @@ public:
 private:
 
 	int data[100];
-
-	int head  ;
-
+	
+    int head  ;
 	int tail  ;
 
 };

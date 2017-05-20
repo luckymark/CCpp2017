@@ -38,9 +38,7 @@ bool Queue::Isemp()
 void Queue::append(int number)
 {
 	data [tail] = number ;
-
 	tail ++ ;
-
 }
 
 void Queue::show()
@@ -48,7 +46,6 @@ void Queue::show()
 	for(int i = 0 ; i < 100 ; i++  ){
 		cout << data[i] <<endl;
 	}
-
 }
 
 

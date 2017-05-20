@@ -1,0 +1,57 @@
+18:04:17 **** Incremental Build of configuration Debug for project Circuit ****
+make all 
+Building file: ../main.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+In file included from ../main.cpp:9:0:
+../circuit.h:17:14: error: invalid abstract type ‘device’ for ‘a’
+  device a[100];
+              ^
+In file included from ../main.cpp:8:0:
+../device.h:13:7: note:   because the following virtual functions are pure within ‘device’:
+ class device
+       ^
+../device.h:20:15: note: 	virtual void device::display()
+  virtual void display() = 0 ;
+               ^
+In file included from ../main.cpp:9:0:
+../circuit.h:17:14: error: cannot declare field ‘circuit::a’ to be of abstract type ‘device’
+  device a[100];
+              ^
+../circuit.h: In constructor ‘circuit::circuit()’:
+../circuit.h:20:6: warning: ‘circuit::status’ will be initialized after [-Wreorder]
+  int status;
+      ^
+../circuit.h:18:6: warning:   ‘int circuit::head’ [-Wreorder]
+  int head ;
+      ^
+../circuit.h:22:2: warning:   when initialized here [-Wreorder]
+  circuit():status(1),head(0),tail(0){}
+  ^
+../main.cpp: In function ‘int main()’:
+../main.cpp:15:2: error: ‘Fan’ was not declared in this scope
+  Fan fan1 ;
+  ^
+../main.cpp:16:9: error: expected unqualified-id before ‘.’ token
+  circuit.add(light1);
+         ^
+../main.cpp:17:9: error: expected unqualified-id before ‘.’ token
+  circuit.add(fan1);
+         ^
+../main.cpp:18:9: error: expected unqualified-id before ‘.’ token
+  circuit.status();
+         ^
+../main.cpp:19:9: error: expected unqualified-id before ‘.’ token
+  circuit.on();
+         ^
+../main.cpp:20:9: error: expected unqualified-id before ‘.’ token
+  circuit.status();
+         ^
+../main.cpp:21:9: error: expected unqualified-id before ‘.’ token
+  circuit.off();
+subdir.mk:18: recipe for target 'main.o' failed
+         ^
+../main.cpp:22:9: error: expected unqualified-id before ‘.’ token
+  circuit.status();
+         ^
+make: *** [main.o] Error 1

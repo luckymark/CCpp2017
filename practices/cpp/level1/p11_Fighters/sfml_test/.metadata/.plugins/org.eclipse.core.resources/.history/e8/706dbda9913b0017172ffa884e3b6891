@@ -1,0 +1,20 @@
+/*
+ * computercontrol.cpp
+ *
+ *  Created on: 2017年5月18日
+ *      Author: mark
+ */
+#include"advanced.h"
+#include <SFML/System.hpp>
+#include<iostream>
+void computercontrol(Flight &flight)
+{
+	while(1){
+		flight.control2();
+		std::cout<<"in thread !"<<std::endl;
+		sf::sleep(sf::seconds(1));
+	}
+}
+
+
+

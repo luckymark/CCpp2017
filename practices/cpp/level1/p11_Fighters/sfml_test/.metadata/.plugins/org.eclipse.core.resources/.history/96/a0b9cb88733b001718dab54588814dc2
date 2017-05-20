@@ -1,0 +1,58 @@
+/*
+ * flight.h
+ *
+ *  Created on: 2017年5月16日
+ *      Author: mark
+ */
+
+#ifndef FLIGHT_H_
+#define FLIGHT_H_
+#include <SFML/Graphics.hpp>
+
+class Flight
+{
+public:
+	Flight(const char* filename){
+		life = 3 ;
+		texture.loadFromFile(filename);
+		sprite.setTexture(texture);
+		sprite.setPosition(500,500);
+	}
+	Flight(){
+		life = 1 ;
+		texture.loadFromFile("image.jpg");
+
+		sprite.setTexture(texture);
+
+	}
+
+	void control();
+
+	sf::Sprite &GetSprite(){
+		return sprite ;
+	}
+
+	void restore(){
+		life++;
+	}
+	void subtract(){
+		life--;
+	}
+
+	bool ifdeath(){
+		if(life<=0){
+			return 0;
+		}
+		return 1 ;
+	}
+
+private:
+	int life ;
+	sf::Texture texture;
+	sf::Sprite sprite;
+};
+
+
+
+
+#endif /* FLIGHT_H_ */

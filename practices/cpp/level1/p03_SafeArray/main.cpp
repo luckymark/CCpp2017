@@ -12,16 +12,14 @@ using namespace std ;
 
 int main()
 {
-
 	cout<<"how many numbers do you want to save?"<<endl;
 
 	int number ;
-
 	cin>>number ;
 
 	SafeArry a(number);
 
-	for(int i = 0 ; i< number ; i++ ){
+	for(int i = 0 ; i < number ; i++) {
 		srand(time(0));
 		a.put(i,rand());
 	}

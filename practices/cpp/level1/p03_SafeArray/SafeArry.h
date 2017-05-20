@@ -21,9 +21,7 @@ public:
 
 private:
 	int k ;
-
 	int* arry ;
-
 };
 
 

@@ -13,14 +13,12 @@ int main()
 {
 	Queue queue ;
 
-	queue.Isemp();
+    queue.Isemp();
 
 	int i =0;
 
 	while( !(queue.IsFull()) ){
-
 		queue.append(i);
-
 		i++;
 	}
 

@@ -1,0 +1,65 @@
+/*
+ * t.cpp
+ *
+ *  Created on: 2017年5月5日
+ *      Author: mark
+ */
+#include <SFML/Graphics.hpp>
+#include <iostream>
+
+//sf::Mutex mutex;
+
+//int k = 0 ;
+
+/*void func()
+{
+
+		sf::Lock lock(mutex);
+		for(int i = 0; i<10 ;++i){
+			std::cout<<"I am thread number one"<<std::endl;
+			k++;
+			std::cout<<k<<std::endl;
+		}
+
+
+}
+*/
+
+int main()
+{
+	//sf::Thread thread(&func);
+	//thread.launch();
+
+	//sf::Lock lock(mutex);
+
+	sf::Window window(sf::VideoMode(800,600),"MY window",sf::Style::Close);
+
+	while(window.isOpen()){
+		sf::Event event ;
+
+		if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		{
+			std::cout<<"left"<<std::endl;
+		}
+		while(window.pollEvent(event)){
+			if(event.type == sf::Event::LostFocus){
+				std::cout<<"1"<<std::endl;
+			}
+			if(event.type == sf::Event::Closed){
+				window.close();
+			}
+		}
+	}
+
+	//for(int i=0;i<10;++i){
+	//	std::cout<<"I am the main thread"<<std::endl;
+	//	k++;
+	//	std::cout<<k<<std::endl;
+//	}
+
+
+	return 0 ;
+}
+
+
+

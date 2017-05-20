@@ -1,0 +1,33 @@
+/*
+ * control2.cpp
+ *
+ *  Created on: 2017年5月18日
+ *      Author: mark
+ */
+#include"advanced.h"
+#include"flight.h"
+void Flight::control2()
+{
+	int choice = myrand();
+	switch (choice){
+	case 1 : sprite.move(0,-1);
+			break;
+	case 2 : sprite.move(0,1);
+			break;
+	case 3 :
+			sprite.move(1,0);
+			break;
+	case 4 :
+			if(sprite.getPosition().x>0)
+			sprite.move(-1,0);
+			break;
+	case 5 :
+		break;
+	default:
+		break;
+	}
+
+}
+
+
+

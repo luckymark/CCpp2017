@@ -81,14 +81,16 @@ public:
 	int DELETE_STUDENT(int n){
 		Point* A  = Link_Head ;
 		if ( Number == 0 ) return 1;
-		while(1){
+	
+        while(1){
 			if( A->now->Getnumber() == n ){break;}
 			A = A->next ;
 			if( A == NULL ){
 				return 1 ;
 			}
 		}
-		Point *B = A ->next;
+
+        Point *B = A ->next;
 
 		if(Link_Head == Link_Tail){
 			delete A->now;
@@ -110,7 +112,6 @@ public:
 
 		else if( A->last == NULL ){
 			A->next->last = NULL ;
-
 			Link_Head = A->next ;
 
 			delete A->now;
@@ -129,7 +130,6 @@ public:
 			A->now = NULL ;
 			delete A ;
 			A = NULL ;
-
 
 			Number -- ;
 		}

@@ -1,0 +1,18 @@
+/*
+ * mysand.cpp
+ *
+ *  Created on: 2017年5月18日
+ *      Author: mark
+ */
+#include<time.h>
+#include<stdlib.h>
+
+int mysand()
+{
+	srand(time(0));
+	int A = rand()%5+1;
+	return A ;
+}
+
+
+

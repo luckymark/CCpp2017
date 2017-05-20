@@ -1,0 +1,13 @@
+/*
+ * control.cpp
+ *
+ *  Created on: 2017年5月16日
+ *      Author: mark
+ */
+void control(&sf::Sprite sprite)
+{
+
+}
+
+
+

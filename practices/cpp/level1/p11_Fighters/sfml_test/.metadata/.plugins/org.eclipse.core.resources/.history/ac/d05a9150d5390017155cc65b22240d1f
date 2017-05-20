@@ -1,0 +1,30 @@
+/*
+ * control.cpp
+ *
+ *  Created on: 2017年5月16日
+ *      Author: mark
+ */
+#include <SFML/Graphics.hpp>
+
+void control(sf::Sprite &sprite1)
+{
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+    	sprite1.move(-3,0);
+    }
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+    	sprite1.move(3,0);
+    }
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)){
+    	sprite1.move(0,-5);
+    }
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)){
+    	sprite1.move(0,5);
+    }
+
+}
+
+
+
