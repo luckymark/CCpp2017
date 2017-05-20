@@ -5,11 +5,9 @@
 
 class Player: public Character{
 	public:
-		Player(int kind, string name, string character_setting);
-		Player(int kind, string name, string character_setting, sf::Vector2f pos);
-		Player(int kind, string name, string character_setting, sf::Vector2f pos, int dir);
+		Player(int kind, string name, sf::Vector2f pos, Director *world);
 		virtual void Action(sf::Time dt,sf::Vector2f pos);
-		void fire(int x);
+		void fire(sf::Time dt, sf::Vector2f dir);
 };
 
 

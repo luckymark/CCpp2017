@@ -8,9 +8,6 @@ using namespace std;
 
 Director::Director(){
 	stuff.clear();
-	request.clear();
-	request_position.clear();
-	request_dir.clear();
 	sample.clear();
 	sample_type.clear();
 	clock.restart();
@@ -31,25 +28,8 @@ void Director::clean_stuff(){
 	}
 }
 
-void Director::get_request(){
-	for(int i = 0; i < stuff.size(); i++){
-		if(stuff[i] -> has_request()){
-			request.push_back(stuff[i] -> get_request());
-			request_position.push_back(stuff[i] -> get_position());
-			request_dir.push_back(stuff[i] -> get_request_direction());
-		}
-	}
-}
-
-void Director::clear_request(){
-	request_position.clear();
-	request.clear();
-	request_dir.clear();
-}
 
 void Director::world_loop(){
-	fill_request();
-	clear_request();
 	for(int i = 0; i < stuff.size(); i++)
 		for(int j = i + 1; j < stuff.size(); j++){
 			stuff[j] -> be_impacted_from(stuff[i]); ///
@@ -66,7 +46,6 @@ void Director::world_loop(){
 		}
 	}
 	clean_stuff();
-	get_request();
 }
 void Director::main_loop(){
 	window.create(sf::VideoMode(800,800), "My window");
@@ -123,22 +102,15 @@ void Director::new_stuff(int x,sf::Vector2f request_place, sf::Vector2f dir){
 	if(x == -1) return;
 	if(x >= sample.size()) return;
 
-	char tt[2][1005];
-	FILE *in = fopen(sample[x].c_str(), "r");
-	fscanf(in,"%s",tt[0]);
-	fscanf(in,"%s",tt[1]);
-	fclose(in);
 	Item *tmp = NULL;
 	switch(sample_type[x]){
-		case 0: tmp = new Player(sample_type[x], string(tt[0]), string(tt[1]), request_place);
-			tmp -> set_direction(dir);
+		case 0: tmp = new Player(sample_type[x], sample[x], request_place,this);
 			break;
-		case 1: tmp = new Bullet(sample_type[x], string(tt[0]), string(tt[1]), request_place);
-			tmp -> set_direction(dir);
+		case 1: tmp = new Bullet(sample_type[x], sample[x], request_place,this);
 			break;
-		case 2: tmp = new Room(sample_type[x], string(tt[0]), string(tt[1]), request_place);
+		case 2: tmp = new Room(sample_type[x], sample[x], request_place,this);
 			break;
-		case 3: tmp = new Enemy(sample_type[x], string(tt[0]), string(tt[1]), request_place);
+		case 3: tmp = new Enemy(sample_type[x], sample[x], request_place,this);
 			break;
 		case 4: //tmp = new Object(sample_type[x], sample[x], request_place);
 			break;
@@ -147,12 +119,6 @@ void Director::new_stuff(int x,sf::Vector2f request_place, sf::Vector2f dir){
 	}
 	if(tmp != NULL) 
 		stuff.push_back(tmp);
-}
-
-void Director::fill_request(){
-	for(int i = 0; i < request.size(); i++){
-		new_stuff(request[i],request_position[i],request_dir[i]);
-	}
 }
 
 Director::~Director(){

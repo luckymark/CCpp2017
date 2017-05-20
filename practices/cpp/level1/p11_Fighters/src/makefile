@@ -1,6 +1,6 @@
-main: main.cpp Animation.o Item.o Character.o Director.o Player.o Bullet.o Room.o Enemy.o
+main: main.cpp Animation.o Item.o Character.o Director.o Player.o Bullet.o Room.o Enemy.o Physics.o
 	clang++ main.cpp Item.o Animation.o Frame.o Character.o Director.o Player.o Bullet.o Room.o \
-		Bag.o Prop.o Magic.o Skill.o Buff.o Enemy.o\
+		Bag.o Prop.o Magic.o Skill.o Buff.o Enemy.o Physics.o\
 		-F /Library/Frameworks -framework sfml-audio -framework sfml-window -framework sfml-graphics \
 		-framework sfml-system -framework OpenGL -framework GLUT -o main.cpp.out -g
 
@@ -22,7 +22,7 @@ Bullet.o: Bullet.h Bullet.cpp Item.o
 Room.o: Room.h Room.cpp Item.o
 	clang++ -I /usr/local/include Room.cpp -c -g
 
-Item.o:	Item.cpp Item.h Animation.o Concept.h Bag.o Prop.o Magic.o Skill.o Buff.o
+Item.o:	Item.cpp Item.h Animation.o Concept.h Bag.o Prop.o Magic.o Skill.o Buff.o Physics.o
 	clang++ -I /usr/local/include Item.cpp -c -g
 
 Animation.o: Animation.cpp Animation.h Frame.o
@@ -45,6 +45,9 @@ Magic.o: Magic.cpp Magic.h
 
 Skill.o: Skill.cpp Skill.h
 	clang++ -I /usr/local/include/ Skill.cpp -c -g
+
+Physics.o: Physics.cpp Physics.h
+	clang++ -I /usr/local/include/ Physics.cpp -c -g
 
 
 template: main.cpp

@@ -1,96 +1,27 @@
 #include "Item.h"
 
 Animation* Item::get_cur_animation(){
-	//return animation + cur_animation;
 	return &animation[cur_animation];
 }
 
-void Item::set_direction(sf::Vector2f dir){
-	direction = dir;
-}
-
-sf::Vector2f Item::get_request_direction(){
-	return request_direction;
-}
-
 void Item::set_speed(sf::Vector2f sp){
-	speed = sp;
+	physics.set_speed(sp);
 }
 sf::Vector2f Item::get_position(){
-	return position;
+	return physics.get_position();
 }
-Item::Item(int kind, string item_setting_name){
-	toward = 0;
+Item::Item(int kind, string item_setting_name, sf::Vector2f pos, Director *world_){
 	item_kind = 0;
 	animation = NULL;
 	animation_num = 0;
-	position = sf::Vector2f(0,0);
-	speed = sf::Vector2f(0,0);
-	stop_ratio = 1;
 	cur_animation = 0;
-	default_animation = 0;
-	is_on_ground = 0;
-	dead_flag = 0;
-	request = -1;
-	request_flag = 0;
-	direction = sf::Vector2f(0,0);
-	request_direction = sf::Vector2f(0,0);
+	world = NULL;
 
 	item_kind = kind;
+	physics.set_position(pos);
+	world = world_;
+
 	get_setting(item_setting_name);
-}
-Item::Item(int kind, string item_setting_name, sf::Vector2f pos){
-	toward = 0;
-	item_kind = 0;
-	animation = NULL;
-	animation_num = 0;
-	position = sf::Vector2f(0,0);
-	speed = sf::Vector2f(0,0);
-	stop_ratio = 1;
-	cur_animation = 0;
-	default_animation = 0;
-	is_on_ground = 0;
-	dead_flag = 0;
-	request = -1;
-	request_flag = 0;
-	direction = sf::Vector2f(0,0);
-	request_direction = sf::Vector2f(0,0);
-
-	item_kind = kind;
-	request_flag = dead_flag = 0;
-	position = pos;
-	get_setting(item_setting_name);
-}
-Item::Item(int kind, string item_setting_name, sf::Vector2f pos, int dir){
-	toward = 0;
-	item_kind = 0;
-	animation = NULL;
-	animation_num = 0;
-	position = sf::Vector2f(0,0);
-	speed = sf::Vector2f(0,0);
-	stop_ratio = 1;
-	cur_animation = 0;
-	default_animation = 0;
-	is_on_ground = 0;
-	dead_flag = 0;
-	request = -1;
-	request_flag = 0;
-	direction = sf::Vector2f(0,0);
-	request_direction = sf::Vector2f(0,0);
-
-	item_kind = kind;
-	position = pos;
-	get_setting(item_setting_name);
-	set_toward(dir);
-}
-
-int Item::get_toward(){
-	return toward;
-}
-
-void Item::stop(){
-	animation[cur_animation].set_stop_ratio(stop_ratio);
-	animation[cur_animation].set_play_flag(0);
 }
 
 int Item::get_kind(){
@@ -102,16 +33,13 @@ Animation* Item::get_current_animation(){
 }
 
 sf::Vector2f Item::get_speed(){
-	return speed;
+	return physics.get_speed();
 }
 
-void Item::update_speed(){
-	speed = animation[cur_animation].get_speed();
-}
 
 void Item::set_position(sf::Vector2f pos){
-	position = pos;
-	animation[cur_animation].set_core_position(pos);
+	physics.set_position(pos);
+	animation[cur_animation].set_position(pos);
 }
 
 void Item::get_setting(string item_setting_name){
@@ -130,22 +58,43 @@ void Item::get_setting(string item_setting_name){
 
 	char tmp[1005];
 	for(int i = 0; i < animation_num; i++){
-		fscanf(in, "%s", tmp);		//image_setting
+		fscanf(in, "%s ", tmp);		//image_setting
 		animation[i].set_sequence(string(tmp));
-		fscanf(in, "%s", tmp);		//audio_setting
+		fscanf(in, "%s ", tmp);		//audio_setting
 		animation[i].set_sound(string(tmp));
-		animation[i].update_last_time(); //update the last time of each frame
+		animation[i].update_last_time_from_sound(); //update the last time of each frame
+	}
+
+	for(int i = 0; i < 3; i++)
+		if(fscanf(in, " %d",&life.w[i]) == EOF){
+			cerr << "meet Eof" << endl;
+			exit(0);
+		}
+	for(int i = 0; i < 3; i++)
+		if(fscanf(in, " %d",&magic.w[i]) == EOF){
+			cerr << "meet EOF" << endl;
+			exit(0);
+		}
+
+	float mx;
+	fscanf(in," %f",&mx);
+	physics.set_max_power_ratio(mx);
+	fscanf(in," %f",&mx);
+	physics.set_mu(mx);
+	fscanf(in," %f",&mx);
+	physics.set_mass(mx);
+	fscanf(in," %f",&mx);
+	physics.set_max_force(mx);
+
+	for(int i = 0; i < animation_num; i++){
+		fscanf(in, " %f", &skill[i].power_ratio_percentage);
 	}
 
 	fclose(in);
 }
 
-void Item::set_toward(int dir){
-	toward = dir;
-}
-
-void Item::set_stop_ratio(float f){
-	stop_ratio = f;
+void Item::add_force_from_skill(int key, sf::Vector2f dir,sf::Time dt){
+	physics.add_power_ratio(dir * skill[key].power_ratio_percentage * physics.get_max_power_ratio(),dt);
 }
 
 sf::Sprite* Item::display(){
@@ -153,13 +102,10 @@ sf::Sprite* Item::display(){
 }
 
 void Item::next(sf::Time dt){
+	animation[cur_animation].set_position(physics.get_position());
 	animation[cur_animation].next_frame(dt);
-	update_position();
-	update_speed();
-}
-
-void Item::update_position(){
-	position = animation[cur_animation].get_core_position();
+	physics.next(dt);
+	animation[cur_animation].set_position(physics.get_position());
 }
 
 Item::~Item(){

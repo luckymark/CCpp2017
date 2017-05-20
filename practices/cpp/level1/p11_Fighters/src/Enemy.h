@@ -7,20 +7,7 @@
 
 class Enemy:public Character{
 	public:
-		Enemy(int		kind, 
-		      string		item_setting,
-		      string		enemy_setting);
-
-		Enemy(int		kind,
-		      string		item_setting, 
-		      string		enemy_setting,
-		      sf::Vector2f 	pos);
-
-		Enemy(int 		kind,
-		      string 		item_setting,
-		      string 		enemy_setting, 
-		      sf::Vector2f 	pos, 
-		      int 		dir);
+		Enemy(int kind, string item_setting,sf::Vector2f pos, Director *world);
 
 		void fire(int x);
 		virtual void Action(sf::Time dt, sf::Vector2f mouse_position);

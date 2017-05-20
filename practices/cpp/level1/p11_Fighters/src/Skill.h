@@ -5,11 +5,9 @@
 struct Skill{
 	Buff buff;
 	Buff cost;
-	float speed;
-	float acceleration;
-	int which_animation;
+	float power_ratio_percentage;
 	Skill();
-       	Skill(Buff buff,Buff cost,int speed,int acceleration,int which);
+       	Skill(Buff buff,Buff cost,float power_ratio_percentage);
 };
 
 

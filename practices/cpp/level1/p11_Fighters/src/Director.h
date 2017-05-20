@@ -10,9 +10,6 @@ using namespace std;
 class Director{
 	private:
 		vector<Item*>  		stuff;
-		vector<int> 		request;
-		vector<sf::Vector2f>	request_position;
-		vector<sf::Vector2f> 	request_dir;
 
 		vector<string> 		sample;
 		vector<int>		sample_type;
@@ -31,8 +28,6 @@ class Director{
 		void main_loop();
 		void new_stuff(int x,sf::Vector2f place, sf::Vector2f dir);
 		void clean_stuff();
-		void fill_request();
-		void get_request();
 		void clear_request();
 		void update_player_position();
 		int get_player_key();

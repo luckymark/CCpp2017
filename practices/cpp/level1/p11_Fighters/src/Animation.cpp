@@ -6,45 +6,19 @@
 #include <cstring>
 using namespace std;
 
-void Animation::set_stop_ratio(float f){
-	stop_ratio = f;
-}
-
 Animation::Animation(){
 	sequence.clear();
 	cur_time.restart();
 	last_time = cur_time.getElapsedTime();
 	play_flag = 0;
 	cur_frame = 0;
-	core_position = sf::Vector2f(0,0);
-	speed = sf::Vector2f(0,0);
-	max_speed = 0;
-	stop_ratio = 1;
-	acceleration = sf::Vector2f(0,0);
+	position = sf::Vector2f(0,0);
 	affect_flag = 0;
 	sound_flag = 1;
 }
 
 void Animation::set_sound_flag(int f){
 	sound_flag = f;
-}
-
-Animation::Animation( string frame_setting_file_name, string sound_file_name){
-	sequence.clear();
-	cur_time.restart();
-	last_time = cur_time.getElapsedTime();
-	play_flag = 0;
-	cur_frame = 0;
-	core_position = sf::Vector2f(0,0);
-	speed = sf::Vector2f(0,0);
-	max_speed = 0;
-	stop_ratio = 1;
-	acceleration = sf::Vector2f(0,0);
-	affect_flag = 0;
-
-	set_sound(sound_file_name); 		
-	set_sequence(frame_setting_file_name);
-	update_last_time();
 }
 
 void Animation::set_sound(const string &sound_file_name){
@@ -82,7 +56,7 @@ void Animation::set_sequence(const string &frame_setting_file_name){
 	fclose(in);
 }
 
-void Animation::update_last_time(){
+void Animation::update_last_time_from_sound(){
 	if((long long)sequence.size() == 0) {
 		cerr << " zero length sequence in Animation.cpp " << endl;
 		exit(0);
@@ -104,23 +78,7 @@ float length2(sf::Vector2f vec){
 	return vec.x*vec.x + vec.y*vec.y + 0.01;
 }
 
-void Animation::set_max_speed(float sp){
-	max_speed = sp;
-}
-
 void Animation::next_frame(sf::Time dt){
-	//if(play_flag == 0) return;
-	core_position += speed * dt.asSeconds();
-	speed += acceleration * dt.asSeconds();
-
-	if(length2(speed) > max_speed){
-		speed *= max_speed / length2(speed);
-	}
-	if(play_flag == 0){ 			//当没有按键的事件的时候，就慢慢停下来
-		acceleration = sf::Vector2f(0,0);
-		speed *= stop_ratio;
-	}
-
 
 	if(cur_time.getElapsedTime() < last_time) return;
 	cur_frame++;
@@ -130,21 +88,7 @@ void Animation::next_frame(sf::Time dt){
 		initlize();
 		return;
 	}
-	//sound.stop();
-	//sound.setPlayingOffset(last_time * (long long)cur_frame);
 	cur_time.restart();
-}
-
-sf::Vector2f Animation::get_speed(){
-	return speed;
-}
-
-void Animation::set_acceleration(sf::Vector2f ac){
-	acceleration = ac;
-}
-
-void Animation::set_speed(sf::Vector2f sp){
-	speed = sp;
 }
 
 void Animation::set_length(int key,sf::Vector2f len){
@@ -153,26 +97,17 @@ void Animation::set_length(int key,sf::Vector2f len){
 
 sf::Sprite* Animation::begin_cur_display(){
 	if(sound.getStatus() == 0 && sound_flag)sound.play();
-	sequence[cur_frame].set_core_position(core_position);
+	sequence[cur_frame].set_core_position(position);
 	return sequence[cur_frame].display();
 }
 
-void Animation::end_cur_display(){
-	//sound.pause();
-	//sound.setPlayingOffset(last_time * (long long)cur_frame);
-}
-
-void Animation::set_core_position(sf::Vector2f pos){
-	core_position = pos;
+void Animation::set_position(sf::Vector2f pos){
+	position = pos;
 	sequence[cur_frame].set_core_position(pos);
 }
 
 void Animation::set_play_flag(int f){
 	play_flag = f;
-}
-
-sf::Vector2f Animation::get_core_position(){
-	return core_position;
 }
 
 void Animation::be_affected(Animation *other){
