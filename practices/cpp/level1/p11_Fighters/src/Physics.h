@@ -32,6 +32,7 @@ class Physics{
 		sf::Vector2f get_position();
 		sf::Vector2f get_speed();
 		float get_max_power_ratio();
+		float get_mass();
 
 		void add_motivation(sf::Time dt);
 		void add_motivation(sf::Vector2f mo);

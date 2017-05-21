@@ -31,8 +31,8 @@ void Frame::update_draw_position(){
 	sprite.setPosition(core_position - del_position);
 }
 
-sf::Sprite* Frame::display(){
-	return &sprite;
+void Frame::display(sf::RenderWindow *win){
+	win -> draw(sprite);
 }
 
 void Frame::set_image(string image_file_name){

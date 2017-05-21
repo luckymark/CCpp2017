@@ -1,4 +1,9 @@
 #include "Item.h"
+#include "Director.h"
+
+void Item::dead(){
+	world -> delete_stuff(this);
+}
 
 Animation* Item::get_cur_animation(){
 	return &animation[cur_animation];
@@ -97,8 +102,8 @@ void Item::add_force_from_skill(int key, sf::Vector2f dir,sf::Time dt){
 	physics.add_power_ratio(dir * skill[key].power_ratio_percentage * physics.get_max_power_ratio(),dt);
 }
 
-sf::Sprite* Item::display(){
-	return animation[cur_animation].begin_cur_display();
+void Item::display(){
+	animation[cur_animation].begin_cur_display(&(world -> window));
 }
 
 void Item::next(sf::Time dt){

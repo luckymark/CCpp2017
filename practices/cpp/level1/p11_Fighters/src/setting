@@ -1,4 +1,5 @@
 0 ../data/character/setting
-1 ../data/bullet/total_setting
-2 ../data/Room/total_setting
-3 ../data/enemy/0/total_setting
+1 ../data/bullet/setting_move
+2 ../data/Room/setting
+3 ../data/enemy/0/setting
+4 ../data/bullet/setting_hit

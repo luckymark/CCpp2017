@@ -5,6 +5,10 @@
 #include <cstdlib>
 using namespace std;
 
+float Physics::get_mass(){
+	return mass;
+}
+
 float Physics::get_max_power_ratio(){
 	return max_power_ratio;
 }
@@ -30,7 +34,7 @@ void Physics::set_position(sf::Vector2f pos){
 }
 
 Physics::Physics(){
-	mass = 0;
+	mass = max_force = max_power_ratio = mu = max_mu = 0;
 	position = speed = motivation = force = sf::Vector2f(0,0);
 }
 void Physics::add_force(sf::Vector2f f){

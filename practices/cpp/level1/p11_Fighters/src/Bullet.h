@@ -9,9 +9,9 @@ class Bullet: public Item{
 	public:
 		Bullet(int kind, string item_setting, sf::Vector2f pos, Director *world);
 
-		virtual int is_dead();
 		virtual void be_impacted_from(Item *other);
 		virtual void Action(sf::Time dt, sf::Vector2f pos);
+		virtual void dead();
 };
 
 

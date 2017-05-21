@@ -40,9 +40,7 @@ class Animation{
 		void next_frame(sf::Time dt);			
 								
 
-		sf::Sprite* begin_cur_display();		
-								
-
+		void begin_cur_display(sf::RenderWindow *win);		
 
 		void be_affected(Animation *other);		
 

@@ -40,7 +40,6 @@ class Item{
 		vector<Buff*>	buff;			//用于储存当前的状态
 		Bag		bag;			//用于储存当前的物品
 
-		int 		dead_flag;
 	public:
 		Physics		physics;
 
@@ -62,9 +61,9 @@ class Item{
 		virtual void Action(sf::Time dt,sf::Vector2f pos){}
 		virtual void use_skill(int which){}		//留给character使用的接口
 
-		virtual sf::Sprite* display();
+		virtual void display();
 		void next(sf::Time dt);
-		int is_dead(){return 0;}
+		virtual void dead();
 
 		Animation* get_current_animation();
 

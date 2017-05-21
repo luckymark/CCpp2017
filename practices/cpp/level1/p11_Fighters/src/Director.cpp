@@ -15,19 +15,15 @@ Director::Director(){
 	player_key = -1;
 }
 
-void Director::clean_stuff(){
-	for(vector<Item*>::iterator it = stuff.begin(); it != stuff.end();){
-		if((*it) -> is_dead()){
-			if(*it != NULL){
-				delete *it;
-			}
-			it = stuff.erase(it);
-		}else {
-			it++;
+void Director::delete_stuff(Item *tmp){
+	for(vector<Item*>::iterator it = stuff.begin(); it != stuff.end(); it++){
+		if((*it) == tmp){
+			delete tmp;
+			stuff.erase(it);
+			return;
 		}
 	}
 }
-
 
 void Director::world_loop(){
 	for(int i = 0; i < stuff.size(); i++)
@@ -45,8 +41,8 @@ void Director::world_loop(){
 			stuff[i] -> Action(clock.getElapsedTime(),player_position);
 		}
 	}
-	clean_stuff();
 }
+
 void Director::main_loop(){
 	window.create(sf::VideoMode(800,800), "My window");
 	window.setVerticalSyncEnabled(true);
@@ -64,7 +60,7 @@ void Director::main_loop(){
 		world_loop();
 		clock.restart();
 		for(int i = 0; i < stuff.size(); i++){
-			window.draw(*(stuff[i] -> display()));
+			stuff[i] -> display();
 		}
 		window.display();
 	}
@@ -98,7 +94,7 @@ void Director::set_world(string setting){
 	fclose(in);
 }
 
-void Director::new_stuff(int x,sf::Vector2f request_place, sf::Vector2f dir){
+void Director::new_stuff(int x,sf::Vector2f request_place){
 	if(x == -1) return;
 	if(x >= sample.size()) return;
 

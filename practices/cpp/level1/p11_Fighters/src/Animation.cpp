@@ -80,6 +80,9 @@ float length2(sf::Vector2f vec){
 
 void Animation::next_frame(sf::Time dt){
 
+	if(play_flag == 0){
+		return;
+	}
 	if(cur_time.getElapsedTime() < last_time) return;
 	cur_frame++;
 	if(cur_frame >= sequence.size()){
@@ -95,10 +98,12 @@ void Animation::set_length(int key,sf::Vector2f len){
 	sequence[key].set_length(len);
 }
 
-sf::Sprite* Animation::begin_cur_display(){
+void Animation::begin_cur_display(sf::RenderWindow  *win){
 	if(sound.getStatus() == 0 && sound_flag)sound.play();
 	sequence[cur_frame].set_core_position(position);
-	return sequence[cur_frame].display();
+	if(play_flag){
+		sequence[cur_frame].display(win);
+	}
 }
 
 void Animation::set_position(sf::Vector2f pos){

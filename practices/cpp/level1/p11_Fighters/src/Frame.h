@@ -40,7 +40,7 @@ class Frame{ //帧
 			string image_info_flie_name );		
 
 		//void initlize();				
-		sf::Sprite* display();				
+		void display(sf::RenderWindow *win);				
 		int is_in(const sf::Vector2f &point);		
 		int is_in(Frame *other);
 
