@@ -50,7 +50,7 @@ void Player::fire(sf::Time dt,sf::Vector2f dir){
 	Item *tmp = NULL;
 	dir = physics.make_one(dir);
 	dir *= float(500);
-	tmp = new Bullet(world -> sample_type[1], world -> sample[1], physics.get_position(), world);
+	tmp = new Bullet(world -> sample_type[type_Bullet], world -> sample[type_Bullet], physics.get_position(), world);
 	if(tmp == NULL){
 		cerr << "get memery fail" << endl;
 		exit(0);

@@ -36,7 +36,7 @@ void Bullet::Action(sf::Time dt, sf::Vector2f pos){
 
 void Bullet::dead(){
 	Item *tmp = NULL;
-	tmp = new PureAnimationItem( world -> sample_type[4], world -> sample[4], physics.get_position(), world, 1);
+	tmp = new PureAnimationItem( world -> sample_type[type_Bullet_hit], world -> sample[type_Bullet_hit], physics.get_position(), world, 1);
 	if(tmp == NULL){
 		cerr << "fail to get mem" << endl;
 		exit(0);

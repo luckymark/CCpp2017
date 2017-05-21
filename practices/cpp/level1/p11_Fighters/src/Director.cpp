@@ -34,7 +34,7 @@ void Director::world_loop(){
 	for(int i = 0; i < stuff.size(); i++){
 		float x = sf::Mouse::getPosition(window).x;
 		float y = sf::Mouse::getPosition(window).y;
-		if(stuff[i] -> get_kind() == Player_type){
+		if(stuff[i] -> get_kind() == type_Player){
 			stuff[i] -> Action(clock.getElapsedTime(),sf::Vector2f(x,y));
 			update_player_position();
 		}else {
@@ -73,7 +73,7 @@ void Director::update_player_position(){
 int Director::get_player_key(){
 	if(player_key == -1){
 		for(int i = 0; i < stuff.size(); i++){
-			if(stuff[i] -> get_kind() == Player_type){ //0
+			if(stuff[i] -> get_kind() == type_Player){ //0
 				player_key = i;
 				return i;
 			}
@@ -100,13 +100,13 @@ void Director::new_stuff(int x,sf::Vector2f request_place){
 
 	Item *tmp = NULL;
 	switch(sample_type[x]){
-		case 0: tmp = new Player(sample_type[x], sample[x], request_place,this);
+		case type_Player: tmp = new Player(sample_type[x], sample[x], request_place,this);
 			break;
-		case 1: tmp = new Bullet(sample_type[x], sample[x], request_place,this);
+		case type_Bullet: tmp = new Bullet(sample_type[x], sample[x], request_place,this);
 			break;
-		case 2: tmp = new Room(sample_type[x], sample[x], request_place,this);
+		case type_Room: tmp = new Room(sample_type[x], sample[x], request_place,this);
 			break;
-		case 3: tmp = new Enemy(sample_type[x], sample[x], request_place,this);
+		case type_Enemy: tmp = new Enemy(sample_type[x], sample[x], request_place,this);
 			break;
 		case 4: //tmp = new Object(sample_type[x], sample[x], request_place);
 			break;

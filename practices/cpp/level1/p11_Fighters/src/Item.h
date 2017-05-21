@@ -16,14 +16,9 @@
 #include <utility>
 using namespace std;
 
-
-//Player 0
-//Bullet 1 
-//Room 	 2 
-//Enemy  3 //means normal enemy
-//Object 4
-//Boss   5
-enum {Player_type, Bullet_type, Room_type, Enemy_type, Object_type, Boss_type} item_type;
+enum {
+	type_Player, type_Bullet, type_Room, type_Enemy, type_Bullet_hit
+} item_type;
 static const int max_skill_num = 15;
 class Director;
 class Item{
