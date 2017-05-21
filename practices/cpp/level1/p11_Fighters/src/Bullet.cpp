@@ -44,8 +44,8 @@ void Bullet::dead(){
 	Item *tmp = NULL;
 	tmp = new PureAnimationItem( world -> sample_type[type_Bullet_hit], world -> sample[type_Bullet_hit], physics.get_position(), world, 1);
 	if(tmp == NULL){
-		cerr << "fail to get mem" << endl;
-		exit(0);
+		//cerr << "fail to get mem" << endl;
+		//exit(0);
 	}
 	world -> stuff.push_back(tmp);
 	world -> delete_stuff(this);

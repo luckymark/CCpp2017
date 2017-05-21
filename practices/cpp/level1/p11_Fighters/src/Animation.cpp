@@ -14,7 +14,7 @@ Animation::Animation(){
 	cur_frame = 0;
 	position = sf::Vector2f(0,0);
 	affect_flag = 0;
-	sound_flag = 1;
+	sound_flag = 1; //默认有声音
 }
 
 void Animation::set_sound_flag(int f){
@@ -87,6 +87,7 @@ void Animation::next_frame(sf::Time dt){
 	cur_frame++;
 	if(cur_frame >= sequence.size()){
 		play_flag = 0;
+		sound_flag = 0;
 		cur_frame = 0;
 		initlize();
 		return;

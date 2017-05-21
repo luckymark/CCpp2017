@@ -36,7 +36,18 @@ void Player::Action(sf::Time dt, sf::Vector2f mouse_position){
 		physics.set_self_move_ratio(0.4);
 		add_force_from_skill(1,sf::Vector2f(1,0),dt);
 		use_skill(3);
-	}else {
+	}else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
+		sf::Vector2f dir = physics.make_one(mouse_position - physics.get_position());
+		physics.set_self_move_ratio(0.4);
+		//add_force_from_skill(1,dir,dt);
+		physics.add_motivation(dir * float(300));
+		if(dir.x >= 0){
+		       	use_skill(5);
+		}else {
+			use_skill(6);
+		}
+	}
+	else {
 		physics.set_self_move_ratio(1);
 		if(abs(physics.get_speed().x) < 10 && abs(physics.get_speed().y) < 10){
 			use_skill(4);

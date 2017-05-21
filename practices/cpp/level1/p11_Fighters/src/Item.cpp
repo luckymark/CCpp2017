@@ -107,10 +107,9 @@ void Item::display(){
 }
 
 void Item::next(sf::Time dt){
-	animation[cur_animation].set_position(physics.get_position());
-	animation[cur_animation].next_frame(dt);
 	physics.next(dt);
 	animation[cur_animation].set_position(physics.get_position());
+	animation[cur_animation].next_frame(dt);
 }
 
 Item::~Item(){

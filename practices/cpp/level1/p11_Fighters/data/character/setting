@@ -1,4 +1,4 @@
-5
+7
 /Users/chenxiaoyu/cpp/home/CCpp2017/practices/cpp/level1/p11_Fighters/data/character/walk/0/setting
 /Users/chenxiaoyu/cpp/home/CCpp2017/practices/cpp/level1/p11_Fighters/data/character/walk/0/bird_flap.flac
 
@@ -13,6 +13,12 @@
 
 /Users/chenxiaoyu/cpp/home/CCpp2017/practices/cpp/level1/p11_Fighters/data/character/walk/0s/setting
 /Users/chenxiaoyu/cpp/home/CCpp2017/practices/cpp/level1/p11_Fighters/data/character/walk/0s/bird_flap.flac
+
+/Users/chenxiaoyu/cpp/home/CCpp2017/practices/cpp/level1/p11_Fighters/data/character/attack/0/setting
+/Users/chenxiaoyu/cpp/home/CCpp2017/practices/cpp/level1/p11_Fighters/data/character/attack/0/bird_flap.flac
+
+/Users/chenxiaoyu/cpp/home/CCpp2017/practices/cpp/level1/p11_Fighters/data/character/attack/0f/setting
+/Users/chenxiaoyu/cpp/home/CCpp2017/practices/cpp/level1/p11_Fighters/data/character/attack/0f/bird_flap.flac
 
 100
 1
@@ -32,3 +38,4 @@
 0.2
 0.2
 0.2
+1.0
