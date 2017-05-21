@@ -79,8 +79,26 @@ int Frame::is_in(const sf::Vector2f &point){
 }
 
 int Frame::is_in(Frame *other){
-	return 	   (core_position.x <= other -> x[1])
+	/*return 	   (core_position.x <= other -> x[1])
 	       	&& (core_position.x >= other -> x[0])
 		&& (core_position.y <= other -> y[1])
-	       	&& (core_position.y >= other -> y[0]);
+	       	&& (core_position.y >= other -> y[0]);*/
+	int tag1,tag2;
+	if(core_position.x < other -> x[0]){
+		tag1 = 0;
+	}else if(core_position.x >= other -> x[0] && core_position.x <= other -> x[1]){
+		tag1 = 1;
+	}else if(core_position.x > other -> x[1]){
+		tag1 = 2;
+	}
+
+	if(core_position.y < other -> y[0]){
+		tag2 = 0;
+	}else if(core_position.y >= other -> y[0] && core_position.y <= other -> y[1]){
+		tag2 = 1;
+	}else if(core_position.y > other -> y[1]){
+		tag2 = 2;
+	}
+
+	return tag2*3 + tag1;
 }

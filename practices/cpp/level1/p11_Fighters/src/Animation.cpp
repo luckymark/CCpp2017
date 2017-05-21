@@ -116,9 +116,13 @@ void Animation::set_play_flag(int f){
 }
 
 void Animation::be_affected(Animation *other){
-	int flag = sequence[cur_frame].is_in(&(other -> sequence[other -> cur_frame]));
-	flag |= other -> sequence[other -> cur_frame].is_in(&(sequence[cur_frame]));
+	int flag = (sequence[cur_frame].is_in(&(other -> sequence[other -> cur_frame])) == 4);
+	flag |= (other -> sequence[other -> cur_frame].is_in(&(sequence[cur_frame])) == 4);
 	affect_flag = flag;
+}
+
+int Animation::stand_at(Animation *other){ //自己在别人的哪个区域
+	return sequence[cur_frame].is_in(&(other -> sequence[other -> cur_frame]));
 }
 
 int Animation::is_affect(){

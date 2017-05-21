@@ -43,6 +43,7 @@ class Animation{
 		void begin_cur_display(sf::RenderWindow *win);		
 
 		void be_affected(Animation *other);		
+		int stand_at(Animation *other);
 
 
 		void set_sound(const string &sound_file_name);	

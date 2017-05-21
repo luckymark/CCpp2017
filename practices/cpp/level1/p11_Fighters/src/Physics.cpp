@@ -29,6 +29,18 @@ void Physics::set_max_force(float mx){
 	max_force = mx;
 }
 
+void Physics::add_position(sf::Vector2f del_pos){
+	position += del_pos;
+}
+
+void Physics::turn_motivation_y(){
+	motivation.y *= float(-1);
+}
+
+void Physics::turn_motivation_x(){
+	motivation.x *= float(-1);
+}
+
 void Physics::set_position(sf::Vector2f pos){
 	position = pos;
 }
@@ -40,6 +52,15 @@ Physics::Physics(){
 void Physics::add_force(sf::Vector2f f){
 	force += f;
 }
+
+sf::Vector2f Physics::get_motivation(){
+	return motivation;
+}
+
+void Physics::set_motivation(sf::Vector2f mo){
+	motivation = mo;
+}
+
 void Physics::add_motivation(sf::Time dt){
 	motivation += force * dt.asSeconds();
 }
@@ -83,6 +104,7 @@ void Physics::general_friction(float mu){
 	}
 
 }
+
 void Physics::update_position(sf::Time dt){
 	position += speed * dt.asSeconds();
 }

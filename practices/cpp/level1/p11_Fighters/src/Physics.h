@@ -22,6 +22,7 @@ class Physics{
 		Physics();
 		void set_max_force(float mx);
 		void set_position(sf::Vector2f pos);
+		void set_motivation(sf::Vector2f mo);
 		void set_speed(sf::Vector2f sp);
 		void set_self_move_ratio(float x);
 
@@ -29,6 +30,7 @@ class Physics{
 		void set_max_power_ratio(float m);
 		void set_mu(float m);
 
+		sf::Vector2f get_motivation();
 		sf::Vector2f get_position();
 		sf::Vector2f get_speed();
 		float get_max_power_ratio();
@@ -39,6 +41,11 @@ class Physics{
 		void add_force(sf::Vector2f f);
 		float get_length_of_vector(sf::Vector2f vec);
 		void add_power_ratio(sf::Vector2f pr,sf::Time dt);
+		void add_position(sf::Vector2f del_pos);
+
+		void turn_motivation_y();
+		void turn_motivation_x();
+
 
 		void update_speed();
 		void update_position(sf::Time dt);

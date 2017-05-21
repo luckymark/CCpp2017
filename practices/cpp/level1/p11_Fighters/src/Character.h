@@ -24,6 +24,7 @@ class Character: public Item{
 		void animation_init();
 		void set_shot_direction(sf::Vector2f pos);
 		void use_skill(int key);
+		virtual void be_impacted_from(Item *other);
 		virtual ~Character();
 };
 
