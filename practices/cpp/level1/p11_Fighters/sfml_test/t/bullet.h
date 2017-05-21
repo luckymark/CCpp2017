@@ -14,35 +14,40 @@ public:
 	bullet(char a){
 		texture.loadFromFile("bullet.jpg");
 		sprite.setTexture(texture);
-		sprite.setRotation(45);
+		sprite.scale(0.1,0.1);
+		sprite.setRotation(145);
 		b = 1 ;
 	}
 	bullet(int a){
 		texture.loadFromFile("bullet.jpg");
 		sprite.setTexture(texture);
-		sprite.setRotation(145);
+		sprite.scale(0.1,0.1);
+		sprite.setRotation(-45);
 		b = 0 ;
 	}
-	void set(int x , int y){
-		sprite.setPosition(x,y);
-	}
+
 	int fly1(){
-		if(sprite.getPosition().y>0){
+		if(sprite.getPosition().y<1000){
 			sprite.move(0,-1);
 			return 1 ;
 		}
 		else return 0;
 	}
 	int fly2(){
-		if(sprite.getPosition().y<1000){
+		if(sprite.getPosition().y>0){
 			sprite.move(0,1);
 			return 1 ;
 		}
 		else return 0;
 	}
+
 	int getb(){
 		return b ;
 	}
+	void set(int x , int y){
+			sprite.setPosition(x,y);
+	}
+
 	sf::Sprite getsprite(){
 		return sprite;
 	}

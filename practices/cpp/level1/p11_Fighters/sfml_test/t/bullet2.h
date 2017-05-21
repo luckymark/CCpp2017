@@ -10,7 +10,10 @@
 #include"bullet.h"
 #include<iostream>
 #include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
 using namespace std ;
+
+
 class ArrayBullet
 {
 public:
@@ -18,42 +21,36 @@ public:
 		bullet a(1);
 		a.set(x,y);
 		A.push_back(a);
-		size = A.size();
 	}
 	void add_e(int x , int y){
 		bullet a('a');
 		a.set(x,y);
 		A.push_back(a);
-		size = A.size();
 	}
 
-	void control_bullet(){
+void control_bullet(){
+	sf::Mutex mutex;
+	while(1){
+		mutex.lock();
 		if(A.size()!=0){
-			for(int i = 0;i <= size;i++){
+			for(int i = 0;i < A.size();i++){
 				if(A[i].getb()==1){
-					int j = A[i].fly1();
-					if( j == 0){
-						std::vector<bullet>::iterator it = A.begin()+j ;
-						A.erase(it);
-					}
+					int j = A[i].fly2();
+					if( j == 0){A.erase(A.begin() + i );}
 				}
 				if(A[i].getb()==0){
 					int j = A[i].fly1();
-					if( j == 0){
-						std::vector<bullet>::iterator it = A.begin()+j ;
-						A.erase(it);
-					}
+					if( j == 0){A.erase(A.begin() + i );}
 				}
-
-
-			}
+		   }
+			mutex.unlock();
+			sf::sleep(sf::milliseconds(10));
 		}
 	}
+}
 	vector <bullet>A ;
-	int size = 0;
+
+
 };
-
-
-
 
 #endif /* BULLET2_H_ */

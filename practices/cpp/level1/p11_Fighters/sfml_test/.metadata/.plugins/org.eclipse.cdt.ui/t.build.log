@@ -1,6 +1,24 @@
-14:51:24 **** Incremental Build of configuration Debug for project t ****
+11:39:57 **** Incremental Build of configuration Debug for project t ****
 make all 
-make: Nothing to be done for 'all'.
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:36:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:52:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
 
-14:51:24 Build Finished (took 94ms)
+11:39:57 Build Finished (took 638ms)
 

@@ -1,0 +1,60 @@
+/*
+ * t.cpp
+ *
+ *  Created on: 2017年5月5日
+ *      Author: mark
+ */
+
+#include <SFML/Graphics.hpp>
+#include <SFML/System.hpp>
+#include<iostream>
+#include"advanced.h"
+#include"flight.h"
+#include"map.h"
+#include"bullet2.h"
+#define WIDE 1300
+#define HIGH 1000
+
+int main()
+{
+	sf::Mutex mutex;
+
+    sf::RenderWindow window(sf::VideoMode(WIDE,HIGH), "Fly to Dream");
+
+    Flight MyFlight("timg.jpg");
+    Flight EnemeyFlight;
+    Map map("map.jpg");
+
+    ArrayBullet Bullet;
+
+    sf::Thread EnemeyControl(&Flight::control2,&EnemeyFlight);
+    sf::Thread BulletControl(&ArrayBullet::control_bullet,&Bullet);
+    sf::Thread MyflightControl(&Flight::control,&MyFlight);
+
+    EnemeyControl.launch();
+    BulletControl.launch();
+    MyflightControl.launch();
+
+    while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+            	window.close();
+        }
+
+        mutex.lock();
+        window.clear(sf::Color::Black);
+        window.draw(map.Getsprite());
+        window.draw(MyFlight.GetSprite());
+        for(int i= 0 ; i <= Bullet.size&&Bullet.size!=0;i++){
+        	window.draw(Bullet.A[i].getsprite());
+        }
+        window.draw(EnemeyFlight.GetSprite());
+        window.display();
+        mutex.unlock();
+    }
+
+    return 0;
+}
