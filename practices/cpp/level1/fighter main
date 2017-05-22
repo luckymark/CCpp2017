@@ -1,0 +1,127 @@
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include "music.h"
+#include "plane.h"
+
+
+void move(sf::Sprite *thing)
+{
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    {
+        thing->move(-5,0);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    {
+        thing->move(5,0);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    {
+        thing->move(0,-5);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    {
+        thing->move(0,5);
+    }
+}
+
+
+
+int main()
+{
+
+    sf::RenderWindow window(sf::VideoMode(1000,800), "play plane");
+
+
+
+    //音乐
+    Music mymusic;
+    mymusic.play();
+
+    //背景
+    sf::Texture a;
+    sf::Sprite b;
+    a.loadFromFile("back.png");
+    b.setTexture(a);
+
+    //飞机
+    sf::Texture texture;
+    sf::Sprite self;
+    texture.loadFromFile("plane.png");
+    self.setTexture(texture);
+
+    //子弹
+    Bullet mybullet[200];
+
+    //初始位置
+    self.setOrigin(50,50);
+    self.setPosition(500,750);
+
+    while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+            {
+                window.close();
+            }
+            //动飞机
+            if(self.getPosition().x>42&&self.getPosition().x<958&&self.getPosition().y>52&&self.getPosition().y<800)
+            {
+                move(&self);
+            }
+
+            //打子弹
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+            {
+                for(int i=0;i<200;i++)
+                {
+                    if(mybullet[i].statement==0)
+                    {
+                        mybullet[i].convex.setPosition(self.getPosition());
+                        mybullet[i].convex.move(0,-50);
+                        mybullet[i].convex.move(-13,0);
+                        mybullet[i].statement=1;
+                        break;
+                    }
+                }
+
+
+            }
+
+        }
+
+
+
+
+        for(int i=0;i<200;i++)
+        {
+            if(mybullet[i].statement==1)
+            {
+                mybullet[i].convex.move(0,-2);
+            }
+            if(mybullet[i].convex.getPosition().y<-20)
+            {
+                mybullet[i].statement=0;
+            }
+
+        }
+
+            window.clear();
+            window.draw(b);
+            window.draw(self);
+
+            for(int i=0;i<200;i++)
+            {
+                if(mybullet[i].statement==1)
+                {
+                    window.draw(mybullet[i].convex);
+                }
+
+            }
+            window.display();
+    }
+
+
+        return 0;
+}
