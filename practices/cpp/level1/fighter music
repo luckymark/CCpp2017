@@ -1,0 +1,17 @@
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
+class Music
+{
+    public:
+        sf::Music music;
+        int play()
+        {
+            if (!music.openFromFile("music.ogg"))
+            {
+                return -1;
+            }
+            music.play();
+        }
+
+};
