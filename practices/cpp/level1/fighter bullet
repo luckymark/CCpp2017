@@ -1,0 +1,21 @@
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
+class Bullet
+{
+    public:
+        sf::ConvexShape convex;
+
+        int statement=0;
+
+        Bullet()
+        {
+            convex.setPointCount(5);
+            convex.setPoint(0, sf::Vector2f(5, 0));
+            convex.setPoint(1, sf::Vector2f(0, 5));
+            convex.setPoint(2, sf::Vector2f(0, 20));
+            convex.setPoint(3, sf::Vector2f(10, 20));
+            convex.setPoint(4, sf::Vector2f(10, 5));
+        }
+
+};
