@@ -1,14 +1,14 @@
 [Editors]
 Order=0,1,2,3,4
-Focused=0
+Focused=3
 [Editor_0]
 CursorCol=3
 CursorRow=13
 TopLine=1
 LeftChar=1
 [Editor_1]
-CursorCol=13
-CursorRow=17
+CursorCol=17
+CursorRow=1
 TopLine=1
 LeftChar=1
 [Editor_2]
