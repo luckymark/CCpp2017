@@ -4,7 +4,7 @@
 #include "World.h"
 #include "Back.h"
 #include "Bullet.h"
-
+#include "Enemy.h"
 class Hero
 {
     public:
@@ -22,6 +22,7 @@ class Hero
 //        sf::Sprite hero;
         sf::Vector2f hero_position;
         Back B;
+        Enemy E;
 
 };
 

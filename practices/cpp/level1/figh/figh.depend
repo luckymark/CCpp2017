@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1495463573 source:h:\c”Ô—‘\figh\main.cpp
+1495469237 source:h:\c”Ô—‘\figh\main.cpp
 	<SFML/Audio.hpp>
 	<SFML/Graphics.hpp>
 	<windows.h>
@@ -8,6 +8,7 @@
 	"Hero.h"
 	"Bullet.h"
 	"World.h"
+	"Enemy.h"
 
 1494762233 h:\sfml-2.4.2\include\sfml\graphics.hpp
 	<SFML/Window.hpp>
@@ -506,11 +507,12 @@
 1495463536 h:\c”Ô—‘\figh\include\back.h
 	<SFML/Graphics.hpp>
 
-1495463545 h:\c”Ô—‘\figh\include\hero.h
+1495466944 h:\c”Ô—‘\figh\include\hero.h
 	<SFML/Graphics.hpp>
 	"World.h"
 	"Back.h"
 	"Bullet.h"
+	"Enemy.h"
 
 1495463536 h:\c”Ô—‘\figh\include\world.h
 	<SFML/Graphics.hpp>
@@ -524,7 +526,7 @@
 1495463536 source:h:\c”Ô—‘\figh\src\bullet.cpp
 	"Bullet.h"
 
-1495463536 source:h:\c”Ô—‘\figh\src\hero.cpp
+1495469020 source:h:\c”Ô—‘\figh\src\hero.cpp
 	"Hero.h"
 
 1495463536 source:h:\c”Ô—‘\figh\src\music.cpp
@@ -532,4 +534,10 @@
 
 1495463386 source:h:\c”Ô—‘\figh\src\world.cpp
 	"World.h"
+
+1495466944 h:\c”Ô—‘\figh\include\enemy.h
+	<SFML/Graphics.hpp>
+
+1495466958 source:h:\c”Ô—‘\figh\src\enemy.cpp
+	"Enemy.h"
 

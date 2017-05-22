@@ -35,21 +35,21 @@ void Hero::hero_move(sf::Sprite &sprit)
     sf::Sprite backes=B.Get_sprite();
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)&&(hero_position.x>130))
         {
-           World::window.clear();
-           sprit.move(-1,0 );        }
+//           World::window.clear();
+           sprit.move(-0.5,0 );        }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&&(hero_position.x<725))
         {
-           World::window.clear();
-           sprit.move(1, 0);
+//           World::window.clear();
+           sprit.move(0.5 , 0);
         }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)&&(hero_position.y>-30))
         {
-           World::window.clear();
+//           World::window.clear();
            sprit.move(0, -1);
         }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)&&(hero_position.y<840))
         {
-           World::window.clear();
+//           World::window.clear();
            sprit.move(0, 1);
         }
     World::window.draw(backes);
@@ -66,7 +66,9 @@ void Hero::fire(sf::Sprite &sprit)
          sf::Sprite bullet=p->Get_bullet();
          for(int i=0;i<=300;i++){
               bullet.move(0,-3);
+              Enemy::enemy2.move(0,0.5);
               World::window.draw(bullet);
+              World::window.draw(Enemy::enemy2);
               World::window.display();
               World::window.clear();
               World::window.draw(sprit);

@@ -5,8 +5,8 @@
 #include "Back.h"
 #include "Hero.h"
 #include "Bullet.h"
-
 #include "World.h"
+#include "Enemy.h"
 
 sf::RenderWindow World::window(sf::VideoMode(1000, 1050), "Fighter");
 
@@ -22,7 +22,7 @@ int main()
 //	Enemy enemy(130+rand()%680,5+rand()%100);
 
 	sf::Sprite hero=heroes.Get_hero();
-
+    srand( (unsigned)time( NULL ) );
 	while (World::window.isOpen())
     {
         sf::Event event;
@@ -37,7 +37,23 @@ int main()
         heroes.fire(hero);
 //        enemy.Create_enemy();
         World::window.display();
+        int rands=160+rand()%600;
+        Enemy *q=new Enemy;
+    q->enemy2.setPosition(rands,0);
+    sf::Vector2f position_enemy=q->enemy2.getPosition();
+    while(position_enemy.y<950){
+        q->enemy2.move(0,0.5);
+        position_enemy=q->enemy2.getPosition();
+        heroes.hero_move(hero);
+        World::window.draw(q->enemy2);
+        World::window.display();
+        heroes.fire(hero);
+
+
+        }
+        delete q;
     }
+
 		return 0;
 }
 
