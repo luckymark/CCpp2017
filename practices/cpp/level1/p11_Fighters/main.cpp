@@ -8,8 +8,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "gameWindow.h"
-#define speed 0.5
 int main() {
+	srand(time(0));
 	gameProcess();
 
 	return 0;

@@ -7,19 +7,19 @@ struct info {
 	sf::Sprite bullet_sprite;
 	float x, y;
 	float speed;
+	bool ifExist;
 };
 class bullet {
 	public:
-		bullet(int max=100);
+		bullet(int max=50);
 		void appendBullet(float x, float y, char type);
 		void moveBullet();
 		void showBullet(sf::RenderWindow &thisWindow);
+		void isExist(int index);
 	protected:
-		info bulletInfo[100];
-		int head;
-		int tail;
+		info * bulletInfo;
 		int max;
-		bool flag_full, flag_null;
+		int tail;
 
 };
 #endif

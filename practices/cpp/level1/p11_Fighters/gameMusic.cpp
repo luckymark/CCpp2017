@@ -8,5 +8,7 @@ gameMusic::gameMusic(int type) {
 	
 }
 void gameMusic::playMusic() {
+	gameSound.setLoop(true);
 	gameSound.play();
+	
 }
