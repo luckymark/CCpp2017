@@ -4,9 +4,10 @@ Game::Game()
 
     :Window(sf::VideoMode(1920, 1080), "My+1sflight")
     ,Player(){
-        Player.setPosition(960,980);
+        if(!surfaceofflight.loadFromFile("jzm.jpg")){}
+        Player.setTexture(surfaceofflight);
+        Player.setPosition(0,540);
     }
-
 void Game::processEvents(){
     sf::Event event;
         while(Window.pollEvent(event)){
@@ -39,20 +40,24 @@ bool isPressed){
         IsMovingRight = isPressed;
 }
 
-
-
-
 void Game::update(sf::Time deltaTime)
-{   int PlayerSpeed=300;
+{
+    int PlayerSpeed=300;
+    sf::Vector2f pos = Player.getPosition();
     sf::Vector2f movement(0, 0);
-    if (IsMovingUp)
+
+    if (IsMovingUp&&pos.y>=0){
         movement.y -= PlayerSpeed;
-    if (IsMovingDown)
+    }
+    if (IsMovingDown&&pos.y<=980){
         movement.y += PlayerSpeed;
-    if (IsMovingLeft)
+    }
+    if (IsMovingLeft&&pos.x>=0){
         movement.x -= PlayerSpeed;
-    if (IsMovingRight)
+    }
+    if (IsMovingRight&&pos.x<=1820){
         movement.x += PlayerSpeed;
+    }
         Player.move(movement * deltaTime.asSeconds());
 }
 
@@ -86,18 +91,13 @@ void Game::run(){
 
 void Game::render(){
 //////////background///////////////
-    sf::Sprite background;
-    sf::Texture rmdht;
     if(!rmdht.loadFromFile("rmdht.jpg")){}
     background.setTexture(rmdht);
     background.setPosition(0,0);
-///////////////flight//////////////
-    sf::Texture surfaceofflight;
-    if(!surfaceofflight.loadFromFile("jzm.jpg")){}
-    Player.setTexture(surfaceofflight);
 /////////////render////////////////
     Window.clear();
     Window.draw(background);
     Window.draw(Player);
     Window.display();
 }
+
