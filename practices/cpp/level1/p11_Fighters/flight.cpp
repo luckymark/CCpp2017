@@ -21,7 +21,7 @@ public :
 
                         }
                     ene_aircraft.setTexture(ene_aircraft_texture);
-                    //ene_aircraft.setScale(1.0f,1.0f);
+                    ene_aircraft.setScale(1.0f,1.0f);
             }
         ~EnemyAircraft()
             {
@@ -49,6 +49,28 @@ public:
 
             }
 
+};
+
+//爆炸的类
+class Explosion{
+public:
+        sf::Texture explosion_texture;
+        sf::Sprite explosion;
+
+        Explosion()
+        {
+            if (!explosion_texture.loadFromFile("baozha1.jfif"))
+                        {
+
+                        }
+                    explosion.setTexture(explosion_texture);
+                    explosion.setScale(0.5f,0.5f);
+        }
+
+        ~Explosion()
+        {
+
+        }
 };
 
 int MoveSprite(sf::Sprite &myplane)
@@ -92,14 +114,15 @@ int main()
 
 
             //设置背景音乐
-            sf::Music background_music;
-            if (!background_music.openFromFile("OpeningTitles.ogg"))
-                {
-                            return -1;      // error
-                }
-            background_music.play();
-            background_music.setLoop(true);
-
+//            sf::Music background_music;
+//            if (!background_music.openFromFile("OpeningTitles.ogg"))
+//                {
+//                            return -1;      // error
+//                }
+//            background_music.play();
+//            background_music.setLoop(true);
+            //爆炸音效
+            sf::Music explosion_music;
 
             //设置输出窗口
             while (window.isOpen())
@@ -179,13 +202,32 @@ int main()
                                                                 window.draw(myplane);
                                                                 position_ene_air = enemy_aircra.ene_aircraft.getPosition();
                                                                 position_bu = p[1].bullet.getPosition();
-                                                                if((position_bu.y-position_ene_air.y)<60&&-60<(position_bu.y-position_ene_air.y))
+                                                                if( (position_bu.y-position_ene_air.y)<60&&-60<(position_bu.y-position_ene_air.y) )
                                                                     {
                                                                             if((position_ene_air.x<=(position_bu.x+60))&&(position_ene_air.x+75>=(position_bu.x-60)))
                                                                                     {
+                                                                                            Explosion * p_exp_ene = new Explosion;
+                                                                                            p_exp_ene->explosion.setPosition(position_ene_air.x, position_ene_air.y) ;
+                                                                                            window.draw(p_exp_ene->explosion);
                                                                                             window.display();
-                                                                                            if_collision=1;
+
+
+                                                                                            sf::Music ii;
+                                                                                            if (!ii.openFromFile("baozhasheng1.wav"))
+                                                                                                    {
+                                                                                                                return -1;      // error
+                                                                                                    }
+                                                                                            ii.play();
+                                                                                            if (!explosion_music.openFromFile("baozhasheng1.wav"))
+                                                                                                    {
+                                                                                                                return -1;      // error
+                                                                                                    }
+                                                                                            explosion_music.play();
+
+
+                                                                                            if_collision++;
                                                                                             std::cout<<if_collision<<std::endl;
+                                                                                            delete p_exp_ene;
                                                                                             break;
                                                                                     }
 
@@ -203,12 +245,13 @@ int main()
                                                     }
 
                                                 delete[] p;
+
                                     }
 
                                     window.clear(sf::Color::White);
                                     window.draw(myplane);
                                     MoveSprite(myplane);
-                                    if(if_collision==1)
+                                    if(if_collision)
                                         {
                                                     break;
                                         }
