@@ -65,7 +65,7 @@ void gameProcess() {
 		playerAction(playersPlane,bulletCD);
 		window.clear(sf::Color::Black);
 		playersPlane.moveBullet();
-		moveEnemy(enemysPlane, 30);
+		moveEnemy(enemysPlane, playersPlane, 30);
 		playersPlane.showPlane(window);
 		showEnemy(window,enemysPlane, 30);
 		window.display();

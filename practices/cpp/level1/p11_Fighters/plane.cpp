@@ -77,14 +77,29 @@ bool plane::isExist() {
 	if (life != 0)return true;
 	return false;
 }
+void plane::collision(bullet & bp) {
+	if (0 == this->life)return;
+	for (int i = 0; i < 25; i++) {
+		if (bp.bulletInfo[i].ifExist == 0)continue;
+		if ((bp.bulletInfo[i].x > this->x  &&
+			bp.bulletInfo[i].x < this->x + 2*this->half_sizeX) &&
+			(bp.bulletInfo[i].y > this->y  &&
+				bp.bulletInfo[i].y < this->y + 2*this->half_sizeY)) {
+			this->life = this->life - 1;
+			bp.bulletInfo[i].ifExist = 0;
+			return;
+		}
+	}
+}
 void appendEnemy(plane * enemy,int index) {
 	enemy[index] = *(new plane());
 	enemy[index].lifeUp();
 }
 
-void moveEnemy(plane * enemy,int max) {
+void moveEnemy(plane * enemy,plane & player,int max) {
 	for (int i = 0; i < max; i++) {
 		enemy[i].movePlane();
+		enemy[i].collision(*player.plane_bullet);
 	}
 }
 void showEnemy(sf::RenderWindow &thisWindow,plane * enemy,int max) {

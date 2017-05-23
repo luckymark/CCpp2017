@@ -2,6 +2,7 @@
 #include<iostream>
 #include <SFML/Graphics.hpp>
 #include "bullet.h"
+
 #define Xmax 800
 #define Ymax 600
 bullet::bullet(int max) {
@@ -43,7 +44,7 @@ void bullet::appendBullet(float x, float y, char type) {
 
 void bullet::moveBullet() {
 	for (int i = 0; i<max; i++) {
-		if (bulletInfo[i].ifExist = 0)continue;
+		if (0==bulletInfo[i].ifExist )continue;
 		bulletInfo[i].y = bulletInfo[i].y + bulletInfo[i].speed;
 		bulletInfo[i].bullet_sprite.setPosition(sf::Vector2f(bulletInfo[i].x, bulletInfo[i].y));
 		isExist(i);
@@ -53,13 +54,16 @@ void bullet::moveBullet() {
 void bullet::showBullet(sf::RenderWindow &thisWindow) {
 
 	for (int i = 0; i<max; i++) {
-		if (bulletInfo[i].ifExist = 0)continue;
+		if (0==bulletInfo[i].ifExist )continue;
 		thisWindow.draw(bulletInfo[i].bullet_sprite);
 	}
 }
-void bullet::isExist(int index) {
-	int x = bulletInfo[index].x;
-	int y = bulletInfo[index].y;
-	if (x<0 || x>Xmax || y<0 || y>Ymax)bulletInfo[index].ifExist = 0;
-
+bool bullet::isExist(int index) {
+	float x = bulletInfo[index].x;
+	float y = bulletInfo[index].y;
+	if (x<0 || x>Xmax || y<0 || y>Ymax) {
+		bulletInfo[index].ifExist = 0;
+		return false;
+	}
+	return true;
 }
