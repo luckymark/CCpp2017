@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 # include<iostream>
-#define BulMoveSpeed  0.7
+#define BulMoveSpeed  0.8
 #define EneAiecraftSpeedD 0.4
 #define EneAiecraftSpeedLR 4
 # define EneAiecraftSpeedlr 0.08
@@ -21,7 +21,7 @@ public :
 
                         }
                     ene_aircraft.setTexture(ene_aircraft_texture);
-                    ene_aircraft.setScale(1.0f,1.0f);
+                    //ene_aircraft.setScale(1.0f,1.0f);
             }
         ~EnemyAircraft()
             {
@@ -121,6 +121,9 @@ int main()
                         enemy_aircra.ene_aircraft.setPosition(pst_ene_aircraft,0);
                         sf::Vector2f position_ene_air = enemy_aircra.ene_aircraft.getPosition();
 
+                        //判断是否碰撞
+                        int if_collision = 0;
+
                         while(position_ene_air.y<900&&position_ene_air.x>0&&position_ene_air.x<1325)
                             {
 
@@ -148,10 +151,10 @@ int main()
 
                                                 // 产 生三个子弹
                                                 Bullet *p = new Bullet[3];
-                                                sf::Vector2f position = myplane.getPosition();
-                                                p[1].bullet.setPosition(position.x+41.4,position.y-45);
-                                                p[0].bullet.setPosition(position.x-5,position.y-30);
-                                                p[2].bullet.setPosition(position.x+87.8,position.y-30);
+                                                sf::Vector2f position_plane = myplane.getPosition();
+                                                p[1].bullet.setPosition(position_plane.x+41.4,position_plane.y-45);
+                                                p[0].bullet.setPosition(position_plane.x-5,position_plane.y-30);
+                                                p[2].bullet.setPosition(position_plane.x+87.8,position_plane.y-30);
 
                                                 sf::Vector2f  position_bu = p[1].bullet.getPosition();
                                                 while(position_bu.y>0)
@@ -173,7 +176,20 @@ int main()
                                                                                     break;
                                                                     }
                                                                 MoveSprite(myplane);
+                                                                window.draw(myplane);
+                                                                position_ene_air = enemy_aircra.ene_aircraft.getPosition();
                                                                 position_bu = p[1].bullet.getPosition();
+                                                                if((position_bu.y-position_ene_air.y)<60&&-60<(position_bu.y-position_ene_air.y))
+                                                                    {
+                                                                            if((position_ene_air.x<=(position_bu.x+60))&&(position_ene_air.x+75>=(position_bu.x-60)))
+                                                                                    {
+                                                                                            window.display();
+                                                                                            if_collision=1;
+                                                                                            std::cout<<if_collision<<std::endl;
+                                                                                            break;
+                                                                                    }
+
+                                                                    }
 
                                                                 window.draw(p[1].bullet);
                                                                 window.draw(p[0].bullet);
@@ -182,17 +198,22 @@ int main()
                                                                 window.display();
 
                                                                 window.clear(sf::Color::White);
-                                                                window.draw(myplane);
+
 
                                                     }
 
                                                 delete[] p;
+                                    }
+
+                                    window.clear(sf::Color::White);
+                                    window.draw(myplane);
+                                    MoveSprite(myplane);
+                                    if(if_collision==1)
+                                        {
+                                                    break;
                                         }
 
-                                window.clear(sf::Color::White);
-                                window.draw(myplane);
-                                MoveSprite(myplane);
-                        }
+                            }
 
 
             }
