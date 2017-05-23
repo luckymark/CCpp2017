@@ -114,13 +114,13 @@ int main()
 
 
             //设置背景音乐
-//            sf::Music background_music;
-//            if (!background_music.openFromFile("OpeningTitles.ogg"))
-//                {
-//                            return -1;      // error
-//                }
-//            background_music.play();
-//            background_music.setLoop(true);
+            sf::Music background_music;
+            if (!background_music.openFromFile("OpeningTitles.ogg"))
+                {
+                            return -1;      // error
+                }
+            background_music.play();
+            background_music.setLoop(true);
             //爆炸音效
             sf::Music explosion_music;
 
