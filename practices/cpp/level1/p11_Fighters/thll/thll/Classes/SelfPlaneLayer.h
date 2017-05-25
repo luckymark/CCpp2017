@@ -11,7 +11,7 @@
 class SelfPlaneLayer :public cocos2d::Layer
 {
 public:
-	//static cocos2d::Scene* createScene();
+	static cocos2d::Scene* createScene();
 
 	virtual bool init();
 
@@ -19,6 +19,9 @@ public:
 
 	CREATE_FUNC(SelfPlaneLayer);
 
+	cocos2d::Vector<cocos2d::Sprite* > getBulletList();
+
+	cocos2d::Node* getPlane();
 private:
 	std::map<cocos2d::EventKeyboard::KeyCode, bool> keys;
 

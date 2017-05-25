@@ -2,7 +2,7 @@
 
 USING_NS_CC;
 
-/*Scene* SelfPlaneLayer::createScene()
+Scene* SelfPlaneLayer::createScene()
 {
 	auto scene = Scene::create();
 	auto layer = SelfPlaneLayer::create();
@@ -10,7 +10,7 @@ USING_NS_CC;
 	scene->addChild(layer);
 	
 	return scene;
-}*/
+}
 
 bool SelfPlaneLayer::init()
 {
@@ -27,12 +27,6 @@ bool SelfPlaneLayer::init()
 	plane->setTag(PLANE_TAG);
 	plane->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
 	plane->setAnchorPoint(Vec2(0.5, 0.5));
-	auto planeBody = PhysicsBody::createBox(plane->getContentSize());
-	planeBody->setContactTestBitmask(0x0003);            
-	planeBody->setCategoryBitmask(0x0001);                
-	planeBody->setCollisionBitmask(0x0007);                
-	planeBody->setGravityEnable(false);                          
-	plane->setPhysicsBody(planeBody);
 
 	this->addChild(plane);
 
@@ -44,8 +38,8 @@ bool SelfPlaneLayer::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, plane);
 
 	this->scheduleUpdate();
-	this->schedule(schedule_selector(SelfPlaneLayer::bulletCreate), 0.1);
-	this->schedule(schedule_selector(SelfPlaneLayer::bulletMove), 0.05);
+	this->schedule(schedule_selector(SelfPlaneLayer::bulletCreate), 0.01);
+	this->schedule(schedule_selector(SelfPlaneLayer::bulletMove), 0.005);
 
 	return true;
 }
@@ -186,4 +180,14 @@ void SelfPlaneLayer::bulletMove(float f)
 			i--;
 		}
 	}
+}
+
+Vector<Sprite *> SelfPlaneLayer::getBulletList()
+{
+	return this->bulletList;
+}
+
+Node* SelfPlaneLayer::getPlane()
+{
+	return this->getChildByTag(PLANE_TAG);
 }

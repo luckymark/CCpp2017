@@ -4,6 +4,17 @@
 
 USING_NS_CC;
 
+Scene* EnemyPlaneLayer::createScene()
+{
+	auto scene = Scene::create();
+
+	auto layer = EnemyPlaneLayer::create();
+
+	scene->addChild(layer);
+
+	return scene;
+}
+
 bool EnemyPlaneLayer::init()
 {
 	if (!Layer::init())
@@ -22,11 +33,11 @@ void EnemyPlaneLayer::enemyMove(float dt)
 	for (int i = 0; i < enemyList.size(); i++)
 	{
 		auto enemy = enemyList.at(i);
-		enemy->setPositionY(enemy->getPositionY() - 5);
+		if(!enemy->isDeleted())enemy->setPositionY(enemy->getPositionY() - 5);
 		if (enemy->getPositionY() < 0)
 		{
-			enemyList.eraseObject(enemy);
 			enemy->removeFromParent();
+			enemyList.eraseObject(enemy);	
 			i--;
 		}
 	}
@@ -37,7 +48,7 @@ void EnemyPlaneLayer::enemyCreate(float dt)
 	int rnd = rand() % 2 + 1;
 
 	auto strings = cocos2d::__String::createWithFormat("enemy%d.png", rnd);
-	auto enemy = Sprite::create(strings->getCString());
+	auto enemy = EnemyPlane::create(strings->getCString());
 
 	if (rnd == 1)
 	{
@@ -50,13 +61,11 @@ void EnemyPlaneLayer::enemyCreate(float dt)
 
 	enemy->setPosition(Vec2(rand() % (int)(Director::getInstance()->getVisibleSize().width), Director::getInstance()->getVisibleSize().height));
 
-	auto enemyBody = PhysicsBody::createBox(enemy->getContentSize());        
-	enemyBody->setContactTestBitmask(0x0003);
-	enemyBody->setCategoryBitmask(0x0002);
-	enemyBody->setCollisionBitmask(0x0001);
-	enemyBody->setGravityEnable(false);
-	enemy->setPhysicsBody(enemyBody);
-
 	this->addChild(enemy);
 	this->enemyList.pushBack(enemy);
+}
+
+Vector<EnemyPlane* > EnemyPlaneLayer::getEnemyList()
+{
+	return this->enemyList;
 }
