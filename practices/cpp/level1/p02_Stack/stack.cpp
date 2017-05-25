@@ -1,22 +1,3 @@
-/*
-题目：IntStack（堆栈）
-
-功能要求（一）：
-
-实现一个IntStack类（后进先出FILO），可容纳100个int数据，并实现下面的操作：
-
-push（入栈）
-pop（出栈）
-判断是否满
-判断是否空
-功能要求（二）：
-
-实例化堆栈对象的时候，可指定该堆栈的容量
-
-功能要求（三）（学了模板以后再做）：
-
-将IntStack改造为类型无关的Stack
-*/
 #include<iostream>
 using std::cin;
 using std::cout;
