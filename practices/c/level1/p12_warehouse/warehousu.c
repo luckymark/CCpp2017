@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<stdlib.h>
 #include<windows.h>
@@ -54,18 +54,18 @@ void boundry()
 {
 	system("cls");
 	gotoxy(20, 8);
-	printf("°´Êı×Ö¼üÑ¡Ôñ²Ëµ¥¹¦ÄÜ");
+	printf("æŒ‰æ•°å­—é”®é€‰æ‹©èœå•åŠŸèƒ½");
 	gotoxy(20, 10);
-	printf("2.ÏÔÊ¾´æ»õÁĞ±í");
+	printf("2.æ˜¾ç¤ºå­˜è´§åˆ—è¡¨");
 	gotoxy(20, 12);
-	printf("3.Èë¿â");
+	printf("3.å…¥åº“");
 	gotoxy(20, 14);
-	printf("4.³ö¿â");
+	printf("4.å‡ºåº“");
 	gotoxy(20, 16);
-	printf("5.ÍË³ö³ÌĞò");
+	printf("5.é€€å‡ºç¨‹åº");
 	gotoxy(20, 18);
 }
-void gotoxy(int x, int y)//Ö¸¶¨ÏÔÊ¾Î»ÖÃ
+void gotoxy(int x, int y)//æŒ‡å®šæ˜¾ç¤ºä½ç½®
 {
 	COORD c;
 	c.X = x;
