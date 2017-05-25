@@ -15,9 +15,11 @@ class plane {
 		void showPlane(sf::RenderWindow &thisWindow);
 		void Fire();
 		void moveBullet();
-		void lifeUp();
+		void lifeChange(int delta);
 		bool isExist();
-		void collision(bullet & bp);
+		bool isCollision(float x, float y, float Xsize, float Ysize);
+		bool collision(bullet & bp);
+		bool collision(plane & p);
 	protected:
 		
 		sf::Texture plane_texture;
@@ -29,6 +31,6 @@ class plane {
 
 };
 void appendEnemy(plane * enemy,int index);
-void moveEnemy(plane * enemy, plane & player,int max);
+void moveEnemy(plane * enemy, plane & player,int max, bool & ifCollision);
 void showEnemy(sf::RenderWindow &thisWindow,plane * enemy,int max);
 #endif

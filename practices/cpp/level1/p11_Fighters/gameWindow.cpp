@@ -48,14 +48,17 @@ void enemysAction(plane * p, bool & flag) {
 }
 void gameProcess() {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Sky Legend");
-	int fresh_count=0;
-	bool bulletCD=0,enemyCD=0;
+	int fresh_count=0,sound_count=0;
+	bool bulletCD=0,enemyCD=0, flag_collision = 0;
+
 	plane playersPlane(350, 500, 'p');
 	gameMusic gameBgm1(1);
+	gameMusic soundEffect[10];
 	plane enemysPlane[30];
+
 	srand(time(0));
 	gameBgm1.playMusic();
-	while (window.isOpen()) {
+	while (window.isOpen()){
 
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -65,8 +68,17 @@ void gameProcess() {
 		playerAction(playersPlane,bulletCD);
 		window.clear(sf::Color::Black);
 		playersPlane.moveBullet();
-		moveEnemy(enemysPlane, playersPlane, 30);
+		moveEnemy(enemysPlane,playersPlane,30,flag_collision);
 		playersPlane.showPlane(window);
+		if (flag_collision) {
+			soundEffect[sound_count].playMusic(0);
+			sound_count++;
+			if (10 == sound_count) {
+				sound_count = 0;
+			}
+		}
+		
+		flag_collision = 0;
 		showEnemy(window,enemysPlane, 30);
 		window.display();
 		++fresh_count;

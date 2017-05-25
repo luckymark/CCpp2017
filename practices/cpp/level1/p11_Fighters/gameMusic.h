@@ -5,7 +5,7 @@ class gameMusic {
 		sf::SoundBuffer gameBuffer;
 		sf::Sound gameSound;
 	public:
-		gameMusic(int type);
-		void playMusic();
+		gameMusic(int type=2);
+		void playMusic(bool loop = 1);
 };
 #endif

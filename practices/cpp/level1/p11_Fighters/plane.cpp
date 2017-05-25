@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "plane.h"
 #include "bullet.h"
+#include "gameMusic.h"
 #define Xmax 800
 #define Ymax 600
 plane::plane(float x,float y,char type) {
@@ -70,36 +71,57 @@ void plane::Fire() {
 void plane::moveBullet() {
 	plane_bullet->moveBullet();
 }
-void plane::lifeUp() {
-	life += 1;
+void plane::lifeChange(int delta) {
+	life += delta;
 }
 bool plane::isExist() {
 	if (life != 0)return true;
 	return false;
 }
-void plane::collision(bullet & bp) {
-	if (0 == this->life)return;
+bool plane::isCollision(float x, float y,float Xsize,float Ysize) {
+	if ((this->x + 2 * this->half_sizeX > x&&this->x < x + 2 * Xsize) &&
+		(this->y + this->half_sizeY > y&&this->y< y ))return true;
+	return false;
+}
+bool plane::collision(bullet & bp) {
+	if (0 == this->life)return false;
 	for (int i = 0; i < 25; i++) {
 		if (bp.bulletInfo[i].ifExist == 0)continue;
 		if ((bp.bulletInfo[i].x > this->x  &&
 			bp.bulletInfo[i].x < this->x + 2*this->half_sizeX) &&
 			(bp.bulletInfo[i].y > this->y  &&
 				bp.bulletInfo[i].y < this->y + 2*this->half_sizeY)) {
-			this->life = this->life - 1;
+			this->lifeChange(-1);
 			bp.bulletInfo[i].ifExist = 0;
-			return;
+			return true;
 		}
 	}
+	return false;
+}
+bool plane::collision(plane & p) {
+	if (0 == this->life)return false;
+	if (!p.isExist())return false;
+	if (p.isCollision(this->x, this->y,this->half_sizeX,this->half_sizeY)) {
+		this->lifeChange(-1);
+		//p.lifeChange(-1);
+		return true;
+	}
+	return false;
 }
 void appendEnemy(plane * enemy,int index) {
 	enemy[index] = *(new plane());
-	enemy[index].lifeUp();
+	enemy[index].lifeChange(1);
 }
 
-void moveEnemy(plane * enemy,plane & player,int max) {
+void moveEnemy(plane * enemy,plane & player,int max,bool & ifCollision) {
 	for (int i = 0; i < max; i++) {
 		enemy[i].movePlane();
-		enemy[i].collision(*player.plane_bullet);
+		if (enemy[i].collision(*player.plane_bullet)) {
+			ifCollision = 1;
+		}
+		if (enemy[i].collision(player)) {
+			ifCollision = 1;
+		}
 	}
 }
 void showEnemy(sf::RenderWindow &thisWindow,plane * enemy,int max) {
