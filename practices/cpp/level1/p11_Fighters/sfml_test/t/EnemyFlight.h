@@ -11,17 +11,21 @@
 #include<time.h>
 #include<stdlib.h>
 #include<iostream>
+#include<vector>
 
-class EnemyFlight:public Flight
+class EnemyFlight
 {
 public:
 	EnemyFlight():Flight(){
 		srand(time(0));
 		number = rand()%5;
+		for(int i = 0 ; i<number; i++){
+			Flight flight;
+			E.push_back(flight);
+		}
 	}
-
 private:
-	vector<Flight> E;
+	std::vector<Flight> E;
 	int number ;
 };
 

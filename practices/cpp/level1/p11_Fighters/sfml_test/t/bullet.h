@@ -12,30 +12,28 @@ class bullet
 {
 public:
 	bullet(char a){
-		texture.loadFromFile("bullet.jpg");
-		sprite.setTexture(texture);
-		sprite.scale(0.1,0.1);
-		sprite.setRotation(145);
 		b = 1 ;
 	}
 	bullet(int a){
-		texture.loadFromFile("bullet.jpg");
-		sprite.setTexture(texture);
-		sprite.scale(0.1,0.1);
-		sprite.setRotation(-45);
 		b = 0 ;
 	}
 
 	int fly1(){
+		sf::Mutex mutex ;
 		if(sprite.getPosition().y<1000){
+			mutex.lock();
 			sprite.move(0,-1);
+			mutex.unlock();
 			return 1 ;
 		}
 		else return 0;
 	}
 	int fly2(){
+		sf::Mutex mutex;
 		if(sprite.getPosition().y>0){
+			mutex.lock();
 			sprite.move(0,1);
+			mutex.unlock();
 			return 1 ;
 		}
 		else return 0;
@@ -52,8 +50,6 @@ public:
 		return sprite;
 	}
 
-private:
-	sf::Texture texture;
 	sf::Sprite sprite;
 	int b ;
 };

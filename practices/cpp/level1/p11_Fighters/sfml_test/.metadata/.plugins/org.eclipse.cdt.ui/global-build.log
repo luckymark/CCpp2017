@@ -1,90 +1,80 @@
-11:17:23 **** Incremental Build of configuration Debug for project t ****
+11:59:29 **** Incremental Build of configuration Debug for project t ****
 make all 
-Building file: ../t.cpp
+Building file: ../control2.cpp
 Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
-In file included from ../t.cpp:14:0:
-../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
-../bullet2.h:36:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-    for(int i = 0;i < A.size();i++){
-                    ^
-../t.cpp: In function ‘int main()’:
-../t.cpp:56:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-         for(int i= 0 ; i < Bullet.A.size();i++){
-                          ^
-Finished building: ../t.cpp
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control2.d" -MT"control2.d" -o "control2.o" "../control2.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../control2.cpp:7:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+Finished building: ../control2.cpp
  
 Building target: t
 Invoking: GCC C++ Linker
 g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
 Finished building target: t
  
-11:17:24 **** Incremental Build of configuration Debug for project t ****
+11:59:32 **** Incremental Build of configuration Debug for project t ****
 make all 
 make: Nothing to be done for 'all'.
-11:18:49 **** Incremental Build of configuration Debug for project t ****
+12:00:02 **** Incremental Build of configuration Debug for project t ****
 make all 
 make: Nothing to be done for 'all'.
-11:20:43 **** Incremental Build of configuration Debug for project t ****
+14:07:17 **** Incremental Build of configuration Debug for project t ****
 make all 
+make: Nothing to be done for 'all'.
+14:11:52 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
+14:11:57 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
+14:14:51 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../control.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control.d" -MT"control.d" -o "control.o" "../control.cpp"
+In file included from ../control.cpp:8:0:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+../flight.h:63:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int time1 = 0;
+              ^
+Finished building: ../control.cpp
+ 
+Building file: ../control2.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control2.d" -MT"control2.d" -o "control2.o" "../control2.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../control2.cpp:7:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+../flight.h:63:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int time1 = 0;
+              ^
+Finished building: ../control2.cpp
+ 
 Building file: ../t.cpp
 Invoking: GCC C++ Compiler
 g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
-In file included from ../t.cpp:14:0:
-../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
-../bullet2.h:36:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-    for(int i = 0;i < A.size();i++){
-                    ^
-../t.cpp: In function ‘int main()’:
-../t.cpp:56:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-         for(int i= 0 ; i < Bullet.A.size();i++){
-                          ^
-Finished building: ../t.cpp
- 
-Building target: t
-Invoking: GCC C++ Linker
-g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
-Finished building target: t
- 
-11:24:12 **** Incremental Build of configuration Debug for project t ****
-make all 
-make: Nothing to be done for 'all'.
-11:26:15 **** Incremental Build of configuration Debug for project t ****
-make all 
-Building file: ../t.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
-In file included from ../t.cpp:14:0:
-../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
-../bullet2.h:36:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-    for(int i = 0;i < A.size();i++){
-                    ^
-../t.cpp: In function ‘int main()’:
-../t.cpp:53:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-         for(int i= 0 ; i < Bullet.A.size();i++){
-                          ^
-Finished building: ../t.cpp
- 
-Building target: t
-Invoking: GCC C++ Linker
-g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
-Finished building target: t
- 
-11:28:22 **** Incremental Build of configuration Debug for project t ****
-make all 
-make: Nothing to be done for 'all'.
-11:39:57 **** Incremental Build of configuration Debug for project t ****
-make all 
-Building file: ../t.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+../flight.h:63:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int time1 = 0;
+              ^
 In file included from ../t.cpp:13:0:
 ../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
-../bullet2.h:36:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../bullet2.h:46:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
     for(int i = 0;i < A.size();i++){
                     ^
 ../t.cpp: In function ‘int main()’:
-../t.cpp:52:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+../t.cpp:62:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
          for(int i= 0 ; i < Bullet.A.size();i++){
                           ^
 Finished building: ../t.cpp
@@ -94,3 +84,746 @@ Invoking: GCC C++ Linker
 g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
 Finished building target: t
  
+14:15:32 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../control2.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control2.d" -MT"control2.d" -o "control2.o" "../control2.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../control2.cpp:7:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+../flight.h:63:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int time1 = 0;
+              ^
+Finished building: ../control2.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:15:49 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../control2.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control2.d" -MT"control2.d" -o "control2.o" "../control2.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../control2.cpp:7:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+../flight.h:63:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int time1 = 0;
+              ^
+Finished building: ../control2.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:17:27 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
+14:20:08 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+../flight.h:63:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int time1 = 0;
+              ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:62:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:23:46 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
+14:25:36 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
+14:25:56 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+../flight.h:63:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int time1 = 0;
+              ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:62:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:26:28 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+../flight.h:63:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int time1 = 0;
+              ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:61:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:28:47 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
+14:30:01 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+../flight.h:63:14: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int time1 = 0;
+              ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:61:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:33:36 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../control.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control.d" -MT"control.d" -o "control.o" "../control.cpp"
+In file included from ../control.cpp:8:0:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+Finished building: ../control.cpp
+ 
+Building file: ../control2.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control2.d" -MT"control2.d" -o "control2.o" "../control2.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../control2.cpp:7:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+Finished building: ../control2.cpp
+ 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:62:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:35:54 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../control2.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control2.d" -MT"control2.d" -o "control2.o" "../control2.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../control2.cpp:7:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+Finished building: ../control2.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:36:25 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
+14:36:39 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../control2.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control2.d" -MT"control2.d" -o "control2.o" "../control2.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../control2.cpp:7:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+Finished building: ../control2.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:37:55 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
+14:38:01 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
+14:38:59 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../control.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control.d" -MT"control.d" -o "control.o" "../control.cpp"
+In file included from ../control.cpp:8:0:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+Finished building: ../control.cpp
+ 
+Building file: ../control2.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control2.d" -MT"control2.d" -o "control2.o" "../control2.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../control2.cpp:7:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+Finished building: ../control2.cpp
+ 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:62:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:39:10 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../control.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control.d" -MT"control.d" -o "control.o" "../control.cpp"
+In file included from ../control.cpp:8:0:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+Finished building: ../control.cpp
+ 
+Building file: ../control2.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control2.d" -MT"control2.d" -o "control2.o" "../control2.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../control2.cpp:7:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+Finished building: ../control2.cpp
+ 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:62:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:39:18 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../control.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control.d" -MT"control.d" -o "control.o" "../control.cpp"
+In file included from ../control.cpp:8:0:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+Finished building: ../control.cpp
+ 
+Building file: ../control2.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control2.d" -MT"control2.d" -o "control2.o" "../control2.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../control2.cpp:7:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+Finished building: ../control2.cpp
+ 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:62:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:39:34 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../control2.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control2.d" -MT"control2.d" -o "control2.o" "../control2.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../control2.cpp:7:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+Finished building: ../control2.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:39:48 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
+14:39:52 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
+14:40:01 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../control2.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control2.d" -MT"control2.d" -o "control2.o" "../control2.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../control2.cpp:7:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+Finished building: ../control2.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:40:49 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../control.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control.d" -MT"control.d" -o "control.o" "../control.cpp"
+In file included from ../control.cpp:8:0:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+Finished building: ../control.cpp
+ 
+Building file: ../control2.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control2.d" -MT"control2.d" -o "control2.o" "../control2.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../control2.cpp:7:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+Finished building: ../control2.cpp
+ 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:62:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:41:43 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:62:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:42:01 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:62:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:42:21 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:62:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:42:35 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:62:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:42:48 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:62:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:42:57 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:62:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:43:08 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:62:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:43:26 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:62:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:44:46 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../control2.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control2.d" -MT"control2.d" -o "control2.o" "../control2.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../control2.cpp:7:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+Finished building: ../control2.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:46:30 **** Incremental Build of configuration Debug for project t ****
+make all 
+Building file: ../control2.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"control2.d" -MT"control2.d" -o "control2.o" "../control2.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../control2.cpp:7:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+Finished building: ../control2.cpp
+ 
+Building file: ../t.cpp
+Invoking: GCC C++ Compiler
+g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"t.d" -MT"t.d" -o "t.o" "../t.cpp"
+In file included from ../advanced.h:10:0,
+                 from ../t.cpp:10:
+../flight.h:62:11: warning: non-static data member initializers only available with -std=c++11 or -std=gnu++11
+  int s  = 0 ;
+           ^
+In file included from ../t.cpp:13:0:
+../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
+../bullet2.h:44:20: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i = 0;i < A.size();i++){
+                    ^
+../t.cpp: In function ‘int main()’:
+../t.cpp:62:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+         for(int i= 0 ; i < Bullet.A.size();i++){
+                          ^
+Finished building: ../t.cpp
+ 
+Building target: t
+Invoking: GCC C++ Linker
+g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "t"  ./control.o ./control2.o ./t.o   -lsfml-graphics -lsfml-window -lsfml-system
+Finished building target: t
+ 
+14:47:42 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
+14:48:41 **** Incremental Build of configuration Debug for project t ****
+make all 
+make: Nothing to be done for 'all'.
