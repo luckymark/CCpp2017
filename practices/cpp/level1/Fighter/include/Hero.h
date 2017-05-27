@@ -1,25 +1,18 @@
 #ifndef HERO_H
 #define HERO_H
-#include <SFML/Graphics.hpp>
-#include "World.h"
-#include "Back.h"
-#include "Bullet.h"
+#include "Plane.h"
+#include "Music.h"
 
-class Hero
+class Hero :public Plane
 {
     public:
-        Hero();
+        Hero(World *world);
         virtual ~Hero();
-        void init_hero();
-        sf::Sprite Get_hero();
-        sf::Vector2f Get_hero_position();
-        void hero_move(sf::Sprite &sprite);
-        void fire(sf::Sprite &sprite);
+        void init();
+    protected:
+
     private:
-        sf::Texture textur;
-        sf::Sprite hero;
-        sf::Vector2f hero_position;
-        Back B;
+        sf::Texture texture=RTexture::PLAYER;
 };
 
 #endif // HERO_H

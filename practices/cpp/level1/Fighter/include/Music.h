@@ -7,12 +7,12 @@ class Music
     public:
         Music();
         virtual ~Music();
-        void play_bgm();
+        static sf::Music BGM;
+        static void load();
 
     protected:
 
     private:
-        sf::Music bgm;
 };
 
 #endif // MUSIC_H

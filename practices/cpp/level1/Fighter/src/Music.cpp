@@ -1,8 +1,10 @@
 #include "Music.h"
-
+#include <SFML/Audio.hpp>
+#include <SFML/System.hpp>
+sf::Music Music::BGM;
 Music::Music()
 {
-    bgm.openFromFile("resource/music/music.wav");
+    //ctor
 }
 
 Music::~Music()
@@ -10,7 +12,7 @@ Music::~Music()
     //dtor
 }
 
-void Music::play_bgm()
+void Music::load()
 {
-    bgm.play();
+    BGM.openFromFile("resource/music/BGM.wav");
 }
