@@ -2,6 +2,7 @@
  #include "Plane.h"
  #include "game.h"
  #include "burst.h"
+ #include "StrUpdate.h"
 sf::RenderWindow mainWindow;
 Enemy enemy[enenumber];
 
@@ -20,6 +21,7 @@ void Game::play()
 		manager.BulletUpdate(bullet);
 		manager.EnemyUpdate(enemy);
 		manager.BurstUpdate(burst,bullet);
+		StrUpdate::update();
 		mainWindow.display();
 	}
 }
