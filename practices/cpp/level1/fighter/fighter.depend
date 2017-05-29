@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1495874747 source:h:\c”Ô—‘\fighter\main.cpp
+1495877082 source:h:\c”Ô—‘\fighter\main.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Main.hpp>
 	"Music.h"
@@ -523,9 +523,10 @@
 	"Hero.h"
 	"Texture.h"
 
-1495874567 h:\c”Ô—‘\fighter\include\hero.h
+1496062478 h:\c”Ô—‘\fighter\include\hero.h
 	"Plane.h"
 	"Music.h"
+	"RTexture.h"
 
 1495812794 h:\c”Ô—‘\fighter\include\plane.h
 	<SFML/Graphics.hpp>
@@ -533,13 +534,13 @@
 	"Music.h"
 	"Action.h"
 
-1495873701 h:\c”Ô—‘\fighter\include\action.h
+1496062198 h:\c”Ô—‘\fighter\include\action.h
 	<SFML/Graphics.hpp>
 
-1495873701 source:h:\c”Ô—‘\fighter\src\action.cpp
+1496063454 source:h:\c”Ô—‘\fighter\src\action.cpp
 	"Action.h"
 
-1495814508 source:h:\c”Ô—‘\fighter\src\hero.cpp
+1496063808 source:h:\c”Ô—‘\fighter\src\hero.cpp
 	"Hero.h"
 	"World.h"
 
@@ -571,19 +572,30 @@
 	"RTexture.h"
 	<SFML/Graphics.hpp>
 
-1495874512 h:\c”Ô—‘\fighter\include\world.h
+1496062763 h:\c”Ô—‘\fighter\include\world.h
 	<SFML/Graphics.hpp>
 	"Hero.h"
+	<unordered_set>
+	"Bullet.h"
+	"RTexture.h"
 
-1495875742 source:h:\c”Ô—‘\fighter\src\world.cpp
+1496063246 source:h:\c”Ô—‘\fighter\src\world.cpp
 	"World.h"
 
-1495816406 source:h:\c”Ô—‘\fighter\src\game.cpp
+1496063076 source:h:\c”Ô—‘\fighter\src\game.cpp
 	"Game.h"
 
-1495876579 h:\c”Ô—‘\fighter\include\game.h
+1495877082 h:\c”Ô—‘\fighter\include\game.h
 	<SFML/Audio.hpp>
 	"World.h"
 	"Music.h"
 	<SFML/Graphics.hpp>
+
+1496062198 h:\c”Ô—‘\fighter\include\bullet.h
+	<SFML/Graphics.hpp>
+	"RTexture.h"
+	"Action.h"
+
+1496062198 source:h:\c”Ô—‘\fighter\src\bullet.cpp
+	"Bullet.h"
 

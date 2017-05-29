@@ -8,7 +8,7 @@ class Action :public sf::Sprite
         Action();
         virtual ~Action();
         void move(sf::Vector2<float> direction);
-//        void move();
+        void move();
     protected:
         sf::Vector2<float> direction;
 

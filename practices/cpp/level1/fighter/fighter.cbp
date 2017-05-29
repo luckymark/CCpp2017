@@ -49,6 +49,8 @@
 			<Add directory="../../SFML-2.4.2/lib" />
 		</Linker>
 		<Unit filename="include/Action.h" />
+		<Unit filename="include/Bullet.h" />
+		<Unit filename="include/Enemy.h" />
 		<Unit filename="include/Game.h" />
 		<Unit filename="include/Hero.h" />
 		<Unit filename="include/Load.h" />
@@ -58,6 +60,8 @@
 		<Unit filename="include/World.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Action.cpp" />
+		<Unit filename="src/Bullet.cpp" />
+		<Unit filename="src/Enemy.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/Hero.cpp" />
 		<Unit filename="src/Load.cpp" />

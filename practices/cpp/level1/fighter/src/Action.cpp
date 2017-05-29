@@ -26,14 +26,14 @@ void Action::move(sf::Vector2<float> direction){
 }
 
 
-//void Action::move(){
-//
-//
-//    sf::Vector2<float> temp = this->direction;
-//    temp.x=this->direction.x;
-//    temp.y=this->direction.y;
-//    this->setPosition(this->getPosition()+temp);
-//
-//
-//
-//}
+void Action::move(){
+
+
+    sf::Vector2<float> temp = this->direction;
+    temp.x=this->direction.x;
+    temp.y=this->direction.y;
+    this->setPosition(this->getPosition()+temp);
+
+
+
+}

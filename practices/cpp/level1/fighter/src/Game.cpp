@@ -54,12 +54,15 @@ void Game::MainLoop()
                     }
                 }
 
-
                 if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) ){
                     if(this->world->hero->getPosition().y<(this->world->window->getSize().y-this->world->hero->getGlobalBounds().height)){
                         world->hero->move(sf::Vector2<float>(0.0,1.0));
                     }
                 }
+
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+                                this->world->hero->shoot();
+                    }
          }
 
          while (world->window->pollEvent(event)){
@@ -70,7 +73,8 @@ void Game::MainLoop()
                 return ;
             }
          }
-
+         world->moveBullet();
+         world->cleanBullet();
          world->Refresh();
          world->window->display();
      }
