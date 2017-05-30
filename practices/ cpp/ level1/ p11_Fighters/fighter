@@ -1,0 +1,218 @@
+#include <SFML/Graphics.hpp>
+#include<SFML/Audio.hpp>
+#include<iostream>
+#include<windows.h>
+#include<time.h>
+#define move_speed_my_aircraft 0.5
+#define move_speed_my_missle 0.3
+#define move_speed_enemy_aircraft 0.15
+#define window_lenth 1920
+#define window_width 1020
+
+void move_aircraft(sf::Sprite &duixiang)
+{
+    sf::Vector2f now_position=duixiang.getPosition();
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)&&(now_position.x>53.25)){
+    duixiang.move(-move_speed_my_aircraft, 0);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)&&(now_position.x<window_lenth-53.25)){
+    duixiang.move(move_speed_my_aircraft, 0);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)&&(now_position.y>75)){
+    duixiang.move(0, -move_speed_my_aircraft);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)&&(now_position.y<window_width-75)){
+    duixiang.move(0, move_speed_my_aircraft);
+    }
+}
+//飞机类
+class AIRCRAFT{
+public:
+    sf::Texture tex_aircraft;
+    sf::Sprite aircraft;
+    };
+//导弹类
+class MISSILE{
+public:
+    sf::Texture tex_missile;
+    sf::Sprite missile;
+    };
+
+class MY_AIRCRAFT:public AIRCRAFT
+{
+public:
+    MY_AIRCRAFT()
+    {
+       if (!tex_aircraft.loadFromFile("my_aircraft.jpg")){
+    // error...
+}
+aircraft.setTexture(tex_aircraft);
+aircraft.setOrigin(106.5,150);
+aircraft.setPosition(960,930);
+aircraft.setScale(0.5f,0.5f);
+
+
+
+    }
+
+
+sf::FloatRect boundingBox= aircraft.getGlobalBounds();
+
+
+};
+
+class MY_MISSILE:public MISSILE
+{
+public:
+    int if_exist=0;
+    MY_MISSILE()
+    {
+if (!tex_missile.loadFromFile("missile.jpg")){
+    // error...
+}
+missile.setTexture(tex_missile);
+missile.setOrigin(62.5,62.5);
+missile.setScale(0.3f,0.3f);
+    }
+};
+
+class ENEMY_AIRCRAFT:public AIRCRAFT
+{
+public:
+    int if_exist=0;
+    ENEMY_AIRCRAFT()
+    {
+        if (!tex_aircraft.loadFromFile("enemy_aircraft.png")){
+    // error...
+}
+aircraft.setTexture(tex_aircraft);
+aircraft.setOrigin(147,134);
+aircraft.setScale(0.4f,0.4f);
+    }
+};
+int main()
+{
+    //播放背景音乐
+    sf::Music music;
+    if (!music.openFromFile("Sight.wav")){
+    return -1;
+    }
+    music.setVolume(30);
+    music.play();
+    music.setLoop(true);
+    sf::Clock clock1;
+    MY_MISSILE my_missile[50];
+    ENEMY_AIRCRAFT enemy_aircraft[30];
+    int between_time,enemy_number,enemy_index;
+    int if_my_aircraft_exist;
+    int your_life=3;
+    sf::RenderWindow window(sf::VideoMode(window_lenth,window_width), "SFML works!");
+    clock_t start_time,finish_time;
+    start_time=clock();
+    srand(time(0));
+    while(your_life>0){
+    MY_AIRCRAFT *my_aircraft=new (MY_AIRCRAFT);
+    if_my_aircraft_exist=1;
+    while (window.isOpen()){
+            //window.setFramerateLimit(60);
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
+        finish_time=clock();
+    between_time=finish_time-start_time;
+    if(between_time>3000){
+       enemy_number=rand()%3+1;
+            for(int j=0;j<30;j++){
+                if(0==enemy_aircraft[j].if_exist){
+                enemy_aircraft[j].if_exist=1;
+                enemy_index=rand()%window_lenth+1;
+                enemy_aircraft[j].aircraft.setPosition(enemy_index,80);
+                enemy_number--;
+                if(0==enemy_number){
+                    break;
+                }
+            }
+        }
+    start_time=finish_time;
+    }
+    move_aircraft(my_aircraft->aircraft);
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+        sf::Time elapsed = clock1.getElapsedTime();
+        clock1.restart();
+        if(elapsed.asSeconds()>0.05){
+            for(int i=0;i<50;i++){
+                if(0==my_missile[i].if_exist){
+                    my_missile[i].missile.setPosition(my_aircraft->aircraft.getPosition());
+                    my_missile[i].if_exist=1;
+                    break;
+                }
+            }
+        }
+    }
+        for(int i=0;i<50;i++){
+            if(1==my_missile[i].if_exist){
+                my_missile[i].missile.move(0,-move_speed_my_missle);
+                }
+            if(my_missile[i].missile.getPosition().y<-20){
+                my_missile[i].if_exist=0;
+                }
+            }
+            for(int j=0;j<30;j++){
+                if(1==enemy_aircraft[j].if_exist){
+                    enemy_aircraft[j].aircraft.move(0,move_speed_enemy_aircraft);
+                }
+                if(enemy_aircraft[j].aircraft.getPosition().y>window_width){
+                    enemy_aircraft[j].if_exist=0;
+                }
+            }
+    window.clear(sf::Color::White);
+    window.draw(my_aircraft->aircraft);
+    for(int i=0;i<50;i++){
+        if(1==my_missile[i].if_exist){
+
+            window.draw(my_missile[i].missile);
+        }
+    }
+    for(int j=0;j<30;j++){
+        if(1==enemy_aircraft[j].if_exist){
+
+            window.draw(enemy_aircraft[j].aircraft);
+        }
+    }
+    for(int i=0;i<50;i++){
+        for(int j=0;j<30;j++){
+            if((1==my_missile[i].if_exist)&&(1==enemy_aircraft[j].if_exist)){
+                    sf::FloatRect boundingBox1 = enemy_aircraft[j].aircraft.getGlobalBounds();
+                sf::FloatRect boundingBox2 = my_missile[i].missile.getGlobalBounds();
+                if(boundingBox1.intersects(boundingBox2)){
+                        my_missile[i].if_exist=0;
+                enemy_aircraft[j].if_exist=0;
+                }
+            }
+        }
+    }
+    sf::FloatRect boundingBox3 = my_aircraft->aircraft.getGlobalBounds();
+    for(int j=0;j<30;j++){
+        if(1==enemy_aircraft[j].if_exist){
+                sf::FloatRect boundingBox1 = enemy_aircraft[j].aircraft.getGlobalBounds();
+            if(boundingBox3.intersects(boundingBox1)){
+                    if_my_aircraft_exist=0;
+                    your_life--;
+                break;
+            }
+        }
+    }
+    if(0==if_my_aircraft_exist){
+      window.clear(sf::Color::White);
+      window.display();
+      Sleep(3000);
+      break;
+    }
+    window.display();
+}
+        }
+    return 0;
+}
