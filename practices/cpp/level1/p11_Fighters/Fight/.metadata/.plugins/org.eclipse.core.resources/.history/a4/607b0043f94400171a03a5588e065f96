@@ -1,0 +1,27 @@
+/*
+ * explosin.h
+ *
+ *  Created on: 2017年5月28日
+ *      Author: chen
+ */
+
+#ifndef EXPLOSION_H_
+#define EXPLOSION_H_
+class Explosion{
+public:
+	Explosion():x(0),y(0),time(0){}
+	void settexture(sf::Texture &Global){
+		texture = Global;
+		sprite.setTexture(texture);
+	}
+	sf::Clock clock ;
+	int x ;
+	int y ;
+	sf::Sprite sprite ;
+	sf::Texture texture ;
+};
+
+
+
+
+#endif /* EXPLOSIN_H_ */

@@ -1,0 +1,63 @@
+/*
+ * EnemyFlight.h
+ *
+ *  Created on: 2017年5月28日
+ *      Author: chen
+ */
+
+#ifndef ENEMYFLIGHT_H_
+#define ENEMYFLIGHT_H_
+
+#include"flight.h"
+#include<time.h>
+#include<stdlib.h>
+#include<iostream>
+#include<vector>
+
+class EnemyFlight
+{
+public:
+	EnemyFlight(sf::Texture globaltexture ):texture(globaltexture){
+
+		number = 6 ;
+		//number++;
+		for(int i = 0 ; i<number; i++){
+			E.push_back(new Flight);
+			E[i]->SetTexture(texture);
+			E[i]->ankel();
+			E[i]->SetPosiontion(rand()%500+300,200);
+
+		}
+	}
+
+	int control(){
+		int m = 0;
+		sf::Mutex mutex ;
+		mutex.lock();
+		for(int i = 0 ;i < number;i++){
+			m = m * 10 ;
+			if(E[i]->control2()){
+				m = m + i ;
+			}
+		}
+		mutex.unlock();
+		return m ;
+	}
+	int getnumber(){
+		return number ;
+	}
+
+	void destory(int a){
+		delete E[a];
+	}
+
+	std::vector<Flight*> E;
+private:
+	sf::Texture texture;
+	int number ;
+};
+
+
+
+
+#endif /* ENEMYFLIGHT_H_ */

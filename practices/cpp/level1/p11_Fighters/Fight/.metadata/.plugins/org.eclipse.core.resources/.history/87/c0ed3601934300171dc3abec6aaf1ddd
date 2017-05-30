@@ -1,0 +1,43 @@
+/*
+ * control2.cpp
+ *
+ *  Created on: 2017年5月28日
+ *      Author: chen
+ */
+#include"advanced.h"
+#include"flight.h"
+#include <SFML/System.hpp>
+#include<time.h>
+#include<stdlib.h>
+#include<iostream>
+int Flight::control2()
+{
+		sf::Mutex mutex;
+
+		static sf::Clock clock ;
+		if(sprite.getPosition().y<800){
+			int choice = rand()%4;
+			switch (choice){
+			case 0 :
+				sprite.move(0,10);
+				break;
+			case 1 :
+				if(sprite.getPosition().x>0&&sprite.getPosition().x<900){
+					sprite.move(-20,0);
+				}
+				break;
+			case 2 :
+				if(sprite.getPosition().x>0&&sprite.getPosition().x<1225){
+					sprite.move(20,0);
+				}
+				break;
+			case 3 :
+				return 1 ;
+			}
+		}
+		return 0 ;
+}
+
+
+
+

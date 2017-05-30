@@ -1,0 +1,65 @@
+/*
+ * bullet.h
+ *
+ *  Created on: 2017年5月28日
+ *      Author: chen
+ */
+
+#ifndef BULLET_H_
+#define BULLET_H_
+
+#include <SFML/Graphics.hpp>
+class bullet
+{
+public:
+	bullet(char a){
+		b = 1 ;
+	}
+	bullet(int a){
+		b = 0 ;
+	}
+
+	int fly1(){
+		sf::Mutex mutex ;
+		if(sprite.getPosition().y<1000){
+			mutex.lock();
+			sprite.move(0,-1);
+			mutex.unlock();
+			return 1 ;
+		}
+		else return 0;
+	}
+	int fly2(){
+		sf::Mutex mutex;
+		if(sprite.getPosition().y>0){
+			mutex.lock();
+			sprite.move(0,1);
+			mutex.unlock();
+			return 1 ;
+		}
+		else return 0;
+	}
+
+	int getb(){
+		return b ;
+	}
+	void set(int x1 , int y1){
+			sprite.setPosition(x1,y1);
+			x = x1 ;
+			y = y1 ;
+	}
+
+	sf::Sprite getsprite(){
+		return sprite;
+	}
+
+	sf::Sprite sprite;
+	int b ;
+	int x ;
+	int y ;
+};
+
+
+
+
+#endif /* BULLET_H_ */

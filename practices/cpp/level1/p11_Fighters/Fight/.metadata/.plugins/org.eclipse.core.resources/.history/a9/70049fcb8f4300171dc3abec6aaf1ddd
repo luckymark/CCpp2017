@@ -1,0 +1,54 @@
+/*
+ * EnemyFlight.h
+ *
+ *  Created on: 2017年5月28日
+ *      Author: chen
+ */
+
+#ifndef ENEMYFLIGHT_H_
+#define ENEMYFLIGHT_H_
+
+#include"flight.h"
+#include<time.h>
+#include<stdlib.h>
+#include<iostream>
+#include<vector>
+
+class EnemyFlight
+{
+public:
+	EnemyFlight(sf::Texture globaltexture ):texture(globaltexture){
+		srand(time(0));
+		number = 6 ;
+		//number++;
+		for(int i = 0 ; i<number; i++){
+			Flight flight;
+			flight.SetTexture(texture);
+			flight.SetPosiontion(100,100);
+			E.push_back(flight);
+		}
+	}
+
+	int control(){
+		int m = 0;
+		for(int i = 0 ;i < number;i++){
+			m = m * 10 ;
+			if(E[i].control2()){
+				m = m + i ;
+			}
+		}
+		return m ;
+	}
+	int getnumber(){
+		return number ;
+	}
+	std::vector<Flight> E;
+private:
+	sf::Texture texture;
+	int number ;
+};
+
+
+
+
+#endif /* ENEMYFLIGHT_H_ */

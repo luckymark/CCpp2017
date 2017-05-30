@@ -1,0 +1,22 @@
+/*
+ * explosin.h
+ *
+ *  Created on: 2017年5月28日
+ *      Author: chen
+ */
+
+#ifndef EXPLOSIN_H_
+#define EXPLOSIN_H_
+class Explosin
+{
+public:
+	Explosin():x(0),y(0){}
+	int x ;
+	int y;
+
+};
+
+
+
+
+#endif /* EXPLOSIN_H_ */

@@ -1,0 +1,85 @@
+/*
+ * EnemyFlight.h
+ *
+ *  Created on: 2017年5月28日
+ *      Author: chen
+ */
+
+#ifndef ENEMYFLIGHT_H_
+#define ENEMYFLIGHT_H_
+
+#include"flight.h"
+#include<time.h>
+#include<stdlib.h>
+#include<iostream>
+#include<vector>
+
+class EnemyFlight
+{
+public:
+	EnemyFlight(sf::Texture globaltexture ):texture(globaltexture){
+
+		number = 6 ;
+		//number++;
+		for(int i = 0 ; i<number; i++){
+			E.push_back(new Flight);
+			E[i]->SetTexture(texture);
+			E[i]->ankel();
+			E[i]->SetPosiontion(rand()%500+300,200);
+
+		}
+	}
+
+	int control(){
+		int m = 0;
+		for(int i = 0 ;i < number;i++){
+			m = m * 10 ;
+			if(E[i]->control2()){
+				m = m + i ;
+			}
+		}
+		return m ;
+	}
+	int getnumber(){
+		return number ;
+	}
+
+	int destory(){
+		int k = 0;
+		for(int j = 0;j < E.size();j++){
+			if(! E[j]->getlive() ){
+				std::cout<<"start to delete E["<<j<<"]"<<std::endl;
+				delete E[j];
+				number--;
+				std::cout<<"after delete E["<<j<<"]"<<std::endl;
+				E[j] = NULL ;
+				k=1;
+			}
+		}
+		if(k==1){
+			int i = 0;
+			while(E.size()!=0&&i<E.size()){
+				if(E[i]==NULL){
+					std::cout<<"start to erase E["<<i<<"]"<<std::endl;
+					E.erase(E.begin()+i);
+					std::cout<<"after to delete E["<<i<<"]"<<std::endl;
+					i=0;
+					continue;
+				}
+				i++;
+			}
+		}
+		if(k==1)return 1;
+		else return 0;
+	}
+
+	std::vector<Flight*> E;
+private:
+	sf::Texture texture;
+	int number ;
+};
+
+
+
+
+#endif /* ENEMYFLIGHT_H_ */

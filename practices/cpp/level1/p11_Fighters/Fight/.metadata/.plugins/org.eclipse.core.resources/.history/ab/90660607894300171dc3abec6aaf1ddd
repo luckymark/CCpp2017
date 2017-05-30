@@ -1,0 +1,69 @@
+/*
+ * flight.h
+ *
+ *  Created on: 2017年5月28日
+ *      Author: chen
+ */
+#include <SFML/Graphics.hpp>
+#include<time.h>
+#include<stdlib.h>
+#include<iostream>
+#ifndef FLIGHT_H_
+#define FLIGHT_H_
+class Flight
+{
+public:
+	Flight(){
+		life = 3 ;
+		sprite.scale(1,1);
+		sprite.setPosition(500,500);
+	}
+
+	void SetTexture(sf::Texture globaltexture){
+		texture = globaltexture ;
+		sprite.setTexture(texture);
+	}
+
+	void SetPosiontion(int x , int y){
+		sprite.setPosition(x,y);
+	}
+
+	int control();
+
+	int control2();
+
+	sf::Sprite &GetSprite(){
+		return sprite ;
+	}
+
+	void restore(){
+		life++;
+	}
+	void subtract(){
+		life--;
+	}
+
+	bool ifdeath(){
+		if(life<=0){
+			return 0;
+		}
+		return 1 ;
+	}
+	int getx(){
+		return  sprite.getPosition().x;
+	}
+	int gety(){
+		return  sprite.getPosition().y ;
+	}
+
+private:
+	int life ;
+	sf::Texture texture;
+	sf::Sprite sprite;
+};
+
+
+#endif
+
+
+
