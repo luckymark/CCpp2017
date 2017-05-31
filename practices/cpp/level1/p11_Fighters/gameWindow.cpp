@@ -5,6 +5,7 @@
 #include "gameMusic.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+
 void playerAction(plane & p,bool & flag) {
 	static float speedCtrl=1;
 
@@ -56,6 +57,7 @@ void gameProcess() {
 	gameMusic soundEffect[10];
 	plane enemysPlane[30];
 
+	window.setFramerateLimit(60);
 	srand(time(0));
 	gameBgm1.playMusic();
 	while (window.isOpen()){
@@ -82,12 +84,15 @@ void gameProcess() {
 		showEnemy(window,enemysPlane, 30);
 		window.display();
 		++fresh_count;
-		if (0 == fresh_count % 100) {
+		if (0 == fresh_count % 10) {
 			bulletCD = 0;
 		}
-		if (1000 == fresh_count) {
-			fresh_count = 0;
+		if (0 == fresh_count % 40) {
 			enemyCD = 0;
+		}
+		if (100 == fresh_count) {
+			fresh_count = 0;
+			
 		}
 	}
 }

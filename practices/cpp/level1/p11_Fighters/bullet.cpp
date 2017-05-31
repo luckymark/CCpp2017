@@ -20,9 +20,9 @@ void bullet::appendBullet(float x, float y, char type) {
 	float ispeed;
 	switch (type) {
 	case 'p':
-		tex.loadFromFile("UFO.png");
+		tex.loadFromFile("UFO.psd");
 		bulletInfo[tail].bullet_sprite.setScale(sf::Vector2f(0.05f, 0.2f));
-		ispeed = -0.5;
+		ispeed = -10;
 		break;
 	default:
 		;

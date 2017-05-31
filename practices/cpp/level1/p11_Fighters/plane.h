@@ -21,7 +21,7 @@ class plane {
 		bool collision(bullet & bp);
 		bool collision(plane & p);
 	protected:
-		
+		char type;
 		sf::Texture plane_texture;
 		sf::Sprite plane_sprite;
 		short life;
