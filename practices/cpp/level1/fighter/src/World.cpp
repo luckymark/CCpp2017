@@ -26,18 +26,44 @@ void World::Refresh(){
     this->window->clear();
     this->window->draw(*this);
     this->window->draw(*(this->hero));
+
     for(auto enemy = this->enemyPlanes.begin();enemy!=(this->enemyPlanes.end());)
     {
          auto temp=enemy;
+         if((*enemy)->state>=1&&(*enemy)->state<=100)
+        {
+            (*enemy)->boomCheck(((*enemy)->state)++);
+            break;
+        }else if((*enemy)->state==101)
+        {
+            delete *enemy;
+            enemy = (this->enemyPlanes).erase(enemy);
+            break;
+        }
          (*enemy)->enemyMove();
-         this->window->draw(**enemy);
+          for(auto sprite = this->heroBullets.begin(); sprite!=(this->heroBullets.end());)
+            {
+                if((*enemy)->getGlobalBounds().intersects((*sprite)->getGlobalBounds()))
+                {
+                        (*enemy)->state=1;
+                        this->heroBullets.erase(sprite);
+                        break;
+                }
+                sprite++;
+            }
+          this->window->draw(**enemy);
           if(temp==enemy){++enemy;}
 
     }
 
 
-    for(auto &sprite : this->heroBullets){
+    for(auto &sprite : this->heroBullets)
+    {
+        this->window->draw(*sprite);
+    }
 
+    for(auto &sprite:this->enemyBullets)
+    {
         this->window->draw(*sprite);
     }
 }
@@ -62,15 +88,15 @@ void World::moveBullet()
         bullet->move();
     }
      for(auto &bullet : this->enemyBullets){
-
+        bullet->setSpeed(0.3);
         bullet->move();
     }
 }
 
 void World::cleanBullet(){
 
-    for(auto bullet = this->heroBullets.begin(); bullet!=(this->heroBullets.end());){
-
+    for(auto bullet = this->heroBullets.begin(); bullet!=(this->heroBullets.end());)
+    {
         if((*bullet)->getPosition().y<0){
 
             delete *bullet;
@@ -80,14 +106,13 @@ void World::cleanBullet(){
         }else{
             bullet++;
         }
-
     }
 
 }
 
 void World::addEnemy()
 {
-    static int i=0;
+    static int i=500;
     if(i++>=2000)
     {
         Enemy* enemy1 = new Enemy(this);
@@ -96,8 +121,23 @@ void World::addEnemy()
         this->enemyPlanes.insert(enemy3);
         this->enemyPlanes.insert(enemy1);
         this->enemyPlanes.insert(enemy2);
-        i= 0;
+        i=100+rand()%500;
     }
     else{return;}
 
 }
+
+void World::EnemyShoot()
+{
+    for(auto enemy=this->enemyPlanes.begin();enemy!=this->enemyPlanes.end();)
+    {
+        (*enemy)-> Fire();
+        enemy++;
+    }
+}
+
+
+
+
+
+

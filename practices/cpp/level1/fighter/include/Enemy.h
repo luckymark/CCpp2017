@@ -9,8 +9,10 @@ class Enemy:public Plane
     public:
         Enemy(World *world);
         virtual ~Enemy();
-        virtual void enemyMove();
-
+        void enemyMove();
+        void Fire();
+        void boomCheck(int state);
+        int state=0;
         int mark;
 
     protected:

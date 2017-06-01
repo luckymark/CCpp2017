@@ -8,6 +8,7 @@ class Music
         Music();
         virtual ~Music();
         static sf::Music BGM;
+        static sf::Music BOOM;
         static void load();
 
     protected:

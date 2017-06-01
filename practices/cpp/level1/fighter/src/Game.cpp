@@ -30,7 +30,7 @@ void Game::init()
 
 void Game::MainLoop()
 {
-//    this->play_music();
+    this->play_music();
      while (world->window->isOpen())
      {
          sf::Event event;
@@ -74,6 +74,7 @@ void Game::MainLoop()
             }
          }
          world->addEnemy();
+         world->EnemyShoot();
          world->moveBullet();
          world->cleanBullet();
          world->Refresh();

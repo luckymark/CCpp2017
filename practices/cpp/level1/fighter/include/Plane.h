@@ -13,6 +13,8 @@ class Plane:public Action
 
     protected:
         World *world;
+        sf::Texture BOOMP=RTexture::BOOM1;
+        sf::Music &BOOM=Music::BOOM;
 
     private:
 };

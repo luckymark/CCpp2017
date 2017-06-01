@@ -23,13 +23,16 @@ void Hero::init()
 void Hero::shoot()
 {
     static int i=0;
-    if(i>50){
+    if(i>200){
         Bullet *bulletM=new Bullet(RTexture::BULLET1,sf::Vector2f(0.0,-1.0));
         Bullet *bulletR=new Bullet(RTexture::BULLET2,sf::Vector2f(0.0,-1.0));
         Bullet *bulletL=new Bullet(RTexture::BULLET2,sf::Vector2f(0.0,-1.0));
         bulletM->setScale(1,1);
         bulletR->setScale(1,1);
         bulletL->setScale(1,1);
+        bulletM->setSpeed(1);
+        bulletR->setSpeed(1);
+        bulletL->setSpeed(1);
         bulletM->setPosition(this->getPosition().x+63,this->getPosition().y);
         bulletR->setPosition(this->getPosition().x+88,this->getPosition().y);
         bulletL->setPosition(this->getPosition().x+10,this->getPosition().y);

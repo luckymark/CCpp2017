@@ -13,6 +13,7 @@ class RTexture
         static sf::Texture BULLET2;
         static sf::Texture BACK_GROUND;
         static sf::Texture BOOM1;
+        static sf::Texture BULLET3;
         static void load();
 
     protected:

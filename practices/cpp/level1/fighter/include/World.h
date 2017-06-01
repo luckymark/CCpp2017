@@ -19,6 +19,7 @@ class World:public sf::Sprite
         void Refresh();
         void moveBullet();
         void cleanBullet();
+        void EnemyShoot();
         sf::RenderWindow *window;
         Hero *hero;
         bool loading=true;
