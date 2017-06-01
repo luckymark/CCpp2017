@@ -14,7 +14,6 @@ World::~World()
 }
 
 void World::add(Hero *Hero){
-   // this->planes.insert(Player);
     this->hero=Hero;
 
 }
@@ -27,6 +26,16 @@ void World::Refresh(){
     this->window->clear();
     this->window->draw(*this);
     this->window->draw(*(this->hero));
+    for(auto enemy = this->enemyPlanes.begin();enemy!=(this->enemyPlanes.end());)
+    {
+         auto temp=enemy;
+         (*enemy)->enemyMove();
+         this->window->draw(**enemy);
+          if(temp==enemy){++enemy;}
+
+    }
+
+
     for(auto &sprite : this->heroBullets){
 
         this->window->draw(*sprite);
@@ -38,11 +47,11 @@ void World::addBullet(Bullet *bullet,int mark)
     switch (mark)
     {
         case 1:
-             this->heroBullets.insert(bullet);//添加子弹到玩家子弹
+             this->heroBullets.insert(bullet);
              break;
         case 2:
 
-             this->enemyBullets.insert(bullet);//添加子弹到敌人子弹
+             this->enemyBullets.insert(bullet);
              break;
     }
 }
@@ -73,5 +82,22 @@ void World::cleanBullet(){
         }
 
     }
+
+}
+
+void World::addEnemy()
+{
+    static int i=0;
+    if(i++>=2000)
+    {
+        Enemy* enemy1 = new Enemy(this);
+        Enemy* enemy2 = new Enemy(this);
+        Enemy* enemy3 = new Enemy(this);
+        this->enemyPlanes.insert(enemy3);
+        this->enemyPlanes.insert(enemy1);
+        this->enemyPlanes.insert(enemy2);
+        i= 0;
+    }
+    else{return;}
 
 }

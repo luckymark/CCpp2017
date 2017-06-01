@@ -1,6 +1,6 @@
 #include "Bullet.h"
 
-Bullet::Bullet(sf::Texture texture,sf::Vector2<float> direction)
+Bullet::Bullet(sf::Texture texture,sf::Vector2f direction)
 {
     //ctor
     this->texture=texture;

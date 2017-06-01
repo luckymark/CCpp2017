@@ -12,12 +12,12 @@ Action::~Action()
     //dtor
 }
 
-void Action::move(sf::Vector2<float> direction){
+void Action::move(sf::Vector2f direction){
 
     this->direction=direction;
-    sf::Vector2<float> temp = this->direction;
-    temp.x=this->direction.x;
-    temp.y=this->direction.y;
+    sf::Vector2f temp = this->direction;
+    temp.x=this->direction.x*speed;
+    temp.y=this->direction.y*speed;
     this->setPosition(this->getPosition()+temp);
 
 
@@ -29,11 +29,16 @@ void Action::move(sf::Vector2<float> direction){
 void Action::move(){
 
 
-    sf::Vector2<float> temp = this->direction;
-    temp.x=this->direction.x;
-    temp.y=this->direction.y;
+    sf::Vector2f temp = this->direction;
+    temp.x=this->direction.x*speed;
+    temp.y=this->direction.y*speed;
     this->setPosition(this->getPosition()+temp);
 
 
 
+}
+
+void Action::setSpeed(float speed)
+{
+    this->speed=speed;
 }

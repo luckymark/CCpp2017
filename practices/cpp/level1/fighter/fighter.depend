@@ -528,19 +528,19 @@
 	"Music.h"
 	"RTexture.h"
 
-1495812794 h:\c”Ô—‘\fighter\include\plane.h
+1496289432 h:\c”Ô—‘\fighter\include\plane.h
 	<SFML/Graphics.hpp>
 	"RTexture.h"
 	"Music.h"
 	"Action.h"
 
-1496062198 h:\c”Ô—‘\fighter\include\action.h
+1496305308 h:\c”Ô—‘\fighter\include\action.h
 	<SFML/Graphics.hpp>
 
-1496063454 source:h:\c”Ô—‘\fighter\src\action.cpp
+1496305308 source:h:\c”Ô—‘\fighter\src\action.cpp
 	"Action.h"
 
-1496063808 source:h:\c”Ô—‘\fighter\src\hero.cpp
+1496305308 source:h:\c”Ô—‘\fighter\src\hero.cpp
 	"Hero.h"
 	"World.h"
 
@@ -568,21 +568,22 @@
 	"World.h"
 	"RTexture.h"
 
-1495875305 source:h:\c”Ô—‘\fighter\src\rtexture.cpp
+1496141294 source:h:\c”Ô—‘\fighter\src\rtexture.cpp
 	"RTexture.h"
 	<SFML/Graphics.hpp>
 
-1496062763 h:\c”Ô—‘\fighter\include\world.h
+1496306047 h:\c”Ô—‘\fighter\include\world.h
 	<SFML/Graphics.hpp>
 	"Hero.h"
 	<unordered_set>
 	"Bullet.h"
 	"RTexture.h"
+	"Enemy.h"
 
-1496063246 source:h:\c”Ô—‘\fighter\src\world.cpp
+1496307614 source:h:\c”Ô—‘\fighter\src\world.cpp
 	"World.h"
 
-1496063076 source:h:\c”Ô—‘\fighter\src\game.cpp
+1496305332 source:h:\c”Ô—‘\fighter\src\game.cpp
 	"Game.h"
 
 1495877082 h:\c”Ô—‘\fighter\include\game.h
@@ -591,11 +592,19 @@
 	"Music.h"
 	<SFML/Graphics.hpp>
 
-1496062198 h:\c”Ô—‘\fighter\include\bullet.h
+1496306047 h:\c”Ô—‘\fighter\include\bullet.h
 	<SFML/Graphics.hpp>
 	"RTexture.h"
 	"Action.h"
 
-1496062198 source:h:\c”Ô—‘\fighter\src\bullet.cpp
+1496306047 source:h:\c”Ô—‘\fighter\src\bullet.cpp
 	"Bullet.h"
+
+1496307520 source:h:\c”Ô—‘\fighter\src\enemy.cpp
+	"Enemy.h"
+
+1496306047 h:\c”Ô—‘\fighter\include\enemy.h
+	<SFML/Audio.hpp>
+	"Music.h"
+	"Plane.h"
 

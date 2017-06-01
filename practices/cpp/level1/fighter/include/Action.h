@@ -7,12 +7,14 @@ class Action :public sf::Sprite
     public:
         Action();
         virtual ~Action();
-        void move(sf::Vector2<float> direction);
+        void move(sf::Vector2f direction);
         void move();
+        void setSpeed(float speed);
     protected:
-        sf::Vector2<float> direction;
+        sf::Vector2f direction;
 
     private:
+        float speed=1;
 };
 
 #endif // ACTION_H

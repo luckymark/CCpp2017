@@ -7,7 +7,7 @@
 class Bullet:public Action
 {
     public:
-        Bullet(sf::Texture texture,sf::Vector2<float> direction=sf::Vector2<float>(0.0,1.0));
+        Bullet(sf::Texture texture,sf::Vector2f direction=sf::Vector2f(0.0,1.0));
         virtual ~Bullet();
 
     protected:

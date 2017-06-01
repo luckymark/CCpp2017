@@ -9,9 +9,12 @@ class Enemy:public Plane
     public:
         Enemy(World *world);
         virtual ~Enemy();
-        void enemyMove();
+        virtual void enemyMove();
+
+        int mark;
 
     protected:
+        sf::Vector2f direction;
 
     private:
 };

@@ -6,6 +6,7 @@ Hero::Hero(World *world):Plane(world)
     //ctor
     this->setTexture(this->texture);
     this->setPosition(400,400);
+    this->setSpeed(1);
 }
 
 Hero::~Hero()
@@ -23,10 +24,9 @@ void Hero::shoot()
 {
     static int i=0;
     if(i>50){
-//        FIRE.play();
-        Bullet *bulletM=new Bullet(RTexture::BULLET1,sf::Vector2<float>(0.0,-1.0));
-        Bullet *bulletR=new Bullet(RTexture::BULLET2,sf::Vector2<float>(0.0,-1.0));
-        Bullet *bulletL=new Bullet(RTexture::BULLET2,sf::Vector2<float>(0.0,-1.0));
+        Bullet *bulletM=new Bullet(RTexture::BULLET1,sf::Vector2f(0.0,-1.0));
+        Bullet *bulletR=new Bullet(RTexture::BULLET2,sf::Vector2f(0.0,-1.0));
+        Bullet *bulletL=new Bullet(RTexture::BULLET2,sf::Vector2f(0.0,-1.0));
         bulletM->setScale(1,1);
         bulletR->setScale(1,1);
         bulletL->setScale(1,1);
