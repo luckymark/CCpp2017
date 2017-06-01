@@ -117,7 +117,7 @@ bool plane::isCollision(float x, float y,float Xsize,float Ysize) {
 	return false;
 }
 bool plane::collision(bullet & bp) {
-	if ( this->life==0)return false;
+	if ( this->life<=0)return false;
 	for (int i = 0; i < 25; i++) {
 		if (bp.bulletInfo[i].ifExist == 0)continue;
 		if ((bp.bulletInfo[i].x > this->x  &&

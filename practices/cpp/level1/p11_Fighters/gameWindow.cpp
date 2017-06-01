@@ -3,6 +3,7 @@
 #include<iostream>
 #include "plane.h"
 #include "gameMusic.h"
+#include "gameText.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
@@ -49,16 +50,16 @@ void enemysAction(plane * p, bool & flag) {
 }
 void gameProcess() {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Sky Legend");
-	int fresh_count=0,sound_count=0;
+	int fresh_count=0,sound_count=0,score=0;
 	bool bulletCD=0,enemyCD=0, flag_collision = 0;
 
 	plane playersPlane(350, 500, 'p');
+	plane enemysPlane[30];
 	gameMusic gameBgm1(1);
 	gameMusic soundEffect[10];
-	plane enemysPlane[30];
+	gameText scoreText('s',score);
 
 	window.setFramerateLimit(60);
-	srand(time(0));
 	gameBgm1.playMusic();
 	while (window.isOpen()){
 
@@ -68,21 +69,24 @@ void gameProcess() {
 		}
 		enemysAction(enemysPlane, enemyCD);
 		playerAction(playersPlane,bulletCD);
-		window.clear(sf::Color::Black);
+		window.clear();
 		playersPlane.moveBullet();
 		moveEnemy(enemysPlane,playersPlane,30,flag_collision);
 		playersPlane.showPlane(window);
 		if (flag_collision) {
 			soundEffect[sound_count].playMusic(0);
+			score++;
 			sound_count++;
 			if (10 == sound_count) {
 				sound_count = 0;
 			}
 		}
-		
 		flag_collision = 0;
 		showEnemy(window,enemysPlane, 30);
+		scoreText.setScore(score);
+		scoreText.showText(window);
 		window.display();
+		
 		++fresh_count;
 		if (0 == fresh_count % 10) {
 			bulletCD = 0;

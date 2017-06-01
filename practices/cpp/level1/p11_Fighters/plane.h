@@ -3,7 +3,6 @@
 #include "bullet.h"
 #include <SFML/Graphics.hpp>
 #define PLANE_H
-
 class plane {
 
 	public:
