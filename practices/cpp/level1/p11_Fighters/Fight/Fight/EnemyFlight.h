@@ -25,8 +25,7 @@ public:
 			E.push_back(new Flight);
 			E[i]->SetTexture(texture);
 			E[i]->ankel();
-			E[i]->SetPosiontion(rand()%500+300,200);
-
+			E[i]->SetPosiontion(rand()%500+300,0);
 		}
 	}
 
@@ -46,12 +45,12 @@ public:
 
 	int destory(){
 		int k = 0;
+		int n = 0;
 		for(int j = 0;j < E.size();j++){
 			if(! E[j]->getlive() ){
-				std::cout<<"start to delete E["<<j<<"]"<<std::endl;
 				delete E[j];
 				number--;
-				std::cout<<"after delete E["<<j<<"]"<<std::endl;
+				n++;
 				E[j] = NULL ;
 				k=1;
 			}
@@ -60,19 +59,23 @@ public:
 			int i = 0;
 			while(E.size()!=0&&i<E.size()){
 				if(E[i]==NULL){
-					std::cout<<"start to erase E["<<i<<"]"<<std::endl;
 					E.erase(E.begin()+i);
-					std::cout<<"after to delete E["<<i<<"]"<<std::endl;
 					i=0;
 					continue;
 				}
 				i++;
 			}
 		}
+		for(int n1 = 0 ; n1<n; n1++){
+			E.push_back(new Flight);
+			number++;
+			E[E.size()-1]->SetTexture(texture);
+			E[E.size()-1]->ankel();
+			E[E.size()-1]->SetPosiontion(rand()%500+300,0);
+		}
 		if(k==1)return 1;
 		else return 0;
 	}
-
 	std::vector<Flight*> E;
 private:
 	sf::Texture texture;

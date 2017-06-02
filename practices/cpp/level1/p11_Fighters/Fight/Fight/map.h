@@ -17,7 +17,7 @@ public:
 	Map(const char* namefile){
 		texture.loadFromFile(namefile);
 		sprite.setTexture(texture);
-		sprite.scale(2,2);
+		sprite.scale(1,1);
 	}
 	Map();
 	sf::Sprite Getsprite(){

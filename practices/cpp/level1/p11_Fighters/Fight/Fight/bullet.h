@@ -16,31 +16,33 @@ public:
 		b = 1 ;
 		x = 0 ;
 		y = 0 ;
+		status = 1;
+//		std::cout<<"enemey bullet"<<std::endl;
 	}
 	bullet(int a){
 		b = 0 ;
 		x = 0 ;
 		y = 0 ;
+		status = 1;
+//		std::cout<<"my bullet"<<std::endl;
+	}
+
+	~bullet(){
+//		std::cout<<"bullet start to destruct"<<std::endl;
 	}
 
 	int fly1(){
-		sf::Mutex mutex ;
-		if(sprite.getPosition().y<1000){
-			mutex.lock();
+		if(sprite.getPosition().y<1000&&sprite.getPosition().y>0){
 			sprite.move(0,-1);
 			y--;
-			mutex.unlock();
 			return 1 ;
 		}
 		else return 0;
 	}
 	int fly2(){
-		sf::Mutex mutex;
-		if(sprite.getPosition().y>0){
-			mutex.lock();
+		if(sprite.getPosition().y<1000&&sprite.getPosition().y>0){
 			sprite.move(0,1);
 			y++;
-			mutex.unlock();
 			return 1 ;
 		}
 		else return 0;
@@ -67,10 +69,15 @@ public:
 		return sprite;
 	}
 
+	void setstatus(){
+		status = 0;
+	}
+
 	sf::Sprite sprite;
 	int b ;
 	int x ;
 	int y ;
+	int status;
 };
 
 

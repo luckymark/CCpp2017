@@ -1,53 +1,6 @@
-16:08:24 **** Incremental Build of configuration Debug for project Fight ****
+15:24:45 **** Incremental Build of configuration Debug for project Fight ****
 make all 
-Building file: ../main.cpp
-Invoking: GCC C++ Compiler
-g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
-In file included from ../advanced.h:11:0,
-                 from ../main.cpp:11:
-../flight.h: In destructor ‘virtual Flight::~Flight()’:
-../flight.h:29:12: warning: value computed is not used [-Wunused-value]
-   std::cout<"destory";
-            ^
-In file included from ../main.cpp:13:0:
-../EnemyFlight.h: In member function ‘int EnemyFlight::destory()’:
-../EnemyFlight.h:49:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-   for(int j = 0;j < E.size();j++){
-                   ^
-../EnemyFlight.h:61:24: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-    while(E.size()!=0&&i<E.size()){
-                        ^
-In file included from ../main.cpp:15:0:
-../bullet2.h: In member function ‘void ArrayBullet::control_bullet()’:
-../bullet2.h:42:19: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-   for(int i = 0;i < A.size();i++){
-                   ^
-../main.cpp: In function ‘int main()’:
-../main.cpp:89:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-         for(int i = 0 ;i < Bullet.A.size();i++){
-                          ^
-../main.cpp:90:27: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-          for(int j = 0 ;j < Enemey.E.size();j++)
-                           ^
-../main.cpp:106:26: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-         for(int i= 0 ; i < Bullet.A.size();i++){
-                          ^
-../main.cpp:114:25: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-         for(int k = 0; k<explosion.size();k++){
-                         ^
-../main.cpp:123:25: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-         for(int k = 0; k<explosion.size();k++){
-                         ^
-../main.cpp:133:16: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
-         while(j!=explosion.size()){
-                ^
-Finished building: ../main.cpp
- 
-Building target: Fight
-Invoking: GCC C++ Linker
-g++ -lsfml-graphics -lsfml-window -lsfml-system  -o "Fight"  ./control.o ./control2.o ./main.o   -lsfml-graphics -lsfml-window -lsfml-system
-Finished building target: Fight
- 
+make: Nothing to be done for 'all'.
 
-16:08:25 Build Finished (took 562ms)
+15:24:45 Build Finished (took 79ms)
 

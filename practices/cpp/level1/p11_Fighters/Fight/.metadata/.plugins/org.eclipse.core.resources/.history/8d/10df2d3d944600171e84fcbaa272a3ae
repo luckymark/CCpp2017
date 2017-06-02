@@ -1,0 +1,40 @@
+/*
+ * control2.cpp
+ *
+ *  Created on: 2017年5月28日
+ *      Author: chen
+ */
+#include"advanced.h"
+#include"flight.h"
+#include <SFML/System.hpp>
+#include<time.h>
+#include<stdlib.h>
+#include<iostream>
+int Flight::control2()
+{
+		sf::Mutex mutex;
+
+		static sf::Clock clock ;
+
+		speed = speed + acc;
+
+
+
+		if(direction == 0){
+			if(sprite.getPosition().y<1000){
+				sprite.move(0,20);
+			}
+		}
+
+		if()
+
+
+		if(sprite.getPosition().y<1000&&sprite.getPosition().x<1000&&sprite.getPosition().x>0){
+
+		}
+		return 0 ;
+}
+
+
+
+

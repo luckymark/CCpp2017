@@ -1,5 +1,10 @@
 eclipse.preferences.version=1
+org.eclipse.debug.ui.BreakpointView+org.eclipse.debug.ui.actions.SkipAllBreakpoints=true
+org.eclipse.debug.ui.MemoryView.RenderingViewPane.1=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<persistedMemoryRenderings>\n<memoryRendering memoryBlock\="66100765" renderingId\="org.eclipse.debug.ui.rendering.raw_memory"/>\n</persistedMemoryRenderings>\n
+org.eclipse.debug.ui.MemoryView.RenderingViewPane.2=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<persistedMemoryRenderings>\n<memoryRendering memoryBlock\="66100765" renderingId\="org.eclipse.cdt.debug.ui.memory.floatingpoint.FPRendering"/>\n<memoryRendering memoryBlock\="66100765" renderingId\="org.eclipse.cdt.debug.ui.memory.traditional.TraditionalRendering"/>\n</persistedMemoryRenderings>\n
 org.eclipse.debug.ui.PREF_LAUNCH_PERSPECTIVES=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<launchPerspectives/>\n
+org.eclipse.debug.ui.memory.columnSize\:org.eclipse.cdt.dsf.gdb=4
+org.eclipse.debug.ui.memory.rowSize\:org.eclipse.cdt.dsf.gdb=16
 org.eclipse.debug.ui.user_view_bindings=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\n<viewBindings>\n<view id\="org.eclipse.ui.console.ConsoleView">\n<perspective id\="org.eclipse.debug.ui.DebugPerspective" userAction\="opened"/>\n</view>\n</viewBindings>\n
 pref_state_memento.org.eclipse.debug.ui.BreakpointView=<?xml version\="1.0" encoding\="UTF-8"?>\n<VariablesViewMemento org.eclipse.debug.ui.SASH_DETAILS_PART\="315" org.eclipse.debug.ui.SASH_VIEW_PART\="684">\n<PRESENTATION_CONTEXT_PROPERTIES IMemento.internal.id\="org.eclipse.debug.ui.BreakpointView">\n<BOOLEAN BOOLEAN\="true" IMemento.internal.id\="org.eclipse.debug.ui.check"/>\n</PRESENTATION_CONTEXT_PROPERTIES>\n</VariablesViewMemento>
 pref_state_memento.org.eclipse.debug.ui.DebugVieworg.eclipse.debug.ui.DebugView=<?xml version\="1.0" encoding\="UTF-8"?>\n<DebugViewMemento org.eclipse.debug.ui.BREADCRUMB_DROPDOWN_AUTO_EXPAND\="false"/>

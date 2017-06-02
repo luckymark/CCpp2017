@@ -17,13 +17,16 @@ class Flight
 public:
 	Flight(){
 		life = 3 ;
-		sprite.scale(1,1);
+		sprite.scale(0.5,0.5);
 		sprite.setPosition(500,500);
 		x1 = 500;
 		y1 = 500;
 		x2 = x1+130;
 		y2 = y1;
 		live = 1;
+		speed = 0 ;
+		acc= 0;
+		direction = 0 ;
 	}
 	virtual ~Flight(){
 		std::cout<"destory";
@@ -36,6 +39,8 @@ public:
 
 	void SetPosiontion(int x , int y){
 		sprite.setPosition(x,y);
+		if(x<500)direction = 1;
+		if(x>500)direction = 2;
 		x1 = x-130 ;
 		x2 = x;
 		y1 = y -80 ;
@@ -45,6 +50,7 @@ public:
 	int control();
 
 	int control2();
+
 
 	sf::Sprite &GetSprite(){
 		return sprite ;
@@ -62,6 +68,14 @@ public:
 		return false ;
 	}
 
+	bool judge1(int x , int y){
+		if(y==y1 && x > x1 && x<x2){
+			life --;
+			return true;
+		}
+		return false;
+	}
+
 	void restore(){
 		life++;
 	}
@@ -70,10 +84,10 @@ public:
 	}
 
 	bool ifdeath(){
-		if(life<=0){
-			return 0;
+		if(life==0){
+			return true;
 		}
-		return 1 ;
+		return false ;
 	}
 	int getx(){
 		return  sprite.getPosition().x;
@@ -89,12 +103,16 @@ private:
 	int life ;
 	sf::Texture texture;
 	sf::Sprite sprite;
+	sf::Clock clock;
 	int live ;
 public:
 	int x1 ;
 	int y1 ;
 	int x2 ;
 	int y2 ;
+	int speed ;
+	int acc;
+	int direction;
 };
 
 

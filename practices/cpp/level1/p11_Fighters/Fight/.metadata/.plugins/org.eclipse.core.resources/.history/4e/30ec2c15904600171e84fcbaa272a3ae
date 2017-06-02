@@ -1,0 +1,32 @@
+/*
+ * control2.cpp
+ *
+ *  Created on: 2017年5月28日
+ *      Author: chen
+ */
+#include"advanced.h"
+#include"flight.h"
+#include <SFML/System.hpp>
+#include<time.h>
+#include<stdlib.h>
+#include<iostream>
+int Flight::control2()
+{
+		sf::Mutex mutex;
+
+		static sf::Clock clock ;
+		static int speed[21];
+		static int *p=speed+11;
+		speed={-10,-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10};
+		if(sprite.getPosition().y<1000){
+			sprite.move(*p,20);
+			p++;
+
+		}
+		else live = 0;
+		return 0 ;
+}
+
+
+
+
