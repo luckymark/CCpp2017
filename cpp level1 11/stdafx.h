@@ -28,6 +28,6 @@
 
 
 #define bulnumber 5
-#define enenumber 6
+#define enenumber 5
 
 	

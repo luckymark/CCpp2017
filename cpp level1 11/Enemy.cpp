@@ -6,6 +6,7 @@
 extern sf::RenderWindow mainWindow;
 Enemy::Enemy()
 {
+	enebullet=new EnemyBullet(this);
 	if (image.loadFromFile("images/plane2.png") != true)
 	{
 		return;
@@ -36,7 +37,13 @@ void Enemy::move(float timeDelta)
 
 void Enemy::UseEnemy()
 {
-	EnemyPointX = -rand()%(width-30);
+	static int mark = 0;
+	if (mark == 0)
+	{
+		srand((unsigned)time(NULL));
+		mark = 1;
+	}
+	EnemyPointX = -rand()%(width-70);
 	EnemyPointY = 0 ;
 }
 

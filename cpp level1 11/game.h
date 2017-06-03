@@ -4,6 +4,7 @@
 #include "Plane.h"
 #include "Bullet.h"
 #include "ObjectManager.h"
+#include "EnemyBullet.h"
 
 #define width 1024
 #define height 770
@@ -14,10 +15,16 @@ public:
 	static int head ;
 	static int tail ;
 	static int flag ;
+	static bool empty;
+
 	static int ehead;
 	static int etail;
-	static bool empty ;
 	static bool eempty;
+
+	static int ebhead;
+	static int ebtail;
+	static bool ebempty;
+
 	sf::Clock clock1;
 	
 	float time = 0;

@@ -4,6 +4,7 @@
 #include "game.h"
 #include "windows.h"
 
+
 extern sf::RenderWindow mainWindow;
 extern Enemy enemy[enenumber];
 void ObjectManager::PlaneUpdate(Plane &plane)
@@ -99,10 +100,16 @@ void ObjectManager::EnemyUpdate(Enemy *enemy)
 	float timeDelta = clock2.restart().asSeconds();
 	for (int i = Game::etail; EnemyFullOrEmpty(i); i = Enemy::right[i])
 	{
-		enemy[i].move(timeDelta);
+		enemy[i].move(timeDelta);	
 		enemy[i].draw();
+		
 	}
-	
+	//´òÓ¡µÐ»ú×Óµ¯
+	for (int i = 0; i < enenumber; i++)
+	{
+		enemy[i].enebullet->move(timeDelta);
+		enemy[i].enebullet->draw();
+	}
 	static sf::Clock clock3;
 	static int mark = 0;
 	if (mark == 0)
@@ -117,11 +124,11 @@ void ObjectManager::EnemyUpdate(Enemy *enemy)
 		{
 			
 			enemy[Game::ehead].UseEnemy();
+			enemy[Game::ehead].enebullet->enemyExist = 1;
 			Game::ehead = Enemy::right[Game::ehead];
 			if (Game::ehead == Game::etail)
 			{
-				Game::eempty = false;
-			
+				Game::eempty = false;			
 			}
 			
 		}
@@ -202,3 +209,4 @@ void ObjectManager::BurstUpdate(Burst *burst,Bullet *bullet)
 		}
 	}
 }
+

@@ -6,9 +6,10 @@
 
 
 
+
 int main()
 {
-	Game game;
+	Game game;	
 	game.play();
 	return 0;
 }

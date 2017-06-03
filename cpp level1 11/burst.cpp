@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "burst.h"
 #include "game.h"
+#include "StrUpdate.h"
 extern sf::RenderWindow mainWindow;
 
 void Burst::crash(Bullet *bullet, Enemy *enemy,Burst *burst)
@@ -12,10 +13,16 @@ void Burst::crash(Bullet *bullet, Enemy *enemy,Burst *burst)
 		{
 			if (fabs(bullet[i].BulletPointX + 15 - enemy[j].EnemyPointX) < 30 && fabs(bullet[i].BulletPointY - enemy[j].EnemyPointY) < 30)
 			{
+				StrUpdate::score++;
 				burst[j].pointX = enemy[j].EnemyPointX;
 				burst[j].pointY = enemy[j].EnemyPointY;
 				burst[j].times = 0;
-
+				enemy[j].enebullet->enemyExist = 0;
+			/*	enemy[j].enebullet->total = 0;
+				for (int i = 0; i < eneonce*enebulnumber; i++)
+				{
+					enemy[j].enebullet->flag[i] = 0;
+				}*/
 				if (i == Game::tail)
 				{
 					Game::tail = Bullet::right[i];

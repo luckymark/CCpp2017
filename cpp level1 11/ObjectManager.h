@@ -3,6 +3,8 @@
 #include "Plane.h"
 #include "Enemy.h"
 #include "burst.h"
+#include "EnemyBullet.h"
+#include "Bullet.h"
 class Burst;
 class ObjectManager
 {
