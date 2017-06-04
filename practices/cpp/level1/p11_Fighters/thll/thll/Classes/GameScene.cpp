@@ -20,6 +20,7 @@ bool GameScene::init()
 		return false;
 	}
 
+	this->schedule(schedule_selector(GameScene::gameUpdate), 1.0 / 60.0);
 	return true;
 }
 
@@ -31,12 +32,42 @@ void GameScene::onEnterTransitionDidFinish()
 	enemyLayer = EnemyPlaneLayer::create();
 	this->addChild(enemyLayer);
 
-	this->schedule(schedule_selector(GameScene::collisionJudge), 0.001);
+	bulletLayer = BulletLayer::create();
+	this->addChild(bulletLayer);
 }
 
-void GameScene::collisionJudge(float dt)
+void GameScene::gameUpdate(float dt)
 {
-	Vector<Sprite* > bulletList = planeLayer->getBulletList();
+	enemy_create_count++;
+	enemy_move_count++;
+	bullet_create_count++;
+
+	planeLayer->planeUpdate(dt);
+	if (bullet_create_count % 5 == 0)
+	{
+		planeLayer->startShooting();
+		bullet_create_count = 0;
+	}
+
+	if (enemy_create_count % 30 == 0)
+	{
+		enemyLayer->enemyCreate();
+		enemy_create_count = 0;
+	}
+
+	if (enemy_move_count % 5 == 0)
+	{
+		enemyLayer->enemyMove();
+		enemy_move_count = 0;
+	}
+
+	bulletLayer->bulletMove();
+	collisionJudge();
+}
+
+void GameScene::collisionJudge()
+{
+	Vector<Sprite* > bulletList = bulletLayer->getBulletList();
 	Vector<EnemyPlane* > enemyList = enemyLayer->getEnemyList();
 	auto plane = planeLayer->getPlane();
 	auto system = ParticleExplosion::create();
@@ -45,6 +76,7 @@ void GameScene::collisionJudge(float dt)
 	for (int i = 0; i < bulletList.size(); i++)
 	{
 		auto bullet = bulletList.at(i);
+		int flag = 0;
 		for (int j = 0; j < enemyList.size(); j++)
 		{
 			auto enemy = enemyList.at(j);
@@ -59,8 +91,14 @@ void GameScene::collisionJudge(float dt)
 				enemy->removeFromParent();
 				this->planeBomb(pos, tag);					
 				enemyList.eraseObject(enemy);
-				return;
+				flag = 1;
+				break;
 			}
+		}
+		if (flag)
+		{
+			bulletLayer->bulletRemove(bullet);
+			break;
 		}
 	}
 }

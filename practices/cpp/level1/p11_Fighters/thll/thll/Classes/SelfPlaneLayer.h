@@ -7,6 +7,7 @@
 
 #include "cocos2d.h"
 #include "SelfPlane.h"
+#include "BulletLayer.h"
 
 class SelfPlaneLayer :public cocos2d::Layer
 {
@@ -15,21 +16,19 @@ public:
 
 	virtual bool init();
 
-	virtual void update(float dt);
-
-	CREATE_FUNC(SelfPlaneLayer);
-
-	cocos2d::Vector<cocos2d::Sprite* > getBulletList();
+	static SelfPlaneLayer* create();
 
 	cocos2d::Node* getPlane();
+
+	void planeUpdate(float dt);
+
+	void startShooting();
+
+	static SelfPlaneLayer* sharedPlane;
+
 private:
+
 	std::map<cocos2d::EventKeyboard::KeyCode, bool> keys;
-
-	cocos2d::Vector<cocos2d::Sprite* > bulletList;
-
-	void bulletCreate(float f);
-
-	void bulletMove(float f);
 
 	void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
 
@@ -39,5 +38,4 @@ private:
 
 	void keyPressedDuration(cocos2d::EventKeyboard::KeyCode keyCode);
 };
-
 #endif

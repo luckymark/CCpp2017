@@ -42,7 +42,7 @@
     <ClCompile Include="..\Classes\SelfPlaneLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CollisionLayer.cpp">
+    <ClCompile Include="..\Classes\BulletLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,7 +77,7 @@
     <ClInclude Include="..\Classes\SelfPlaneLayer.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\CollisionLayer.h">
+    <ClInclude Include="..\Classes\BulletLayer.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

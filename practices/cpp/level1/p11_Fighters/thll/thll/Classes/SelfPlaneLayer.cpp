@@ -2,6 +2,22 @@
 
 USING_NS_CC;
 
+SelfPlaneLayer* SelfPlaneLayer::sharedPlane = nullptr;
+
+SelfPlaneLayer* SelfPlaneLayer::create()
+{
+	SelfPlaneLayer *pRet = new SelfPlaneLayer();
+	if (pRet && pRet->init()) {
+		pRet->autorelease();
+		sharedPlane = pRet;
+		return pRet;
+	}
+	else {
+		CC_SAFE_DELETE(pRet);
+		return NULL;
+	}
+}
+
 Scene* SelfPlaneLayer::createScene()
 {
 	auto scene = Scene::create();
@@ -37,17 +53,14 @@ bool SelfPlaneLayer::init()
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, plane);
 
-	this->scheduleUpdate();
-	this->schedule(schedule_selector(SelfPlaneLayer::bulletCreate), 0.01);
-	this->schedule(schedule_selector(SelfPlaneLayer::bulletMove), 0.005);
+	//this->scheduleUpdate();
+	//this->schedule(schedule_selector(SelfPlaneLayer::bulletCreate), 0.01);
 
 	return true;
 }
 
-void SelfPlaneLayer::update(float  delta)
+void SelfPlaneLayer::planeUpdate(float  delta)
 {
-	Node::update(delta);
-
 	auto left = EventKeyboard::KeyCode::KEY_LEFT_ARROW;
 	auto right = EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
 	auto up = EventKeyboard::KeyCode::KEY_UP_ARROW;
@@ -146,47 +159,15 @@ bool SelfPlaneLayer::isKeyPressed(EventKeyboard::KeyCode keyCode)
 	return keys[keyCode];
 }
 
-void SelfPlaneLayer::bulletCreate(float f)
+void SelfPlaneLayer::startShooting()
 {
-
 	auto key_z = EventKeyboard::KeyCode::KEY_Z;
-	auto plane = this->getChildByTag(PLANE_TAG);
-
+	auto bulletLayer = BulletLayer::sharedBullet;
 	if (isKeyPressed(key_z))
 	{
-		auto bullet = Sprite::create("bullet.png");
-
-		bullet->setPosition(plane->getPositionX(), plane->getPositionY() + 30);
-		bullet->setTag(BULLET_TAG);
-
-		this->addChild(bullet);
-		this->bulletList.pushBack(bullet);
-	}
-
-}
-
-void SelfPlaneLayer::bulletMove(float f)
-{
-	auto winSize = Director::getInstance()->getWinSize();
-
-	for (int i = 0; i < bulletList.size(); i++)
-	{
-		auto bullet = bulletList.at(i);
-		bullet->setPositionY(bullet->getPositionY() + 3);
-		if (bullet->getPositionY() > winSize.height)
-		{
-			bulletList.eraseObject(bullet);
-			bullet->removeFromParent();
-			i--;
-		}
+		bulletLayer->bulletCreate();
 	}
 }
-
-Vector<Sprite *> SelfPlaneLayer::getBulletList()
-{
-	return this->bulletList;
-}
-
 Node* SelfPlaneLayer::getPlane()
 {
 	return this->getChildByTag(PLANE_TAG);

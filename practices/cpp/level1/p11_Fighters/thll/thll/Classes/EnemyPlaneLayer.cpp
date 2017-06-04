@@ -3,6 +3,21 @@
 #include "cstdlib"
 
 USING_NS_CC;
+EnemyPlaneLayer* EnemyPlaneLayer::sharedEnemy = nullptr;
+
+EnemyPlaneLayer* EnemyPlaneLayer::create()
+{
+	EnemyPlaneLayer *pRet = new EnemyPlaneLayer();
+	if (pRet && pRet->init()) {
+		pRet->autorelease();
+		sharedEnemy = pRet;
+		return pRet;
+	}
+	else {
+		CC_SAFE_DELETE(pRet);
+		return NULL;
+	}
+}
 
 Scene* EnemyPlaneLayer::createScene()
 {
@@ -22,11 +37,9 @@ bool EnemyPlaneLayer::init()
 		return false;
 	}
 
-	this->schedule(schedule_selector(EnemyPlaneLayer::enemyCreate), 1);
-	this->schedule(schedule_selector(EnemyPlaneLayer::enemyMove), 0.05);
 }
 
-void EnemyPlaneLayer::enemyMove(float dt)
+void EnemyPlaneLayer::enemyMove()
 {
 	auto winSize = Director::getInstance()->getWinSize();
 
@@ -43,7 +56,7 @@ void EnemyPlaneLayer::enemyMove(float dt)
 	}
 }
 
-void EnemyPlaneLayer::enemyCreate(float dt)
+void EnemyPlaneLayer::enemyCreate()
 {
 	int rnd = rand() % 2 + 1;
 

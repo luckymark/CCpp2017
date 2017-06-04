@@ -5,6 +5,7 @@
 #include "SelfPlaneLayer.h"
 #include "EnemyPlaneLayer.h"
 #include "EnemyPlane.h"
+#include "BulletLayer.h"
 #include <map>
 
 class GameScene : public cocos2d::Layer
@@ -17,19 +18,27 @@ public:
 	virtual void onEnterTransitionDidFinish();
 
 	CREATE_FUNC(GameScene);
-
-
 private:
 
-	void collisionJudge(float dt);
+	void gameUpdate(float dt);
+
+	void collisionJudge();
 
 	SelfPlaneLayer* planeLayer;
 
 	EnemyPlaneLayer* enemyLayer;
 
+	BulletLayer* bulletLayer;
+
 	void planeBomb(cocos2d::Vec2 vec, int tag);
 
 	void bombRemove(cocos2d::Node * sprite);
+
+	int enemy_create_count = 0;
+
+	int enemy_move_count = 0;
+
+	int bullet_create_count = 0;
 };
 
 #endif

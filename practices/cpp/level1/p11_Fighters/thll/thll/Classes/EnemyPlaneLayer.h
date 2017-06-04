@@ -12,17 +12,19 @@ class EnemyPlaneLayer :public cocos2d::Layer
 public:
 	static cocos2d::Scene* createScene();
 
-	CREATE_FUNC(EnemyPlaneLayer);
+	static EnemyPlaneLayer* create();
 
 	virtual bool init();
 
 	cocos2d::Vector<EnemyPlane* > getEnemyList();
 
+	void enemyCreate();
+
+	void enemyMove();
+
+	static EnemyPlaneLayer* sharedEnemy;
+
 private:
 	cocos2d::Vector<EnemyPlane* > enemyList;
-
-	void enemyCreate(float dt);
-
-	void enemyMove(float dt);
 };
 #endif
