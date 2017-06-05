@@ -7,7 +7,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
-void playerAction(plane & p,bool & flag) {
+void playerAction(plane & p) {
 	static float speedCtrl=1;
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl) ||
@@ -31,18 +31,21 @@ void playerAction(plane & p,bool & flag) {
 		p.movePlane(0, speedCtrl);
 	}
 	if ((sf::Keyboard::isKeyPressed(sf::Keyboard::Space) ||
-		sf::Keyboard::isKeyPressed(sf::Keyboard::J))&&!flag) {
-		p.Fire();
-		flag = 1;
+		sf::Keyboard::isKeyPressed(sf::Keyboard::J))) {
+		p.Fire('p');
 	}
 	speedCtrl = 1;
 }
-void enemysAction(plane * p, bool & flag) {
+void enemysAction(plane * p, bool & flag1) {
 	static int num=0;
-	if (!flag) {
+	if (!flag1) {
 		appendEnemy(p, num);
 		num++;
-		flag = 1;
+		flag1 = 1;
+	}
+	for (int i = 0; i < 30; i++) {
+		if (!p[i].isExist())continue;
+		p[i].Fire('e');
 	}
 	if (30 == num) {
 		num = 0;
@@ -52,6 +55,7 @@ void gameProcess() {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Sky Legend");
 	int fresh_count=0,sound_count=0,score=0;
 	bool bulletCD=0,enemyCD=0, flag_collision = 0;
+	bool enemyBulletCD = 0;
 
 	plane playersPlane(350, 500, 'p');
 	plane enemysPlane[30];
@@ -68,11 +72,13 @@ void gameProcess() {
 			if (event.type == sf::Event::Closed)window.close();
 		}
 		enemysAction(enemysPlane, enemyCD);
-		playerAction(playersPlane,bulletCD);
+		playerAction(playersPlane);
 		window.clear();
 		playersPlane.moveBullet();
 		moveEnemy(enemysPlane,playersPlane,30,flag_collision);
 		playersPlane.showPlane(window);
+		playersPlane.Count();
+		playersPlane.freshBulletCD();
 		if (flag_collision) {
 			soundEffect[sound_count].playMusic(0);
 			score++;
@@ -86,17 +92,12 @@ void gameProcess() {
 		scoreText.setScore(score);
 		scoreText.showText(window);
 		window.display();
-		
 		++fresh_count;
-		if (0 == fresh_count % 10) {
-			bulletCD = 0;
-		}
 		if (0 == fresh_count % 40) {
 			enemyCD = 0;
 		}
 		if (100 == fresh_count) {
 			fresh_count = 0;
-			
 		}
 	}
 }

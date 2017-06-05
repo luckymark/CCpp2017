@@ -19,12 +19,17 @@ void bullet::appendBullet(float x, float y, char type) {
 	sf::Sprite spr;
 	float ispeed;
 	switch (type) {
-	case 'p':
-		tex.loadFromFile("UFO.psd");
-		bulletInfo[tail].bullet_sprite.setScale(sf::Vector2f(0.05f, 0.2f));
-		ispeed = -10;
-		break;
-	default:
+		case 'p':
+			tex.loadFromFile("UFO.psd");
+			bulletInfo[tail].bullet_sprite.setScale(sf::Vector2f(0.05f, 0.2f));
+			ispeed = -10;
+			break;
+		case 'e':
+			tex.loadFromFile("UFO.psd");
+			bulletInfo[tail].bullet_sprite.setScale(sf::Vector2f(0.05f, 0.2f));
+			ispeed = 5;
+			break;
+		default:
 		;
 	}
 	bulletInfo[tail].bullet_texture = tex;

@@ -12,15 +12,20 @@ class plane {
 		void movePlane(float x, float y);
 		void movePlane();
 		void showPlane(sf::RenderWindow &thisWindow);
-		void Fire();
+		void Fire(char type);
 		void moveBullet();
 		void lifeChange(int delta);
+		void freshBulletCD();
+		void Count();
 		bool isExist();
 		bool isCollision(float x, float y, float Xsize, float Ysize);
 		bool collision(bullet & bp);
 		bool collision(plane & p);
 	protected:
+		bool bulletCD;
 		char type;
+		int count;
+		int fireRate;
 		sf::Texture plane_texture;
 		sf::Sprite plane_sprite;
 		short life;

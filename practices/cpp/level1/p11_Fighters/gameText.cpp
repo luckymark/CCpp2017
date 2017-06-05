@@ -14,6 +14,7 @@ gameText::gameText(char type, int data) {
 			this->data = data;
 			this->type = type;
 			break;
+
 		default:
 			;
 	}

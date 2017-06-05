@@ -3,6 +3,6 @@
 #include "plane.h"
 
 void gameProcess();
-void playerAction(plane & p, bool & flag);
-void enemysAction(plane * p, bool & flag);
+void playerAction(plane & p);
+void enemysAction(plane * p, bool & flag1);
 #endif

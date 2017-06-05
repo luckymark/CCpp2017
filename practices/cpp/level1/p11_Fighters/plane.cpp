@@ -19,6 +19,7 @@ plane::plane(float x,float y,char type) {
 			this->x = x;
 			this->y = y;
 			plane_sprite.setScale(sf::Vector2f(0.5f, 0.5f));
+			fireRate = 10;
 			break;
 		case 'e':
 			plane_texture.loadFromFile("UFO.psd");
@@ -30,9 +31,11 @@ plane::plane(float x,float y,char type) {
 			this->x = rand()%Xmax-half_sizeX;
 			this->y = y;
 			plane_sprite.setScale(sf::Vector2f(0.3f, 0.3f));
+			fireRate = 50;
 			break;
 	}
-
+	bulletCD = 0;
+	count = 0;
 	plane_sprite.setTexture(plane_texture);
 	
 	plane_sprite.setPosition(sf::Vector2f(this->x, this->y));
@@ -92,20 +95,36 @@ void plane::showPlane(sf::RenderWindow &thisWindow) {
 			this->life = 0;
 			break;
 		case 0:
+			plane_bullet->showBullet(thisWindow);
 		default:
 			break;
 
 	}
 	
 }
-void plane::Fire() {
-	plane_bullet->appendBullet(this->x+30, this->y,'p');
+void plane::Fire(char type) {
+	if (!bulletCD) {
+		plane_bullet->appendBullet(this->x + this->half_sizeX, this->y, type);
+		bulletCD = 1;
+	}
+	
 }
 void plane::moveBullet() {
 	plane_bullet->moveBullet();
 }
 void plane::lifeChange(int delta) {
 	life += delta;
+}
+void plane::freshBulletCD() {
+	if (bulletCD&&(0==count%fireRate)) {
+		bulletCD =0;
+	}
+}
+void plane::Count() {
+	this->count=this->count+1;
+	if (100 == count) {
+		count = 0;
+	}
 }
 bool plane::isExist() {
 	if (life != 0)return true;
@@ -132,7 +151,7 @@ bool plane::collision(bullet & bp) {
 	return false;
 }
 bool plane::collision(plane & p) {
-	if (0 == this->life)return false;
+	if (0 >= this->life)return false;
 	if (!p.isExist())return false;
 	if (p.isCollision(this->x, this->y,this->half_sizeX,this->half_sizeY)) {
 		this->lifeChange(-2);
@@ -149,6 +168,7 @@ void appendEnemy(plane * enemy,int index) {
 void moveEnemy(plane * enemy,plane & player,int max,bool & ifCollision) {
 	for (int i = 0; i < max; i++) {
 		enemy[i].movePlane();
+		enemy[i].moveBullet();
 		if (enemy[i].collision(*player.plane_bullet)) {
 			ifCollision = 1;
 		}
@@ -159,7 +179,8 @@ void moveEnemy(plane * enemy,plane & player,int max,bool & ifCollision) {
 }
 void showEnemy(sf::RenderWindow &thisWindow,plane * enemy,int max) {
 	for (int i = 0; i < max; i++) {
-		if (!enemy[i].isExist())continue;
 		enemy[i].showPlane(thisWindow);
+		enemy[i].Count();
+		enemy[i].freshBulletCD();
 	}
 }
