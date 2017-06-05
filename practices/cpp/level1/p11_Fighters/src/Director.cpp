@@ -3,6 +3,7 @@
 #include "Bullet.h"
 #include "Room.h"
 #include "Enemy.h"
+#include "Background.h"
 #include <iostream>
 using namespace std;
 
@@ -108,9 +109,11 @@ void Director::new_stuff(int x,sf::Vector2f request_place){
 			break;
 		case type_Enemy: tmp = new Enemy(sample_type[x], sample[x], request_place,this);
 			break;
-		case 4: //tmp = new Object(sample_type[x], sample[x], request_place);
+		case type_Background: tmp = new Background(sample_type[x], sample[x], request_place, this);
 			break;
-		case 5: //tmp = new Boss(sample_type[x], sample[x], request_place);
+		case 6: //tmp = new Object(sample_type[x], sample[x], request_place);
+			break;
+		case 7: //tmp = new Boss(sample_type[x], sample[x], request_place);
 			break;
 	}
 	if(tmp != NULL) 

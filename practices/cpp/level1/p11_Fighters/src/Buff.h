@@ -30,5 +30,4 @@ struct Buff{
 	Buff(int key, int val, float duration_time_);
 };
 
-
 #endif

@@ -1,10 +1,11 @@
-main: main.cpp Animation.o Item.o Character.o Director.o Player.o Bullet.o Room.o Enemy.o Physics.o PureAnimationItem.o
+main: main.cpp Animation.o Item.o Character.o Director.o Player.o Bullet.o Room.o Enemy.o Physics.o PureAnimationItem.o LifeBar.o Background.o
 	clang++ main.cpp Item.o Animation.o Frame.o Character.o Director.o Player.o Bullet.o Room.o \
-		Bag.o Prop.o Magic.o Skill.o Buff.o Enemy.o Physics.o PureAnimationItem.o\
+		Bag.o Prop.o Magic.o Skill.o Buff.o Enemy.o Physics.o PureAnimationItem.o LifeBar.o\
+		Background.o\
 		-F /Library/Frameworks -framework sfml-audio -framework sfml-window -framework sfml-graphics \
 		-framework sfml-system -framework OpenGL -framework GLUT -o main.cpp.out -g
 
-Director.o: Director.cpp Director.h 
+Director.o: Director.cpp Director.h Item.o
 	clang++ -I /usr/local/include Director.cpp -c -g
 
 Player.o: Player.h Player.cpp Item.o Character.o
@@ -22,14 +23,20 @@ Bullet.o: Bullet.h Bullet.cpp Item.o
 Room.o: Room.h Room.cpp Item.o
 	clang++ -I /usr/local/include Room.cpp -c -g
 
-PureAnimationItem.o: PureAnimationItem.cpp PureAnimationItem.h
+PureAnimationItem.o: PureAnimationItem.cpp PureAnimationItem.h Item.o
 	clang++ -I /usr/local/include PureAnimationItem.cpp -c -g
+
+Background.o: Background.cpp Background.h 
+	clang++ -I /usr/local/include Background.cpp -c -g
 
 Item.o:	Item.cpp Item.h Animation.o Concept.h Bag.o Prop.o Magic.o Skill.o Buff.o Physics.o
 	clang++ -I /usr/local/include Item.cpp -c -g
 
 Animation.o: Animation.cpp Animation.h Frame.o
 	clang++ -I /usr/local/include Animation.cpp -c -g
+
+LifeBar.o: LifeBar.cpp LifeBar.h Frame.o
+	clang++ -I /usr/local/include LifeBar.cpp -c -g
 
 Frame.o: Frame.cpp Frame.h
 	clang++ -I /usr/local/include Frame.cpp -c -g

@@ -58,6 +58,8 @@ Character::Character(int kind, string setting, sf::Vector2f pos, Director *world
 	}
 
 void Character::use_skill(int which){
+	//if(!skill[which].is_ready()) return;
+	//skill[which].use();
 	cur_animation = which;
 	animation[cur_animation].set_play_flag(1);
 	animation[cur_animation].set_sound_flag(1);

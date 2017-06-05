@@ -4,8 +4,8 @@ struct Magic{
 	int w[3];
 	Magic(int x=0,int y=0,int z=0);
 	// 0 power
-	// 1 power_lim
-	// 2 power_grow_speed
+	// 1 power_grow_speed
+	// 2 power_lim
 };
 
 #endif

@@ -5,9 +5,14 @@
 struct Skill{
 	Buff buff;
 	Buff cost;
+	int during_flag;
+	float cooling_time;
 	float power_ratio_percentage;
+	sf::Clock clock;
 	Skill();
-       	Skill(Buff buff,Buff cost,float power_ratio_percentage);
+       	void set(Buff buff, Buff cost, float cooling_time);
+	void use();
+	int is_ready();
 };
 
 

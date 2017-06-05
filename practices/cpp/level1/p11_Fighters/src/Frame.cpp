@@ -79,11 +79,7 @@ int Frame::is_in(const sf::Vector2f &point){
 }
 
 int Frame::is_in(Frame *other){
-	/*return 	   (core_position.x <= other -> x[1])
-	       	&& (core_position.x >= other -> x[0])
-		&& (core_position.y <= other -> y[1])
-	       	&& (core_position.y >= other -> y[0]);*/
-	int tag1,tag2;
+	int tag1 = 0, tag2 = 0;
 	if(core_position.x < other -> x[0]){
 		tag1 = 0;
 	}else if(core_position.x >= other -> x[0] && core_position.x <= other -> x[1]){
@@ -101,4 +97,8 @@ int Frame::is_in(Frame *other){
 	}
 
 	return tag2*3 + tag1;
+}
+
+void Frame::set_scale(sf::Vector2f scale){
+	sprite.setScale(scale);
 }

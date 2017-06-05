@@ -48,6 +48,7 @@ class Frame{ //帧
 		void set_image_info(string image_info_flie_name);
 		void set_core_position(sf::Vector2f position); 	
 		void set_length(sf::Vector2f len);
+		void set_scale(sf::Vector2f scale);
 
 		~Frame(){}
 };
