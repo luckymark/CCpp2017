@@ -44,7 +44,6 @@ void enemysAction(plane * p, bool & flag1) {
 		flag1 = 1;
 	}
 	for (int i = 0; i < 30; i++) {
-		if (!p[i].isExist())continue;
 		p[i].Fire('e');
 	}
 	if (30 == num) {
@@ -54,14 +53,16 @@ void enemysAction(plane * p, bool & flag1) {
 void gameProcess() {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Sky Legend");
 	int fresh_count=0,sound_count=0,score=0;
-	bool bulletCD=0,enemyCD=0, flag_collision = 0;
+	bool bulletCD=0,enemyCD=0;
 	bool enemyBulletCD = 0;
+	int flag_collision = 0;
 
 	plane playersPlane(350, 500, 'p');
 	plane enemysPlane[30];
 	gameMusic gameBgm1(1);
-	gameMusic soundEffect[10];
+	gameMusic soundEffect;
 	gameText scoreText('s',score);
+	gameText lifeText('l', playersPlane.showLife());
 
 	window.setFramerateLimit(60);
 	gameBgm1.playMusic();
@@ -69,7 +70,8 @@ void gameProcess() {
 
 		sf::Event event;
 		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed)window.close();
+			if (event.type == sf::Event::Closed|| 
+				sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))window.close();
 		}
 		enemysAction(enemysPlane, enemyCD);
 		playerAction(playersPlane);
@@ -79,18 +81,18 @@ void gameProcess() {
 		playersPlane.showPlane(window);
 		playersPlane.Count();
 		playersPlane.freshBulletCD();
-		if (flag_collision) {
-			soundEffect[sound_count].playMusic(0);
-			score++;
-			sound_count++;
-			if (10 == sound_count) {
-				sound_count = 0;
+		if (flag_collision>0) {
+			soundEffect.playMusic(0);
+			if (1 == flag_collision) {
+				score++;
 			}
 		}
 		flag_collision = 0;
 		showEnemy(window,enemysPlane, 30);
 		scoreText.setScore(score);
 		scoreText.showText(window);
+		lifeText.setGameText("Life:" + std::to_string(playersPlane.showLife()));
+		lifeText.showText(window);
 		window.display();
 		++fresh_count;
 		if (0 == fresh_count % 40) {

@@ -17,6 +17,8 @@ class plane {
 		void lifeChange(int delta);
 		void freshBulletCD();
 		void Count();
+		char showType();
+		int showLife();
 		bool isExist();
 		bool isCollision(float x, float y, float Xsize, float Ysize);
 		bool collision(bullet & bp);
@@ -35,6 +37,6 @@ class plane {
 
 };
 void appendEnemy(plane * enemy,int index);
-void moveEnemy(plane * enemy, plane & player,int max, bool & ifCollision);
+void moveEnemy(plane * enemy, plane & player,int max, int & ifCollision);
 void showEnemy(sf::RenderWindow &thisWindow,plane * enemy,int max);
 #endif

@@ -19,7 +19,7 @@ plane::plane(float x,float y,char type) {
 			this->x = x;
 			this->y = y;
 			plane_sprite.setScale(sf::Vector2f(0.5f, 0.5f));
-			fireRate = 10;
+			fireRate = 5;
 			break;
 		case 'e':
 			plane_texture.loadFromFile("UFO.psd");
@@ -103,6 +103,7 @@ void plane::showPlane(sf::RenderWindow &thisWindow) {
 	
 }
 void plane::Fire(char type) {
+	if (this->life <= 0)return;
 	if (!bulletCD) {
 		plane_bullet->appendBullet(this->x + this->half_sizeX, this->y, type);
 		bulletCD = 1;
@@ -143,7 +144,17 @@ bool plane::collision(bullet & bp) {
 			bp.bulletInfo[i].x < this->x + 2*this->half_sizeX) &&
 			(bp.bulletInfo[i].y > this->y  &&
 				bp.bulletInfo[i].y < this->y + 2*this->half_sizeY)) {
-			this->lifeChange(-2);
+			switch (this->showType()) {
+				case 'e':
+					this->lifeChange(-2);
+					break;
+				case 'p':
+					this->lifeChange(-1);
+					break;
+				default:
+					;
+			}
+			
 			bp.bulletInfo[i].ifExist = 0;
 			return true;
 		}
@@ -155,25 +166,32 @@ bool plane::collision(plane & p) {
 	if (!p.isExist())return false;
 	if (p.isCollision(this->x, this->y,this->half_sizeX,this->half_sizeY)) {
 		this->lifeChange(-2);
-		//p.lifeChange(-1);
+		p.lifeChange(-1);
 		return true;
 	}
 	return false;
+}
+char plane::showType() {
+	return this->type;
+}
+int plane::showLife(){
+	return this->life;
 }
 void appendEnemy(plane * enemy,int index) {
 	enemy[index] = *(new plane());
 	enemy[index].lifeChange(1);
 }
 
-void moveEnemy(plane * enemy,plane & player,int max,bool & ifCollision) {
+void moveEnemy(plane * enemy,plane & player,int max,int & ifCollision) {
 	for (int i = 0; i < max; i++) {
 		enemy[i].movePlane();
 		enemy[i].moveBullet();
-		if (enemy[i].collision(*player.plane_bullet)) {
+		if (enemy[i].collision(*player.plane_bullet)||
+			enemy[i].collision(player) ){
 			ifCollision = 1;
 		}
-		if (enemy[i].collision(player)) {
-			ifCollision = 1;
+		if (player.collision(*enemy[i].plane_bullet)) {
+			ifCollision = 2;
 		}
 	}
 }

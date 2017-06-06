@@ -8,13 +8,23 @@ gameText::gameText(char type, int data) {
 			text.setFont(font);
 			text.setCharacterSize(20);
 			text.setFillColor(sf::Color::White);
-			text.setPosition(700, 560);
+			text.setPosition(700, 580);
 			text.setStyle(sf::Text::Bold);
 			text.setString("Score:" + std::to_string(data));
 			this->data = data;
 			this->type = type;
 			break;
-
+		case 'l':
+			font.loadFromFile("AdobeDevanagari-Regular.otf");
+			text.setFont(font);
+			text.setCharacterSize(20);
+			text.setFillColor(sf::Color::White);
+			text.setPosition(0, 580);
+			text.setStyle(sf::Text::Bold);
+			text.setString("Life:" + std::to_string(data));
+			this->data = data;
+			this->type = type;
+			break;
 		default:
 			;
 	}
