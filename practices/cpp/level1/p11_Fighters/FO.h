@@ -9,15 +9,20 @@ public:
 	void crash();
 	FO();
 	FO(int flag);
+	void setSButterfly(double x, double y);
+	sf::Vector2f getJulgeArea();
 	~FO();
-	sf::Sprite hero, HSAmmo, LSAmmo;
-	//sf::Texture frame;
+	
 
 public:
+	sf::Sprite hero, HSAmmo, LSAmmo;
+	sf::Texture Reimu, Marisa, Sanae, Enemy1, Enemy2;
+	//sf::Texture frame;
 	int HealthPoint, Score, width, height, staticFrame, dynamicFrame;
 	sf::Vector2f velocity;
 	double damage, speed, theta;
-	int type;
+	bool isSym;
+	int type, gap, born;
 
 };
 
