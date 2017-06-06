@@ -3,7 +3,6 @@
 
 #define OFFSET 5
 #define PLANE_TAG 103
-#define BULLET_TAG 107
 
 #include "cocos2d.h"
 #include "SelfPlane.h"
@@ -24,7 +23,7 @@ public:
 
 	void startShooting();
 
-	static SelfPlaneLayer* sharedPlane;
+	static SelfPlaneLayer* sharedPlaneLayer;
 
 private:
 

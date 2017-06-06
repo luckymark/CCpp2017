@@ -2,14 +2,14 @@
 
 USING_NS_CC;
 
-SelfPlaneLayer* SelfPlaneLayer::sharedPlane = nullptr;
+SelfPlaneLayer* SelfPlaneLayer::sharedPlaneLayer = nullptr;
 
 SelfPlaneLayer* SelfPlaneLayer::create()
 {
 	SelfPlaneLayer *pRet = new SelfPlaneLayer();
 	if (pRet && pRet->init()) {
 		pRet->autorelease();
-		sharedPlane = pRet;
+		sharedPlaneLayer = pRet;
 		return pRet;
 	}
 	else {
@@ -41,7 +41,7 @@ bool SelfPlaneLayer::init()
 
 	auto plane = SelfPlane::create("hero1.png");
 	plane->setTag(PLANE_TAG);
-	plane->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 2));
+	plane->setInitialPosition();
 	plane->setAnchorPoint(Vec2(0.5, 0.5));
 
 	this->addChild(plane);
@@ -115,7 +115,7 @@ void SelfPlaneLayer::keyPressedDuration(EventKeyboard::KeyCode keyCode)
 
 	float totX = plane->getPositionX() + offsetX, totY = plane->getPositionY() + offsetY;
 
-	float sizeX = plane->getContentSize().width, sizeY = plane->getContentSize().height / 2.0;
+	float sizeX = plane->getContentSize().width / 2.0, sizeY = plane->getContentSize().height / 2.0;
 
 	if (totX >  winSize.width - sizeX)
 	{

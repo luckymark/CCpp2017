@@ -82,3 +82,8 @@ Vector<EnemyPlane* > EnemyPlaneLayer::getEnemyList()
 {
 	return this->enemyList;
 }
+
+void EnemyPlaneLayer::enemyShoting()
+{
+	BulletLayer::sharedBullet->enemyBulletCreate();
+}

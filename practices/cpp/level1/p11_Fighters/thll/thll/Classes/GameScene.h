@@ -1,6 +1,8 @@
 #ifndef _GAME_SCENE_H_
 #define _GAME_SCENE_H_
 
+#define GAME_UPDATE_SEC 1.0 / 60.0f
+
 #include "cocos2d.h"
 #include "SelfPlaneLayer.h"
 #include "EnemyPlaneLayer.h"
@@ -38,7 +40,7 @@ private:
 
 	int enemy_move_count = 0;
 
-	int bullet_create_count = 0;
+	int plane_bullet_create_count = 0;
 };
 
 #endif

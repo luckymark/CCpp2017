@@ -6,6 +6,7 @@
 
 #include "cocos2d.h"
 #include "EnemyPlane.h"
+#include "BulletLayer.h"
 
 class EnemyPlaneLayer :public cocos2d::Layer
 {
@@ -21,6 +22,8 @@ public:
 	void enemyCreate();
 
 	void enemyMove();
+
+	void enemyShoting();
 
 	static EnemyPlaneLayer* sharedEnemy;
 

@@ -20,7 +20,7 @@ bool GameScene::init()
 		return false;
 	}
 
-	this->schedule(schedule_selector(GameScene::gameUpdate), 1.0 / 60.0);
+	this->schedule(schedule_selector(GameScene::gameUpdate), GAME_UPDATE_SEC);
 	return true;
 }
 
@@ -40,18 +40,22 @@ void GameScene::gameUpdate(float dt)
 {
 	enemy_create_count++;
 	enemy_move_count++;
-	bullet_create_count++;
+	plane_bullet_create_count++;
 
+	// Plane 
 	planeLayer->planeUpdate(dt);
-	if (bullet_create_count % 5 == 0)
+
+	if (plane_bullet_create_count % 5 == 0)
 	{
 		planeLayer->startShooting();
-		bullet_create_count = 0;
+		plane_bullet_create_count = 0;
 	}
 
+	// Enemy
 	if (enemy_create_count % 30 == 0)
 	{
 		enemyLayer->enemyCreate();
+		enemyLayer->enemyShoting();
 		enemy_create_count = 0;
 	}
 
@@ -61,7 +65,10 @@ void GameScene::gameUpdate(float dt)
 		enemy_move_count = 0;
 	}
 
+	// Bullet
 	bulletLayer->bulletMove();
+
+	// Handle Game
 	collisionJudge();
 }
 
@@ -72,33 +79,83 @@ void GameScene::collisionJudge()
 	auto plane = planeLayer->getPlane();
 	auto system = ParticleExplosion::create();
 
-	//check bullet and enemy
+	//check enemy and self
+	for (int i = 0; i < enemyList.size(); i++)
+	{
+		auto enemy = enemyList.at(i);
+		if (plane->getBoundingBox().intersectsRect(enemy->getBoundingBox()) && !enemy->isDeleted())
+		{
+			enemy->setDeleted(true);
+			auto enemy_pos = enemy->getPosition();
+			auto plane_pos = plane->getPosition();
+
+			int enemy_tag = enemy->getTag();
+			int plane_tag = plane->getTag();
+
+			//enemy_pos.x += enemy->getBoundingBox().size.width / 2;
+			//enemy_pos.y -= enemy->getBoundingBox().size.height / 2;
+			//plane_pos.x += plane->getBoundingBox().size.width / 2;
+			//plane_pos.y -= plane->getBoundingBox().size.height / 2;
+
+			system->setPosition(enemy_pos);
+
+			enemy->removeFromParent();
+			this->planeBomb(enemy_pos, enemy_tag);
+			enemyList.eraseObject(enemy);
+
+			this->unschedule(schedule_selector(GameScene::gameUpdate));
+			//plane->runAction(Sequence::create(NULL, CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, plane)), NULL));
+			this->planeBomb(plane_pos, plane_tag);
+			break;
+		}
+	}
+	//check bullet and enemy and plane
 	for (int i = 0; i < bulletList.size(); i++)
 	{
 		auto bullet = bulletList.at(i);
-		int flag = 0;
-		for (int j = 0; j < enemyList.size(); j++)
+		auto tag = bullet->getTag();
+		// bullet and enemy bomb
+		if (tag == PLANE_BULLET_TAG)
 		{
-			auto enemy = enemyList.at(j);
-			if (enemy->getBoundingBox().intersectsRect(bullet->getBoundingBox())&&!enemy->isDeleted())
+			int flag = 0;
+			for (int j = 0; j < enemyList.size(); j++)
 			{
-				enemy->setDeleted(true);
-				auto pos = enemy->getPosition();
-				int tag = enemy->getTag();
-				pos.x += enemy->getBoundingBox().size.width / 2;
-				pos.y -= enemy->getBoundingBox().size.height / 2;
-				system->setPosition(pos);	
-				enemy->removeFromParent();
-				this->planeBomb(pos, tag);					
-				enemyList.eraseObject(enemy);
-				flag = 1;
+				auto enemy = enemyList.at(j);
+				if (enemy->getBoundingBox().intersectsRect(bullet->getBoundingBox())&&!enemy->isDeleted())
+				{
+					enemy->setDeleted(true);
+					auto pos = enemy->getPosition();
+					int tag = enemy->getTag();
+					//pos.x += enemy->getBoundingBox().size.width / 2;
+					//pos.y -= enemy->getBoundingBox().size.height / 2;
+					system->setPosition(pos);	
+					enemy->removeFromParent();
+					this->planeBomb(pos, tag);					
+					enemyList.eraseObject(enemy);
+					flag = 1;
+					break;
+				}
+			}
+			if (flag)
+			{
+				bulletLayer->bulletRemove(bullet);
 				break;
 			}
 		}
-		if (flag)
+		// plane and bullet bomb
+		else if (tag == ENEMY_BULLET_TAG)
 		{
-			bulletLayer->bulletRemove(bullet);
-			break;
+			if (plane->boundingBox().intersectsRect(bullet->getBoundingBox()))
+			{
+				auto plane_pos = plane->getPosition();
+
+				int plane_tag = plane->getTag();
+
+				
+				plane->setVisible(false);
+				this->planeBomb(plane_pos, plane_tag);
+				break;
+			}
 		}
 	}
 }
@@ -146,10 +203,20 @@ void GameScene::planeBomb(Vec2 vec, int tag)
 
 void GameScene::bombRemove(Node * sprite)
 {
-	log("ok\n");
 	sprite->removeFromParent();
-	if (sprite->getTag() == 103)
+	if (sprite->getTag() == PLANE_TAG)
 	{
+		// TODO : GAME OVER
+		auto plane = SelfPlane::sharedPlane;
+		if (plane->isLifeEmpty())
+		{
 
+		}
+		else
+		{
+			plane->lifeDecreased();
+			//plane->setInitialPosition();
+			//planeLayer->addChild(plane);
+		}
 	}
 }
