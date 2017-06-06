@@ -1,19 +1,18 @@
 #include "Fighters.h"
 #include "StringHelpers.h"
 
-#include <SFML\Window\Event.hpp>
-
-
 const sf::Time Game::TimePerFrame = sf::seconds(1.f / 60.f);
 
 Game::Game()
-	: mWindow(sf::VideoMode(1920, 1080), "World", sf::Style::Close)
+	: mWindow(sf::VideoMode(1920, 1080), "Input", sf::Style::Close)
 	, mWorld(mWindow)
 	, mFont()
 	, mStatisticsText()
 	, mStatisticsUpdateTime()
 	, mStatisticsNumFrames(0)
 {
+	mWindow.setKeyRepeatEnabled(false);
+
 	mFont.loadFromFile("Sansation.ttf");
 	mStatisticsText.setFont(mFont);
 	mStatisticsText.setPosition(5.f, 5.f);
@@ -32,7 +31,7 @@ void Game::run()
 		{
 			timeSinceLastUpdate -= TimePerFrame;
 
-			processEvents();
+			processInput();
 			update(TimePerFrame);
 
 		}
@@ -42,26 +41,20 @@ void Game::run()
 	}
 }
 
-void Game::processEvents()
+void Game::processInput()
 {
+	CommandQueue& commands = mWorld.getCommandQueue();
+
 	sf::Event event;
 	while (mWindow.pollEvent(event))
 	{
-		switch (event.type)
-		{
-		case sf::Event::KeyPressed:
-			handlePlayerInput(event.key.code, true);
-			break;
+		mPlayer.handleEvent(event, commands);
 
-		case sf::Event::KeyReleased:
-			handlePlayerInput(event.key.code, false);
-			break;
-
-		case sf::Event::Closed:
+		if (event.type == sf::Event::Closed)
 			mWindow.close();
-			break;
-		}
 	}
+
+	mPlayer.handleRealtimeInput(commands);
 }
 
 void Game::update(sf::Time elapsedTime)

@@ -1,8 +1,10 @@
 #include "SceneNode.h"
+#include "Command.h"
 #include "Foreach.h"
 
 #include <algorithm>
 #include <cassert>
+
 
 SceneNode::SceneNode()
 	: mChildren()
@@ -44,7 +46,7 @@ void SceneNode::updateChildren(sf::Time dt)
 		child->update(dt);
 }
 
-inline void SceneNode::draw(sf::RenderTarget & target, sf::RenderStates states) const
+void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	// Apply transform of current node
 	states.transform *= getTransform();
@@ -78,4 +80,20 @@ sf::Transform SceneNode::getWorldTransform() const
 		transform = node->getTransform() * transform;
 
 	return transform;
+}
+
+void SceneNode::onCommand(const Command& command, sf::Time dt)
+{
+	// Command current node, if category matches
+	if (command.category & getCategory())
+		command.action(*this, dt);
+
+	// Command children
+	FOREACH(Ptr& child, mChildren)
+		child->onCommand(command, dt);
+}
+
+unsigned int SceneNode::getCategory() const
+{
+	return Category::Scene;
 }

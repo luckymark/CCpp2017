@@ -13,7 +13,8 @@ public:
 		Raptor,
 	};
 public:
-					Aircraft(Type type, const TextureHolder& textures);
+							Aircraft(Type type, const TextureHolder& textures);
+	virtual unsigned int	getCategory() const;
 private:
 	virtual void	drawCurrent(sf::RenderTarget&target, sf::RenderStates states) const;
 private:
