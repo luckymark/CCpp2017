@@ -44,6 +44,11 @@ void Character::be_impacted_from(Item *other){
 			physics.add_motivation(other -> physics.get_motivation());
 			other -> dead();
 		}
+	}else if(other -> get_kind() == type_Enemy_bullet){ //Enemy_bullet
+		if(animation[cur_animation].is_affect() && item_kind == type_Player){
+			physics.add_motivation(other -> physics.get_motivation());
+			other -> dead();
+		}
 	}
 }
 

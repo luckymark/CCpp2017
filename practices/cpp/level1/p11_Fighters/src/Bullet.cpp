@@ -14,6 +14,16 @@ void Bullet::be_impacted_from(Item *other){
 		if(!animation[cur_animation].is_affect()){
 			dead();
 		}
+	}else if(other -> get_kind() == type_Bullet){
+		if(animation[cur_animation].is_affect() && item_kind == type_Enemy_bullet){
+			dead();
+			other -> dead();
+		}
+	}else if(other -> get_kind() == type_Enemy_bullet){
+		if(animation[cur_animation].is_affect() && item_kind == type_Bullet){
+			dead();
+			other -> dead();
+		}
 	}
 	/*else if(other -> get_kind() == type_Enemy){ // enemy
 		if(animation[cur_animation].is_affect()){
@@ -42,7 +52,11 @@ void Bullet::Action(sf::Time dt, sf::Vector2f pos){
 
 void Bullet::dead(){
 	Item *tmp = NULL;
-	tmp = new PureAnimationItem( world -> sample_type[type_Bullet_hit], world -> sample[type_Bullet_hit], physics.get_position(), world, 1);
+	if(item_kind == type_Bullet){
+		tmp = new PureAnimationItem( world -> sample_type[type_Bullet_hit], world -> sample[type_Bullet_hit], physics.get_position(), world, 1);
+	}else if(item_kind == type_Enemy_bullet){
+		tmp = new PureAnimationItem( world -> sample_type[type_Enemy_bullet_hit], world -> sample[type_Enemy_bullet_hit], physics.get_position(), world, 1);
+	}
 	if(tmp == NULL){
 		//cerr << "fail to get mem" << endl;
 		//exit(0);

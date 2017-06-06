@@ -47,7 +47,7 @@ void Player::Action(sf::Time dt, sf::Vector2f mouse_position){
 		if(skill[5].is_ready()){
 			sf::Vector2f dir = physics.make_one(mouse_position - physics.get_position());
 			physics.set_self_move_ratio(0.4);
-			physics.add_motivation(dir * float(3000));
+			physics.add_motivation(dir * float(6000));
 			if(dir.x >= 0){
 				use_skill(5);
 			}else {

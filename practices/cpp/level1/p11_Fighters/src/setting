@@ -4,3 +4,5 @@
 3 ../data/enemy/0/setting
 4 ../data/bullet/setting_hit
 5 ../data/Background/setting
+6 ../data/Enemy_bullet/setting_move
+7 ../data/Enemy_bullet/setting_hit

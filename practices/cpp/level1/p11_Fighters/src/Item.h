@@ -18,7 +18,8 @@
 using namespace std;
 
 enum {
-	type_Player, type_Bullet, type_Room, type_Enemy, type_Bullet_hit, type_Background
+	type_Player, type_Bullet, type_Room, type_Enemy, type_Bullet_hit, type_Background, 
+	type_Enemy_bullet, type_Enemy_bullet_hit
 } item_type;
 static const int max_skill_num = 15;
 class Director;

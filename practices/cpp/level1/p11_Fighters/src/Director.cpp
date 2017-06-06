@@ -29,8 +29,10 @@ void Director::delete_stuff(Item *tmp){
 void Director::world_loop(){
 	for(int i = 0; i < stuff.size(); i++)
 		for(int j = i + 1; j < stuff.size(); j++){
-			stuff[j] -> be_impacted_from(stuff[i]); ///
-			stuff[i] -> be_impacted_from(stuff[j]); ///
+			if(i < stuff.size() && j < stuff.size())
+				stuff[j] -> be_impacted_from(stuff[i]); ///
+			if(i < stuff.size() && j < stuff.size())
+				stuff[i] -> be_impacted_from(stuff[j]); ///
 		}
 	for(int i = 0; i < stuff.size(); i++){
 		float x = sf::Mouse::getPosition(window).x;
@@ -102,19 +104,19 @@ void Director::new_stuff(int x,sf::Vector2f request_place){
 	Item *tmp = NULL;
 	switch(sample_type[x]){
 		case type_Player: tmp = new Player(sample_type[x], sample[x], request_place,this);
-			break;
+				  break;
 		case type_Bullet: tmp = new Bullet(sample_type[x], sample[x], request_place,this);
-			break;
+				  break;
 		case type_Room: tmp = new Room(sample_type[x], sample[x], request_place,this);
-			break;
+				break;
 		case type_Enemy: tmp = new Enemy(sample_type[x], sample[x], request_place,this);
-			break;
+				 break;
 		case type_Background: tmp = new Background(sample_type[x], sample[x], request_place, this);
-			break;
+				      break;
 		case 6: //tmp = new Object(sample_type[x], sample[x], request_place);
-			break;
+				      break;
 		case 7: //tmp = new Boss(sample_type[x], sample[x], request_place);
-			break;
+				      break;
 	}
 	if(tmp != NULL) 
 		stuff.push_back(tmp);
