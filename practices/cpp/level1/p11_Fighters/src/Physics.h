@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+using namespace std;
 
 const float g = 10;
 
@@ -54,6 +55,8 @@ class Physics{
 		void next(sf::Time dt);
 		void general_friction(float mu);
 		void clear();
+
+		friend void collision(Physics &p1, Physics &p2);
 };
 
 

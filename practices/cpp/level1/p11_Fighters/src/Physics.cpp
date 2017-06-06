@@ -148,3 +148,31 @@ sf::Vector2f Physics::get_speed(){
 	return speed;
 }
 
+void collision(Physics &p1, Physics &p2){
+
+	sf::Vector2f dir = p1.position - p2.position;
+	float td = dir.x * dir.x + dir.y * dir.y;
+
+	float t1 = p1.speed.x * dir.x + p1.speed.y * dir.y; 
+	t1 /= td;
+	float t2 = p2.speed.x * dir.x + p2.speed.y * dir.y; 
+	t2 /= td;
+
+	sf::Vector2f tv1 = t1 * dir;
+       	tv1 = p1.speed - tv1;
+       	p1.speed -= tv1;
+
+	sf::Vector2f tv2 = t2 * dir;
+       	tv2 = p2.speed - tv2; 
+	p2.speed -= tv2;
+	
+	sf::Vector2f v1 = ((p1.mass - p2.mass) * p1.speed + 2 * p2.mass * p2.speed)/(p1.mass + p2.mass);
+	sf::Vector2f v2 = ((p2.mass - p1.mass) * p2.speed + 2 * p1.mass * p1.speed)/(p1.mass + p2.mass);
+
+	p1.speed = v1 + tv1; p2.speed = v2 + tv2;
+	p1.motivation = p1.speed * p1.mass;
+	p2.motivation = p2.speed * p2.mass;
+
+	p1.position += p1.speed * 0.01f;
+	p2.position += p2.speed * 0.01f;
+}

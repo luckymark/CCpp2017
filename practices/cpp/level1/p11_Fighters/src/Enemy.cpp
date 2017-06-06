@@ -11,7 +11,7 @@ void Enemy::Action(sf::Time dt, sf::Vector2f player_position){
 		bullte_clock.restart();
 	}
 	physics.set_self_move_ratio(1);
-	add_force_from_skill(0,player_position - physics.get_position(),dt);
+	//add_force_from_skill(0,player_position - physics.get_position(),dt);
 	use_skill(0);
 	animation[cur_animation].set_sound_flag(0);
 	next(dt);

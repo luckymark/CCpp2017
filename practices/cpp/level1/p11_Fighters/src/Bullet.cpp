@@ -15,14 +15,16 @@ void Bullet::be_impacted_from(Item *other){
 			dead();
 		}
 	}else if(other -> get_kind() == type_Bullet){
-		if(animation[cur_animation].is_affect() && item_kind == type_Enemy_bullet){
-			dead();
-			other -> dead();
+		if(animation[cur_animation].is_affect() && (item_kind == type_Enemy_bullet || item_kind == type_Bullet)){
+			//dead();
+			//other -> dead();
+			collision(physics, other -> physics);
 		}
 	}else if(other -> get_kind() == type_Enemy_bullet){
-		if(animation[cur_animation].is_affect() && item_kind == type_Bullet){
-			dead();
-			other -> dead();
+		if(animation[cur_animation].is_affect() && (item_kind == type_Bullet || item_kind == type_Enemy_bullet)){
+			//dead();
+			//other -> dead();
+			collision(physics, other -> physics);
 		}
 	}
 	/*else if(other -> get_kind() == type_Enemy){ // enemy

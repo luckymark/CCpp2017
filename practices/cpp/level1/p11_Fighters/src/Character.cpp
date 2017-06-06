@@ -50,6 +50,12 @@ void Character::be_impacted_from(Item *other){
 			other -> dead();
 		}
 	}
+
+	//skill 效果
+	if(item_kind == type_Player){
+		if(cur_animation == 5 || cur_animation == 6){
+		}
+	}
 }
 
 void Character::set_shot_direction(sf::Vector2f pos){

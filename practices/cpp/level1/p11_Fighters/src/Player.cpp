@@ -27,34 +27,35 @@ void Player::Action(sf::Time dt, sf::Vector2f mouse_position){
 		physics.set_self_move_ratio(0.4);
 		add_force_from_skill(0,sf::Vector2f(0,1),dt);
 		use_skill(0);
-	}
-	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
+	} else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
 		physics.set_self_move_ratio(0.4);
 		add_force_from_skill(1,sf::Vector2f(0,-1),dt);
 		use_skill(1);
-	}
-	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
+	} else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
 		physics.set_self_move_ratio(0.4);
 		add_force_from_skill(1,sf::Vector2f(-1,0),dt);
 		use_skill(2);
-	}
-	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
+	} else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
 		physics.set_self_move_ratio(0.4);
 		add_force_from_skill(1,sf::Vector2f(1,0),dt);
 		use_skill(3);
-	}
-	else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
+	} else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
 		if(skill[5].is_ready()){
 			sf::Vector2f dir = physics.make_one(mouse_position - physics.get_position());
 			physics.set_self_move_ratio(0.4);
 			physics.add_motivation(dir * float(6000));
 			if(dir.x >= 0){
+				animation[5].initlize();
 				use_skill(5);
 			}else {
+				animation[6].initlize();
 				use_skill(6);
 			}
 			skill[5].use();
 		}
+	}else if(sf::Keyboard::isKeyPressed(sf::Keyboard::E)){
+		physics.set_self_move_ratio(1.0);
+		use_skill(7);
 	}
 	else {
 		physics.set_self_move_ratio(1);
@@ -65,6 +66,8 @@ void Player::Action(sf::Time dt, sf::Vector2f mouse_position){
 
 	next(dt);
 	if(cur_animation <= 4){
+		animation[cur_animation].set_play_flag(1);
+	}else if(cur_animation == 7){
 		animation[cur_animation].set_play_flag(1);
 	}else {
 		if(cur_animation == 5 || cur_animation == 6){
