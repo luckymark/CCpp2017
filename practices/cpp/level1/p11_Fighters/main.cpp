@@ -56,7 +56,6 @@ int main()
     t_enemy.loadFromFile("assets/enemy.png");
     enemy.setTexture(t_enemy);
     enemy.setScale(0.5,0.5);
-    enemy.setRotation(180);
 
     //load bgm
     sf::Music bgm;
@@ -181,6 +180,33 @@ void update()
         {
             sf::Vector2f movement(0,0.1f);
             *(it)+=movement;
+            it++;
+        }
+    }
+    //kill enemy
+    for(std::vector<sf::Vector2f>::iterator it=herofirevector.begin();it!=herofirevector.end();)
+    {
+        bool killed=0;
+        sf::Vector2f fireett=*(it);
+        for(std::vector<sf::Vector2f>::iterator itt=enemyvector.begin();itt!=enemyvector.end();)
+        {
+            sf::Vector2f enemyett=*(itt);
+            if(fireett.x+FIRE_L/2>enemyett.x&&fireett.x+FIRE_L/2<enemyett.x+PLANE_L
+            &&fireett.y+FIRE_L/2>enemyett.y&&fireett.y+FIRE_L/2<enemyett.y+PLANE_L)
+            {
+                cout<<"Hitted"<<"#"<<fireett.x+FIRE_L/2<<","<<fireett.y+FIRE_L/2<<"--#("<<enemyett.x<<","<<enemyett.y<<"),("<<enemyett.x+PLANE_L<<","<<enemyett.y+PLANE_L<<")"<<endl;
+                it=herofirevector.erase(it);
+                itt=enemyvector.erase(itt);
+                killed=1;
+                break;
+            }
+            else
+            {
+                itt++;
+            }
+        }
+        if(killed==0)
+        {
             it++;
         }
     }
