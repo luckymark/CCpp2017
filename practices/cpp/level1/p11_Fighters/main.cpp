@@ -19,6 +19,7 @@ void handlePlayerInput(sf::Keyboard::Key, bool);
 void update();
 void fire();
 void spawnEnemy();
+void boom(sf::Vector2f);
 
 //movement params 
 bool isMovingUp=false;
@@ -28,15 +29,21 @@ bool isMovingRight=false;
 bool FiringKey=false;
 
 
+
 sf::Texture t_hero;
 sf::Sprite hero;
 sf::Texture t_herofire;
 sf::Sprite herofire;
 sf::Texture t_enemy;
 sf::Sprite enemy;
+sf::Texture t_boom1;
+sf::Sprite boom1;
+sf::Texture t_boom2;
+sf::Sprite boom2;
 
 std::vector<sf::Vector2f> herofirevector;
 std::vector<sf::Vector2f>enemyvector;
+std::vector< std::pair<sf::Vector2f,int> > boomvector;
 
 int main()
 {
@@ -56,6 +63,12 @@ int main()
     t_enemy.loadFromFile("assets/enemy.png");
     enemy.setTexture(t_enemy);
     enemy.setScale(0.5,0.5);
+
+    //load boom
+    t_boom1.loadFromFile("assets/boom1.png");
+    t_boom2.loadFromFile("assets/boom2.png");
+    boom1.setTexture(t_boom1);
+    boom2.setTexture(t_boom2);
 
     //load bgm
     sf::Music bgm;
@@ -96,7 +109,9 @@ int main()
         }
         update();
         
-        //render
+        /************************
+        *RENDER REGION
+        */
         window.clear();
         window.draw(hero);
         for(std::vector<sf::Vector2f>::iterator it=herofirevector.begin();it!=herofirevector.end();it++)
@@ -109,7 +124,32 @@ int main()
             enemy.setPosition(*(it));
             window.draw(enemy);
         }
+        //renderboom
+        for(std::vector< std::pair<sf::Vector2f,int> >::iterator it=boomvector.begin();it!=boomvector.end();)
+        {
+            if(it->second<=0)
+            {
+                it=boomvector.erase(it);
+                continue;
+            }
+            if(it->second%2==0)
+            {
+                boom2.setPosition(it->first);
+                window.draw(boom2);
+                it->second-=1;
+            }
+            else if(it->second%2==1)
+            {
+                boom1.setPosition(it->first);
+                window.draw(boom1);
+                it->second-=1;
+            }
+            ++it;
+        }
         window.display();
+        /*************************
+        *REGION END
+        */
     }
 
     return 0;
@@ -194,7 +234,7 @@ void update()
             if(fireett.x+FIRE_L/2>enemyett.x&&fireett.x+FIRE_L/2<enemyett.x+PLANE_L
             &&fireett.y+FIRE_L/2>enemyett.y&&fireett.y+FIRE_L/2<enemyett.y+PLANE_L)
             {
-                cout<<"Hitted"<<"#"<<fireett.x+FIRE_L/2<<","<<fireett.y+FIRE_L/2<<"--#("<<enemyett.x<<","<<enemyett.y<<"),("<<enemyett.x+PLANE_L<<","<<enemyett.y+PLANE_L<<")"<<endl;
+                boom(enemyett);
                 it=herofirevector.erase(it);
                 itt=enemyvector.erase(itt);
                 killed=1;
@@ -227,4 +267,12 @@ void spawnEnemy()
     int x=(int)(rand()%(STAGE_X-PLANE_L));
     sf::Vector2f newenemy(x,0);
     enemyvector.push_back(newenemy);
+}
+
+void boom(sf::Vector2f pos)
+{
+    std::pair<sf::Vector2f,int> newboom;
+    newboom.first=pos;
+    newboom.second=450;
+    boomvector.push_back(newboom);
 }
