@@ -2,6 +2,10 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Window.hpp>
 
+const int STAGE_X=540;
+const int STAGE_Y=720;
+const int PLANE_L=64;
+
 
 void handlePlayerInput(sf::Keyboard::Key, bool);
 void update();
@@ -17,7 +21,7 @@ sf::Sprite hero;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(540, 720), "SFML works!");
+    sf::RenderWindow window(sf::VideoMode(STAGE_X, STAGE_Y), "SFML works!");
 
     //load hero
     t_hero.loadFromFile("assets/hero.png");
@@ -78,13 +82,13 @@ void handlePlayerInput(sf::Keyboard::Key key,bool isPressed)
 void update()
 {
     sf::Vector2f movement(0.f, 0.f);
-    if (isMovingUp)
+    if (isMovingUp&&hero.getPosition().y>0)
         movement.y -= 0.4f;
-    if (isMovingDown)
+    if (isMovingDown&&hero.getPosition().y<STAGE_Y-PLANE_L)
         movement.y += 0.4f;
-    if (isMovingLeft)
+    if (isMovingLeft&&hero.getPosition().x>0)
         movement.x -= 0.4f;
-    if (isMovingRight)
+    if (isMovingRight&&hero.getPosition().x<STAGE_X-PLANE_L)
         movement.x += 0.4f;
     hero.move(movement);
 }
