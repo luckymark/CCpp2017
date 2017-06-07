@@ -18,7 +18,7 @@ void Game::play()
 	while (1)
 	{
 		mainWindow.clear();
-
+		manager.BackgroundUpdate();
 		manager.PlaneUpdate(plane);
 		manager.BulletUpdate(bullet);
 		manager.EnemyUpdate(enemy);

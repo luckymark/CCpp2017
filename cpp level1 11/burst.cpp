@@ -123,15 +123,15 @@ void Burst::explode()
 
 Burst::Burst()
 {
-	if (image0.loadFromFile("images/enemyExplode0.png") != true)
+	if (image0.loadFromFile("images/enemyExplode00.png") != true)
 	{
 		return;
 	}
-	if (image1.loadFromFile("images/enemyExplode1.png") != true)
+	if (image1.loadFromFile("images/enemyExplode11.png") != true)
 	{
 		return;
 	}
-	if (image2.loadFromFile("images/enemyExplode2.png") != true)
+	if (image2.loadFromFile("images/enemyExplode22.png") != true)
 	{
 		return;
 	}

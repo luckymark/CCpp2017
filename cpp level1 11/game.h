@@ -6,8 +6,8 @@
 #include "ObjectManager.h"
 #include "EnemyBullet.h"
 
-#define width 1024
-#define height 770
+#define width 1224
+#define height 800
 
 class Game
 {

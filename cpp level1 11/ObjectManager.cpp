@@ -11,18 +11,28 @@ void ObjectManager::PlaneUpdate(Plane &plane)
 {
 	sf::Event event;
 	mainWindow.pollEvent(event);
+	static sf::Clock clock0;
+	float timeDelta = clock0.restart().asSeconds();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		plane.MoveLeft();
+		plane.MoveLeft(timeDelta);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		plane.MoveRight();
+		plane.MoveRight(timeDelta);
 	}
-	else
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		plane.draw();
+		plane.MoveUp(timeDelta);
 	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		plane.MoveDown(timeDelta);
+	}
+	//else
+	//{
+		plane.draw();
+	//}
 }
 
 void ObjectManager::BulletUpdate(Bullet *bullet)
@@ -210,3 +220,14 @@ void ObjectManager::BurstUpdate(Burst *burst,Bullet *bullet)
 	}
 }
 
+void ObjectManager::BackgroundUpdate()
+{
+	sf::Texture image;
+	if (image.loadFromFile("images/Background.jpg") != true)
+	{
+		return;
+	}
+	sf::Sprite sprite(image);
+	sprite.setOrigin(0,0);
+	mainWindow.draw(sprite);
+}

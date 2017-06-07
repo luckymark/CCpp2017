@@ -16,6 +16,7 @@ public:
 	void PlaneUpdate(Plane &plane);
 	void BulletUpdate(Bullet *bullet);
 	void EnemyUpdate(Enemy *enemy);
+	void BackgroundUpdate();
 	void ObjectManager::BurstUpdate(Burst *burst, Bullet *bullet);
 	bool static FullOrEmpty(int i);
 	bool static EnemyFullOrEmpty(int i);

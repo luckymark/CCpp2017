@@ -7,7 +7,7 @@ extern sf::RenderWindow mainWindow;
 EnemyBullet::EnemyBullet(Enemy *enemy)
 {
 	this->enemy = enemy;
-	if (image.loadFromFile("images/bullet2.png") != true)
+	if (image.loadFromFile("images/bullet3.png") != true)
 	{
 		return;
 	}
@@ -38,7 +38,7 @@ void EnemyBullet::move(float timeDelta)
 		mark = 1;
 	}
 	sf::Time time1 = clock3.getElapsedTime();
-	if (time1.asSeconds() > 2.0&&enemyExist==1&&total<eneonce*enebulnumber)
+	if (time1.asSeconds() > 3.0&&enemyExist==1&&total<eneonce*enebulnumber)
 	{
 		for (int i = total; i < total + 3; i++)
 		{
@@ -89,7 +89,6 @@ void EnemyBullet::move(float timeDelta)
 			//printf("no");
 			if (begin == total&&begin!=0)
 			{
-				printf("yes");
 				total = 0;
 				begin = 0;
 			}
