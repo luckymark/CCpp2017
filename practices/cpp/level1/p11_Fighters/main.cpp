@@ -40,6 +40,7 @@ sf::Texture t_boom1;
 sf::Sprite boom1;
 sf::Texture t_boom2;
 sf::Sprite boom2;
+sf::Music ks;
 
 std::vector<sf::Vector2f> herofirevector;
 std::vector<sf::Vector2f>enemyvector;
@@ -73,7 +74,12 @@ int main()
     //load bgm
     sf::Music bgm;
     bgm.openFromFile("assets/bgm1.ogg");
+    bgm.setVolume(20);
     bgm.play();
+
+    //load kill sound
+    ks.openFromFile("assets/killed.ogg");
+    
 
     //set main clock
     sf::Clock spawnclock;
@@ -275,4 +281,5 @@ void boom(sf::Vector2f pos)
     newboom.first=pos;
     newboom.second=450;
     boomvector.push_back(newboom);
+    ks.play();
 }
