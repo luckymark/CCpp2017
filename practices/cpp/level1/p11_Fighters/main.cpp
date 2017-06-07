@@ -155,7 +155,7 @@ void update()
     hero.move(movement);
 
     //herofire move
-    for(std::vector<sf::Vector2f>::iterator it=herofirevector.begin();it!=herofirevector.end();/*no ++*/)
+    for(std::vector<sf::Vector2f>::iterator it=herofirevector.begin();it!=herofirevector.end();)
     {
         sf::Vector2f location=*(it);
         if(location.x<0||location.x>STAGE_X||location.y<0||location.y>STAGE_Y)
@@ -167,14 +167,22 @@ void update()
             sf::Vector2f movement(0,-0.2f);
             *(it)+=movement;
             it++;
-        }
-       
+        } 
     }
     //enemy move
-    for(std::vector<sf::Vector2f>::iterator it=enemyvector.begin();it!=enemyvector.end();it++)
+    for(std::vector<sf::Vector2f>::iterator it=enemyvector.begin();it!=enemyvector.end();)
     {
-        sf::Vector2f movement(0,0.1f);
-        *(it)+=movement;
+        sf::Vector2f location=*(it);
+        if(location.x<0||location.x+PLANE_L>STAGE_X||location.y<0||location.y>STAGE_Y)
+        {
+            it=enemyvector.erase(it);
+        }
+        else
+        {
+            sf::Vector2f movement(0,0.1f);
+            *(it)+=movement;
+            it++;
+        }
     }
 }
 
