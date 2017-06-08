@@ -4,6 +4,7 @@
 #include<SFML/System.hpp>
 #include<list>
 #include<cstdlib>
+#include<vector>
 using namespace sf;
 using namespace std;
 class enemy:public Sprite, public Clock
@@ -44,6 +45,11 @@ class enemy:public Sprite, public Clock
         {
             if(type==1&&getPosition().y+hight<=0)live=false;
             else if(getPosition().y>=800)live==false;
+            return live;
+        }
+        bool check(bool situation)
+        {
+            live=situation;
             return live;
         }
         void useful(double x,double y)
@@ -89,7 +95,9 @@ int main()
     list<enemy>::iterator l,r;
     Event event;
     //获取运行时间用于调整射速和敌人刷新频率
-    Clock amt,enet,total;
+    Clock amt,enet,total,ena;
+    list<Clock> m;
+    list<Clock>::iterator i;
     while (window.isOpen())
     {
         p=1;
@@ -135,28 +143,29 @@ int main()
         {
             for(l=ammo.begin();l!=ammo.end();l++)l->movable();
         }
-
         //敌人
         if(enet.getElapsedTime().asMilliseconds()>500)
         {
             p=1;
             srand((int)total.getElapsedTime().asMilliseconds());
             int num=rand()%10;
-            for(int i=0;i<num;i++)
+            for(int j=0;j<num;j++)
             {
                 
-                if(!en.empty())
+                if(!en.empty()&&!m.empty())
                 {
-                    
-                    for(l=en.begin();l!=en.end();l++)
+                    l=en.begin();
+                    i=m.begin();    
+                    while(l!=en.end()&&i!=m.end())
                     {
                             if(!l->check())
                             {
                                 l->useful(rand()%(400-32),0.f);
                                 p=0;
+                                i->restart();
                                 break;
                             }
-                            
+                    l++;i++;
                     }
                 }
                 if(p)
@@ -164,22 +173,27 @@ int main()
                     en.push_back(enemy(enemypic,32,32,3));
                     l=--en.end();
                     l->useful(rand()%(400-32),0.f);
-
-                } 
-                enet.restart();
+                    m.push_back(Clock());
+                    i=--m.end();
+                    i->restart();
+                }  
             }
+            enet.restart();
          }
         if(!en.empty())
         {
             for(l=en.begin();l!=en.end();l++)l->movable();
         }
         //敌方子弹
+        /*
         if(!en.empty())
         {
-            for(l=en.begin();l!=en.end();l++)
+            l=en.begin();
+            i=m.begin();
+            while(l!=en.end()&&i!=m.end())
             {
                 p=1;
-                if((int)l->getElapsedTime().asMilliseconds()>100&&l->check())
+                if((int)i->getElapsedTime().asMilliseconds()>100&&l->check())
                 {
                     if(!enam.empty())
                     {
@@ -200,12 +214,19 @@ int main()
                         }
                     }
                 }
+                l++;i++;
             }
+            ena.restart();
         }
         if(!enam.empty())
         {
             for(l=enam.begin();l!=enam.end();l++)l->movable();
         }
+        */
+        //自机子弹击中敌机
+        
+        
+        
         //绘制
         window.clear();
         window.draw(back);
@@ -226,6 +247,18 @@ int main()
             if(l->check())window.draw(*l);
         }
         window.display();
+        if(!en.empty()&&!ammo.empty())
+        for(l=en.begin();l!=en.end();l++)
+        {
+            for(r=ammo.begin();r!=ammo.end();r++)
+            {  
+                if(r->check()&&l->check())
+                if(r->getGlobalBounds().intersects(l->getGlobalBounds()))
+                {
+                    l->check(false);r->check(false);
+                }
+            }
+        }
     }
 
     return 0;
