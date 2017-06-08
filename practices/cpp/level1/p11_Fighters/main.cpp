@@ -197,11 +197,36 @@ int main()
         counter.setColor(sf::Color::Blue);
         window.draw(counter);
 
+        //render for gameover
+        if(life<=0)
+        {
+            
+            boomvector.push_back(std::pair<sf::Vector2f,int>(hero.getPosition(),1200));
+
+            sprintf( buf, "Game Over!\nYour score:%d", score);
+            sf::String text(buf);
+            counter.setString(text);
+            counter.setFont(font);
+            counter.setCharacterSize(35);
+            counter.setColor(sf::Color::Red);
+            counter.setPosition(STAGE_X/4,STAGE_Y/2);
+            window.draw(counter);
+
+            window.display();
+            sf::Clock endclock;
+            while(endclock.getElapsedTime().asSeconds()<3)
+            {
+                //wait 3 second to look score
+            }
+            break;
+        }
         //render all
         window.display();
         /*************************
         *REGION END
         */
+
+        
     }
 
     return 0;
@@ -321,8 +346,42 @@ void update()
     for(std::vector<sf::Vector2f>::iterator it=enemyvector.begin();it!=enemyvector.end();it++)
     {
         sf::Vector2f location=*(it);
-        if(location.y>=199&&location.y<=200)
+        if(location.y>=199.9&&location.y<=200.01)
+        {
             fireenemy(location);
+            continue;
+        }
+    }
+    //kill self
+    for(std::vector<sf::Vector2f>::iterator it=enemyfirevector.begin();it!=enemyfirevector.end();)
+    {
+        sf::Vector2f fireett=*(it);
+        sf::Vector2f heroett=hero.getPosition();
+        if(fireett.x+FIRE_L/2>heroett.x&&fireett.x+FIRE_L/2<heroett.x+PLANE_L
+        &&fireett.y+FIRE_L/2>heroett.y&&fireett.y+FIRE_L/2<heroett.y+PLANE_L)
+        {
+            life-=1;
+            it=enemyfirevector.erase(it);
+        }
+        else
+        {
+            it++;
+        }
+    }
+    for(std::vector<sf::Vector2f>::iterator it=enemyvector.begin();it!=enemyvector.end();)
+    {
+        sf::Vector2f enemyett=*(it);
+        sf::Vector2f heroett=hero.getPosition();
+        if(enemyett.x+FIRE_L/2>heroett.x&&enemyett.x+FIRE_L/2<heroett.x+PLANE_L
+        &&enemyett.y+FIRE_L/2>heroett.y&&enemyett.y+FIRE_L/2<heroett.y+PLANE_L)
+        {
+            life-=1;
+            it=enemyvector.erase(it);
+        }
+        else
+        {
+            it++;
+        }
     }
 }
 
