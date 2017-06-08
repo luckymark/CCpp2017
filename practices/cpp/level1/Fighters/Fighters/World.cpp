@@ -1,12 +1,13 @@
 #include "World.h"
-#include <iostream>
-#define ENEMY_BULLET_SPEED 1.3
+#include "Game.h"
+#define ENEMY_BULLET_SPEED 1.3f
+
 World::World(sf::RenderWindow *window)
 {
 	//ctor
 	this->window = window;
 	this->setTexture(this->texture);
-	this->setScale(1.0*this->window->getSize().x / this->texture.getSize().x, 1.0*this->window->getSize().y / this->texture.getSize().y);
+	this->setScale(1.0f*this->window->getSize().x / this->texture.getSize().x, 1.0f*this->window->getSize().y / this->texture.getSize().y);
 
 }
 
@@ -51,6 +52,7 @@ void World::Refresh() {
 			{
 				(*enemy)->state = 1;
 				this->hero->AddScore(5);
+				AddBonus((*enemy)->getPosition().x, (*enemy)->getPosition().y);
 				this->heroBullets.erase(sprite);
 				break;
 			}
@@ -77,6 +79,11 @@ void World::Refresh() {
 	for (auto &sprite : this->enemyBullets)
 	{
 		
+		this->window->draw(*sprite);
+	}
+
+	for (auto &sprite : this->bonuss)
+	{
 		this->window->draw(*sprite);
 	}
 }
@@ -171,7 +178,7 @@ bool World::killed()
 	if (--(this->hero->unbeatable)>0)
 	{
 		static bool Mark = true;
-
+		this->hero->set_bulletmuch(1);
 		if (Mark)
 		{
 			this->hero->setTexture(RTexture::PLAYER1);
@@ -226,6 +233,62 @@ void World::ClearAll(bool mark)
 
 }
 
+
+
+void World::AddBonus(float x,float y)
+{
+	uniform_int_distribution<time_t> a(0, 50);
+
+	if (a(Game::random) <5|| a(Game::random) > 47) 
+	{
+
+		Bonus *bonus = new Bonus(x, y);
+		bonuss.insert(bonus);
+
+	}
+}
+
+void World::BonusFunction()
+{
+	for (auto &bonus : this->bonuss)
+	{
+		bonus->MoveRand();
+		
+		if (bonus->getGlobalBounds().intersects(this->hero->getGlobalBounds())&&bonus->get_bonusstate()==0)
+		{
+			this->hero->AddLife();
+			delete bonus;
+			this->bonuss.erase(bonus);
+			break;
+		}
+		if (bonus->getGlobalBounds().intersects(this->hero->getGlobalBounds()) && bonus->get_bonusstate() == 2)
+		{
+			this->hero->set_bulletmuch(3);
+			delete bonus;
+			this->bonuss.erase(bonus);
+			break;
+		}
+		if (bonus->getGlobalBounds().intersects(this->hero->getGlobalBounds()) && bonus->get_bonusstate() == 1)
+		{
+			uniform_int_distribution<time_t> c(0, 1);
+			switch (c(Game::random))
+			{
+			case 0:
+				this->hero->set_bulletmuch(3);
+				break;
+			case 1:
+				this->hero->AddLife();
+				break;
+			default:
+				break;
+			}
+			
+			delete bonus;
+			this->bonuss.erase(bonus);
+			break;
+		}
+	}
+}
 
 
 

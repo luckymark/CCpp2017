@@ -27,6 +27,7 @@ private:
 	sf::Text GameOver;
 	bool win = false;
 	int gameover_mark = 0;
+	int restart = 0;
 	void play_music();
 	void pause_music();
 	sf::Music &BGM = Music::BGM;

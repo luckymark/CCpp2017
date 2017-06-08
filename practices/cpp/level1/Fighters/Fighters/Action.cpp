@@ -38,7 +38,7 @@ void Action::move() {
 
 }
 
-void Action::setSpeed(double speed)
+void Action::setSpeed(float speed)
 {
 	this->speed = speed;
 }

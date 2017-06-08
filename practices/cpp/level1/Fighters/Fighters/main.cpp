@@ -6,8 +6,9 @@
 #include "Hero.h"
 #include "Load.h"
 #include "Game.h"
+
 int main()
-{
+{		 
 	sf::RenderWindow window(sf::VideoMode(800, 1000), "Fighter");
 
 	Load::loading();

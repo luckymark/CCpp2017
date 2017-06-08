@@ -2,15 +2,16 @@
 #include "World.h"
 #include "Game.h"
 #include <iostream>
-#define ENEMY_SPEED 0.9
+#define ENEMY_SPEED 0.9f
 Enemy::Enemy(World *world) :Plane(world)
 {
 	//ctor
 
-	uniform_int_distribution<unsigned> u(0, 200);
-	uniform_int_distribution<unsigned> v(250, 500);
-	uniform_int_distribution<unsigned> w(550, 700);
-	this->setScale(0.8, 0.8);
+	uniform_int_distribution<time_t> u(0, 200);
+	uniform_int_distribution<time_t> v(250, 500);
+	uniform_int_distribution<time_t> w(550, 700);
+	float X=0.8f, Y=0.8f;
+	this->setScale(X,Y);
 	this->setTexture(RTexture::ENEMY);
 	static int i = 1;
 	switch (i)

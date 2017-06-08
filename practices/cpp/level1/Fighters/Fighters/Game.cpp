@@ -1,7 +1,7 @@
 #include "Game.h"
 #define HERO_INIT_X 340
 #define HERO_INIT_Y 750
-std::default_random_engine Game::random(time(0));
+std::default_random_engine Game::random(time(NULL));
 Game::Game(World* world)
 {
 	//ctor
@@ -10,8 +10,9 @@ Game::Game(World* world)
 	//GameOver.setColor(sf::Color::White);
 	Score.setFont(RTexture::FONT);
 	GameOver.setFont(RTexture::FONT);
-	GameOver.setScale(2, 2);
-	GameOver.setPosition(this->world->getGlobalBounds().height / 4, this->world->getGlobalBounds().height / 3.0);
+	GameOver.setScale(1.5, 1.5);
+	float x(4.0), y(3.0);
+	GameOver.setPosition(this->world->getGlobalBounds().height / x, this->world->getGlobalBounds().height / y);
 }
 
 Game::~Game()
@@ -32,6 +33,8 @@ void Game::pause_music()
 
 void Game::init()
 {
+	gameover_mark = 0;
+	restart = 0;
 	world->hero->setPosition(400, 400);
 	world->window->clear();
 	world->hero->init();
@@ -44,6 +47,11 @@ void Game::MainLoop()
 	{
 		sf::Event event;
 		if (this->world->loading == true) {
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Home)) {
+				init();
+				continue;
+			}
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 				if (this->world->hero->getPosition().x>0) {
@@ -70,7 +78,7 @@ void Game::MainLoop()
 			}
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-				this->world->hero->shoot();
+				this->world->hero->shoot(this->world->hero->get_bulletmuch());
 			}
 		}
 
@@ -82,9 +90,10 @@ void Game::MainLoop()
 				return;
 			}
 		}
-		if (gameover_mark == 1)
+		if (gameover_mark == 1&&restart==0)
 		{
 			GameOvers(win);
+			restart = 1;
 			continue;
 		}
 		else if (gameover_mark == 0) {
@@ -107,6 +116,7 @@ void Game::MainLoop()
 
 			world->addEnemy();
 			world->EnemyShoot();
+			world->BonusFunction();
 			world->moveBullet();
 			world->cleanBullet();
 			world->Refresh();
@@ -120,11 +130,11 @@ void Game::GameOvers(bool win)
 {
 	char str[120];
 	if (win) {
-		sprintf_s(str, "Congratulations!!!\nYou Win!!!\nYour Score: %d ", this->world->hero->GetScore());
+		sprintf_s(str, "Congratulations!\nYou Win!\nYour Score: %d \nPress Home To Retart!", this->world->hero->GetScore());
 
 	}
 	else {
-		sprintf_s(str, "Regrettable!!!\nYou Failed!!!\nYOUR Score: %d ", this->world->hero->GetScore());
+		sprintf_s(str, "Regrettable!\nYou Failed!\nYOUR Score: %d \nPress Home To Retart!", this->world->hero->GetScore());
 	}
 
 	GameOver.setString(str);

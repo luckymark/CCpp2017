@@ -9,13 +9,13 @@ public:
 	virtual ~Action();
 	void move(sf::Vector2f direction);
 	void move();
-	void setSpeed(double speed);
+	void setSpeed(float speed);
 	
 protected:
 	sf::Vector2f direction;
 
 private:
-	double speed = 1;
+	float speed = 1.0f;
 };
 
 #endif // ACTION_H

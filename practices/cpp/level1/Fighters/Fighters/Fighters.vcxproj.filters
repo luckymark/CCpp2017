@@ -48,6 +48,9 @@
     <ClCompile Include="World.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Bonus.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RTexture.h">
@@ -78,6 +81,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Bonus.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,6 +6,7 @@
 #include "Bullet.h"
 #include "RTexture.h"
 #include "Enemy.h"
+#include "Bonus.h"
 class Hero;
 using namespace std;
 class World :public sf::Sprite
@@ -22,6 +23,8 @@ public:
 	void cleanBullet();
 	void EnemyShoot();
 	void ClearAll(bool mark);
+	void AddBonus(float x,float y);
+	void BonusFunction();
 	sf::RenderWindow *window;
 	Hero *hero;
 	bool loading = true;
@@ -29,9 +32,10 @@ protected:
 
 private:
 	sf::Texture texture = RTexture::BACK_GROUND;
-	unordered_set<Enemy*> enemyPlanes;
-	unordered_set<Bullet*> heroBullets;
-	unordered_set<Bullet*> enemyBullets;
+	unordered_set<Enemy * > enemyPlanes;
+	unordered_set<Bullet * > heroBullets;
+	unordered_set<Bullet * > enemyBullets;
+	unordered_set<Bonus * > bonuss;
 };
 
 #endif // MAINLOOP_H
