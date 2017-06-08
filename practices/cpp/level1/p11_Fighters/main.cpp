@@ -20,6 +20,7 @@ void update();
 void fire();
 void spawnEnemy();
 void boom(sf::Vector2f);
+void fireenemy(sf::Vector2f);
 
 //movement params 
 bool isMovingUp=false;
@@ -27,6 +28,11 @@ bool isMovingDown=false;
 bool isMovingLeft=false;
 bool isMovingRight=false;
 bool FiringKey=false;
+
+//count
+int score=0;
+sf::Text counter;
+sf::Font font;
 
 
 
@@ -36,6 +42,8 @@ sf::Texture t_herofire;
 sf::Sprite herofire;
 sf::Texture t_enemy;
 sf::Sprite enemy;
+sf::Texture t_enemyfire;
+sf::Sprite enemyfire;
 sf::Texture t_boom1;
 sf::Sprite boom1;
 sf::Texture t_boom2;
@@ -45,6 +53,7 @@ sf::Music ks;
 std::vector<sf::Vector2f> herofirevector;
 std::vector<sf::Vector2f>enemyvector;
 std::vector< std::pair<sf::Vector2f,int> > boomvector;
+std::vector<sf::Vector2f>enemyfirevector;
 
 int main()
 {
@@ -56,7 +65,7 @@ int main()
     hero.setScale(0.5,0.5); //PLANE--------(128,128)*0.5=(64,64)
     hero.setPosition(540*0.5-32,720-64);
 
-    //load fire
+    //load herofire
     t_herofire.loadFromFile("assets/herofire.png");
     herofire.setTexture(t_herofire);
 
@@ -64,6 +73,10 @@ int main()
     t_enemy.loadFromFile("assets/enemy.png");
     enemy.setTexture(t_enemy);
     enemy.setScale(0.5,0.5);
+
+    //load enemyfire
+    t_enemyfire.loadFromFile("assets/enemyfire.png");
+    enemyfire.setTexture(t_enemyfire);
 
     //load boom
     t_boom1.loadFromFile("assets/boom1.png");
@@ -80,6 +93,8 @@ int main()
     //load kill sound
     ks.openFromFile("assets/killed.ogg");
     
+    //load font
+    font.loadFromFile("assets/arial.ttf"); 
 
     //set main clock
     sf::Clock spawnclock;
@@ -119,16 +134,25 @@ int main()
         *RENDER REGION
         */
         window.clear();
+        //draw hero
         window.draw(hero);
+        //draw herofire
         for(std::vector<sf::Vector2f>::iterator it=herofirevector.begin();it!=herofirevector.end();it++)
         {
             herofire.setPosition(*(it));
             window.draw(herofire);
         }
+        //draw enemy
         for(std::vector<sf::Vector2f>::iterator it=enemyvector.begin();it!=enemyvector.end();it++)
         {
             enemy.setPosition(*(it));
             window.draw(enemy);
+        }
+        //draw enemyfire
+        for(std::vector<sf::Vector2f>::iterator it=enemyfirevector.begin();it!=enemyfirevector.end();it++)
+        {
+            enemyfire.setPosition(*(it));
+            window.draw(enemyfire);
         }
         //renderboom
         for(std::vector< std::pair<sf::Vector2f,int> >::iterator it=boomvector.begin();it!=boomvector.end();)
@@ -152,6 +176,18 @@ int main()
             }
             ++it;
         }
+
+        //write score on screen
+        //int sprintf( char *buffer, const char *format, [ argument] … );
+        char buf[64];
+        sprintf( buf, "Score:%d", score);
+        sf::String text(buf);
+        counter.setString(text);
+        counter.setFont(font);
+        counter.setColor(sf::Color::Blue);
+        window.draw(counter);
+
+        //render all
         window.display();
         /*************************
         *REGION END
@@ -229,6 +265,21 @@ void update()
             it++;
         }
     }
+    //enemyfire move
+    for(std::vector<sf::Vector2f>::iterator it=enemyfirevector.begin();it!=enemyfirevector.end();)
+    {
+        sf::Vector2f location=*(it);
+        if(location.x<0||location.x>STAGE_X||location.y<0||location.y>STAGE_Y)
+        {
+            it=enemyfirevector.erase(it);
+        }
+        else
+        {
+            sf::Vector2f movement(0,0.2f);
+            *(it)+=movement;
+            it++;
+        } 
+    }
     //kill enemy
     for(std::vector<sf::Vector2f>::iterator it=herofirevector.begin();it!=herofirevector.end();)
     {
@@ -256,6 +307,13 @@ void update()
             it++;
         }
     }
+    //enemy fire
+    for(std::vector<sf::Vector2f>::iterator it=enemyvector.begin();it!=enemyvector.end();it++)
+    {
+        sf::Vector2f location=*(it);
+        if(location.y>=199&&location.y<=200)
+            fireenemy(location);
+    }
 }
 
 void fire()
@@ -282,4 +340,13 @@ void boom(sf::Vector2f pos)
     newboom.second=450;
     boomvector.push_back(newboom);
     ks.play();
+    score+=20;
+}
+
+void fireenemy(sf::Vector2f pos)
+{
+    sf::Vector2f newfire=pos;
+    newfire.x+=PLANE_L/2-FIRE_L/2;
+    newfire.y+=PLANE_L;
+    enemyfirevector.push_back(newfire);
 }
