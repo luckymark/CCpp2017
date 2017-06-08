@@ -27,6 +27,8 @@ public:
 
 	static EnemyPlaneLayer* sharedEnemy;
 
+	void eraseEnemy(EnemyPlane* enemy);
+
 private:
 	cocos2d::Vector<EnemyPlane* > enemyList;
 };

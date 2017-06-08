@@ -87,3 +87,8 @@ void EnemyPlaneLayer::enemyShoting()
 {
 	BulletLayer::sharedBullet->enemyBulletCreate();
 }
+
+void EnemyPlaneLayer::eraseEnemy(EnemyPlane* enemy)
+{
+	this->enemyList.eraseObject(enemy);
+}

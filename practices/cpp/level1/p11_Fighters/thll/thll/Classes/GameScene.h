@@ -8,6 +8,7 @@
 #include "EnemyPlaneLayer.h"
 #include "EnemyPlane.h"
 #include "BulletLayer.h"
+#include "TextLayer.h"
 #include <map>
 
 class GameScene : public cocos2d::Layer
@@ -17,14 +18,16 @@ public:
 
 	virtual bool init();
 
-	virtual void onEnterTransitionDidFinish();
-
 	CREATE_FUNC(GameScene);
 private:
+
+	cocos2d::LabelTTF* scoreLabel;
 
 	void gameUpdate(float dt);
 
 	void collisionJudge();
+
+	void scoreUpdate();
 
 	SelfPlaneLayer* planeLayer;
 
@@ -41,6 +44,10 @@ private:
 	int enemy_move_count = 0;
 
 	int plane_bullet_create_count = 0;
+
+	int enemy_bullet_create_count = 0;
+
+	bool isFirstEnter = true;
 };
 
 #endif

@@ -18,7 +18,15 @@ public:
 
 	void setInitialPosition();
 
+	void addScore(int score);
+
+	int getScore();
+
+	void setNullPosition();
+
 private:
 	int life = 3;
+
+	int score = 0;
 };
 #endif

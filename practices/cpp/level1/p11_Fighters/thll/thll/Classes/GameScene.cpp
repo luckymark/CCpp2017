@@ -20,12 +20,9 @@ bool GameScene::init()
 		return false;
 	}
 
-	this->schedule(schedule_selector(GameScene::gameUpdate), GAME_UPDATE_SEC);
-	return true;
-}
+	auto visibleSize = Director::getInstance()->getVisibleSize();
 
-void GameScene::onEnterTransitionDidFinish()
-{
+	// layer instance
 	planeLayer = SelfPlaneLayer::create();
 	this->addChild(planeLayer);
 
@@ -34,13 +31,41 @@ void GameScene::onEnterTransitionDidFinish()
 
 	bulletLayer = BulletLayer::create();
 	this->addChild(bulletLayer);
+
+	scoreLabel = LabelTTF::create();
+	scoreLabel->setColor(ccc3(143, 146, 147));
+	scoreLabel->setFontSize(30);
+	scoreLabel->setPosition(Vec2(visibleSize.width - 60, visibleSize.height - 30));
+	this->addChild(scoreLabel);
+
+	this->schedule(schedule_selector(GameScene::gameUpdate), GAME_UPDATE_SEC);
+	return true;
 }
 
 void GameScene::gameUpdate(float dt)
 {
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+
+	if (isFirstEnter)
+	{
+		isFirstEnter = false;
+
+		// get the window picture
+
+		auto renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
+
+		renderTexture->begin();
+		this->getParent()->visit();
+		renderTexture->end();
+
+		Director::sharedDirector()->pushScene(TextLayer::createScene(renderTexture));
+
+	}
+
 	enemy_create_count++;
 	enemy_move_count++;
 	plane_bullet_create_count++;
+	enemy_bullet_create_count++;
 
 	// Plane 
 	planeLayer->planeUpdate(dt);
@@ -55,8 +80,13 @@ void GameScene::gameUpdate(float dt)
 	if (enemy_create_count % 30 == 0)
 	{
 		enemyLayer->enemyCreate();
-		enemyLayer->enemyShoting();
 		enemy_create_count = 0;
+	}
+
+	if (enemy_bullet_create_count % 360 == 0)
+	{
+		enemyLayer->enemyShoting();
+		enemy_bullet_create_count = 0;
 	}
 
 	if (enemy_move_count % 5 == 0)
@@ -70,13 +100,16 @@ void GameScene::gameUpdate(float dt)
 
 	// Handle Game
 	collisionJudge();
+
+	// Handle Score
+	scoreUpdate();
 }
 
 void GameScene::collisionJudge()
 {
 	Vector<Sprite* > bulletList = bulletLayer->getBulletList();
 	Vector<EnemyPlane* > enemyList = enemyLayer->getEnemyList();
-	auto plane = planeLayer->getPlane();
+	auto plane = SelfPlane::sharedPlane;
 	auto system = ParticleExplosion::create();
 
 	//check enemy and self
@@ -101,9 +134,10 @@ void GameScene::collisionJudge()
 
 			enemy->removeFromParent();
 			this->planeBomb(enemy_pos, enemy_tag);
-			enemyList.eraseObject(enemy);
+			enemyLayer->eraseEnemy(enemy);
 
-			this->unschedule(schedule_selector(GameScene::gameUpdate));
+			plane->setVisible(false);
+			plane->setNullPosition();
 			//plane->runAction(Sequence::create(NULL, CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, plane)), NULL));
 			this->planeBomb(plane_pos, plane_tag);
 			break;
@@ -131,8 +165,11 @@ void GameScene::collisionJudge()
 					system->setPosition(pos);	
 					enemy->removeFromParent();
 					this->planeBomb(pos, tag);					
-					enemyList.eraseObject(enemy);
+					enemyLayer->eraseEnemy(enemy);
 					flag = 1;
+
+					// update socre
+					plane->addScore(1);
 					break;
 				}
 			}
@@ -150,9 +187,8 @@ void GameScene::collisionJudge()
 				auto plane_pos = plane->getPosition();
 
 				int plane_tag = plane->getTag();
-
-				
 				plane->setVisible(false);
+				plane->setNullPosition();
 				this->planeBomb(plane_pos, plane_tag);
 				break;
 			}
@@ -215,8 +251,14 @@ void GameScene::bombRemove(Node * sprite)
 		else
 		{
 			plane->lifeDecreased();
-			//plane->setInitialPosition();
-			//planeLayer->addChild(plane);
+			plane->setInitialPosition();
+			plane->setVisible(true);
 		}
 	}
+}
+
+void GameScene::scoreUpdate()
+{
+	String* strScore = String::createWithFormat("SCORE: %d", SelfPlane::sharedPlane->getScore());
+	scoreLabel->setString(strScore->_string.c_str());
 }

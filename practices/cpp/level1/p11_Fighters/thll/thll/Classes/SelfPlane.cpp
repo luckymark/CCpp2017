@@ -50,3 +50,18 @@ void SelfPlane::setInitialPosition()
 
 	this->setPosition(Vec2(visibleSize.width / 2.0, this->getContentSize().height / 2.0));
 }
+
+void SelfPlane::addScore(int score)
+{
+	this->score += score;
+}
+
+int SelfPlane::getScore()
+{
+	return this->score;
+}
+
+void SelfPlane::setNullPosition()
+{
+	this->setPosition(Vec2(-10, -10));
+}
