@@ -15,8 +15,9 @@ int Flight::control2()
 		sf::Mutex mutex;
 
 			if(direction == 0){
-			if(sprite.getPosition().y<1000){
-					sprite.move(0,20);
+				if(sprite.getPosition().y<1000){
+					sprite.move(0,0);
+					speed = 0;
 				}
 			}
 
@@ -37,9 +38,9 @@ int Flight::control2()
 			if(sprite.getPosition().y<1000&&sprite.getPosition().x<1000&&sprite.getPosition().x>0){
 				sprite.move(speed,10);
 				x1 = x1 +speed;
-				x2 = x1 ;
-				y1 = y1 + 20;
-				y2 = y1;
+				x2 = x2 + speed ;
+				y1 = y1 + 10;
+				y2 = y2 + 10;
 			}
 			else{
 				live = 0;

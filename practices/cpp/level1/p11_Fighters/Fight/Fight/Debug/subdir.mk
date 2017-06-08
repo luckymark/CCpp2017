@@ -6,17 +6,20 @@
 CPP_SRCS += \
 ../control.cpp \
 ../control2.cpp \
-../main.cpp 
+../main.cpp \
+../myrand.cpp 
 
 OBJS += \
 ./control.o \
 ./control2.o \
-./main.o 
+./main.o \
+./myrand.o 
 
 CPP_DEPS += \
 ./control.d \
 ./control2.d \
-./main.d 
+./main.d \
+./myrand.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

@@ -16,7 +16,7 @@ class Flight
 {
 public:
 	Flight(){
-		life = 3 ;
+		life = 1 ;
 		sprite.scale(0.5,0.5);
 		sprite.setPosition(500,500);
 		x1 = 500;
@@ -39,8 +39,9 @@ public:
 
 	void SetPosiontion(int x , int y){
 		sprite.setPosition(x,y);
-		if(x<500)direction = 1;
-		if(x>500)direction = 2;
+		if(x<750)direction = 1;
+		if(x>450)direction = 2;
+		if(x>=450&&x<=750)direction = 0;
 		x1 = x-130 ;
 		x2 = x;
 		y1 = y -80 ;
@@ -60,27 +61,12 @@ public:
 		sprite.setRotation(180);
 	}
 
-	bool judge(int x , int y){
-		if(y==y1 && x > x1 && x<x2){
-			live = 0;
-			return true ;
-		}
-		return false ;
+	void setlive(){
+		live = 0;
 	}
 
-	bool judge1(int x , int y){
-		if(y==y1 && x > x1 && x<x2){
-			life --;
-			return true;
-		}
-		return false;
-	}
-
-	void restore(){
-		life++;
-	}
-	void subtract(){
-		life--;
+	void setlife(int n){
+		life = life + n;
 	}
 
 	bool ifdeath(){

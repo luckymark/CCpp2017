@@ -1,0 +1,31 @@
+/*
+ * myrand.cpp
+ *
+ *  Created on: 2017年6月8日
+ *      Author: mark
+ */
+#include<time.h>
+#include<cstdlib>
+int myrand(){
+	static int seed = 0 ;
+	static int i = 0;
+	int m = 0;
+	if(i==0){
+		srand(time(0));
+	}
+	if(seed>1000000)seed=0;
+	seed = seed + rand();
+	i++;
+	srand(seed);
+	while(1){
+		int k = rand();
+		if(k-m>100||k-m<-100){
+			m = k;
+			break;
+		}
+	}
+	return m ;
+}
+
+
+

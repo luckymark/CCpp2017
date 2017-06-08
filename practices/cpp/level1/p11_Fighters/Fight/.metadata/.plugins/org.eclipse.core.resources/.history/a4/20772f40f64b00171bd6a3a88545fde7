@@ -1,0 +1,27 @@
+/*
+ * gitftarry.h
+ *
+ *  Created on: 2017年6月8日
+ *      Author: mark
+ */
+
+#ifndef GITFTARRY_H_
+#define GITFTARRY_H_
+#include<vector>
+#include<iostream>
+using namespace std ;
+class Gift
+{
+public:
+
+
+
+
+
+
+};
+
+
+
+
+#endif /* GITFTARRY_H_ */

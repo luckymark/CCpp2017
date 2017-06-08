@@ -15,22 +15,25 @@
 #include"bullet2.h"
 #include"bullet.h"
 #include"explosion.h"
+#include"gitftarry.h"
+#include"gift.h"
 #define WIDE 1000
 #define HIGH 1000
 
 int main()
 {
 	int live = 1;
+	srand(time(0));
 
+	sf::Texture textureofgift;
+	textureofgift.loadFromFile("gift.png");
 
-	sf::Sprite test ;
-	sf::Texture t ;
-	t.loadFromFile("explosion.png");
-	test.setTexture(t);
+	Gift arryofgift(textureofgift);
 
 	sf::Clock clock ;
 	sf::Clock clock_draw;
-	srand(time(0));
+	sf::Clock clock_gift;
+	sf::Clock clock_gift1;
 	sf::Mutex mutex;
 
     sf::RenderWindow window(sf::VideoMode(WIDE,HIGH), "Fly to Dream");
@@ -47,10 +50,6 @@ int main()
     sf::Texture EnemeyFlight_Texture;
     EnemeyFlight_Texture.loadFromFile("2.png");
     EnemyFlight Enemey(EnemeyFlight_Texture);
-
-
-    test.setPosition(Enemey.E[0]->x1,Enemey.E[0]->y1);
-
 
     Map map("back.jpg");
 
@@ -72,6 +71,27 @@ int main()
         }
         int b=MyFlight.control();
 
+        if(clock_gift.getElapsedTime()>sf::seconds(1)){
+        	arryofgift.create();
+        	clock_gift.restart();
+        }
+        if(clock_gift1.getElapsedTime()>sf::milliseconds(100)){
+        	arryofgift.fly();
+        	clock_gift1.restart();
+        }
+        if(!arryofgift.arry.empty()){
+        	sf::FloatRect fly = MyFlight.GetSprite().getGlobalBounds();
+        	for(int i = 0 ; i <arryofgift.arry.size(); i++  ){
+        		sf::FloatRect gift = arryofgift.arry[i].getsprite().getGlobalBounds();
+        		if(fly.intersects(gift)){
+        			if(arryofgift.arry[i].getm()==1){
+        				MyFlight.setlife(1);
+        			}
+        			arryofgift.arry.erase(arryofgift.arry.begin()+i);
+        		}
+        	}
+        }
+
 
         if(b)Bullet.add_m(MyFlight.getx(),MyFlight.gety());
 
@@ -91,8 +111,11 @@ int main()
         for(int i = 0 ;i < Bullet.A.size();i++){
         	for(int j = 0 ;j < Enemey.E.size();j++)
         	{
-        		if(!Bullet.A[i].getb()&&Enemey.E[j]->judge(Bullet.A[i].getx(),Bullet.A[i].gety())){
+        		sf::FloatRect fly = Enemey.E[j]->GetSprite().getGlobalBounds();
+        		sf::FloatRect bul = Bullet.A[i].getsprite().getGlobalBounds();
+        		if(!Bullet.A[i].getb()&&fly.intersects(bul)){
         			Bullet.A[i].status=0;
+        			Enemey.E[j]->setlive();
         			Bullet.A.erase(Bullet.A.erase(Bullet.A.begin()+j));
         			explosion.push_back(new Explosion(Exlosion_Texture));
         			explosion[explosion.size()-1]->setposition(Enemey.E[j]->getx(),Enemey.E[j]->gety());
@@ -100,8 +123,12 @@ int main()
         	}
         }
         for(int i = 0 ;i < Bullet.A.size();i++){
-        	if(Bullet.A[i].getb()&&MyFlight.judge1(Bullet.A[i].getx(),Bullet.A[i].gety())){
+        	sf::FloatRect fly = MyFlight.GetSprite().getGlobalBounds();
+        	sf::FloatRect bul = Bullet.A[i].getsprite().getGlobalBounds();
+        	if(Bullet.A[i].getb()&&fly.intersects(bul)){
         		Bullet.A[i].status=0;
+
+        		MyFlight.setlife(-1);
         		explosion.push_back(new Explosion(Exlosion_Texture));
         		explosion[explosion.size()-1]->setposition(MyFlight.getx()+70,MyFlight.gety()+70);
         		std::cout<<"life --"<<std::endl;
@@ -163,6 +190,10 @@ int main()
         		continue;
         	}
         	j++;
+        }
+
+        for(int k = 0 ;k<arryofgift.arry.size();k++){
+        	window.draw(arryofgift.arry[k].getsprite());
         }
 
   //      window.draw(test);

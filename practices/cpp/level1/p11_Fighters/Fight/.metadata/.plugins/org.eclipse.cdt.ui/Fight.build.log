@@ -1,6 +1,6 @@
-15:24:45 **** Incremental Build of configuration Debug for project Fight ****
+22:18:51 **** Incremental Build of configuration Debug for project Fight ****
 make all 
 make: Nothing to be done for 'all'.
 
-15:24:45 Build Finished (took 79ms)
+22:18:51 Build Finished (took 68ms)
 

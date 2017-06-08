@@ -1,0 +1,41 @@
+/*
+ * gift.h
+ *
+ *  Created on: 2017年6月8日
+ *      Author: mark
+ */
+
+#ifndef GIFT_H_
+#define GIFT_H_
+class gift{
+public:
+	gift(){
+		m=rand()%2;
+	}
+	int getx(){
+		return sprite.getPosition().x;
+	}
+	int gety(){
+		return sprite.getPosition().y;
+	}
+	void setPosition(int x,int y){
+		sprite.setPosition(x,y);
+	}
+	void fly(){
+		sprite.move(5,0);
+	}
+	void setsprite(sf::Texture tex){
+		sprite.setTexture(tex);
+	}
+	sf::Sprite &getsprite(){
+		return sprite;
+	}
+private:
+	sf::Sprite sprite ;
+	int m ;
+};
+
+
+
+
+#endif /* GIFT_H_ */

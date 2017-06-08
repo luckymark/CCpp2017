@@ -1,0 +1,22 @@
+/*
+ * myrand.cpp
+ *
+ *  Created on: 2017年6月8日
+ *      Author: mark
+ */
+#include<time.h>
+#include<cstdlib>
+int myrand(){
+	static int x = rand()%1000;
+	static int p = x ;
+	while(x+400>1000){
+		x  = rand()%1000;
+	}
+
+	int c = x ;
+	x = x+60;
+	return c ;
+}
+
+
+

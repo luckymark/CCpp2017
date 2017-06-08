@@ -1,0 +1,31 @@
+/*
+ * gitftarry.h
+ *
+ *  Created on: 2017年6月8日
+ *      Author: mark
+ */
+
+#ifndef GITFTARRY_H_
+#define GITFTARRY_H_
+#include<vector>
+#include<iostream>
+#include"gift.h"
+using namespace std ;
+class Gift
+{
+public:
+	vector<gift> arry;
+
+	void create(){
+		if(rand()%20==1){
+			gift a;
+			arry.push_back(a);
+		}
+
+	}
+};
+
+
+
+
+#endif /* GITFTARRY_H_ */

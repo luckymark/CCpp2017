@@ -13,6 +13,7 @@
 #include<stdlib.h>
 #include<iostream>
 #include<vector>
+#include"advanced.h"
 
 class EnemyFlight
 {
@@ -25,7 +26,7 @@ public:
 			E.push_back(new Flight);
 			E[i]->SetTexture(texture);
 			E[i]->ankel();
-			E[i]->SetPosiontion(rand()%500+300,0);
+			E[i]->SetPosiontion(myrand(),0);
 		}
 	}
 
@@ -71,7 +72,7 @@ public:
 			number++;
 			E[E.size()-1]->SetTexture(texture);
 			E[E.size()-1]->ankel();
-			E[E.size()-1]->SetPosiontion(rand()%500+300,0);
+			E[E.size()-1]->SetPosiontion(myrand(),0);
 		}
 		if(k==1)return 1;
 		else return 0;

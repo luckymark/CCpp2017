@@ -1,0 +1,27 @@
+/*
+ * gift.h
+ *
+ *  Created on: 2017年6月8日
+ *      Author: mark
+ */
+
+#ifndef GIFT_H_
+#define GIFT_H_
+class gift{
+public:
+
+
+	static void add(sf::Texture global1,sf::Texture global2){
+		texture1 = global1;
+		texture2 = global2;
+	}
+private:
+	sf::Texture texture1 ;
+	sf::Texture texture2;
+	sf::Sprite sprite ;
+};
+
+
+
+
+#endif /* GIFT_H_ */

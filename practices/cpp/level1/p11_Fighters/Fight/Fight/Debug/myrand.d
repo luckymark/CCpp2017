@@ -1,0 +1,1 @@
+myrand.d: ../myrand.cpp

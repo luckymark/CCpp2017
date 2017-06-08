@@ -1,0 +1,21 @@
+/*
+ * myrand.cpp
+ *
+ *  Created on: 2017年6月8日
+ *      Author: mark
+ */
+#include<time.h>
+#include<cstdlib>
+int myrand(){
+	int static m = 100 ;
+	srand(0);
+	int x = rand();
+	m = m +  60;
+	if(m>x%1000-100){
+		m = 20 ;
+	}
+	return m ;
+}
+
+
+
