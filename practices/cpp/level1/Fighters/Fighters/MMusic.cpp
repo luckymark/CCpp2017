@@ -15,6 +15,6 @@ Music::~Music()
 
 void Music::load()
 {
-	BGM.openFromFile("resource/music/BGM.wav");
+	BGM.openFromFile("resource/music/BGM.ogg");
 	BOOM.openFromFile("resource/music/BOOM.wav");
 }

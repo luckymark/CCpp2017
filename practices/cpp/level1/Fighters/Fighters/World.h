@@ -25,6 +25,7 @@ public:
 	void ClearAll(bool mark);
 	void AddBonus(float x,float y);
 	void BonusFunction();
+	int bonusState = 0;
 	sf::RenderWindow *window;
 	Hero *hero;
 	bool loading = true;
@@ -35,6 +36,8 @@ private:
 	unordered_set<Enemy * > enemyPlanes;
 	unordered_set<Bullet * > heroBullets;
 	unordered_set<Bullet * > enemyBullets;
+	unordered_set<Bullet * > smallBossBullet;
+	unordered_set<Enemy * > smallBoss;
 	unordered_set<Bonus * > bonuss;
 };
 

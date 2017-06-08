@@ -18,6 +18,7 @@ sf::Texture RTexture::BOSSNULLET2;
 sf::Texture RTexture::PLAYER2;
 sf::Texture RTexture::BULLETBONUS;
 sf::Texture RTexture::RANDBONUS;
+sf::Texture RTexture::PLAYER3;
 RTexture::RTexture()
 {
 	//ctor
@@ -48,4 +49,5 @@ void RTexture::load()
 	BOOM1.loadFromFile("resource/image/boom.png");
 	LIFE.loadFromFile("resource/image/life.png");
 	FONT.loadFromFile("resource/font/font.ttf");
+	PLAYER3.loadFromFile("resource/image/hero2.png");
 }

@@ -1,3 +1,6 @@
 ﻿  World.cpp
+h:\c++\fighters\fighters\world.cpp(246): warning C4804: “<=”: 在操作中使用类型“bool”不安全
+h:\c++\fighters\fighters\world.cpp(256): warning C4804: “<=”: 在操作中使用类型“bool”不安全
+h:\c++\fighters\fighters\world.cpp(383): warning C4804: “<=”: 在操作中使用类型“bool”不安全
   Fighters.vcxproj -> H:\C++\Fighters\Debug\Fighters.exe
   Fighters.vcxproj -> H:\C++\Fighters\Debug\Fighters.pdb (Full PDB)

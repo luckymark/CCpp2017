@@ -12,6 +12,7 @@ public:
     void MoveRand();
 	void set_bonusstate(int bonusstate);
 	int get_bonusstate();
+	
 
 private:
 	sf::Vector2f direction;

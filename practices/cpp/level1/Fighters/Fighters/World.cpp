@@ -1,5 +1,6 @@
 #include "World.h"
 #include "Game.h"
+#include <iostream>
 #define ENEMY_BULLET_SPEED 1.3f
 
 World::World(sf::RenderWindow *window)
@@ -29,6 +30,68 @@ void World::Refresh() {
 	this->window->clear();
 	this->window->draw(*this);
 	this->window->draw(*(this->hero));
+	for (auto enemy = this->smallBoss.begin(); enemy != (this->smallBoss.end());)
+	{
+		auto temp = enemy;
+		(*enemy)->enemyMove();
+
+		if ((*enemy)->state >= 1 && (*enemy)->state <= 10)
+		{
+			(*enemy)->boomCheck(((*enemy)->state)++);
+			break;
+		}
+
+		else if ((*enemy)->state == 11)
+		{
+			
+			delete *enemy;
+			enemy = (this->smallBoss).erase(enemy);
+			break;
+		}
+
+		if ((*enemy)->getPosition().y>1000)
+		{
+			delete *enemy;
+			enemy = (this->smallBoss).erase(enemy);
+			break;
+		}
+		for (auto sprite = this->heroBullets.begin(); sprite != (this->heroBullets.end());)
+		{
+			if ((*enemy)->getGlobalBounds().intersects((*sprite)->getGlobalBounds()))
+			{
+				this->heroBullets.erase(sprite);
+				if ((((*enemy)->live -= 2) < 0)) {
+					(*enemy)->state = 1;
+					this->hero->AddScore(10);
+					bonusState = 1;
+					AddBonus((*enemy)->getPosition().x, (*enemy)->getPosition().y);
+
+
+
+					break;
+
+				}
+				break;
+			}
+			sprite++;
+		}
+
+		if ((*enemy)->getPosition().y>1000)
+		{
+			delete *enemy;
+			enemy = (this->enemyPlanes).erase(enemy);
+			break;
+		}
+
+		this->window->draw(**enemy);
+		if (temp == enemy) { ++enemy; }
+
+	}
+
+
+
+
+
 
 	for (auto enemy = this->enemyPlanes.begin(); enemy != (this->enemyPlanes.end());)
 	{
@@ -41,6 +104,7 @@ void World::Refresh() {
 		}
 		else if ((*enemy)->state == 11)
 		{
+			
 			delete *enemy;
 			enemy = (this->enemyPlanes).erase(enemy);
 			break;
@@ -50,10 +114,18 @@ void World::Refresh() {
 		{
 			if ((*enemy)->getGlobalBounds().intersects((*sprite)->getGlobalBounds()))
 			{
-				(*enemy)->state = 1;
-				this->hero->AddScore(5);
-				AddBonus((*enemy)->getPosition().x, (*enemy)->getPosition().y);
 				this->heroBullets.erase(sprite);
+				if ((((*enemy)->live -= 2) < 0)) {
+					(*enemy)->state = 1;
+					this->hero->AddScore(5);
+					bonusState = 0;
+					AddBonus((*enemy)->getPosition().x, (*enemy)->getPosition().y);
+				
+
+					
+					break;
+					
+				}
 				break;
 			}
 			sprite++;
@@ -72,6 +144,11 @@ void World::Refresh() {
 
 
 	for (auto &sprite : this->heroBullets)
+	{
+		this->window->draw(*sprite);
+	}
+
+	for (auto &sprite : this->smallBossBullet)
 	{
 		this->window->draw(*sprite);
 	}
@@ -99,6 +176,10 @@ void World::addBullet(Bullet *bullet, int mark)
 
 		this->enemyBullets.insert(bullet);
 		break;
+	case 3:
+		this->smallBossBullet.insert(bullet);
+		
+		break;
 	}
 }
 
@@ -107,10 +188,18 @@ void World::moveBullet()
 	for (auto &bullet : this->heroBullets) {
 		bullet->move();
 	}
+
 	for (auto &bullet : this->enemyBullets) {
 		bullet->setSpeed(ENEMY_BULLET_SPEED);
 		bullet->move();
 	}
+
+	for (auto &bullet : this->smallBossBullet) {
+		bullet->setSpeed(ENEMY_BULLET_SPEED);
+		bullet->move();
+
+	}
+
 }
 
 void World::cleanBullet() {
@@ -149,15 +238,28 @@ void World::cleanBullet() {
 
 void World::addEnemy()
 {
+	uniform_int_distribution<time_t> E(0, 10);
 	static int i = 0;
 	if (i >= 90)
 	{
 		Enemy* enemy1 = new Enemy(this);
-		////        Enemy* enemy2 = new Enemy(this);
-		////        Enemy* enemy3 = new Enemy(this);
-		//        this->enemyPlanes.insert(enemy3);
-		this->enemyPlanes.insert(enemy1);
-		//        this->enemyPlanes.insert(enemy2);
+		if (0 <= E(Game::random) <= 6&&enemy1->get_bossState()==0) {
+			//Enemy* enemy1 = new Enemy(this);
+			////        Enemy* enemy2 = new Enemy(this);
+			////        Enemy* enemy3 = new Enemy(this);
+			//        this->enemyPlanes.insert(enemy3);
+			this->enemyPlanes.insert(enemy1);
+			enemy1->bulletState = 0;
+			//bonusState = 0;
+			//        this->enemyPlanes.insert(enemy2);
+		}
+		if (7 <= E(Game::random) <= 10&& enemy1->get_bossState()==1)
+		{
+			//Enemy *enemy4 = new Enemy(this);
+			enemy1->bulletState = 1;
+			//bonusState = 1;
+			this->smallBoss.insert(enemy1);
+		}
 		i = 0;
 	}
 	else { i++; }
@@ -171,6 +273,13 @@ void World::EnemyShoot()
 		(*enemy)->Fire();
 		enemy++;
 	}
+
+	for (auto enemy = this->smallBoss.begin(); enemy != this->smallBoss.end();)
+	{
+		
+		(*enemy)->Fire();
+		enemy++;
+	}
 }
 
 bool World::killed()
@@ -179,6 +288,7 @@ bool World::killed()
 	{
 		static bool Mark = true;
 		this->hero->set_bulletmuch(1);
+		this->hero->set_bonusmuch(0);
 		if (Mark)
 		{
 			this->hero->setTexture(RTexture::PLAYER1);
@@ -186,7 +296,7 @@ bool World::killed()
 		}
 		else
 		{
-			this->hero->setTexture(RTexture::PLAYER);
+			this->hero->setTexture(RTexture::PLAYER2);
 			Mark = true;
 		}
 		return false;
@@ -199,6 +309,23 @@ bool World::killed()
 			return true;
 		}
 
+	}
+
+	for (auto &bullet : this->smallBossBullet)
+	{
+		if ((bullet)->getGlobalBounds().intersects((this->hero)->getGlobalBounds()))
+		{
+			return true;
+		}
+
+	}
+
+	for (auto &enemy : this->smallBoss)
+	{
+		if ((enemy)->getGlobalBounds().intersects((this->hero)->getGlobalBounds()))
+		{
+			return true;
+		}
 	}
 
 	for (auto &enemy : this->enemyPlanes)
@@ -226,8 +353,14 @@ void World::ClearAll(bool mark)
 			delete plane;
 		}
 		enemyPlanes.clear();
-	}
 
+		for (auto &plane : this->smallBoss)
+		{
+			delete plane;
+		}
+		smallBoss.clear();
+	}
+	smallBossBullet.clear();
 	enemyBullets.clear();
 	heroBullets.clear();
 
@@ -239,12 +372,18 @@ void World::AddBonus(float x,float y)
 {
 	uniform_int_distribution<time_t> a(0, 50);
 
-	if (a(Game::random) <5|| a(Game::random) > 47) 
+	if (a(Game::random) <3&&bonusState==0) 
 	{
 
 		Bonus *bonus = new Bonus(x, y);
 		bonuss.insert(bonus);
 
+	}
+
+	if (4<=a(Game::random) <=35 &&bonusState == 1)
+	{
+		Bonus *bonus = new Bonus(x, y);
+		bonuss.insert(bonus);
 	}
 }
 
@@ -254,7 +393,7 @@ void World::BonusFunction()
 	{
 		bonus->MoveRand();
 		
-		if (bonus->getGlobalBounds().intersects(this->hero->getGlobalBounds())&&bonus->get_bonusstate()==0)
+		if (bonus->getGlobalBounds().intersects(this->hero->getGlobalBounds())&&bonus->get_bonusstate() == 0)
 		{
 			this->hero->AddLife();
 			delete bonus;
@@ -263,11 +402,21 @@ void World::BonusFunction()
 		}
 		if (bonus->getGlobalBounds().intersects(this->hero->getGlobalBounds()) && bonus->get_bonusstate() == 2)
 		{
-			this->hero->set_bulletmuch(3);
+			if (this->hero->get_bonusmuch() == 0) {
+				this->hero->set_bulletmuch(2);
+				this->hero->setTexture(RTexture::PLAYER3);
+				this->hero->set_bonusmuch(1);
+			}
+			else if (this->hero->get_bonusmuch() == 1)
+			{
+				this->hero->setTexture(RTexture::PLAYER);
+				this->hero->set_bulletmuch(3);
+			}
 			delete bonus;
 			this->bonuss.erase(bonus);
 			break;
 		}
+		
 		if (bonus->getGlobalBounds().intersects(this->hero->getGlobalBounds()) && bonus->get_bonusstate() == 1)
 		{
 			uniform_int_distribution<time_t> c(0, 1);
@@ -275,6 +424,8 @@ void World::BonusFunction()
 			{
 			case 0:
 				this->hero->set_bulletmuch(3);
+				this->hero->setTexture(RTexture::PLAYER);
+				this->hero->set_bonusmuch(2);
 				break;
 			case 1:
 				this->hero->AddLife();

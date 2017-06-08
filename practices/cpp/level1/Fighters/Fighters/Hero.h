@@ -21,13 +21,17 @@ public:
 	int GetScore();
 	void set_bulletmuch(int BulletMuch);
 	int get_bulletmuch();
+	void set_bonusmuch(int bonusmuch);
+	int get_bonusmuch();
+
 	friend class World;
 protected:
 
 private:
 	int score;
 	int BulletMuch = 1;
-	sf::Texture texture = RTexture::PLAYER;
+	int bonusmuch = 0;
+	sf::Texture texture=RTexture::PLAYER2 ;
 };
 
 #endif // HERO_H

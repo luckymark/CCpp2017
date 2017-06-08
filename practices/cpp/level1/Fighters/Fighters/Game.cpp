@@ -35,7 +35,8 @@ void Game::init()
 {
 	gameover_mark = 0;
 	restart = 0;
-	world->hero->setPosition(400, 400);
+	world->hero->setPosition(340,750);
+	world->ClearAll(true);
 	world->window->clear();
 	world->hero->init();
 }
