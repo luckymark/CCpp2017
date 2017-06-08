@@ -34,6 +34,9 @@ int score=0;
 sf::Text counter;
 sf::Font font;
 
+int life=3;
+int level=1;
+
 
 
 sf::Texture t_hero;
@@ -119,13 +122,19 @@ int main()
                 break;
             }
         }
-
+        //level control
+        level=1+score/400;
+        if(level>8)
+        {
+            //PASS ALL LEVEL
+            break;
+        }
         //spawn enemy
         if(spawnclock.getElapsedTime().asSeconds()>interval)
         {
             spawnEnemy();
             srand(time(0));
-            interval=2+rand()%2;
+            interval=2-level*0.1+rand()%(2);
             spawnclock.restart();
         }
         update();
@@ -180,10 +189,11 @@ int main()
         //write score on screen
         //int sprintf( char *buffer, const char *format, [ argument] … );
         char buf[64];
-        sprintf( buf, "Score:%d", score);
+        sprintf( buf, "Score:%d\nLife:%d\nLevel:%d", score,life,level);
         sf::String text(buf);
         counter.setString(text);
         counter.setFont(font);
+        counter.setCharacterSize(20);
         counter.setColor(sf::Color::Blue);
         window.draw(counter);
 
@@ -260,7 +270,7 @@ void update()
         }
         else
         {
-            sf::Vector2f movement(0,0.1f);
+            sf::Vector2f movement(0,0.1f+level*0.02f);
             *(it)+=movement;
             it++;
         }
@@ -275,7 +285,7 @@ void update()
         }
         else
         {
-            sf::Vector2f movement(0,0.2f);
+            sf::Vector2f movement(0,0.2f+level*0.04f);
             *(it)+=movement;
             it++;
         } 
