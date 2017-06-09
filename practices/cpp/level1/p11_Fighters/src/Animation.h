@@ -14,7 +14,7 @@
 using namespace std;
 
 class Animation{
-	private:
+	protected:
 		vector<Frame> 		sequence;	
 							
 							
@@ -37,18 +37,18 @@ class Animation{
 
 		int is_playing();				
 		void initlize();				
-		void next_frame(sf::Time dt);			
-		void next_frame();
+		virtual void next_frame(sf::Time dt);			
+		virtual void next_frame();
 								
 
-		void begin_cur_display(sf::RenderWindow *win);		
+		virtual void begin_cur_display(sf::RenderWindow *win);		
 
 		void be_affected(Animation *other);		
 		int stand_at(Animation *other);
 
 
-		void set_sound(const string &sound_file_name);	
-		void set_sequence(const string &frame_setting_file_name); 
+		virtual void set_sound(const string &sound_file_name);	
+		virtual void set_sequence(const string &frame_setting_file_name); 
 								
 		void update_last_time_from_sound();			
 		void set_position(sf::Vector2f pos);	

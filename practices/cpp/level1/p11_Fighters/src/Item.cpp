@@ -1,6 +1,13 @@
 #include "Item.h"
 #include "Director.h"
 
+Item::Item(){
+	item_kind = 0;
+	animation = NULL;
+	cur_animation = 0;
+	world = NULL;
+	physics.set_position(sf::Vector2f(0,0));
+}
 void Item::dead(){
 	world -> delete_stuff(this);
 }

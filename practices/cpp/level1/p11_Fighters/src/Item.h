@@ -19,7 +19,7 @@ using namespace std;
 
 enum {
 	type_Player, type_Bullet, type_Room, type_Enemy, type_Bullet_hit, type_Background, 
-	type_Enemy_bullet, type_Enemy_bullet_hit, type_Dialog
+	type_Enemy_bullet, type_Enemy_bullet_hit, type_Dialog, type_CG
 } item_type;
 static const int max_skill_num = 15;
 class Director;
@@ -41,6 +41,7 @@ class Item{
 	public:
 		Physics		physics;
 
+		Item();
 		Item(int kind, string item_setting_name, sf::Vector2f pos,Director *world_);
 
 		void 	set_position(sf::Vector2f pos);
@@ -50,7 +51,7 @@ class Item{
 		void 	add_force_from_skill(int key, sf::Vector2f dir, sf::Time dt);
 
 		int 		get_kind();
-		void 		get_setting(string item_setting_name);	//use to get the animation and other setting
+		virtual void 	get_setting(string item_setting_name);	//use to get the animation and other setting
 		sf::Vector2f	get_speed();
 		sf::Vector2f 	get_position();
 		Animation* 	get_cur_animation();
@@ -61,7 +62,7 @@ class Item{
 		virtual void use_skill(int which){}		//留给character使用的接口
 
 		virtual void display();
-		void next(sf::Time dt);
+		virtual void next(sf::Time dt);
 		virtual void dead();
 
 		Animation* get_current_animation();

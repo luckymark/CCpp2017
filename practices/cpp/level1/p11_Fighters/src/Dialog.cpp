@@ -11,7 +11,7 @@ Dialog::Dialog(int kind, string item_setting_name, sf::Vector2f pos, Director *w
 		words.push_back(L"你好");
 		text.setString(L"你好");
 		words.push_back(L"我叫蕾米莉亚");
-		words.push_back(L"123");
+		words.push_back(L"我想试一下sfml能不能换行\n以下是测试内容");
 		words.push_back(L"123");
 		words.push_back(L"123");
 		words.push_back(L"123");
@@ -58,8 +58,9 @@ Dialog::Dialog(int kind, string item_setting_name, sf::Vector2f pos, Director *w
 		text.setPosition(sf::Vector2f(10,10));
 	}
 void Dialog::Action(sf::Time dt, sf::Vector2f pos){
-	if(cur_face == face_num-1){
+	if(cur_face == face_num-1 || sf::Mouse::isButtonPressed(sf::Mouse::Right)){
 		dead();
+		return;
 	}
 	if(click_clock.getElapsedTime().asSeconds() > 1.0 && sf::Mouse::isButtonPressed(sf::Mouse::Left)){
 		animation[cur_animation].next_frame();
@@ -71,6 +72,7 @@ void Dialog::Action(sf::Time dt, sf::Vector2f pos){
 void Dialog::display(){
 	/*set positioon*/
 	animation[cur_animation].set_play_flag(1);
+	animation[cur_animation].set_sound_flag(0);
 	animation[cur_animation].begin_cur_display(&(world -> window));
 	world -> window.draw(text);
 }
