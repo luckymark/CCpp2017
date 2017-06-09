@@ -14,8 +14,8 @@ public:
 protected:
 	World *world;
 	sf::Texture BOOMP = RTexture::BOOM1;
-	sf::Music &BOOM = Music::BOOM;
-
+	sf::Music &BOOM = Music::ENEMY_BOOM;
+	sf::Music &FIRE = Music::Fire;
 private:
 };
 

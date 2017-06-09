@@ -1,6 +1,10 @@
 ﻿  World.cpp
-h:\c++\fighters\fighters\world.cpp(246): warning C4804: “<=”: 在操作中使用类型“bool”不安全
-h:\c++\fighters\fighters\world.cpp(256): warning C4804: “<=”: 在操作中使用类型“bool”不安全
-h:\c++\fighters\fighters\world.cpp(383): warning C4804: “<=”: 在操作中使用类型“bool”不安全
+h:\c++\fighters\fighters\world.cpp(249): warning C4804: “<=”: 在操作中使用类型“bool”不安全
+h:\c++\fighters\fighters\world.cpp(259): warning C4804: “<=”: 在操作中使用类型“bool”不安全
+h:\c++\fighters\fighters\world.cpp(391): warning C4804: “<=”: 在操作中使用类型“bool”不安全
+h:\c++\fighters\fighters\world.cpp(462): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+  Game.cpp
+h:\c++\fighters\fighters\game.cpp(4): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+  正在生成代码...
   Fighters.vcxproj -> H:\C++\Fighters\Debug\Fighters.exe
   Fighters.vcxproj -> H:\C++\Fighters\Debug\Fighters.pdb (Full PDB)

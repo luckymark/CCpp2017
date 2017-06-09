@@ -25,18 +25,25 @@ void Hero::init()
 
 void Hero::shoot(int j)
 {
+	int k;
+	if (j == 1) {k = 50 * j;}
+	if (j == 2) { k = 20 * j; }
+	if (j == 3) { k = 8 * j; }
+
 	static int i = 0;
-	if (i>50) {
+
+	if (i>k) {
 		if (j == 3) {
+			Music::Fire.play();
 			Bullet *bulletM = new Bullet(RTexture::BULLET1,1, sf::Vector2f(0.0, -1.0));
 			Bullet *bulletR = new Bullet(RTexture::BULLET2,1, sf::Vector2f(0.0, -1.0));
 			Bullet *bulletL = new Bullet(RTexture::BULLET2,1, sf::Vector2f(0.0, -1.0));
 			bulletM->setScale(1, 1);
 			bulletR->setScale(1, 1);
 			bulletL->setScale(1, 1);
-			bulletM->setSpeed(SHOOT_SPEED);
-			bulletR->setSpeed(SHOOT_SPEED);
-			bulletL->setSpeed(SHOOT_SPEED);
+			bulletM->setBulletSpeed(SHOOT_SPEED);
+			bulletR->setBulletSpeed(SHOOT_SPEED);
+			bulletL->setBulletSpeed(SHOOT_SPEED);
 			bulletM->setPosition(this->getPosition().x + 63, this->getPosition().y);
 			bulletR->setPosition(this->getPosition().x + 88, this->getPosition().y);
 			bulletL->setPosition(this->getPosition().x + 10, this->getPosition().y);
@@ -47,21 +54,23 @@ void Hero::shoot(int j)
 		}
 		if (j == 2)
 		{
+			Music::Fire.play();
 			Bullet *bulletR = new Bullet(RTexture::BULLET2,1, sf::Vector2f(0.0, -1.0));
 			Bullet *bulletL = new Bullet(RTexture::BULLET2,1, sf::Vector2f(0.0, -1.0));
 			bulletR->setScale(1, 1);
 			bulletL->setScale(1, 1);
-			bulletR->setSpeed(SHOOT_SPEED);
-			bulletL->setSpeed(SHOOT_SPEED);
+			bulletR->setBulletSpeed(SHOOT_SPEED);
+			bulletL->setBulletSpeed(SHOOT_SPEED);
 			bulletR->setPosition(this->getPosition().x + 88, this->getPosition().y);
 			bulletL->setPosition(this->getPosition().x + 10, this->getPosition().y);
 			this->world->addBullet(bulletR, 1);
 			this->world->addBullet(bulletL, 1);
 		}
 		if(j==1) {
+			Music::Fire.play();
 			Bullet *bulletM = new Bullet(RTexture::BULLET1,1, sf::Vector2f(0.0, -1.0));
 			bulletM->setScale(1, 1);
-			bulletM->setSpeed(SHOOT_SPEED);
+			bulletM->setBulletSpeed(SHOOT_SPEED);
 			bulletM->setPosition(this->getPosition().x + 63, this->getPosition().y);
 			this->world->addBullet(bulletM, 1);
 		}

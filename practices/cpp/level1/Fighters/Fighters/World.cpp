@@ -190,13 +190,16 @@ void World::moveBullet()
 	}
 
 	for (auto &bullet : this->enemyBullets) {
-		bullet->setSpeed(ENEMY_BULLET_SPEED);
+		bullet->setBulletSpeed(ENEMY_BULLET_SPEED);
 		bullet->move();
 	}
 
 	for (auto &bullet : this->smallBossBullet) {
-		bullet->setSpeed(ENEMY_BULLET_SPEED);
+		
+		bullet->setBulletSpeed(ENEMY_BULLET_SPEED);
+		
 		bullet->move();
+
 
 	}
 
@@ -284,7 +287,7 @@ void World::EnemyShoot()
 
 bool World::killed()
 {
-	if (--(this->hero->unbeatable)>0)
+	if ((--this->hero->unbeatable)>0)
 	{
 		static bool Mark = true;
 		this->hero->set_bulletmuch(1);
@@ -299,6 +302,11 @@ bool World::killed()
 			this->hero->setTexture(RTexture::PLAYER2);
 			Mark = true;
 		}
+		return false;
+	}
+
+	if(loading)
+	{
 		return false;
 	}
 
@@ -411,6 +419,7 @@ void World::BonusFunction()
 			{
 				this->hero->setTexture(RTexture::PLAYER);
 				this->hero->set_bulletmuch(3);
+				
 			}
 			delete bonus;
 			this->bonuss.erase(bonus);
@@ -423,6 +432,7 @@ void World::BonusFunction()
 			switch (c(Game::random))
 			{
 			case 0:
+
 				this->hero->set_bulletmuch(3);
 				this->hero->setTexture(RTexture::PLAYER);
 				this->hero->set_bonusmuch(2);
@@ -439,6 +449,25 @@ void World::BonusFunction()
 			break;
 		}
 	}
+}
+
+void World::Skill()
+{
+	int x = 0;
+	
+	for (int i = 0; i<20; i++)
+	{
+		Bullet *bullet = new Bullet(RTexture::BULLET2, 1, sf::Vector2<float>(0.0, -1.0));
+		bullet->setScale(1.0f, 1.0f);
+		bullet->setPosition(x, 800);
+		this->heroBullets.insert(bullet);
+		x += 40;
+
+	}
+
+
+
+	
 }
 
 

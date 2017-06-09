@@ -47,41 +47,62 @@ void Game::MainLoop()
 	while (world->window->isOpen())
 	{
 		sf::Event event;
-		if (this->world->loading == true) {
+		if (this->world->loading) {
 
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Home)) {
-				init();
-				continue;
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
+				this->world->loading = false;
+				this->init();
+				//this->LOAD_BGM.stop();
+
+
 			}
 
+		}
+		if (gameover_mark == 1) {
+			
+
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Home)) {
+					init();
+					continue;
+				}
+			
+		}
+		else if (this->world->loading == false) {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-				if (this->world->hero->getPosition().x>0) {
+				if (this->world->hero->getPosition().x > 0) {
 					world->hero->move(sf::Vector2f(-1.0, 0.0));
 				}
 			}
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-				if (this->world->hero->getPosition().x<this->world->getTextureRect().width - 430) {
+				if (this->world->hero->getPosition().x < this->world->getTextureRect().width - 430) {
 					world->hero->move(sf::Vector2f(1.0, 0.0));
 				}
 			}
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-				if (this->world->hero->getPosition().y>0) {
+				if (this->world->hero->getPosition().y > 0) {
 					world->hero->move(sf::Vector2f(0.0, -1.0));
 				}
 			}
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-				if (this->world->hero->getPosition().y<800) {
+				if (this->world->hero->getPosition().y < 800) {
 					world->hero->move(sf::Vector2f(0.0, 1.0));
 				}
 			}
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+
 				this->world->hero->shoot(this->world->hero->get_bulletmuch());
 			}
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+
+				this->world->Skill();
+			}
 		}
+		
 
 		while (world->window->pollEvent(event)) {
 

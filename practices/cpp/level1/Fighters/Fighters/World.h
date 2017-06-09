@@ -25,6 +25,7 @@ public:
 	void ClearAll(bool mark);
 	void AddBonus(float x,float y);
 	void BonusFunction();
+	void Skill();
 	int bonusState = 0;
 	sf::RenderWindow *window;
 	Hero *hero;

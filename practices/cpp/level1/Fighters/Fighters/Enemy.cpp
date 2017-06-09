@@ -97,7 +97,7 @@ void Enemy::AddEnemyBullet()
 {
 
 	static int i = 0;
-	if (i>50)
+	if (i>10)
 	{
 		if (this->bossState== 0) 
 		{
@@ -110,11 +110,14 @@ void Enemy::AddEnemyBullet()
 		if (this->bossState== 1)
 		{
 			
-			Bullet *bullet1 = new Bullet(RTexture::BOSSBULLET, 1);
-			bullet1->setPosition(this->getPosition().x + 30, this->getPosition().y);
-			this->world->addBullet(bullet1, 3);
-			
-			
+			for (int i = 0; i <= 2; i++) {
+
+				Bullet *bullet1 = new Bullet(RTexture::BOSSBULLET, 1);
+				bullet1->setPosition(this->getPosition().x + 30, this->getPosition().y);
+				this->world->addBullet(bullet1, 3);
+	
+
+			}
 		}
 		i = 0;
 	}
