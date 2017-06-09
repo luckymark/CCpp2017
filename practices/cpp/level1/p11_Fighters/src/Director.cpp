@@ -4,6 +4,7 @@
 #include "Room.h"
 #include "Enemy.h"
 #include "Background.h"
+#include "Dialog.h"
 #include <iostream>
 using namespace std;
 
@@ -113,10 +114,7 @@ void Director::new_stuff(int x,sf::Vector2f request_place){
 				 break;
 		case type_Background: tmp = new Background(sample_type[x], sample[x], request_place, this);
 				      break;
-		case 6: //tmp = new Object(sample_type[x], sample[x], request_place);
-				      break;
-		case 7: //tmp = new Boss(sample_type[x], sample[x], request_place);
-				      break;
+		case type_Dialog: tmp = new Dialog(sample_type[x], sample[x], request_place, this);
 	}
 	if(tmp != NULL) 
 		stuff.push_back(tmp);

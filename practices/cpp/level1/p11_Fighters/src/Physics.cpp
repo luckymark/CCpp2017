@@ -159,11 +159,15 @@ void collision(Physics &p1, Physics &p2){
 	t2 /= td;
 
 	sf::Vector2f tv1 = t1 * dir;
-       	tv1 = p1.speed - tv1;
-       	p1.speed -= tv1;
 
 	sf::Vector2f tv2 = t2 * dir;
+
+	if(tv1.x*dir.x+tv1.y*dir.y > 0 && tv2.x*dir.x+tv2.y*dir.y < 0) return; //防止没有碰撞的时候碰到了
+
+       	tv1 = p1.speed - tv1;
        	tv2 = p2.speed - tv2; 
+
+       	p1.speed -= tv1;
 	p2.speed -= tv2;
 	
 	sf::Vector2f v1 = ((p1.mass - p2.mass) * p1.speed + 2 * p2.mass * p2.speed)/(p1.mass + p2.mass);

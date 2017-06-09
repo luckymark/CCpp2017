@@ -41,21 +41,29 @@ void Character::be_impacted_from(Item *other){
 		}
 	}else if( other -> get_kind() == type_Bullet){ //Bullet
 		if(animation[cur_animation].is_affect() && item_kind == type_Enemy){
-			physics.add_motivation(other -> physics.get_motivation());
-			other -> dead();
+			collision(physics, other -> physics);
+			if(!(item_kind == type_Player && (cur_animation == 5 || cur_animation == 6))){//
+				other -> dead();
+			}
 		}
 	}else if(other -> get_kind() == type_Enemy_bullet){ //Enemy_bullet
 		if(animation[cur_animation].is_affect() && item_kind == type_Player){
-			physics.add_motivation(other -> physics.get_motivation());
-			other -> dead();
+			collision(physics, other -> physics);
+			if(!(item_kind == type_Player && (cur_animation == 5 || cur_animation == 6))){//
+				other -> dead();
+			}
+		}
+	}else if(other -> get_kind() == type_Enemy){
+		if(animation[cur_animation].is_affect() && item_kind == type_Player){
+			collision(physics, other -> physics);
 		}
 	}
 
 	//skill 效果
-	if(item_kind == type_Player){
+	/*if(item_kind == type_Player){
 		if(cur_animation == 5 || cur_animation == 6){
 		}
-	}
+	}*/
 }
 
 void Character::set_shot_direction(sf::Vector2f pos){

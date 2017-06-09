@@ -38,6 +38,7 @@ class Animation{
 		int is_playing();				
 		void initlize();				
 		void next_frame(sf::Time dt);			
+		void next_frame();
 								
 
 		void begin_cur_display(sf::RenderWindow *win);		
@@ -54,6 +55,7 @@ class Animation{
 		void set_play_flag(int f);			
 		void set_sound_flag(int f);			
 		void set_length(int key, sf::Vector2f len);
+		void set_cur_frame(int x);
 
 		int is_affect();
 

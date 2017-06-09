@@ -18,7 +18,7 @@ Player::Player(int kind, string setting, sf::Vector2f pos, Director *world)
 		set_skill();
 	}
 void Player::Action(sf::Time dt, sf::Vector2f mouse_position){
-	if(bullte_clock.getElapsedTime().asSeconds() > 0.3 && sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+	if(bullte_clock.getElapsedTime().asSeconds() > 0.05 && sf::Mouse::isButtonPressed(sf::Mouse::Left)){
 		fire(dt,mouse_position - physics.get_position());
 		bullte_clock.restart();
 	}

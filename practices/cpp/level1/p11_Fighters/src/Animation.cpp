@@ -129,3 +129,16 @@ int Animation::stand_at(Animation *other){ //自己在别人的哪个区域
 int Animation::is_affect(){
 	return affect_flag;
 }
+
+void Animation::set_cur_frame(int x){
+	cur_frame = x;
+}
+
+void Animation::next_frame(){
+	cur_frame++;
+	if(cur_frame == sequence.size()){
+		cur_frame = 0;
+		play_flag = 0;
+		initlize();
+	}
+}
