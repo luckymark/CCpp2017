@@ -63,6 +63,7 @@ void Director::main_loop(){
 			}
 		}
 		window.clear(sf::Color(100,100,100));
+		bgm.next();
 		world_loop();
 		clock.restart();
 		for(int i = 0; i < stuff.size(); i++){

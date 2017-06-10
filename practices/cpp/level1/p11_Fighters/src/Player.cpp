@@ -15,6 +15,7 @@ void Player::special1(sf::Time dt, sf::Vector2f mouse_position){
 			cerr << "get memery fail" << endl;
 			exit(0);
 		}
+		tmp -> animation[0].set_sound_flag(0);
 		tmp -> physics.add_motivation(physics.get_speed() * (tmp -> physics.get_mass()));
 		tmp -> physics.add_force(sf::Vector2f(cos(cur),sin(cur)) * float(3500));
 		world -> stuff.push_back(tmp);

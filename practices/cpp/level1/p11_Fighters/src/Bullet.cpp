@@ -48,10 +48,10 @@ void Bullet::be_impacted_from(Item *other){
 		}
 	}
 	/*else if(other -> get_kind() == type_Enemy){ // enemy
-		if(animation[cur_animation].is_affect()){
-			dead();
-		}
-	}*/
+	  if(animation[cur_animation].is_affect()){
+	  dead();
+	  }
+	  }*/
 }
 
 void Bullet::Action(sf::Time dt, sf::Vector2f pos){

@@ -26,7 +26,6 @@ class Director;
 class Item{
 	protected:
 		int 		item_kind;		//use to define the kind of item
-		Animation	*animation;		//store the animations
 		int 		animation_num;		//store the num of animations
 		int 		cur_animation; 		//store the current animation
 		Director	*world;
@@ -39,6 +38,7 @@ class Item{
 
 		LifeBar		life_bar;
 	public:
+		Animation	*animation;		//store the animations
 		Physics		physics;
 
 		Item();

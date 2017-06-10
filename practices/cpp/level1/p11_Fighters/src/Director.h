@@ -2,6 +2,7 @@
 #define DIRECTOR_H_
 
 #include "Item.h"
+#include "BGM.h"
 
 #include <vector>
 #include <string>
@@ -18,6 +19,7 @@ class Director{
 		vector<int>		sample_type;
 		sf::Vector2f		player_position;
 		int 			player_key;
+		BGM			bgm;
 
 		Director();
 		void set_world(string setting);
