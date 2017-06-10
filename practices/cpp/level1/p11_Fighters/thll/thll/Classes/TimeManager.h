@@ -10,7 +10,7 @@ public:
 
 	int getTime();
 
-	bool JudgeTimeArray(std::vector<long long> times);
+	bool JudgeTimeArray(std::vector<long double> times);
 
 	bool JudgeTime(long long time);
 

@@ -16,11 +16,11 @@ int TimeManager::getTime()
 	return this->tot_time;
 }
 
-bool TimeManager::JudgeTimeArray(std::vector<long long> times)
+bool TimeManager::JudgeTimeArray(std::vector<long double> times)
 {
 	for (int i = 0; i < times.size(); i++)
 	{
-		if (getTime()  == times[i] * 60)
+		if (getTime()  == (long long)(times[i] * 60))
 		{
 			return true;
 		}

@@ -42,6 +42,7 @@ void BulletLayer::bulletMove()
 {
 	auto winSize = Director::getInstance()->getWinSize();
 	auto plane = SelfPlane::sharedPlane;
+	auto enemyList = EnemyPlaneLayer::sharedEnemy->getEnemyList();
 
 	for (int i = 0; i < bulletList.size(); i++)
 	{
@@ -65,8 +66,31 @@ void BulletLayer::bulletMove()
 				{
 					bullet->setPositionX(bullet->getPositionX() + sqrt(PLANE_BULLET_SPEED));
 					bullet->setPositionY(bullet->getPositionY() + PLANE_BULLET_SPEED);
+				}	
+			}
+			else if (bullet->getType() == 4)
+			{
+				/*float minY = 100000.0, minAbsX = 1000000.0; 
+				Vec2 minVec;
+				for (int i = 0; i < enemyList.size(); i++)
+				{
+					auto enemy = enemyList.at(i);
+					if (enemy->getPositionY() < minY && enemy->getPositionY() > plane->getPositionY() && minAbsX > fabs(plane->getPositionX() - enemy->getPositionX()))
+					{
+						minY = enemy->getPositionY();
+						minAbsX = fabs(plane->getPositionX() - enemy->getPositionX());
+						minVec = enemy->getPosition();
+					}
 				}
-				
+
+				bullet->setPositionY(bullet->getPositionY() + 5);
+				Vec2 newVec = minVec - bullet->getPosition();
+				float theta = atan(newVec.y / newVec.x);
+
+				//bullet->setRotation(bullet->getRotation() + theta);
+
+				bullet->setPosition(bullet->getPosition() + Vec2(cos(theta) * 5, sin(theta) * 5));*/
+
 			}
 			else
 			{
@@ -194,6 +218,22 @@ void BulletLayer::bulletCreate()
 		break;
 	}
 
+}
+
+void BulletLayer::autoBulletCreate()
+{
+	auto plane = SelfPlane::sharedPlane;
+
+	if (plane->getLevel() >= 3)
+	{
+		auto bullet = Bullet::create("bullet.png");
+		bullet->setPosition(plane->getPosition());
+		bullet->setType(4);
+		bullet->setTag(PLANE_BULLET_TAG);
+
+		this->addChild(bullet);
+		this->bulletList.pushBack(bullet);
+	}
 }
 
 void BulletLayer::enemyBulletCreate()

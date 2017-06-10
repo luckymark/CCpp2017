@@ -2,6 +2,7 @@
 #define _BULLET_H_
 
 #include "cocos2d.h"
+#include <math.h>
 
 class Bullet :public cocos2d::Sprite
 {

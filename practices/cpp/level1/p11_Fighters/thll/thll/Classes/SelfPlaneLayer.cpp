@@ -166,6 +166,11 @@ void SelfPlaneLayer::startShooting()
 	if (isKeyPressed(key_z))
 	{
 		bulletLayer->bulletCreate();
+		/*if (EnemyPlaneLayer::sharedEnemy->getEnemyList().size() != 0)
+		{
+			bulletLayer->autoBulletCreate();
+		}*/
+		
 	}
 }
 Node* SelfPlaneLayer::getPlane()

@@ -49,7 +49,7 @@ private:
 
 	int enemy_move_count = 0;
 
-	int plane_bullet_create_count = 0;
+	int plane_auto_bullet_create_count = 0;
 
 	int enemy_bullet_create_count = 0;
 
