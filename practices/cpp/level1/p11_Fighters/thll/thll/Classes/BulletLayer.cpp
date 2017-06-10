@@ -2,14 +2,14 @@
 
 USING_NS_CC;
 
-BulletLayer* BulletLayer::sharedBullet = nullptr;
+BulletLayer* BulletLayer::sharedBulletLayer = nullptr;
 
 BulletLayer* BulletLayer::create()
 {
 	BulletLayer *pRet = new BulletLayer();
 	if (pRet && pRet->init()) {
 		pRet->autorelease();
-		sharedBullet = pRet;
+		sharedBulletLayer = pRet;
 		return pRet;
 	}
 	else {
@@ -41,6 +41,8 @@ bool BulletLayer::init()
 void BulletLayer::bulletMove()
 {
 	auto winSize = Director::getInstance()->getWinSize();
+	auto plane = SelfPlane::sharedPlane;
+
 	for (int i = 0; i < bulletList.size(); i++)
 	{
 		auto bullet = bulletList.at(i);
@@ -48,7 +50,29 @@ void BulletLayer::bulletMove()
 
 		if (tag == PLANE_BULLET_TAG)
 		{
-			bullet->setPositionY(bullet->getPositionY() + PLANE_BULLET_SPEED);
+			if (bullet->getType() == 3)
+			{
+				if (bullet->getDirection() == 0)
+				{
+					bullet->setPositionX(bullet->getPositionX() - sqrt(PLANE_BULLET_SPEED));
+					bullet->setPositionY(bullet->getPositionY() + PLANE_BULLET_SPEED);
+				}
+				else if (bullet->getDirection() == 1)
+				{
+					bullet->setPositionY(bullet->getPositionY() + PLANE_BULLET_SPEED);
+				}
+				else if (bullet->getDirection() == 2)
+				{
+					bullet->setPositionX(bullet->getPositionX() + sqrt(PLANE_BULLET_SPEED));
+					bullet->setPositionY(bullet->getPositionY() + PLANE_BULLET_SPEED);
+				}
+				
+			}
+			else
+			{
+				bullet->setPositionY(bullet->getPositionY() + PLANE_BULLET_SPEED);
+			}		
+			
 			if (bullet->getPositionY() > winSize.height)
 			{
 				bulletList.eraseObject(bullet);
@@ -72,23 +96,104 @@ void BulletLayer::bulletMove()
 
 void BulletLayer::bulletCreate()
 {
-
+	Size visibleSize = Director::getInstance()->getVisibleSize();
 	auto key_z = EventKeyboard::KeyCode::KEY_Z;
-	auto plane = SelfPlaneLayer::sharedPlaneLayer->getChildByTag(PLANE_TAG);
+	auto plane = (SelfPlane* )SelfPlaneLayer::sharedPlaneLayer->getChildByTag(PLANE_TAG);
 
-	auto bullet1 = Sprite::create("bullet.png");
-	auto bullet2 = Sprite::create("bullet.png");
+	int level = plane->getLevel();
+	switch (level)
+	{
+	case 1:
+	{
+		auto bullet1 = Bullet::create("bullet.png");
 
-	bullet1->setPosition(plane->getPositionX() - 5, plane->getPositionY() + 30);
-	bullet1->setTag(PLANE_BULLET_TAG);
+		bullet1->setPosition(plane->getPositionX(), plane->getPositionY() + 30);
+		bullet1->setTag(PLANE_BULLET_TAG);
+		bullet1->setType(1);
 
-	bullet2->setPosition(plane->getPositionX() + 5, plane->getPositionY() + 30);
-	bullet2->setTag(PLANE_BULLET_TAG);
+		this->addChild(bullet1);
+		bulletList.pushBack(bullet1);
+		break;
+	}
+	case 2:
+	{
+		auto bullet1 = Bullet::create("bullet.png");
+		auto bullet2 = Bullet::create("bullet.png");
 
-	this->addChild(bullet1);
-	bulletList.pushBack(bullet1);
-	this->addChild(bullet2);
-	bulletList.pushBack(bullet2);
+		bullet1->setPosition(plane->getPositionX() - 5, plane->getPositionY() + 30);
+		bullet1->setTag(PLANE_BULLET_TAG);
+		bullet1->setType(2);
+
+		bullet2->setPosition(plane->getPositionX() + 5, plane->getPositionY() + 30);
+		bullet2->setTag(PLANE_BULLET_TAG);
+		bullet2->setType(2);
+
+		this->addChild(bullet1);
+		bulletList.pushBack(bullet1);
+		this->addChild(bullet2);
+		bulletList.pushBack(bullet2);
+		break;
+	}
+	case 3:
+	{
+		auto bullet1 = Bullet::create("bullet.png");
+		auto bullet2 = Bullet::create("bullet.png");
+		auto bullet3 = Bullet::create("bullet.png");
+
+		bullet1->setPosition(plane->getPositionX() - 10, plane->getPositionY() + 30);
+		bullet1->setTag(PLANE_BULLET_TAG);
+		bullet1->setRotation(-30);
+		bullet1->setType(3);
+		bullet1->setDirection(0);
+
+		bullet2->setPosition(plane->getPositionX() + 10, plane->getPositionY() + 30);
+		bullet2->setTag(PLANE_BULLET_TAG);
+		bullet2->setRotation(30);
+		bullet2->setType(3);
+		bullet2->setDirection(2);
+
+		bullet3->setPosition(plane->getPositionX(), plane->getPositionY() + 30);
+		bullet3->setTag(PLANE_BULLET_TAG);
+		bullet3->setType(3);
+		bullet3->setDirection(1);
+
+		this->addChild(bullet1);
+		bulletList.pushBack(bullet1);
+
+		this->addChild(bullet2);
+		bulletList.pushBack(bullet2);
+
+		this->addChild(bullet3);
+		bulletList.pushBack(bullet3);
+
+		//float height = bullet1->getContentSize().height;
+		//float width = bullet1->getContentSize().width;
+
+		//calculate fly time 
+		/*float flyVelocity = PLANE_BULLET_SPEED;
+		float flyLen = visibleSize.width + width;
+		float realFlyDuration = flyLen / flyVelocity;
+
+		auto actionMove1 = MoveBy::create(realFlyDuration, Point(0, visibleSize.height + height));
+		auto actionMove2 = MoveBy::create(realFlyDuration, Point(0, visibleSize.height + height));
+		auto actionMove3 = MoveBy::create(realFlyDuration, Point(0, visibleSize.height + height));
+
+		auto actionDone = CallFuncN::create(CC_CALLBACK_1(BulletLayer::bulletRemoveFromActin, this));
+
+		Sequence* sequence1 = Sequence::create(actionMove1, actionDone, NULL);
+		Sequence* sequence2 = Sequence::create(actionMove2, actionDone, NULL);
+		Sequence* sequence3 = Sequence::create(actionMove3, actionDone, NULL);
+
+		bullet1->runAction(sequence1);
+		bullet2->runAction(sequence2);
+		bullet3->runAction(sequence3);*/
+
+		break;
+	}
+	default:
+		break;
+	}
+
 }
 
 void BulletLayer::enemyBulletCreate()
@@ -99,7 +204,7 @@ void BulletLayer::enemyBulletCreate()
 
 	for (int i = 0; i < enemyList.size(); i++)
 	{
-		auto bullet = Sprite::createWithSpriteFrameName("W2.png");
+		auto bullet = Bullet::createWithSpriteFrameName("W2.png");
 
 		auto enemy = enemyList.at(i);
 
@@ -111,13 +216,23 @@ void BulletLayer::enemyBulletCreate()
 	}
 }
 
-Vector<Sprite* > BulletLayer::getBulletList()
+Vector<Bullet* > BulletLayer::getBulletList()
 {
 	return this->bulletList;
 }
 
-void BulletLayer::bulletRemove(Sprite* sprite)
+void BulletLayer::bulletRemove(Bullet* sprite)
 {
 	sprite->removeFromParent();
 	this->bulletList.eraseObject(sprite);
+}
+
+void BulletLayer::bulletRemoveFromActin(Node * pNode)
+{
+	if (NULL == pNode) {
+		return;
+	}
+	Bullet* plane = (Bullet*)pNode;
+	this->bulletRemove(plane);
+	this->removeChild(plane, true);
 }

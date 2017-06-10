@@ -8,6 +8,7 @@
 #include "cocos2d.h"
 #include "SelfPlaneLayer.h"
 #include "EnemyPlaneLayer.h"
+#include "Bullet.h"
 
 class BulletLayer :public cocos2d::Layer
 {
@@ -24,13 +25,15 @@ public:
 
 	void enemyBulletCreate();
 
-	void bulletRemove(cocos2d::Sprite* sprite);
+	void bulletRemove(Bullet* sprite);
 
-	static BulletLayer* sharedBullet;
+	void bulletRemoveFromActin(Node * pNode);
 
-	cocos2d::Vector<cocos2d::Sprite* > getBulletList();
+	static BulletLayer* sharedBulletLayer;
+
+	cocos2d::Vector<Bullet* > getBulletList();
 private:
 	
-	cocos2d::Vector<cocos2d::Sprite* > bulletList;
+	cocos2d::Vector<Bullet* > bulletList;
 };
 #endif // !_BULLET_LAYER_H_

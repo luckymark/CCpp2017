@@ -4,6 +4,9 @@
 #define STATUS_SURVIVAL 0
 #define STATUS_DEAD 1
 #define STATUS_NO_ATTCK 2
+#define PLANE_LEVEL_1_SCORE 0
+#define PLANE_LEVEL_2_SCORE 9
+#define PLANE_LEVEL_3_SCORE 15
 
 #include "cocos2d.h"
 
@@ -36,7 +39,16 @@ public:
 
 	int getStatus(long time);
 
+	int getLevel();
+
+	void levelUp();
+
+	void setLevel(int level);
+
 private:
+
+	int level = 1;
+
 	int status = 0;
 
 	int life = 3;

@@ -153,6 +153,70 @@ void EnemyPlaneLayer::enemyCreate(int progress)
 		Sequence* sequence = Sequence::create(spawn, actionDone, NULL);
 		enemy->runAction(sequence);
 	}
+	else if (progress == 4)
+	{
+		//left enemy 
+		auto enemy1 = EnemyPlane::create("enemy2.png");
+		auto enemy2 = EnemyPlane::create("enemy2.png");
+		auto enemy3 = EnemyPlane::create("enemy2.png");
+		//right enemy 
+		auto enemy4 = EnemyPlane::create("enemy2.png");
+		auto enemy5 = EnemyPlane::create("enemy2.png");
+		auto enemy6 = EnemyPlane::create("enemy2.png");
+
+		float height = enemy1->getContentSize().height;
+		float width = enemy1->getContentSize().width;
+
+		enemy1->setPosition(Vec2(-width / 2, visibleSize.height - height / 2 - 10));
+		enemy2->setPosition(Vec2(-width / 2, enemy1->getPosition().y - 2 * height - 10));
+		enemy3->setPosition(Vec2(-width / 2, enemy2->getPosition().y - 2 * height - 10));
+
+		enemy4->setPosition(Vec2(visibleSize.width + width / 2, enemy1->getPosition().y - height - 10));
+		enemy5->setPosition(Vec2(visibleSize.width + width / 2, enemy4->getPosition().y - 2 * height - 10));
+		enemy6->setPosition(Vec2(visibleSize.width + width / 2, enemy5->getPosition().y - 2 * height - 10));
+ 
+		enemy1->setTag(ENEMY_TYPE_2_TAG);
+		enemy2->setTag(ENEMY_TYPE_2_TAG);
+		enemy3->setTag(ENEMY_TYPE_2_TAG);
+		enemy4->setTag(ENEMY_TYPE_2_TAG);
+		enemy5->setTag(ENEMY_TYPE_2_TAG);
+
+		this->enemyList.pushBack(enemy1);
+		this->enemyList.pushBack(enemy2);
+		this->enemyList.pushBack(enemy3);
+		this->enemyList.pushBack(enemy4);
+		this->enemyList.pushBack(enemy5);
+
+		this->addChild(enemy1);
+		this->addChild(enemy2);
+		this->addChild(enemy3);
+		this->addChild(enemy4);
+		this->addChild(enemy5);
+
+
+		//calculate fly time 
+		float flyVelocity = 200;
+		float flyLen = visibleSize.width + width;
+		float realFlyDuration = flyLen / flyVelocity;
+
+
+		auto actionMove1 = MoveBy::create(realFlyDuration, Point(flyLen, 0));
+		auto actionMove2 = MoveBy::create(realFlyDuration, Point(-flyLen, 0));
+
+		auto actionDone = CallFuncN::create(CC_CALLBACK_1(EnemyPlaneLayer::enemyRemove, this));
+
+		Sequence* sequence1 = Sequence::create(actionMove1, actionDone, NULL);
+		Sequence* sequence2 = Sequence::create(actionMove1->clone(), actionDone, NULL);
+		Sequence* sequence3 = Sequence::create(actionMove1->clone(), actionDone, NULL);
+		Sequence* sequence4 = Sequence::create(actionMove2, actionDone, NULL);
+		Sequence* sequence5 = Sequence::create(actionMove2->clone(), actionDone, NULL);
+
+		enemy1->runAction(sequence1);
+		enemy2->runAction(sequence2);
+		enemy3->runAction(sequence3);
+		enemy4->runAction(sequence4);
+		enemy5->runAction(sequence5);
+	}
 
 
 
@@ -184,7 +248,7 @@ Vector<EnemyPlane* > EnemyPlaneLayer::getEnemyList()
 
 void EnemyPlaneLayer::enemyShoting()
 {
-	BulletLayer::sharedBullet->enemyBulletCreate();
+	BulletLayer::sharedBulletLayer->enemyBulletCreate();
 }
 
 void EnemyPlaneLayer::eraseEnemy(EnemyPlane* enemy)

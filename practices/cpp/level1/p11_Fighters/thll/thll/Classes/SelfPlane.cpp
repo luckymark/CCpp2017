@@ -54,6 +54,26 @@ void SelfPlane::setInitialPosition()
 void SelfPlane::addScore(int score)
 {
 	this->score += score;
+	switch (this->score)
+	{
+	case  PLANE_LEVEL_1_SCORE:
+	{
+		setLevel(1);
+		break;
+	}
+	case PLANE_LEVEL_2_SCORE:
+	{
+		setLevel(2);
+		break;
+	}
+	case PLANE_LEVEL_3_SCORE:
+	{
+		setLevel(3);
+		break;
+	}
+	default:
+		break;
+	}
 }
 
 int SelfPlane::getScore()
@@ -98,5 +118,20 @@ int SelfPlane::getStatus(long time)
 		return status;
 	}
 	
+}
+
+int SelfPlane::getLevel()
+{
+	return this->level;
+}
+
+void SelfPlane::levelUp()
+{
+	this->level++;
+}
+
+void SelfPlane::setLevel(int level)
+{
+	this->level = level;
 }
 

@@ -162,7 +162,7 @@ bool SelfPlaneLayer::isKeyPressed(EventKeyboard::KeyCode keyCode)
 void SelfPlaneLayer::startShooting()
 {
 	auto key_z = EventKeyboard::KeyCode::KEY_Z;
-	auto bulletLayer = BulletLayer::sharedBullet;
+	auto bulletLayer = BulletLayer::sharedBulletLayer;
 	if (isKeyPressed(key_z))
 	{
 		bulletLayer->bulletCreate();

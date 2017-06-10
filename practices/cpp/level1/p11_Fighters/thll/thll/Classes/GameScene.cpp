@@ -112,6 +112,11 @@ void GameScene::gameUpdate(float dt)
 		enemyLayer->enemyCreate(3);
 	}
 
+	if (TimeManager::getInstance()->JudgeTimeArray(std::vector<long long> {45, 50}))
+	{
+		enemyLayer->enemyCreate(4);
+	}
+
 	// enemy bullet
 	if (enemy_bullet_create_count % 360 == 0)
 	{
@@ -137,7 +142,7 @@ void GameScene::gameUpdate(float dt)
 
 void GameScene::collisionJudge()
 {
-	Vector<Sprite* > bulletList = bulletLayer->getBulletList();
+	Vector<Bullet* > bulletList = bulletLayer->getBulletList();
 	Vector<EnemyPlane* > enemyList = enemyLayer->getEnemyList();
 	auto plane = SelfPlane::sharedPlane;
 	auto system = ParticleExplosion::create();
