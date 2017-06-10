@@ -30,6 +30,7 @@ void World::Refresh() {
 	this->window->clear();
 	this->window->draw(*this);
 	this->window->draw(*(this->hero));
+
 	for (auto enemy = this->smallBoss.begin(); enemy != (this->smallBoss.end());)
 	{
 		auto temp = enemy;
@@ -141,8 +142,11 @@ void World::Refresh() {
 		if (temp == enemy) { ++enemy; }
 
 	}
-
-
+	
+	/*sf::RectangleShape rectangle(sf::Vector2f((this->hero->GetBlood()) * 2.0, 40));
+	rectangle.setPosition(0, 50);
+	rectangle.setFillColor(sf::Color::Red);
+	this->window->draw(rectangle);*/
 	for (auto &sprite : this->heroBullets)
 	{
 		this->window->draw(*sprite);
@@ -152,6 +156,7 @@ void World::Refresh() {
 	{
 		this->window->draw(*sprite);
 	}
+
 
 	for (auto &sprite : this->enemyBullets)
 	{
@@ -180,6 +185,7 @@ void World::addBullet(Bullet *bullet, int mark)
 		this->smallBossBullet.insert(bullet);
 		
 		break;
+	
 	}
 }
 
@@ -194,14 +200,6 @@ void World::moveBullet()
 		bullet->move();
 	}
 
-	for (auto &bullet : this->smallBossBullet) {
-		
-		bullet->setBulletSpeed(ENEMY_BULLET_SPEED);
-		
-		bullet->move();
-
-
-	}
 
 }
 
@@ -266,6 +264,7 @@ void World::addEnemy()
 		i = 0;
 	}
 	else { i++; }
+	
 
 }
 
@@ -275,6 +274,7 @@ void World::EnemyShoot()
 	{
 		(*enemy)->Fire();
 		enemy++;
+		
 	}
 
 	for (auto enemy = this->smallBoss.begin(); enemy != this->smallBoss.end();)
@@ -287,24 +287,27 @@ void World::EnemyShoot()
 
 bool World::killed()
 {
-	if ((--this->hero->unbeatable)>0)
-	{
-		static bool Mark = true;
-		this->hero->set_bulletmuch(1);
-		this->hero->set_bonusmuch(0);
-		if (Mark)
+	if (this->hero->blood < 0) {
+		
+		if ((--this->hero->unbeatable) > 0)
 		{
-			this->hero->setTexture(RTexture::PLAYER1);
-			Mark = false;
+			static bool Mark = true;
+			this->hero->set_bulletmuch(1);
+			this->hero->set_bonusmuch(0);
+			if (Mark)
+			{
+				this->hero->setTexture(RTexture::PLAYER1);
+				Mark = false;
+			}
+			else
+			{
+				this->hero->setTexture(RTexture::PLAYER2);
+				Mark = true;
+			}
+			return false;
 		}
-		else
-		{
-			this->hero->setTexture(RTexture::PLAYER2);
-			Mark = true;
-		}
-		return false;
+		this->hero->blood = 100;
 	}
-
 	if(loading)
 	{
 		return false;
@@ -314,6 +317,9 @@ bool World::killed()
 	{
 		if ((bullet)->getGlobalBounds().intersects((this->hero)->getGlobalBounds()))
 		{
+			delete bullet;
+			(this->enemyBullets).erase(bullet);
+			this->hero->blood -= 20;
 			return true;
 		}
 
@@ -323,6 +329,9 @@ bool World::killed()
 	{
 		if ((bullet)->getGlobalBounds().intersects((this->hero)->getGlobalBounds()))
 		{
+			delete bullet;
+			(this->smallBossBullet).erase(bullet);
+			this->hero->blood -= 50;
 			return true;
 		}
 
@@ -332,6 +341,7 @@ bool World::killed()
 	{
 		if ((enemy)->getGlobalBounds().intersects((this->hero)->getGlobalBounds()))
 		{
+			this->hero->blood =-1;
 			return true;
 		}
 	}
@@ -340,6 +350,7 @@ bool World::killed()
 	{
 		if ((enemy)->getGlobalBounds().intersects((this->hero)->getGlobalBounds()))
 		{
+			this->hero->blood = -2;
 			return true;
 		}
 	}
@@ -371,6 +382,7 @@ void World::ClearAll(bool mark)
 	smallBossBullet.clear();
 	enemyBullets.clear();
 	heroBullets.clear();
+	bonuss.clear();
 
 }
 
@@ -400,6 +412,15 @@ void World::BonusFunction()
 	for (auto &bonus : this->bonuss)
 	{
 		bonus->MoveRand();
+
+		if (bonus->getGlobalBounds().intersects(this->hero->getGlobalBounds()) && bonus->get_bonusstate() == 3)
+		{
+			this->hero->add_mp();
+			delete bonus;
+			this->bonuss.erase(bonus);
+			break;
+		}
+		
 		
 		if (bonus->getGlobalBounds().intersects(this->hero->getGlobalBounds())&&bonus->get_bonusstate() == 0)
 		{
@@ -428,7 +449,7 @@ void World::BonusFunction()
 		
 		if (bonus->getGlobalBounds().intersects(this->hero->getGlobalBounds()) && bonus->get_bonusstate() == 1)
 		{
-			uniform_int_distribution<time_t> c(0, 1);
+			uniform_int_distribution<time_t> c(0, 2);
 			switch (c(Game::random))
 			{
 			case 0:
@@ -438,8 +459,10 @@ void World::BonusFunction()
 				this->hero->set_bonusmuch(2);
 				break;
 			case 1:
-				this->hero->AddLife();
+				this->hero->life++;
 				break;
+			case 2:
+				this->hero->add_mp();
 			default:
 				break;
 			}

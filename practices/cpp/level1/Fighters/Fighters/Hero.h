@@ -15,15 +15,19 @@ public:
 	void shoot(int j);
 	void AddScore(int score);
 	void AddLife();
+	int GetBlood();
 	int unbeatable = -10;
 	int life = 3;
+	int blood = 100;
+	int MP = 100;
+	void add_mp();
+	int get_mp();
 	int GetLife();
 	int GetScore();
 	void set_bulletmuch(int BulletMuch);
 	int get_bulletmuch();
 	void set_bonusmuch(int bonusmuch);
 	int get_bonusmuch();
-
 	friend class World;
 protected:
 
@@ -32,6 +36,7 @@ private:
 	int BulletMuch = 1;
 	int bonusmuch = 0;
 	sf::Texture texture=RTexture::PLAYER2 ;
+
 };
 
 #endif // HERO_H

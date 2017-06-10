@@ -19,6 +19,7 @@ void Hero::init()
 {
 	this->life = 3;
 	this->score = 0;
+	this->blood = 100;
 	this->setPosition(340,750);
 
 }
@@ -88,9 +89,23 @@ void Hero::AddScore(int score)
 
 void Hero::AddLife()
 {
-	life++;
+	if (blood >= 100) {
+		life++;
+	}
+	else if (blood < 100) { blood+=20; }
 }
-
+int Hero::GetBlood()
+{
+	return blood;
+}
+void Hero::add_mp()
+{
+	if (MP < 100) { this->MP = MP + 10; }
+}
+int Hero::get_mp()
+{
+	return this->MP;
+}
 int Hero::GetLife()
 {
 	return this->life;
@@ -113,16 +128,19 @@ int Hero::get_bulletmuch()
 
 bool Hero::dead()
 {
-	this->BOOM.play();
-	life--;
-	sf::Sprite boom;
-	boom.setTexture(BOOMP);
-	boom.scale(1.5, 1.5);
-	boom.setPosition(this->getPosition().x, this->getPosition().y);
-	world->window->draw(boom);
-	world->window->display();
-	sf::Time s = sf::seconds(0.3f);
-	sf::sleep(s);
+	
+	if (blood < 0) {
+		this->BOOM.play();
+		life--;
+		sf::Sprite boom;
+		boom.setTexture(BOOMP);
+		boom.scale(1.5, 1.5);
+		boom.setPosition(this->getPosition().x, this->getPosition().y);
+		world->window->draw(boom);
+		world->window->display();
+		sf::Time s = sf::seconds(0.3f);
+		sf::sleep(s);
+	}
 	return life == 0;
 }
 

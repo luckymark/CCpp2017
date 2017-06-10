@@ -40,8 +40,9 @@ void Action::move() {
 
 void Action::bossBulletMove(int i)
 {
-	double dx = cos((2*i*Pi)/8);
-	double dy = sin((2*i*Pi)/8);
+	
+	double dx = cos((2*i*Pi)/10);
+	double dy = sin((2*i*Pi)/10);
 	sf::Vector2f temp = this->direction;
 	temp.x = dx*bullet_speed;
 	temp.y = dy*bullet_speed;

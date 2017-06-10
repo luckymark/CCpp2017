@@ -19,6 +19,8 @@ sf::Texture RTexture::PLAYER2;
 sf::Texture RTexture::BULLETBONUS;
 sf::Texture RTexture::RANDBONUS;
 sf::Texture RTexture::PLAYER3;
+sf::Texture RTexture::ENERGY;
+sf::Texture RTexture::PROTECT;
 RTexture::RTexture()
 {
 	//ctor
@@ -31,7 +33,7 @@ RTexture::~RTexture()
 
 void RTexture::load()
 {
-	BOSS.loadFromFile("resource/image/BOSS.png");
+	BOSS.loadFromFile("resource/image/enemy1.png");
 	BOSS1.loadFromFile("resource/image/boss1.png");
 	BOSSBULLET.loadFromFile("resource/image/bossbullet.png");
 	BOSSBULLET1.loadFromFile("resource/image/bossbullet1.png");
@@ -50,4 +52,6 @@ void RTexture::load()
 	LIFE.loadFromFile("resource/image/life.png");
 	FONT.loadFromFile("resource/font/font.ttf");
 	PLAYER3.loadFromFile("resource/image/hero2.png");
+	PROTECT.loadFromFile("resource/image/protect.png");
+	ENERGY.loadFromFile("resource/image/ENERGY.png");
 }

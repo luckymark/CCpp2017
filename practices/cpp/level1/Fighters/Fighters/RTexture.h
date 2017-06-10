@@ -26,6 +26,8 @@ public:
 	static sf::Texture BULLETBONUS;
 	static sf::Texture RANDBONUS;
 	static sf::Texture PLAYER3;
+	static sf::Texture ENERGY;
+	static sf::Texture PROTECT;
 	static sf::Font FONT;
 	static void load();
 

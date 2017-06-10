@@ -5,7 +5,7 @@
 
 Bonus::Bonus(float x,float y)
 {
-	uniform_int_distribution<time_t> b(0,2);
+	uniform_int_distribution<time_t> b(0,3);
 	switch (b(Game::random))
 	{
 	case 0:
@@ -20,6 +20,10 @@ Bonus::Bonus(float x,float y)
 	case 2:
 		texture = &RTexture::BULLETBONUS;
 		set_bonusstate(2);
+		break;
+	case 3:
+		texture = &RTexture::ENERGY;
+		set_bonusstate(3);
 		break;
 	}
 	this->setPosition(x, y);

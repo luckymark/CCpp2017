@@ -61,7 +61,7 @@ void Game::MainLoop()
 		if (gameover_mark == 1) {
 			
 
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Home)) {
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
 					init();
 					continue;
 				}
@@ -70,12 +70,14 @@ void Game::MainLoop()
 		else if (this->world->loading == false) {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 				if (this->world->hero->getPosition().x > 0) {
+					
 					world->hero->move(sf::Vector2f(-1.0, 0.0));
 				}
 			}
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 				if (this->world->hero->getPosition().x < this->world->getTextureRect().width - 430) {
+					
 					world->hero->move(sf::Vector2f(1.0, 0.0));
 				}
 			}
@@ -88,6 +90,7 @@ void Game::MainLoop()
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
 				if (this->world->hero->getPosition().y < 800) {
+					
 					world->hero->move(sf::Vector2f(0.0, 1.0));
 				}
 			}
@@ -97,9 +100,10 @@ void Game::MainLoop()
 				this->world->hero->shoot(this->world->hero->get_bulletmuch());
 			}
 
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)&&this->world->hero->MP==100) {
 
 				this->world->Skill();
+				this->world->hero->MP = 0;
 			}
 		}
 		
@@ -114,26 +118,39 @@ void Game::MainLoop()
 		}
 		if (gameover_mark == 1&&restart==0)
 		{
+			
+			
 			GameOvers(win);
 			restart = 1;
 			continue;
 		}
+		else if ((this->world->hero->GetScore()) >= 1000) {
+			win = true; 
+			GameOvers(win); 
+			restart = 1;	
+			gameover_mark = 1;	
+			world->ClearAll(true); 
+			world->window->clear(); 
+			continue;
+		
+		}
 		else if (gameover_mark == 0) {
 			if (world->killed())
 			{
+				if ((world->hero->blood) < 0) {
 
-
-				if (world->hero->dead())
-				{
-					gameover_mark = 1;
+					if (world->hero->dead())
+					{
+						gameover_mark = 1;
+						world->hero->setPosition(HERO_INIT_X, HERO_INIT_Y);
+						world->ClearAll(true);
+						world->window->clear();
+						continue;
+					}
+					this->world->hero->unbeatable = 301;
 					world->hero->setPosition(HERO_INIT_X, HERO_INIT_Y);
-					world->ClearAll(true);
-					world->window->clear();
-					continue;
+					world->ClearAll(false);
 				}
-				this->world->hero->unbeatable = 301;
-				world->hero->setPosition(HERO_INIT_X, HERO_INIT_Y);
-				world->ClearAll(false);
 			}
 
 			world->addEnemy();
@@ -142,7 +159,7 @@ void Game::MainLoop()
 			world->moveBullet();
 			world->cleanBullet();
 			world->Refresh();
-			ShowInfo();
+			if (!this->world->loading) { ShowInfo(); }
 			world->window->display();
 		}
 	}
@@ -152,11 +169,11 @@ void Game::GameOvers(bool win)
 {
 	char str[120];
 	if (win) {
-		sprintf_s(str, "Congratulations!\nYou Win!\nYour Score: %d \nPress Home To Retart!", this->world->hero->GetScore());
+		sprintf_s(str, "Congratulations!\nYou Win!\nYour Score: %d \nPress R To Retart!", this->world->hero->GetScore());
 
 	}
 	else {
-		sprintf_s(str, "Regrettable!\nYou Failed!\nYOUR Score: %d \nPress Home To Retart!", this->world->hero->GetScore());
+		sprintf_s(str, "Regrettable!\nYou Failed!\nYOUR Score: %d \nPress R To Retart!", this->world->hero->GetScore());
 	}
 
 	GameOver.setString(str);
@@ -166,6 +183,16 @@ void Game::GameOvers(bool win)
 
 void Game::ShowInfo()
 {
+	sf::RectangleShape rectangle(sf::Vector2f((this->world->hero->GetBlood()) * 2.0, 40));
+	rectangle.setPosition(0, 50);
+	rectangle.setFillColor(sf::Color::Red);
+	this->world->window->draw(rectangle);
+
+	sf::RectangleShape rectangleS(sf::Vector2f((this->world->hero->get_mp()) * 2.0, 40));
+	rectangleS.setPosition(0, 90);
+	rectangleS.setFillColor(sf::Color::Green);
+	this->world->window->draw(rectangleS);
+
 	this->life_now = world->hero->GetLife();
 	char INFO[120];
 	sprintf_s(INFO, "Score: %d                                                 Life: %d", this->world->hero->GetScore(), this->life_now);

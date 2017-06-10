@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "Hero.h"
 #include<unordered_set>
+#include<vector>
 #include "Bullet.h"
 #include "RTexture.h"
 #include "Enemy.h"
@@ -30,6 +31,8 @@ public:
 	sf::RenderWindow *window;
 	Hero *hero;
 	bool loading = true;
+
+
 protected:
 
 private:
@@ -40,6 +43,7 @@ private:
 	unordered_set<Bullet * > smallBossBullet;
 	unordered_set<Enemy * > smallBoss;
 	unordered_set<Bonus * > bonuss;
+	
 };
 
 #endif // MAINLOOP_H
