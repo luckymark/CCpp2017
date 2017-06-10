@@ -105,7 +105,7 @@ void Item::get_setting(string item_setting_name){
 	fclose(in);
 }
 
-void Item::add_force_from_skill(int key, sf::Vector2f dir,sf::Time dt){
+void Item::add_force_from_skill(int key, sf::Vector2f dir,sf::Time dt, float ratio){
 	physics.add_power_ratio(dir * skill[key].power_ratio_percentage * physics.get_max_power_ratio(),dt);
 }
 

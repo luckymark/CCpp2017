@@ -6,6 +6,7 @@
 #include "Background.h"
 #include "Dialog.h"
 #include "CG.h"
+#include "Begin.h"
 #include <iostream>
 using namespace std;
 
@@ -119,6 +120,8 @@ void Director::new_stuff(int x,sf::Vector2f request_place){
 				  break;
 		case type_CG:	tmp = new CG(sample_type[x], sample[x], request_place, this);
 				break;
+		case type_Begin: tmp = new Begin(sample_type[x], sample[x], request_place, this);
+				 break;
 	}
 	if(tmp != NULL) 
 		stuff.push_back(tmp);

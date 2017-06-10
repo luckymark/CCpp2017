@@ -17,26 +17,22 @@ void Character::be_impacted_from(Item *other){
 			int tp = animation[cur_animation].stand_at(other -> get_cur_animation());
 			int tagx = tp%3, tagy = tp/3;
 			if(tagy != 1){
-				physics.turn_motivation_y();
 				sf::Vector2f tmp_mo = physics.get_motivation();
-				tmp_mo.y *= 0.6;
-				physics.set_motivation(tmp_mo);
 				if(tagy == 0){
-					physics.add_position(sf::Vector2f(0,2));
+					if(tmp_mo.y < 0) tmp_mo.y *= float(-1);
 				}else if(tagy == 2){
-					physics.add_position(sf::Vector2f(0,-2));
+					if(tmp_mo.y > 0) tmp_mo.y *= float(-1);
 				}
+				physics.set_motivation(tmp_mo);
 			}
 			if(tagx != 1){
-				physics.turn_motivation_x();
 				sf::Vector2f tmp_mo = physics.get_motivation();
-				tmp_mo.x *= 0.6;
-				physics.set_motivation(tmp_mo);
 				if(tagx == 0){
-					physics.add_position(sf::Vector2f(2,0));
+					if(tmp_mo.x < 0) tmp_mo.x *= float(-1);
 				}else if(tagx == 2){
-					physics.add_position(sf::Vector2f(-2,0));
+					if(tmp_mo.x > 0) tmp_mo.x *= float(-1);
 				}
+				physics.set_motivation(tmp_mo);
 			}
 		}
 	}else if( other -> get_kind() == type_Bullet){ //Bullet
@@ -80,6 +76,7 @@ void Character::use_skill(int which){
 	//if(!skill[which].is_ready()) return;
 	//skill[which].use();
 	cur_animation = which;
+	animation[cur_animation].initlize();
 	animation[cur_animation].set_play_flag(1);
 	animation[cur_animation].set_sound_flag(1);
 }

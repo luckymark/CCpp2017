@@ -69,8 +69,10 @@ int Animation::is_playing(){
 }
 
 void Animation::initlize(){
+	if(play_flag == 1) return;
 	cur_frame = 0;
 	sound.stop(); 	// reset the play position
+	cur_time.restart();
 }
 
 float length2(sf::Vector2f vec){

@@ -1,7 +1,7 @@
-main: main.cpp Animation.o Item.o Character.o Director.o Player.o Bullet.o Room.o Enemy.o Physics.o PureAnimationItem.o LifeBar.o Background.o Dialog.o CG.o MusicAnimation.o Frame.o Bag.o Prop.o Magic.o Skill.o Buff.o
+main: main.cpp Animation.o Item.o Character.o Director.o Player.o Bullet.o Room.o Enemy.o Physics.o PureAnimationItem.o LifeBar.o Background.o Dialog.o CG.o MusicAnimation.o Frame.o Bag.o Prop.o Magic.o Skill.o Buff.o Begin.o
 	clang++ main.cpp Item.o Animation.o Frame.o Character.o Director.o Player.o Bullet.o Room.o \
 		Bag.o Prop.o Magic.o Skill.o Buff.o Enemy.o Physics.o PureAnimationItem.o LifeBar.o\
-		Background.o Dialog.o CG.o MusicAnimation.o\
+		Background.o Dialog.o CG.o MusicAnimation.o Begin.o\
 		-F /Library/Frameworks -framework sfml-audio -framework sfml-window -framework sfml-graphics \
 		-framework sfml-system -framework OpenGL -framework GLUT -o main.cpp.out -g
 
@@ -31,6 +31,10 @@ Background.o: Background.cpp Background.h
 
 Dialog.o: Dialog.cpp Dialog.h
 	clang++ -I /usr/local/include Dialog.cpp -c -g
+
+
+Begin.o: Begin.cpp Begin.h
+	clang++ -I/usr/local/include Begin.cpp -c -g
 
 CG.o: CG.cpp CG.h
 	clang++ -I/usr/local/include CG.cpp -c -g

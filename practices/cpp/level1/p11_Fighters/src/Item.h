@@ -19,7 +19,7 @@ using namespace std;
 
 enum {
 	type_Player, type_Bullet, type_Room, type_Enemy, type_Bullet_hit, type_Background, 
-	type_Enemy_bullet, type_Enemy_bullet_hit, type_Dialog, type_CG
+	type_Enemy_bullet, type_Enemy_bullet_hit, type_Dialog, type_CG, type_Begin
 } item_type;
 static const int max_skill_num = 15;
 class Director;
@@ -48,7 +48,7 @@ class Item{
 		void 	set_speed(sf::Vector2f sp);
 		void 	set_direction(sf::Vector2f sp);
 		virtual void set_life_bar(string setting, sf::Vector2f pos){}
-		void 	add_force_from_skill(int key, sf::Vector2f dir, sf::Time dt);
+		void 	add_force_from_skill(int key, sf::Vector2f dir, sf::Time dt, float ratio);
 
 		int 		get_kind();
 		virtual void 	get_setting(string item_setting_name);	//use to get the animation and other setting

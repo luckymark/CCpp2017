@@ -5,7 +5,7 @@
 #include "MusicAnimation.h"
 
 class CG:public Item{
-	private:
+	protected:
 		MusicAnimation *animation;
 	public:
 		CG(int kind, string item_setting_name, sf::Vector2f pos, Director *world_);

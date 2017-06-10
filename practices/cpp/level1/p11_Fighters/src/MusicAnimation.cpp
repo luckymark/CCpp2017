@@ -14,13 +14,11 @@ void MusicAnimation::set_position(sf::Vector2f pos){
 void MusicAnimation::update_last_time_from_sound(){
 	if((long long)image_file_name.size() == 0) {
 		cerr << " zero length sequence in Animation.cpp " << endl;
-		//exit(0);
 		return;
 	}
 	total_time = sound.getDuration();
 	last_time = total_time / (long long)image_file_name.size();
-	cerr << sound.getDuration().asSeconds() << endl;
-	//last_time *= 0.5f;
+	//cerr << sound.getDuration().asSeconds() << endl;
 }
 
 void MusicAnimation::set_sound(const string &sound_file_name){
@@ -57,7 +55,6 @@ void MusicAnimation::next_frame(sf::Time dt){
 		frame_cnt = frame_num * sound.getPlayingOffset().asSeconds() / total_time.asSeconds();
 	}
 	if(cur_time.getElapsedTime() + del_time < last_time) return;
-	//cerr << (cur_time.getElapsedTime() + del_time).asSeconds() << endl;
 	del_time = cur_time.getElapsedTime() + del_time - last_time;
 	frame_cnt++;
 	if(frame_cnt >= frame_num){
@@ -68,14 +65,18 @@ void MusicAnimation::next_frame(sf::Time dt){
 		return;
 	}
 	sequence[0].set_image(image_file_name[frame_cnt]);
-
-	//cerr << cur_time.restart().asSeconds() << endl;
-	//cur_time.restart();
 	cur_time.restart();
 }
 
 void MusicAnimation::begin_cur_display(sf::RenderWindow  *win){
-	if(sound.getStatus() == 0 && sound_flag)sound.play();
+	if(sound.getStatus() == 0 && sound_flag == 0){
+		sound_flag = play_flag = 0;
+		return;
+	}
+	if(sound.getStatus() == 0 && sound_flag){
+		sound.play();
+		sound_flag = 0;
+	}
 	sequence[cur_frame].set_core_position(position);
 	if(play_flag){
 		sequence[cur_frame].display(win);

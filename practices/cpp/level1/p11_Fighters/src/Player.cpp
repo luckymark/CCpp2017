@@ -18,26 +18,26 @@ Player::Player(int kind, string setting, sf::Vector2f pos, Director *world)
 		set_skill();
 	}
 void Player::Action(sf::Time dt, sf::Vector2f mouse_position){
-	if(bullte_clock.getElapsedTime().asSeconds() > 0.05 && sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+	if(bullte_clock.getElapsedTime().asSeconds() > 0.3 && sf::Mouse::isButtonPressed(sf::Mouse::Left)){
 		fire(dt,mouse_position - physics.get_position());
 		bullte_clock.restart();
 	}
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)){
 		physics.set_self_move_ratio(0.4);
-		add_force_from_skill(0,sf::Vector2f(0,1),dt);
+		add_force_from_skill(0,sf::Vector2f(0,1),dt,1);
 		use_skill(0);
 	} else if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)){
 		physics.set_self_move_ratio(0.4);
-		add_force_from_skill(1,sf::Vector2f(0,-1),dt);
+		add_force_from_skill(1,sf::Vector2f(0,-1),dt,1);
 		use_skill(1);
 	} else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)){
 		physics.set_self_move_ratio(0.4);
-		add_force_from_skill(1,sf::Vector2f(-1,0),dt);
+		add_force_from_skill(1,sf::Vector2f(-1,0),dt,1);
 		use_skill(2);
 	} else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)){
 		physics.set_self_move_ratio(0.4);
-		add_force_from_skill(1,sf::Vector2f(1,0),dt);
+		add_force_from_skill(1,sf::Vector2f(1,0),dt,1);
 		use_skill(3);
 	} else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
 		if(skill[5].is_ready()){
@@ -54,23 +54,28 @@ void Player::Action(sf::Time dt, sf::Vector2f mouse_position){
 			skill[5].use();
 		}
 	}else if(sf::Keyboard::isKeyPressed(sf::Keyboard::E)){
-		physics.set_self_move_ratio(1.0);
+		physics.set_self_move_ratio(10.0);
 		use_skill(7);
+	}else if(sf::Keyboard::isKeyPressed(sf::Keyboard::X)){
+		physics.set_self_move_ratio(10.0);
+		use_skill(8);
 	}
 	else {
 		physics.set_self_move_ratio(1);
 		if(abs(physics.get_speed().x) < 10 && abs(physics.get_speed().y) < 10){
-			use_skill(4);
+			if(cur_animation <= 4 || cur_animation == 7){
+				use_skill(4);
+			}
 		}
 	}
 
 	next(dt);
 	if(cur_animation <= 4){
 		animation[cur_animation].set_play_flag(1);
-	}else if(cur_animation == 7){
+	} else if(cur_animation == 7){
 		animation[cur_animation].set_play_flag(1);
-	}else {
-		if(cur_animation == 5 || cur_animation == 6){
+	} else {
+		if(cur_animation == 5 || cur_animation == 6 || cur_animation == 8){
 			if(!animation[cur_animation].is_playing()){
 				use_skill(4);
 				animation[cur_animation].set_position(physics.get_position());
