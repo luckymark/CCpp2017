@@ -20,7 +20,20 @@ bool GameScene::init()
 		return false;
 	}
 
+	auto visibleOrigin = Director::getInstance()->getVisibleOrigin();
 	auto visibleSize = Director::getInstance()->getVisibleSize();
+
+	// create backgroud
+	auto bg1 = Sprite::create("background.png");
+	bg1->setPosition(Vec2(visibleOrigin.x + visibleSize.width / 2, 0));
+	bg1->setAnchorPoint(Vec2(0.5, 0));
+	bg1->setTag(BG_1_TAG); 
+	this->addChild(bg1, 0);
+	auto bg2 = Sprite::create("background.png");
+	bg2->setPosition(Vec2(visibleOrigin.x + visibleSize.width / 2, bg1->getPositionY() + bg1->getContentSize().height));
+	bg2->setAnchorPoint(Vec2(0.5, 0));
+	bg2->setTag(BG_2_TAG);
+	this->addChild(bg2, 0);
 
 	// layer instance
 	planeLayer = SelfPlaneLayer::create();
@@ -35,7 +48,7 @@ bool GameScene::init()
 	scoreLabel = LabelTTF::create();
 	scoreLabel->setColor(ccc3(143, 146, 147));
 	scoreLabel->setFontSize(30);
-	scoreLabel->setPosition(Vec2(visibleSize.width - 60, visibleSize.height - 30));
+	scoreLabel->setPosition(Vec2(visibleSize.width - 100, visibleSize.height - 30));
 	this->addChild(scoreLabel);
 
 	this->schedule(schedule_selector(GameScene::gameUpdate), GAME_UPDATE_SEC);
@@ -46,9 +59,19 @@ void GameScene::gameUpdate(float dt)
 {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 
-	if (isFirstEnter)
+	// background move
+	auto bg1 = this->getChildByTag(BG_1_TAG);
+	auto bg2 = this->getChildByTag(BG_2_TAG);
+	if (bg2->getPositionY() + bg2->getContentSize().height <= Director::getInstance()->getVisibleSize().height)
 	{
-		isFirstEnter = false;
+		bg1->setPositionY(-bg1->getContentSize().height + Director::getInstance()->getVisibleSize().height);
+	}
+	bg1->setPositionY(bg1->getPositionY() - 3);
+	bg2->setPositionY(bg1->getPositionY() + bg1->getContentSize().height);
+
+	if (is_first_enter)
+	{
+		is_first_enter = false;
 
 		// get the window picture
 
@@ -77,7 +100,7 @@ void GameScene::gameUpdate(float dt)
 	}
 
 	// Enemy
-	if (enemy_create_count % 30 == 0)
+	if (enemy_create_count % 60 == 0)
 	{
 		enemyLayer->enemyCreate();
 		enemy_create_count = 0;
@@ -112,6 +135,15 @@ void GameScene::collisionJudge()
 	auto plane = SelfPlane::sharedPlane;
 	auto system = ParticleExplosion::create();
 
+	if (plane->getStatus(getCurrentTime()) == STATUS_NO_ATTCK)
+	{
+		plane->setOpacity(150);
+	}
+	else
+	{
+		plane->setOpacity(255);
+	}
+
 	//check enemy and self
 	for (int i = 0; i < enemyList.size(); i++)
 	{
@@ -136,10 +168,12 @@ void GameScene::collisionJudge()
 			this->planeBomb(enemy_pos, enemy_tag);
 			enemyLayer->eraseEnemy(enemy);
 
-			plane->setVisible(false);
-			plane->setNullPosition();
-			//plane->runAction(Sequence::create(NULL, CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, plane)), NULL));
-			this->planeBomb(plane_pos, plane_tag);
+			if (plane->getStatus(getCurrentTime()) == STATUS_SURVIVAL)
+			{
+				plane->setDead();
+				//plane->runAction(Sequence::create(NULL, CallFunc::create(CC_CALLBACK_0(Sprite::removeFromParent, plane)), NULL));
+				this->planeBomb(plane_pos, plane_tag);
+			}
 			break;
 		}
 	}
@@ -187,9 +221,12 @@ void GameScene::collisionJudge()
 				auto plane_pos = plane->getPosition();
 
 				int plane_tag = plane->getTag();
-				plane->setVisible(false);
-				plane->setNullPosition();
-				this->planeBomb(plane_pos, plane_tag);
+
+				if (plane->getStatus(getCurrentTime()) == STATUS_SURVIVAL)
+				{
+					plane->setDead();
+					this->planeBomb(plane_pos, plane_tag);
+				}
 				break;
 			}
 		}
@@ -250,11 +287,16 @@ void GameScene::bombRemove(Node * sprite)
 		}
 		else
 		{
-			plane->lifeDecreased();
-			plane->setInitialPosition();
-			plane->setVisible(true);
+			plane->setReborn(getCurrentTime());
 		}
 	}
+}
+
+long GameScene::getCurrentTime()
+{
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	return tv.tv_sec * 1000 + tv.tv_usec / 1000;
 }
 
 void GameScene::scoreUpdate()

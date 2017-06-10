@@ -2,6 +2,8 @@
 #define _GAME_SCENE_H_
 
 #define GAME_UPDATE_SEC 1.0 / 60.0f
+#define BG_1_TAG 101
+#define BG_2_TAG 102
 
 #include "cocos2d.h"
 #include "SelfPlaneLayer.h"
@@ -39,6 +41,8 @@ private:
 
 	void bombRemove(cocos2d::Node * sprite);
 
+	long getCurrentTime();
+
 	int enemy_create_count = 0;
 
 	int enemy_move_count = 0;
@@ -47,7 +51,7 @@ private:
 
 	int enemy_bullet_create_count = 0;
 
-	bool isFirstEnter = true;
+	bool is_first_enter = true;
 };
 
 #endif

@@ -20,7 +20,7 @@ Scene* TextLayer::createScene(RenderTexture* sqr)
 
 	back_spr->setColor(Color3B::GRAY); 
 
-	scene->addChild(back_spr,1);
+	scene->addChild(back_spr,0);
 
 	return scene;
 }
@@ -77,7 +77,6 @@ void TextLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 			}
 			else
 			{
-				log("ok\n");
 				Director::sharedDirector()->popScene();
 			}
 		}
@@ -96,19 +95,22 @@ void TextLayer::onEnterTransitionDidFinish()
 	label->setColor(Color3B::WHITE);
 	label->setFontSize(36);
 	label->setPosition(Vec2(visibleSize.width / 2, 160));
-	this->addChild(label);
+	this->addChild(label,2);
 
 	labelLower = LabelTTF::create();
 	labelLower->setColor(Color3B::WHITE);
 	labelLower->setFontSize(20);
 	labelLower->setPosition(Vec2(visibleSize.width - 160, 80));
-	this->addChild(labelLower);
+	this->addChild(labelLower,2);
 
-	auto layerColor = LayerColor::create();
+	/*auto layerColor = LayerColor::create();
 	layerColor->setColor(Color3B::WHITE);
 	layerColor->setOpacity(150);
-	layerColor->setContentSize(Size(visibleSize.width, visibleSize.height / 4.0));
-	this->addChild(layerColor);
+	layerColor->setContentSize(Size(visibleSize.width, visibleSize.height / 4.0));*/
+	auto layerText = Sprite::create("text/icon/text_box.png");
+	layerText->setOpacity(200);
+	layerText->setPosition(Vec2(layerText->getContentSize().width / 2, layerText->getContentSize().height / 2));
+	this->addChild(layerText,1);
 
 	readXml("/text/text1.xml");
 

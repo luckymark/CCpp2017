@@ -65,3 +65,38 @@ void SelfPlane::setNullPosition()
 {
 	this->setPosition(Vec2(-10, -10));
 }
+
+void SelfPlane::setDead()
+{
+	this->setNullPosition();
+	this->setVisible(false);
+	this->status = STATUS_DEAD;
+}
+
+void SelfPlane::setReborn(long time)
+{
+	this->setVisible(true);
+	this->setInitialPosition();
+	this->lifeDecreased();
+	this->reborn_time = time;
+	this->status = STATUS_SURVIVAL;
+}
+
+bool SelfPlane::getIsDead()
+{
+	return this->is_dead;
+}
+
+int SelfPlane::getStatus(long time)
+{
+	if (reborn_time + 5000 > time)
+	{
+		return STATUS_NO_ATTCK;
+	}
+	else
+	{
+		return status;
+	}
+	
+}
+
