@@ -14,6 +14,7 @@ class Player: public Character{
 		//virtual void be_impacted_from(Item *other);
 		void fire(sf::Time dt, sf::Vector2f dir);
 		void set_skill();
+		void special1(sf::Time dt, sf::Vector2f pos);
 };
 
 

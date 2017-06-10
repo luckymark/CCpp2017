@@ -4,9 +4,30 @@
 #include "Director.h"
 #include <cstdlib>
 
+void Player::special1(sf::Time dt, sf::Vector2f mouse_position){
+	float pi = acos(-1);
+	float t = 2*pi/100;
+	float cur = 0;
+	for(int i = 1; i <= 100; i++){
+		Item *tmp = NULL;
+		tmp = new Bullet(world -> sample_type[type_Bullet], world -> sample[type_Bullet], mouse_position + sf::Vector2f(cos(cur),sin(cur)), world);
+		if(tmp == NULL){
+			cerr << "get memery fail" << endl;
+			exit(0);
+		}
+		tmp -> physics.add_motivation(physics.get_speed() * (tmp -> physics.get_mass()));
+		tmp -> physics.add_force(sf::Vector2f(cos(cur),sin(cur)) * float(3500));
+		world -> stuff.push_back(tmp);
+		
+		cur += t;
+	}
+}
+
 void Player::set_skill(){
 	skill[5].during_flag = 1;
 	skill[5].cooling_time = 4;
+	skill[8].during_flag = 1;
+	skill[8].cooling_time = 0;
 }
 
 Player::Player(int kind, string setting, sf::Vector2f pos, Director *world) 
@@ -57,8 +78,18 @@ void Player::Action(sf::Time dt, sf::Vector2f mouse_position){
 		physics.set_self_move_ratio(10.0);
 		use_skill(7);
 	}else if(sf::Keyboard::isKeyPressed(sf::Keyboard::X)){
+		sf::Vector2f dir = physics.make_one(mouse_position - physics.get_position());
 		physics.set_self_move_ratio(10.0);
-		use_skill(8);
+		if(skill[8].is_ready()){
+			if(dir.x >= 0){
+				animation[8].initlize();
+				use_skill(8);
+			}else {
+				animation[9].initlize();
+				use_skill(9);
+			}
+		}
+		skill[8].use();
 	}
 	else {
 		physics.set_self_move_ratio(1);
@@ -75,8 +106,11 @@ void Player::Action(sf::Time dt, sf::Vector2f mouse_position){
 	} else if(cur_animation == 7){
 		animation[cur_animation].set_play_flag(1);
 	} else {
-		if(cur_animation == 5 || cur_animation == 6 || cur_animation == 8){
+		if(cur_animation == 5 || cur_animation == 6 || cur_animation == 8 || cur_animation == 9){
 			if(!animation[cur_animation].is_playing()){
+				if(cur_animation == 8 || cur_animation == 9){
+					special1(dt,mouse_position);
+				}
 				use_skill(4);
 				animation[cur_animation].set_position(physics.get_position());
 			}
