@@ -21,5 +21,5 @@ void EnemyPlane::setDeleted(bool is)
 
 bool EnemyPlane::isDeleted()
 {
-	return this->deleted;
+	return deleted;
 }

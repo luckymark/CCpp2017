@@ -155,6 +155,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\SelfPlaneLayer.cpp" />
     <ClCompile Include="..\Classes\SelfPlane.cpp" />
     <ClCompile Include="..\Classes\TextLayer.cpp" />
+    <ClCompile Include="..\Classes\TimeManager.cpp" />
     <ClCompile Include="..\Classes\tinyxml\tinystr.cpp" />
     <ClCompile Include="..\Classes\tinyxml\tinyxml.cpp" />
     <ClCompile Include="..\Classes\tinyxml\tinyxmlerror.cpp" />
@@ -174,6 +175,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\SelfPlaneLayer.h" />
     <ClInclude Include="..\Classes\SelfPlane.h" />
     <ClInclude Include="..\Classes\TextLayer.h" />
+    <ClInclude Include="..\Classes\TimeManager.h" />
     <ClInclude Include="..\Classes\tinyxml\tinystr.h" />
     <ClInclude Include="..\Classes\tinyxml\tinyxml.h" />
     <ClInclude Include="..\Classes\WordNode.h" />

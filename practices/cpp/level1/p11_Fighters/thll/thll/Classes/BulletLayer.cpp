@@ -48,7 +48,7 @@ void BulletLayer::bulletMove()
 
 		if (tag == PLANE_BULLET_TAG)
 		{
-			bullet->setPositionY(bullet->getPositionY() + 3);
+			bullet->setPositionY(bullet->getPositionY() + PLANE_BULLET_SPEED);
 			if (bullet->getPositionY() > winSize.height)
 			{
 				bulletList.eraseObject(bullet);
@@ -76,13 +76,19 @@ void BulletLayer::bulletCreate()
 	auto key_z = EventKeyboard::KeyCode::KEY_Z;
 	auto plane = SelfPlaneLayer::sharedPlaneLayer->getChildByTag(PLANE_TAG);
 
-	auto bullet = Sprite::create("bullet.png");
+	auto bullet1 = Sprite::create("bullet.png");
+	auto bullet2 = Sprite::create("bullet.png");
 
-	bullet->setPosition(plane->getPositionX(), plane->getPositionY() + 30);
-	bullet->setTag(PLANE_BULLET_TAG);
+	bullet1->setPosition(plane->getPositionX() - 5, plane->getPositionY() + 30);
+	bullet1->setTag(PLANE_BULLET_TAG);
 
-	this->addChild(bullet);
-	bulletList.pushBack(bullet);
+	bullet2->setPosition(plane->getPositionX() + 5, plane->getPositionY() + 30);
+	bullet2->setTag(PLANE_BULLET_TAG);
+
+	this->addChild(bullet1);
+	bulletList.pushBack(bullet1);
+	this->addChild(bullet2);
+	bulletList.pushBack(bullet2);
 }
 
 void BulletLayer::enemyBulletCreate()

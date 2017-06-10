@@ -11,7 +11,9 @@
 #include "EnemyPlane.h"
 #include "BulletLayer.h"
 #include "TextLayer.h"
+#include "TimeManager.h"
 #include <map>
+#include <vector>
 
 class GameScene : public cocos2d::Layer
 {
@@ -51,7 +53,7 @@ private:
 
 	int enemy_bullet_create_count = 0;
 
-	bool is_first_enter = true;
+	bool is_first_enter = false;
 };
 
 #endif

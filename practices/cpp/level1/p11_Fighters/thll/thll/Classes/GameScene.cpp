@@ -85,6 +85,7 @@ void GameScene::gameUpdate(float dt)
 
 	}
 
+	TimeManager::getInstance()->timeIncreased();
 	enemy_create_count++;
 	enemy_move_count++;
 	plane_bullet_create_count++;
@@ -93,19 +94,25 @@ void GameScene::gameUpdate(float dt)
 	// Plane 
 	planeLayer->planeUpdate(dt);
 
-	if (plane_bullet_create_count % 5 == 0)
-	{
-		planeLayer->startShooting();
-		plane_bullet_create_count = 0;
-	}
+	planeLayer->startShooting();
 
 	// Enemy
-	if (enemy_create_count % 60 == 0)
+	if (TimeManager::getInstance()->JudgeTimeArray(std::vector<long long> {1,2,3,4,5,6,7,8,9,10}))
 	{
-		enemyLayer->enemyCreate();
-		enemy_create_count = 0;
+		enemyLayer->enemyCreate(1);
 	}
 
+	if (TimeManager::getInstance()->JudgeTimeArray(std::vector<long long> {15, 20, 25}))
+	{
+		enemyLayer->enemyCreate(2);
+	}
+
+	if (TimeManager::getInstance()->JudgeTimeArray(std::vector<long long> {30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40}))
+	{
+		enemyLayer->enemyCreate(3);
+	}
+
+	// enemy bullet
 	if (enemy_bullet_create_count % 360 == 0)
 	{
 		enemyLayer->enemyShoting();
@@ -114,7 +121,7 @@ void GameScene::gameUpdate(float dt)
 
 	if (enemy_move_count % 5 == 0)
 	{
-		enemyLayer->enemyMove();
+		//enemyLayer->enemyMove();
 		enemy_move_count = 0;
 	}
 

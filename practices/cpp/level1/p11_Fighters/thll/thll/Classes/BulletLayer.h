@@ -3,6 +3,7 @@
 
 #define PLANE_BULLET_TAG 107
 #define ENEMY_BULLET_TAG 110
+#define PLANE_BULLET_SPEED 30
 
 #include "cocos2d.h"
 #include "SelfPlaneLayer.h"

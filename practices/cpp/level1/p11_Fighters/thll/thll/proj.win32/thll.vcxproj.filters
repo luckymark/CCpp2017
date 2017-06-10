@@ -66,6 +66,7 @@
     <ClCompile Include="..\Classes\TextLayer.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\TimeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -111,6 +112,9 @@
       <Filter>src\tinyxml</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\TextLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TimeManager.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

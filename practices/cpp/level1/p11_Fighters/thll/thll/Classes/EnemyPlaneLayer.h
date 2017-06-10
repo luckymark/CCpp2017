@@ -19,9 +19,11 @@ public:
 
 	cocos2d::Vector<EnemyPlane* > getEnemyList();
 
-	void enemyCreate();
+	void enemyCreate(int progress);
 
-	void enemyMove();
+	//void enemyMove();
+
+	void enemyRemove(Node* pNode);
 
 	void enemyShoting();
 
