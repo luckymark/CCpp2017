@@ -28,6 +28,7 @@ public:
 	static sf::Texture PLAYER3;
 	static sf::Texture ENERGY;
 	static sf::Texture PROTECT;
+	static sf::Texture LOAD;
 	static sf::Font FONT;
 	static void load();
 

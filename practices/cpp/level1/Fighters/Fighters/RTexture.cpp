@@ -21,6 +21,7 @@ sf::Texture RTexture::RANDBONUS;
 sf::Texture RTexture::PLAYER3;
 sf::Texture RTexture::ENERGY;
 sf::Texture RTexture::PROTECT;
+sf::Texture RTexture::LOAD;
 RTexture::RTexture()
 {
 	//ctor
@@ -54,4 +55,5 @@ void RTexture::load()
 	PLAYER3.loadFromFile("resource/image/hero2.png");
 	PROTECT.loadFromFile("resource/image/protect.png");
 	ENERGY.loadFromFile("resource/image/ENERGY.png");
+	LOAD.loadFromFile("resource/image/Load.png");
 }

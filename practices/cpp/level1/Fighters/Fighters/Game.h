@@ -24,6 +24,7 @@ private:
 	World *world;
 	int life_now;
 	sf::Text Score;
+	sf::Text Loading;
 	sf::Text GameOver;
 	bool win = false;
 	int gameover_mark = 0;

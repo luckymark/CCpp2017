@@ -48,7 +48,8 @@ void Game::MainLoop()
 	{
 		sf::Event event;
 		if (this->world->loading) {
-
+		
+			
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Return)) {
 				this->world->loading = false;
 				this->init();
@@ -56,6 +57,8 @@ void Game::MainLoop()
 
 
 			}
+
+			
 
 		}
 		if (gameover_mark == 1) {
@@ -152,13 +155,20 @@ void Game::MainLoop()
 					world->ClearAll(false);
 				}
 			}
-
+			
 			world->addEnemy();
 			world->EnemyShoot();
 			world->BonusFunction();
 			world->moveBullet();
 			world->cleanBullet();
 			world->Refresh();
+			if (this->world->loading) {
+				sf::Sprite load;
+				load.setTexture(RTexture::LOAD);
+				this->world->window->draw(load);
+
+
+			}
 			if (!this->world->loading) { ShowInfo(); }
 			world->window->display();
 		}
