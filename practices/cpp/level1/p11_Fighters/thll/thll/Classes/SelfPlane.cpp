@@ -127,3 +127,8 @@ void SelfPlane::setLevel(int level)
 	this->level = level;
 }
 
+int SelfPlane::getLife()
+{
+	return this->life;
+}
+

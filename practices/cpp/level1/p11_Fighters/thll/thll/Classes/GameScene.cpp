@@ -48,6 +48,19 @@ bool GameScene::init()
 	bossLayer = BossLayer::create();
 	this->addChild(bossLayer);
 
+	//life count
+	String* strLife = String::createWithFormat("X%d", SelfPlane::sharedPlane->getLife());
+	lifeLabel = LabelBMFont::create(strLife->getCString(), "font/font.fnt");
+	lifeLabel->setColor(Color3B::BLACK);
+	lifeLabel->setAnchorPoint(Vec2(1, 1));
+	lifeLabel->setPosition(Vec2(visibleSize.width - 5, visibleSize.height - lifeLabel->getContentSize().height));
+	this->addChild(lifeLabel);
+
+	Sprite* s_plane = Sprite::create("ui/shoot/life.png");
+	s_plane->setAnchorPoint(Vec2(1, 1));
+	s_plane->setPosition(Vec2(visibleSize.width - lifeLabel->getContentSize().width, visibleSize.height));
+	this->addChild(s_plane);
+
 	//label
 	scoreLabel = LabelBMFont::create("0","font/font.fnt");
 	scoreLabel->setColor(Color3B::BLACK);
@@ -156,6 +169,9 @@ void GameScene::gameUpdate(float dt)
 
 	// Handle Score
 	scoreUpdate();
+
+	// Handle life label
+	lifeUpdate();
 }
 
 void GameScene::collisionJudge()
@@ -378,8 +394,12 @@ long GameScene::getCurrentTime()
 
 void GameScene::scoreUpdate()
 {
-	auto visibleSize = Director::getInstance()->getVisibleSize();
-	String* strScore = String::createWithFormat("SCORE: %d", SelfPlane::sharedPlane->getScore());
+	String* strScore = String::createWithFormat("%d", SelfPlane::sharedPlane->getScore());
 	scoreLabel->setString(strScore->_string.c_str());
-	//scoreLabel->setPosition(Vec2(vis, visibleSize.height - scoreLabel->getContentSize().height));
+}
+
+void GameScene::lifeUpdate()
+{
+	String* strLife = String::createWithFormat("X%d", SelfPlane::sharedPlane->getLife());
+	lifeLabel->setString(strLife->_string.c_str());
 }

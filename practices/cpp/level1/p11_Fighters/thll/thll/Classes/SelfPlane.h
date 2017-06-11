@@ -45,6 +45,8 @@ public:
 
 	void setLevel(int level);
 
+	int getLife();
+
 private:
 
 	int level = 1;

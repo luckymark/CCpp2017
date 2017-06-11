@@ -28,11 +28,15 @@ private:
 
 	cocos2d::LabelBMFont *scoreLabel;
 
+	cocos2d::LabelBMFont *lifeLabel;
+
 	void gameUpdate(float dt);
 
 	void collisionJudge();
 
 	void scoreUpdate();
+
+	void lifeUpdate();
 
 	SelfPlaneLayer* planeLayer;
 
