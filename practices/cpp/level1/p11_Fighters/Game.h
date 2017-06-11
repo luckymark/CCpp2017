@@ -23,52 +23,89 @@ public:
 	int S1E1();
 	int S1E2();
 	int S1E3();
-	void pushToDraw(list<FO>::iterator it);
+	int S1E4();
+	int S1E5();
+	int S1E6();
+	int S1E7();
+
+	int S1E8();
+
+	int S1E9();
+	int S1E10();
+	int S1E11();
+
+	int S1E12();
+
+	int S1E13();
+
+	void enemiesPushToDraw(list<FO>::iterator it);
+	void backEsPushToDraw(list<FO>::iterator it);
 	void frameDisplay();
 	void backgroundDisplay();
 	void playerAmmoDisplay();
 	void enemiesDisplay();
+	//void enemyBulletsPreDisplay();
 	void enemyBulletsDisplay();
 	void playerDisplay();
 	void effsDisplay();
+	void boardDisplay();
 	void enemyCollisionProcessing(list<FO>::iterator it);
 	void enemyUnderAttack(list<FO>::iterator it, list<sf::Sprite>::iterator itAmmo);
 	void enemyCrash(list<FO>::iterator it);
+	void standardSButterflyFrame(list<FO>::iterator it, int temp);
+	void standardMButterflyFrame(list<FO>::iterator it, int temp);
+
+	void setSnipe(list<FO>::iterator it, double speed, int type, int color);
+	//
 	void setRoundSnipe(list<FO>::iterator it, double speed);
+	//
+	void setMultiRoundSnipe(list<FO>::iterator it, double speed, int color);
+
+	void setGeneralMultiSnipe(list<FO>::iterator it, double speed, int type, int color, double angle);
+
+	void setRandom(list<FO>::iterator it, double speed, int type, int color, double leftBoarder, double range);
+	//
+	void setRoundRandom(list<FO>::iterator it, double speed, int color, double leftBoarder, double range);
+	//
 	void setSharpRandom(list<FO>::iterator it, double speed);
+
+	void setSharpLine(list<FO>::iterator it, double speed);
+
+	void setSharpFlower1(list<FO>::iterator it, double speed, int type, int color);
+
+	void nonSpellCard1(list<FO>::iterator it);
+	void spellCard1(list<FO>::iterator it);
+
 	void processTaps();
 	void playerInput(sf::Keyboard::Key key, bool isPressed);
 	friend bool isOutOfBoard(sf::Sprite value);//wait for updating
 	friend bool isFOOutOfBoard(FO value);//wait for updating
 	void mainProcessing();
 	bool checkCollision(sf::Sprite obj1, sf::Sprite obj2);
+	bool checkPlayerCollision();
 	/*friend DWORD WINAPI BGMPlay(LPVOID lpParameter);*/
 	~Game();
 
-/*private:
-	void checkCollision(PFITERATOR object1, PFITERATOR object2);
-	bool checkOverstep(PFITERATOR object);
-	*/
 private:
 	Game* self = this;
 	bool mIsMovingUp, mIsMovingDown, mIsMovingLeft, mIsMovingRight, mIsGrazing, mIsFire;
 	sf::RenderWindow mWindow;
 	sf::Font font;
-	sf::Text text;
-	sf::Texture loading, nowLoading, stageSelect, front00, julgePointArray, Title1, allBullets1, allBullets2;
-	sf::Texture bullets, buffetsEff, deathCircle, bg1, bgEff1, bg2, bgEff2, bg3, bgEff3, Enemy1, Enemy2;
+	sf::Text text, tempScore;
+	sf::Texture loading, nowLoading, stageSelect, front00, julgePointArray, Title1, allBullets1, allBullets2, whiteSpark;
+	sf::Texture bullets, buffetsEff, deathCircle, bg1, bgEff1, bg2, bgEff2, bg3, bgEff3, Enemy1, Enemy2, Enemy3, lifePieces, magicSquare;
 	sf::Sprite loadingUI, loadingUISub, back[6], backEff[6], front01, front02, front03, front04;
-	sf::Sprite julgePoint, playerAmmo, AmmoEff, deathEff;
+	sf::Sprite julgePoint, playerAmmo, AmmoEff, deathEff, lifeBoard;
 	sf::Music menuMusic, stage1BGM, stage2BGM, stage3BGM;
 	sf::SoundBuffer playerBulletSoundBuffer, playerBulletSoundBuffer1, enemyBulletSoundBuffer, collisionSoundBuffer, spellCardSoundBuffer, buttomSoundBuffer;
-	sf::SoundBuffer breakSoundBuffer;
-	sf::Sound playerBulletSound, playerBulletSound1, enemyBulletSound, collisionSound, spellCardSound, buttomSound;
-	sf::Sound breakSound;
+	sf::SoundBuffer breakSoundBuffer, playerDeadSoundBuffer, SCAnounceBuffer, cardGetBuffer;
+	sf::Sound playerBulletSound, playerBulletSound1, enemyBulletSound, collisionSound, spellCardSound, buttomSound, SCAnounce, cardGet;
+	sf::Sound breakSound, playerDeadSound;
 	sf::Clock clock;
 	FO player;
-	list<FO>  enemyBullets;
+	list<FO>  enemyBullets, enemyBulletsPre;
 	list<sf::Sprite> playerBullets, deathEffs;
-	list<sf::Sprite> enemies, playerBulletsEffs;
-	int remnant;
+	list<sf::Sprite> enemies, playerBulletsEffs, backgroundEffs;
+	long long remnant, score;
 };
 

@@ -10,17 +10,26 @@ void FO::crash()
 
 FO::FO()
 {
+	phase = 1;
+	bounds = 0;
 	staticFrame = 0;
 	dynamicFrame = 0;
+	width = 0;
+	height = 0;
+	score = 0;
 	damage = 1.0;
 	isSym = false;
 }
 
 FO::FO(int flag)
 {
-	
+	phase = 1;
+	bounds = 0;
 	staticFrame = 0;
 	dynamicFrame = 0;
+	width = 0;
+	height = 0;
+	score = 0;
 	damage = 1.0;
 	isSym = false;
 	
@@ -55,7 +64,7 @@ FO::FO(int flag)
 		speed = 10.0;
 		hero.setTexture(Reimu);
 		hero.setTextureRect(sf::IntRect(0, 0, width, height));
-		hero.setPosition(sf::Vector2f(400, 820));
+		hero.setPosition(sf::Vector2f(430, 820));
 		HSAmmo.setTexture(Reimu);
 		HSAmmo.setTextureRect(sf::IntRect(0, 3 * height + 0, 25, 24));
 		HSAmmo.setRotation(270);
@@ -78,6 +87,7 @@ FO::FO(int flag)
 		width = 32;
 		height = 32;
 		speed = 2;
+		score = 50;
 		//hero.setTexture(Enemy1);
 		//hero.setTextureRect(sf::IntRect(0, 64, width, height));
 		//hero.setScale(sf::Vector2f(1.5, 1.5));
@@ -87,21 +97,31 @@ FO::FO(int flag)
 		type = 3;
 		width = 48;
 		height = 32;
+		score = 200;
 		break;
 	case 4://mFairy
 		type = 4;
 		width = 48;
 		height = 48;
+		score = 1000;
 		break;
 	case 5://mButterfly
-		HealthPoint = 120;
+		HealthPoint = 100;
 		type = 5;
 		width = 64;
 		height = 64;
+		score = 1000;
 		break;
-
-}
+	case 6://Ghost
+		HealthPoint = 1340;
+		type = 6;
+		width = 32;
+		height = 32;
+		score = 10000;
+		phase = 2;
+		break;
 	}
+}
 
 /*void FO::setSButterfly(double x, double y)
 {
