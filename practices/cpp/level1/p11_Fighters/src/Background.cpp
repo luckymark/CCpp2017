@@ -5,6 +5,7 @@
 Background::Background(int kind, string item_setting_name, sf::Vector2f pos,Director *world_, int which_)
 	:Item(kind, item_setting_name, pos, world_){
 		which = which_;
+		physics.set_position(pos);
 		add_door();
 		add_enemy();
        	}

@@ -28,7 +28,7 @@ void Player::set_skill(){
 	skill[5].during_flag = 1;
 	skill[5].cooling_time = 4;
 	skill[8].during_flag = 1;
-	skill[8].cooling_time = 10;
+	//skill[8].cooling_time = 10;
 }
 
 Player::Player(int kind, string setting, sf::Vector2f pos, Director *world) 
@@ -123,7 +123,7 @@ void Player::Action(sf::Time dt, sf::Vector2f mouse_position){
 	}
 	life_bar.set_life(life.w[0],life.w[2]);
 	if(life.w[0] <= 0){
-		dead();
+		//dead();
 		return;
 	}
 }

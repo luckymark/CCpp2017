@@ -32,10 +32,13 @@ void Director::delete_stuff(Item *tmp){
 }
 
 void Director::world_loop(){
+	update_enemy_exist_flag();
 	for(int i = 0; i < stuff.size(); i++)
 		for(int j = i + 1; j < stuff.size(); j++){
+			if(map_change_flag == 1) break;
 			if(i < stuff.size() && j < stuff.size())
 				stuff[j] -> be_impacted_from(stuff[i]); ///
+			if(map_change_flag == 1) break;
 			if(i < stuff.size() && j < stuff.size())
 				stuff[i] -> be_impacted_from(stuff[j]); ///
 		}
@@ -78,10 +81,19 @@ void Director::deal_with_window_event(){
 void Director::basic_work(){
 	bgm.next();
 	window.clear(sf::Color(100,100,100));
-	for(int i = 0; i < stuff.size(); i++) if(stuff[i] -> get_kind() == type_Background || stuff[i] -> get_kind() == type_Background1 || stuff[i] -> get_kind() == type_Background2){
-		stuff[i] -> display();
+	for(int i = 0; i < stuff.size(); i++) {
+		if(stuff[i] -> get_kind() == type_Background || stuff[i] -> get_kind() == type_Background1 
+				|| stuff[i] -> get_kind() == type_Background2){
+			stuff[i] -> display();
+		}
 	}
-	for(int i = 0; i < stuff.size(); i++) if(stuff[i] -> get_kind() != type_Background && stuff[i] -> get_kind() != type_Background1 && stuff[i] -> get_kind() != type_Background2){
+	for(int i = 0; i < stuff.size(); i++){
+		if(stuff[i] -> get_kind() != type_Background && stuff[i] -> get_kind() != type_Background1 
+				&& stuff[i] -> get_kind() != type_Background2){
+			stuff[i] -> display();
+		}
+	}
+	for(int i = 0; i < stuff.size(); i++)if(stuff[i] -> get_kind() == type_Player){
 		stuff[i] -> display();
 	}
 	if(map_flag){
@@ -114,7 +126,7 @@ void Director::winner_checker(){
 			ff++;
 		}
 		if(stuff[i] -> get_kind() == type_Enemy || stuff[i] -> get_kind() == type_Enemy_1 
-			|| stuff[i] -> get_kind() == type_Enemy_2 || stuff[i] -> get_kind() == type_Enemy_3 || stuff[i] -> get_kind() == type_Enemy_4){
+				|| stuff[i] -> get_kind() == type_Enemy_2 || stuff[i] -> get_kind() == type_Enemy_3 || stuff[i] -> get_kind() == type_Enemy_4){
 			ff++;
 		}
 		if(stuff[i] -> get_kind() == type_Player){
@@ -168,7 +180,6 @@ void Director::map_change_process(){
 		}
 	}
 
-
 }
 
 int Director::map_change_checker(){
@@ -190,6 +201,7 @@ int Director::map_change_checker(){
 			}
 		}	
 
+		update_enemy_exist_flag();
 		map_change_flag = 0;
 		map_change_dir = sf::Vector2f(0,0);
 		new_map = NULL;

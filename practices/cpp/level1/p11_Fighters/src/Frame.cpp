@@ -59,7 +59,8 @@ void Frame::set_image_info(string image_info_file_name){
 	char tmp[1005];
 	FILE *in = fopen(image_info_file_name.c_str(), "r");
 	if(in == NULL){
-		cerr << "fail to open in Frame.cpp 48" << endl;
+		cerr << "fail to open in Frame.cpp " << endl;
+		cerr << image_info_file_name << endl;
 		exit(0);
 	}
 	fscanf(in," %f%f", &del_position.x,&del_position.y);
