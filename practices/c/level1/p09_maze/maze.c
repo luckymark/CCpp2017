@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<Windows.h>
-#include <stdlib.h>
+#include<stdlib.h>
+#include<stdbool.h> 
 
 void mapprint();
 void posation();
