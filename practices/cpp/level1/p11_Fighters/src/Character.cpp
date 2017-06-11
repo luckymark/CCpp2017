@@ -36,12 +36,9 @@ void Character::be_impacted_from(Item *other){
 			}
 		}
 	}else if( other -> get_kind() == type_Bullet){ //Bullet
-		if(animation[cur_animation].is_affect() && item_kind == type_Enemy){
-			collision(physics, other -> physics);
-			if(!(item_kind == type_Player && (cur_animation == 5 || cur_animation == 6))){//
-				other -> dead();
-			}
-			life.w[0] -= 5;
+		if((animation[cur_animation].is_affect()) && ((item_kind == type_Enemy) || (item_kind == type_Enemy_1) || (item_kind == type_Enemy_2) || (item_kind == type_Enemy_3) || (item_kind == type_Enemy_4)) ){
+				collision(physics, other -> physics);
+				life.w[0] -= 5;
 		}
 	}else if(other -> get_kind() == type_Enemy_bullet){ //Enemy_bullet
 		if(animation[cur_animation].is_affect() && item_kind == type_Player){
@@ -50,17 +47,17 @@ void Character::be_impacted_from(Item *other){
 				other -> dead();
 			}
 		}
-	}else if(other -> get_kind() == type_Enemy){
-		if(animation[cur_animation].is_affect() && item_kind == type_Player){
+	}else if(other -> get_kind() == type_Enemy || other -> get_kind() == type_Enemy_1 || other -> get_kind() == type_Enemy_2 || other -> get_kind() == type_Enemy_3 || other -> get_kind() == type_Enemy_4){
+		if(animation[cur_animation].is_affect() && (item_kind == type_Player)){
 			collision(physics, other -> physics);
 		}
 	}
 
 	//skill 效果
 	/*if(item_kind == type_Player){
-		if(cur_animation == 5 || cur_animation == 6){
-		}
-	}*/
+	  if(cur_animation == 5 || cur_animation == 6){
+	  }
+	  }*/
 }
 
 void Character::set_shot_direction(sf::Vector2f pos){

@@ -14,6 +14,8 @@ class Director{
 		sf::Vector2f		map_change_dir;
 		Item*			new_map;
 		int			enemy_exist_flag;
+		Frame			small_map, win_image, lose_image;
+		int 			win_flag, lose_flag, map_flag;
 
 		sf::RenderWindow 	window;
 		sf::Clock		clock;
@@ -41,6 +43,11 @@ class Director{
 		int map_change_checker();
 		void map_change_process();
 		void update_enemy_exist_flag();
+		void winner_checker();
+		void load_image();
+		void start();
+		void restart();
+		void end_game();
 		~Director();
 };
 

@@ -8,7 +8,9 @@ Enemy::Enemy(int kind ,string item_setting, sf::Vector2f pos, Director *world)
 
 void Enemy::Action(sf::Time dt, sf::Vector2f player_position){
 	if(bullte_clock.getElapsedTime().asSeconds() > 1){
-		fire(dt,player_position - physics.get_position());
+		if(item_kind != type_Enemy_2){
+			fire(dt,player_position - physics.get_position());
+		}
 		bullte_clock.restart();
 	}
 	if(life.w[0] <= 0){

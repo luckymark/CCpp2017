@@ -40,7 +40,7 @@ Player::Player(int kind, string setting, sf::Vector2f pos, Director *world)
 		set_skill();
 	}
 void Player::Action(sf::Time dt, sf::Vector2f mouse_position){
-	if(bullte_clock.getElapsedTime().asSeconds() > 0.3 && sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+	if(bullte_clock.getElapsedTime().asSeconds() > 0.1 && sf::Mouse::isButtonPressed(sf::Mouse::Left)){
 		fire(dt,mouse_position - physics.get_position());
 		bullte_clock.restart();
 	}
@@ -128,7 +128,7 @@ void Player::fire(sf::Time dt,sf::Vector2f dir){
 	Item *tmp = NULL;
 	life.w[0] -= 10;
 	dir = physics.make_one(dir);
-	dir *= float(15000);
+	dir *= float(35000);
 	tmp = new Bullet(world -> sample_type[type_Bullet], world -> sample[type_Bullet], physics.get_position(), world);
 	if(tmp == NULL){
 		cerr << "get memery fail" << endl;

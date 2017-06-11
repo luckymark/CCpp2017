@@ -50,6 +50,7 @@ void Director::world_loop(){
 		}
 	}
 	update_enemy_exist_flag();
+	winner_checker();
 }
 
 void Director::deal_with_window_event(){
@@ -61,19 +62,100 @@ void Director::deal_with_window_event(){
 			default: break;
 		}
 	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::M)){
+		map_flag = 1;
+	}else {
+		map_flag = 0;
+	}
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::R)){
+		if(lose_flag == 1 || win_flag == 1){
+			restart();
+		}
+	}
 }
 
 
 void Director::basic_work(){
 	bgm.next();
 	window.clear(sf::Color(100,100,100));
-	for(int i = 0; i < stuff.size(); i++) if(stuff[i] -> get_kind() == type_Background || stuff[i] -> get_kind() == type_Background1){
+	for(int i = 0; i < stuff.size(); i++) if(stuff[i] -> get_kind() == type_Background || stuff[i] -> get_kind() == type_Background1 || stuff[i] -> get_kind() == type_Background2){
 		stuff[i] -> display();
 	}
-	for(int i = 0; i < stuff.size(); i++) if(stuff[i] -> get_kind() != type_Background && stuff[i] -> get_kind() != type_Background1){
+	for(int i = 0; i < stuff.size(); i++) if(stuff[i] -> get_kind() != type_Background && stuff[i] -> get_kind() != type_Background1 && stuff[i] -> get_kind() != type_Background2){
 		stuff[i] -> display();
+	}
+	if(map_flag){
+		small_map.display(&window);
+	}
+	if(win_flag){
+		win_image.display(&window);
+	}
+	if(lose_flag){
+		lose_image.display(&window);
 	}
 	window.display();
+}
+
+
+void Director::winner_checker(){
+	int ff = 0;
+	int ls = 0;
+	for(int i = 0; i < stuff.size(); i++){
+		if(stuff[i] -> get_kind() == type_Dialog){
+			ff++; ls++;
+		}
+		if(stuff[i] -> get_kind() == type_CG){
+			ff++; ls++;
+		}
+		if(stuff[i] -> get_kind() == type_Begin){
+			ff++; ls++;
+		}
+		if(stuff[i] -> get_kind() == type_Door){
+			ff++;
+		}
+		if(stuff[i] -> get_kind() == type_Enemy || stuff[i] -> get_kind() == type_Enemy_1 
+			|| stuff[i] -> get_kind() == type_Enemy_2 || stuff[i] -> get_kind() == type_Enemy_3 || stuff[i] -> get_kind() == type_Enemy_4){
+			ff++;
+		}
+		if(stuff[i] -> get_kind() == type_Player){
+			ls++;
+		}
+	}
+	if(ff == 0){
+		win_flag = 1;
+	}else {
+		win_flag = 0;
+	}
+	if(ls == 0){
+		lose_flag = 1;
+	}else {
+		lose_flag = 0;
+	}
+}
+
+void Director::end_game(){
+	for(vector<Item*>::iterator it = stuff.begin(); it != stuff.end();){
+		delete (*it);
+		it = stuff.erase(it);
+	}
+}
+
+void Director::start(){
+	load_image();
+	new_stuff(10,sf::Vector2f(0,0));
+}
+
+void Director::restart(){
+	end_game();
+	new_stuff(5,sf::Vector2f(0,0));
+	new_stuff(2,sf::Vector2f(50,50));
+	new_stuff(0,sf::Vector2f(400.0,400.0));
+}
+
+void Director::load_image(){
+	small_map.set_image("../data/sys_pic/2.jpg");
+	win_image.set_image("../data/sys_pic/0.png");
+	lose_image.set_image("../data/sys_pic/1.png");
 }
 
 void Director::map_change_process(){
@@ -191,7 +273,8 @@ void Director::new_stuff(int x,sf::Vector2f request_place){
 void Director::update_enemy_exist_flag(){
 	enemy_exist_flag = 0;
 	for(int i = 0 ; i < stuff.size(); i++){
-		enemy_exist_flag |= (stuff[i] -> get_kind() == type_Enemy);
+		enemy_exist_flag |= (stuff[i] -> get_kind() == type_Enemy | stuff[i] ->get_kind() == type_Enemy_1 | stuff[i] -> get_kind() == type_Enemy_2
+				| stuff[i] -> get_kind() == type_Enemy_3 | stuff[i] -> get_kind() == type_Enemy_4);
 	}
 }
 
