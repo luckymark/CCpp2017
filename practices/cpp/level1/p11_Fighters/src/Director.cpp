@@ -49,6 +49,7 @@ void Director::world_loop(){
 			stuff[i] -> Action(clock.getElapsedTime(),player_position);
 		}
 	}
+	update_enemy_exist_flag();
 }
 
 void Director::deal_with_window_event(){
@@ -66,10 +67,10 @@ void Director::deal_with_window_event(){
 void Director::basic_work(){
 	bgm.next();
 	window.clear(sf::Color(100,100,100));
-	for(int i = 0; i < stuff.size(); i++) if(stuff[i] -> get_kind() == type_Background){
+	for(int i = 0; i < stuff.size(); i++) if(stuff[i] -> get_kind() == type_Background || stuff[i] -> get_kind() == type_Background1){
 		stuff[i] -> display();
 	}
-	for(int i = 0; i < stuff.size(); i++) if(stuff[i] -> get_kind() != type_Background){
+	for(int i = 0; i < stuff.size(); i++) if(stuff[i] -> get_kind() != type_Background && stuff[i] -> get_kind() != type_Background1){
 		stuff[i] -> display();
 	}
 	window.display();
@@ -137,14 +138,14 @@ void Director::update_player_position(){
 }
 
 int Director::get_player_key(){
-	if(player_key == -1){
-		for(int i = 0; i < stuff.size(); i++){
-			if(stuff[i] -> get_kind() == type_Player){ //0
-				player_key = i;
-				return i;
-			}
+	//if(player_key == -1){
+	for(int i = 0; i < stuff.size(); i++){
+		if(stuff[i] -> get_kind() == type_Player){ //0
+			player_key = i;
+			return i;
 		}
 	}
+	//}
 	return player_key;
 }
 
@@ -185,6 +186,13 @@ void Director::new_stuff(int x,sf::Vector2f request_place){
 	}
 	if(tmp != NULL) 
 		stuff.push_back(tmp);
+}
+
+void Director::update_enemy_exist_flag(){
+	enemy_exist_flag = 0;
+	for(int i = 0 ; i < stuff.size(); i++){
+		enemy_exist_flag |= (stuff[i] -> get_kind() == type_Enemy);
+	}
 }
 
 Director::~Director(){

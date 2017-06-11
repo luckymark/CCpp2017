@@ -3,10 +3,12 @@
 2 ../data/Room/setting
 3 ../data/enemy/0/setting
 4 ../data/bullet/setting_hit
-5 ../data/Background/setting
+5 ../data/Background/setting0/setting
 6 ../data/Enemy_bullet/setting_move
 7 ../data/Enemy_bullet/setting_hit
 8 ../data/face/setting
 9 ../data/cg/setting_0
 10 ../data/cg/setting_1
 11 ../data/door/setting
+12 ../data/Background/setting1/setting
+13 ../data/enemy/dead/setting

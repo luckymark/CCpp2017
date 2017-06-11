@@ -6,6 +6,7 @@ CG::CG(int kind, string item_setting_name, sf::Vector2f pos, Director *world_)
 		item_kind = kind;
 		physics.set_position(pos);
 		world = world_;
+		clock.restart();
 		animation = NULL;
 		get_setting(item_setting_name);
 		animation[cur_animation].set_play_flag(1);
@@ -18,8 +19,10 @@ void CG::dead(){
 
 void CG::Action(sf::Time dt, sf::Vector2f pos){
 	if(animation[cur_animation].is_playing() == 0 || sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-		dead();
-		return;
+		if(clock.getElapsedTime().asSeconds() > 1){
+			dead();
+			return;
+		}
 	}
 	next(dt);
 }

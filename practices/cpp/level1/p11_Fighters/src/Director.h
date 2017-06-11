@@ -13,6 +13,7 @@ class Director{
 		int 			map_change_flag;
 		sf::Vector2f		map_change_dir;
 		Item*			new_map;
+		int			enemy_exist_flag;
 
 		sf::RenderWindow 	window;
 		sf::Clock		clock;
@@ -39,6 +40,7 @@ class Director{
 		void draw();
 		int map_change_checker();
 		void map_change_process();
+		void update_enemy_exist_flag();
 		~Director();
 };
 

@@ -41,6 +41,7 @@ void Character::be_impacted_from(Item *other){
 			if(!(item_kind == type_Player && (cur_animation == 5 || cur_animation == 6))){//
 				other -> dead();
 			}
+			life.w[0] -= 5;
 		}
 	}else if(other -> get_kind() == type_Enemy_bullet){ //Enemy_bullet
 		if(animation[cur_animation].is_affect() && item_kind == type_Player){

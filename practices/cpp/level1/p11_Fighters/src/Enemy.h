@@ -11,6 +11,7 @@ class Enemy:public Character{
 
 		void fire(sf::Time dt, sf::Vector2f dir);
 		virtual void Action(sf::Time dt, sf::Vector2f mouse_position);
+		virtual void dead();
 };
 
 

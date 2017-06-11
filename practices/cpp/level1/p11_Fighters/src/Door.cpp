@@ -10,6 +10,7 @@ Door::Door(int kind, string item_setting_name, sf::Vector2f pos, Director *world
 	}
 
 void Door::change_map(){
+	if(world -> enemy_exist_flag == 1) return;
 	world -> map_change_flag = 1;
 	world -> map_change_dir = change_dir;
 	add_next_map();

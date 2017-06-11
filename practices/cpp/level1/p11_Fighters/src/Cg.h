@@ -7,6 +7,7 @@
 class CG:public Item{
 	protected:
 		MusicAnimation *animation;
+		sf::Clock clock;
 	public:
 		CG(int kind, string item_setting_name, sf::Vector2f pos, Director *world_);
 		virtual void dead();
