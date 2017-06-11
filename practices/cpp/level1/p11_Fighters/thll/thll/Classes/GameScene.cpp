@@ -45,6 +45,9 @@ bool GameScene::init()
 	bulletLayer = BulletLayer::create();
 	this->addChild(bulletLayer);
 
+	bossLayer = BossLayer::create();
+	this->addChild(bossLayer);
+
 	scoreLabel = LabelTTF::create();
 	scoreLabel->setColor(ccc3(143, 146, 147));
 	scoreLabel->setFontSize(30);
@@ -102,6 +105,14 @@ void GameScene::gameUpdate(float dt)
 		plane_auto_bullet_create_count = 0;
 	}*/
 
+	// boss
+	if (TimeManager::getInstance()->JudgeTime(1))
+	{
+		bossLayer->bossCreate();
+		is_boss_create = true;
+	}
+	
+
 	// Enemy
 	if (TimeManager::getInstance()->JudgeTimeArray(std::vector<long double> {1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10}))
 	{
@@ -152,6 +163,7 @@ void GameScene::collisionJudge()
 	Vector<EnemyPlane* > enemyList = enemyLayer->getEnemyList();
 	auto plane = SelfPlane::sharedPlane;
 	auto system = ParticleExplosion::create();
+	auto boss = Boss::sharedBoss;
 
 	if (plane->getStatus(getCurrentTime()) == STATUS_NO_ATTCK)
 	{
@@ -195,7 +207,7 @@ void GameScene::collisionJudge()
 			break;
 		}
 	}
-	//check bullet and enemy and plane
+	//check bullet and enemy and plane and boss
 	for (int i = 0; i < bulletList.size(); i++)
 	{
 		auto bullet = bulletList.at(i);
@@ -203,12 +215,47 @@ void GameScene::collisionJudge()
 		// bullet and enemy bomb
 		if (tag == PLANE_BULLET_TAG)
 		{
+
+			if (is_boss_create)
+			{
+				if (boss->getBoundingBox().intersectsRect(bullet->getBoundingBox()) && !boss->isDeleted() )
+				{
+					bulletLayer->bulletRemove(bullet);
+					if (!boss->isLifeEmpty())
+					{
+						boss->lifeDecreased(1);
+						Vector<SpriteFrame*> animationframe;
+						SpriteFrame * sf = SpriteFrame::create("ui/shoot/enemy3_hit.png", Rect(0, 0, 169, 258));
+						animationframe.pushBack(sf);
+						Animation * ani = Animation::createWithSpriteFrames(animationframe, 0.1);
+						Action* act = Sequence::create(Animate::create(ani), NULL, NULL);
+						boss->runAction(act);
+					}
+					else
+					{
+						is_boss_create = false;
+
+						boss->setDeleted(true);
+
+						auto boss_pos = boss->getPosition();
+
+						int boss_tag = boss->getTag();
+
+						boss->removeFromParent();
+
+						this->planeBomb(boss_pos, boss_tag);
+					}
+
+				}
+			}
+
 			int flag = 0;
 			for (int j = 0; j < enemyList.size(); j++)
 			{
 				auto enemy = enemyList.at(j);
 				if (enemy->getBoundingBox().intersectsRect(bullet->getBoundingBox())&&!enemy->isDeleted())
 				{
+					bulletLayer->bulletRemove(bullet);
 					enemy->setDeleted(true);
 					auto pos = enemy->getPosition();
 					int tag = enemy->getTag();
@@ -269,6 +316,15 @@ void GameScene::planeBomb(Vec2 vec, int tag)
 		{
 			auto string = cocos2d::__String::createWithFormat("enemy2_down%d.png", i);
 			SpriteFrame * sf = SpriteFrame::create(string->getCString(), Rect(0, 0, 69, 95));
+			animationframe.pushBack(sf);
+		}
+	}
+	else if (tag == BOSS_TAG)
+	{
+		for (int i = 1; i<= 6; i++)
+		{
+			auto string = cocos2d::__String::createWithFormat("ui/shoot/enemy3_down%d.png", i);
+			SpriteFrame * sf = SpriteFrame::create(string->getCString(), Rect(0, 0, 165, 261));
 			animationframe.pushBack(sf);
 		}
 	}

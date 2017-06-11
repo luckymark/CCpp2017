@@ -39,12 +39,14 @@ bool SelfPlaneLayer::init()
 	auto visibleOrigin = Director::getInstance()->getVisibleOrigin();
 	auto winSize = Director::getInstance()->getWinSize();
 
-	auto plane = SelfPlane::create("hero1.png");
+	auto plane = SelfPlane::create("ui/shoot/hero1.png");
 	plane->setTag(PLANE_TAG);
 	plane->setInitialPosition();
 	plane->setAnchorPoint(Vec2(0.5, 0.5));
 
 	this->addChild(plane);
+
+	planeRunAction();
 
 	auto listener = EventListenerKeyboard::create();
 
@@ -173,6 +175,21 @@ void SelfPlaneLayer::startShooting()
 		
 	}
 }
+void SelfPlaneLayer::planeRunAction()
+{
+	Vector<SpriteFrame*> animationframe;
+	for (int i = 1; i <= 2; i++)
+	{
+		auto string = cocos2d::__String::createWithFormat("ui/shoot/hero%d.png", i);
+		SpriteFrame * sf = SpriteFrame::create(string->getCString(), Rect(0, 0, 102, 126));
+		animationframe.pushBack(sf);
+	}
+	Animation * ani = Animation::createWithSpriteFrames(animationframe, 0.1);
+
+	Action * act = RepeatForever::create(Animate::create(ani));
+	SelfPlane::sharedPlane->runAction(act);
+}
+
 Node* SelfPlaneLayer::getPlane()
 {
 	return this->getChildByTag(PLANE_TAG);

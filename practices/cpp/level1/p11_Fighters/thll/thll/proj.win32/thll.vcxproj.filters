@@ -67,6 +67,12 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\TimeManager.cpp" />
+    <ClCompile Include="..\Classes\BossLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Boss.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -115,6 +121,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\TimeManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BossLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Boss.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

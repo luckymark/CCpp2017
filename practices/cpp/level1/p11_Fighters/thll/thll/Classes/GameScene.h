@@ -12,6 +12,7 @@
 #include "BulletLayer.h"
 #include "TextLayer.h"
 #include "TimeManager.h"
+#include "BossLayer.h"
 #include <map>
 #include <vector>
 
@@ -39,6 +40,8 @@ private:
 
 	BulletLayer* bulletLayer;
 
+	BossLayer* bossLayer;
+
 	void planeBomb(cocos2d::Vec2 vec, int tag);
 
 	void bombRemove(cocos2d::Node * sprite);
@@ -54,6 +57,8 @@ private:
 	int enemy_bullet_create_count = 0;
 
 	bool is_first_enter = false;
+
+	bool is_boss_create = false;
 };
 
 #endif

@@ -23,6 +23,8 @@ public:
 
 	void startShooting();
 
+	void planeRunAction();
+
 	static SelfPlaneLayer* sharedPlaneLayer;
 
 private:
