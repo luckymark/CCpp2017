@@ -53,7 +53,11 @@ void Door::be_impacted_from(Item *other){
 	animation[cur_animation].be_affected(other -> get_cur_animation());
 	if(other -> get_kind() == type_Player){
 		if(animation[cur_animation].is_affect()){
-			change_map();
+			if(world -> enemy_exist_flag == 0){
+				other -> physics.set_position(other -> physics.get_position() - change_dir*(float)2);
+				other -> physics.set_motivation(sf::Vector2f(0,0));
+				change_map();
+			}
 		}
 	}
 }

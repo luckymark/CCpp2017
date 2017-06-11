@@ -6,6 +6,10 @@
 
 
 class Enemy:public Character{
+	private:
+		sf::Clock relife_clock;
+		sf::Clock sub_enemy_clock;
+		sf::Clock sub_enemy_clock1;
 	public:
 		Enemy(int kind, string item_setting,sf::Vector2f pos, Director *world);
 

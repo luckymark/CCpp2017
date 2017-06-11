@@ -18,19 +18,25 @@ void Character::be_impacted_from(Item *other){
 			int tagx = tp%3, tagy = tp/3;
 			if(tagy != 1){
 				sf::Vector2f tmp_mo = physics.get_motivation();
+				tmp_mo.y *= (float)0.4;
 				if(tagy == 0){
 					if(tmp_mo.y < 0) tmp_mo.y *= float(-1);
+					physics.set_position(sf::Vector2f(physics.get_position().x,50));
 				}else if(tagy == 2){
 					if(tmp_mo.y > 0) tmp_mo.y *= float(-1);
+					physics.set_position(sf::Vector2f(physics.get_position().x,750));
 				}
 				physics.set_motivation(tmp_mo);
 			}
 			if(tagx != 1){
 				sf::Vector2f tmp_mo = physics.get_motivation();
+				tmp_mo.x *= (float)0.4;
 				if(tagx == 0){
 					if(tmp_mo.x < 0) tmp_mo.x *= float(-1);
+					physics.set_position(sf::Vector2f(50,physics.get_position().y));
 				}else if(tagx == 2){
 					if(tmp_mo.x > 0) tmp_mo.x *= float(-1);
+					physics.set_position(sf::Vector2f(750,physics.get_position().y));
 				}
 				physics.set_motivation(tmp_mo);
 			}
@@ -43,13 +49,30 @@ void Character::be_impacted_from(Item *other){
 	}else if(other -> get_kind() == type_Enemy_bullet){ //Enemy_bullet
 		if(animation[cur_animation].is_affect() && item_kind == type_Player){
 			collision(physics, other -> physics);
-			if(!(item_kind == type_Player && (cur_animation == 5 || cur_animation == 6 || cur_animation == 7))){//
+			if(!(cur_animation == 5 || cur_animation == 6 || cur_animation == 7)){//
 				other -> dead();
+				life.w[0] -= 100;
 			}
 		}
 	}else if(other -> get_kind() == type_Enemy || other -> get_kind() == type_Enemy_1 || other -> get_kind() == type_Enemy_2 || other -> get_kind() == type_Enemy_3 || other -> get_kind() == type_Enemy_4){
 		if(animation[cur_animation].is_affect() && (item_kind == type_Player)){
 			collision(physics, other -> physics);
+		}
+		if(animation[cur_animation].is_affect() && (other -> get_kind() == type_Enemy_3 || other -> get_kind() == type_Enemy_4)){
+			if(item_kind == type_Player){
+				if(!((cur_animation == 5 || cur_animation == 6 || cur_animation == 7))){//
+					life.w[0] -= 100;
+				}
+			}
+		}
+		if(animation[cur_animation].is_affect() && item_kind == type_Player){
+			collision(physics, other -> physics);
+			if(other -> get_kind() == type_Enemy || other -> get_kind() == type_Enemy_1 || other -> get_kind() == type_Enemy_2 || other -> get_kind() == type_Enemy_3 || other -> get_kind() == type_Enemy_4){
+				if(cur_animation == 5 || cur_animation == 6){
+					life.w[0] -= 50;
+					other -> dead();
+				}
+			}
 		}
 	}
 

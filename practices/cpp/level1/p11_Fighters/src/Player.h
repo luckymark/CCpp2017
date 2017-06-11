@@ -4,8 +4,6 @@
 #include "Character.h"
 
 class Player: public Character{
-	private:
-		sf::Clock life_clock;
 	public:
 		Player(int kind, string name, sf::Vector2f pos, Director *world);
 		virtual void Action(sf::Time dt,sf::Vector2f pos);
@@ -15,6 +13,7 @@ class Player: public Character{
 		void fire(sf::Time dt, sf::Vector2f dir);
 		void set_skill();
 		void special1(sf::Time dt, sf::Vector2f pos);
+		virtual void dead();
 };
 
 

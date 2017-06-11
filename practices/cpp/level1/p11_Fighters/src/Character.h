@@ -18,6 +18,7 @@ class Character: public Item{
 		sf::Vector2f 	shot_direction;
 		int 		bullte;
 		sf::Clock	bullte_clock;
+		sf::Clock 	life_clock;
 		void set_null();
 	public:
 		Character(int kind, string setting, sf::Vector2f pos, Director *world);

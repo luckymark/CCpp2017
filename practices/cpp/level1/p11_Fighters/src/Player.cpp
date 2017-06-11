@@ -28,7 +28,7 @@ void Player::set_skill(){
 	skill[5].during_flag = 1;
 	skill[5].cooling_time = 4;
 	skill[8].during_flag = 1;
-	skill[8].cooling_time = 0;
+	skill[8].cooling_time = 10;
 }
 
 Player::Player(int kind, string setting, sf::Vector2f pos, Director *world) 
@@ -40,7 +40,7 @@ Player::Player(int kind, string setting, sf::Vector2f pos, Director *world)
 		set_skill();
 	}
 void Player::Action(sf::Time dt, sf::Vector2f mouse_position){
-	if(bullte_clock.getElapsedTime().asSeconds() > 0.1 && sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+	if(bullte_clock.getElapsedTime().asSeconds() > 0.1 && sf::Mouse::isButtonPressed(sf::Mouse::Left) && life.w[0] >= 100){
 		fire(dt,mouse_position - physics.get_position());
 		bullte_clock.restart();
 	}
@@ -118,17 +118,25 @@ void Player::Action(sf::Time dt, sf::Vector2f mouse_position){
 		}
 	}
 	if(life.w[0] < life.w[2] && life_clock.getElapsedTime().asSeconds() > 0.1){
-		life.w[0] += 1;
+		life.w[0] += life.w[1];
 		life_clock.restart();
 	}
 	life_bar.set_life(life.w[0],life.w[2]);
+	if(life.w[0] <= 0){
+		dead();
+		return;
+	}
+}
+
+void Player::dead(){
+	world -> delete_stuff(this);
 }
 
 void Player::fire(sf::Time dt,sf::Vector2f dir){
 	Item *tmp = NULL;
 	life.w[0] -= 10;
 	dir = physics.make_one(dir);
-	dir *= float(35000);
+	dir *= float(25000);
 	tmp = new Bullet(world -> sample_type[type_Bullet], world -> sample[type_Bullet], physics.get_position(), world);
 	if(tmp == NULL){
 		cerr << "get memery fail" << endl;
@@ -136,7 +144,7 @@ void Player::fire(sf::Time dt,sf::Vector2f dir){
 	}
 	tmp -> physics.add_motivation(physics.get_speed() * (tmp -> physics.get_mass()));
 	tmp -> physics.add_force(dir);
-	physics.add_force(dir * float(-1));
+	//physics.add_force(dir * float(-1));
 
 	world -> stuff.push_back(tmp);
 }
@@ -150,11 +158,3 @@ void Player::set_life_bar(string setting, sf::Vector2f pos){
 	life_bar.set_from_setting(setting, pos);
 }
 
-/*void Player::be_impacted_from(Item *other){
-  animation[cur_animation].set_position(physics.get_position());
-  animation[cur_animation].be_affected(other -> get_cur_animation());
-  if(other -> get_kind() == type_Enemy){
-  if(animation[cur_animation].is_affect()){
-  }
-  }
-  }*/

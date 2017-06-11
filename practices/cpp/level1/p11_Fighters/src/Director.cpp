@@ -121,7 +121,7 @@ void Director::winner_checker(){
 			ls++;
 		}
 	}
-	if(ff == 0){
+	if(ff == 0 && sf::Keyboard::isKeyPressed(sf::Keyboard::Y)){
 		win_flag = 1;
 	}else {
 		win_flag = 0;

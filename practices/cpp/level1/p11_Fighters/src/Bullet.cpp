@@ -19,8 +19,10 @@ void Bullet::be_impacted_from(Item *other){
 				sf::Vector2f tmp_mo = physics.get_motivation();
 				if(tagy == 0){
 					if(tmp_mo.y < 0) tmp_mo.y *= float(-1);
+					physics.set_position(sf::Vector2f(physics.get_position().x,50));
 				}else if(tagy == 2){
 					if(tmp_mo.y > 0) tmp_mo.y *= float(-1);
+					physics.set_position(sf::Vector2f(physics.get_position().x,750));
 				}
 				physics.set_motivation(tmp_mo);
 			}
@@ -28,8 +30,10 @@ void Bullet::be_impacted_from(Item *other){
 				sf::Vector2f tmp_mo = physics.get_motivation();
 				if(tagx == 0){
 					if(tmp_mo.x < 0) tmp_mo.x *= float(-1);
+					physics.set_position(sf::Vector2f(50,physics.get_position().y));
 				}else if(tagx == 2){
 					if(tmp_mo.x > 0) tmp_mo.x *= float(-1);
+					physics.set_position(sf::Vector2f(750,physics.get_position().y));
 				}
 				physics.set_motivation(tmp_mo);
 			}
