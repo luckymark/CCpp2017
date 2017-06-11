@@ -5,8 +5,8 @@
 #define STATUS_DEAD 1
 #define STATUS_NO_ATTCK 2
 #define PLANE_LEVEL_1_SCORE 0
-#define PLANE_LEVEL_2_SCORE 9
-#define PLANE_LEVEL_3_SCORE 15
+#define PLANE_LEVEL_2_SCORE 10000
+#define PLANE_LEVEL_3_SCORE 25000
 
 #include "cocos2d.h"
 

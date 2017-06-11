@@ -48,10 +48,11 @@ bool GameScene::init()
 	bossLayer = BossLayer::create();
 	this->addChild(bossLayer);
 
-	scoreLabel = LabelTTF::create();
-	scoreLabel->setColor(ccc3(143, 146, 147));
-	scoreLabel->setFontSize(30);
-	scoreLabel->setPosition(Vec2(visibleSize.width - 100, visibleSize.height - 30));
+	//label
+	scoreLabel = LabelBMFont::create("0","font/font.fnt");
+	scoreLabel->setColor(Color3B::BLACK);
+	scoreLabel->setAnchorPoint(Vec2(0, 1));
+	scoreLabel->setPosition(Vec2(0 , visibleSize.height - scoreLabel->getContentSize().height));
 	this->addChild(scoreLabel);
 
 	this->schedule(schedule_selector(GameScene::gameUpdate), GAME_UPDATE_SEC);
@@ -243,6 +244,8 @@ void GameScene::collisionJudge()
 
 						boss->removeFromParent();
 
+						plane->addScore(10000);
+
 						this->planeBomb(boss_pos, boss_tag);
 					}
 
@@ -268,7 +271,7 @@ void GameScene::collisionJudge()
 					flag = 1;
 
 					// update socre
-					plane->addScore(1);
+					plane->addScore(1000);
 					break;
 				}
 			}
@@ -375,6 +378,8 @@ long GameScene::getCurrentTime()
 
 void GameScene::scoreUpdate()
 {
+	auto visibleSize = Director::getInstance()->getVisibleSize();
 	String* strScore = String::createWithFormat("SCORE: %d", SelfPlane::sharedPlane->getScore());
 	scoreLabel->setString(strScore->_string.c_str());
+	//scoreLabel->setPosition(Vec2(vis, visibleSize.height - scoreLabel->getContentSize().height));
 }

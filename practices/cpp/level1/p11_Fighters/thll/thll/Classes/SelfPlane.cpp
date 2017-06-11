@@ -54,25 +54,17 @@ void SelfPlane::setInitialPosition()
 void SelfPlane::addScore(int score)
 {
 	this->score += score;
-	switch (this->score)
-	{
-	case  PLANE_LEVEL_1_SCORE:
+	if (this->score >= PLANE_LEVEL_1_SCORE && this->score <= PLANE_LEVEL_2_SCORE)
 	{
 		setLevel(1);
-		break;
 	}
-	case PLANE_LEVEL_2_SCORE:
+	else if (this->score >= PLANE_LEVEL_2_SCORE && this->score <= PLANE_LEVEL_3_SCORE)
 	{
 		setLevel(2);
-		break;
 	}
-	case PLANE_LEVEL_3_SCORE:
+	else if (this->score >= PLANE_LEVEL_3_SCORE)
 	{
 		setLevel(3);
-		break;
-	}
-	default:
-		break;
 	}
 }
 

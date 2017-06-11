@@ -26,7 +26,7 @@ public:
 	CREATE_FUNC(GameScene);
 private:
 
-	cocos2d::LabelTTF* scoreLabel;
+	cocos2d::LabelBMFont *scoreLabel;
 
 	void gameUpdate(float dt);
 
