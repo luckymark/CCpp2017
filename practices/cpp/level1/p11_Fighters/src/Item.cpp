@@ -119,6 +119,11 @@ void Item::next(sf::Time dt){
 	animation[cur_animation].next_frame(dt);
 }
 
+void Item::set_animation(int x){
+	cur_animation = x;
+	animation[cur_animation].set_play_flag(1);
+}
+
 Item::~Item(){
 	if(animation != NULL)
 		delete[] animation;

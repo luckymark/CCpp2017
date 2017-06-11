@@ -81,7 +81,7 @@ void Dialog::dead(){
 	world->new_stuff(5,sf::Vector2f(0,0));
 	world->new_stuff(2,sf::Vector2f(50,50));
 	world->new_stuff(0,sf::Vector2f(400.0,400.0));
-	world->new_stuff(3,sf::Vector2f(200.0,200.0));
+	//world->new_stuff(3,sf::Vector2f(200.0,200.0));
 	world -> bgm.open_from_setting("../data/BGM/setting");
 	world->delete_stuff(this);
 }

@@ -8,9 +8,11 @@
 #include "CG.h"
 #include "Begin.h"
 #include <iostream>
+#include <cmath>
 using namespace std;
 
 Director::Director(){
+	map_change_flag = 0;
 	stuff.clear();
 	sample.clear();
 	sample_type.clear();
@@ -49,27 +51,84 @@ void Director::world_loop(){
 	}
 }
 
+void Director::deal_with_window_event(){
+	while(window.pollEvent(event)){
+		switch(event.type){
+			case sf::Event::Closed:
+				window.close();
+				break;
+			default: break;
+		}
+	}
+}
+
+
+void Director::basic_work(){
+	bgm.next();
+	window.clear(sf::Color(100,100,100));
+	for(int i = 0; i < stuff.size(); i++) if(stuff[i] -> get_kind() == type_Background){
+		stuff[i] -> display();
+	}
+	for(int i = 0; i < stuff.size(); i++) if(stuff[i] -> get_kind() != type_Background){
+		stuff[i] -> display();
+	}
+	window.display();
+}
+
+void Director::map_change_process(){
+	if(map_change_checker()){
+		return;
+	}
+	for(int i = 0; i < stuff.size(); i++){
+		if(stuff[i] -> get_kind() != type_Room){
+			stuff[i] -> set_position(stuff[i] -> get_position() + map_change_dir);
+		}
+	}
+
+
+}
+
+int Director::map_change_checker(){
+	sf::Vector2f tmp = new_map -> get_position();
+	if(abs(tmp.x) < 10 && abs(tmp.y) < 10){
+		for(int i = 0; i < stuff.size(); i++){
+			if(stuff[i] -> get_kind() != type_Room){
+				stuff[i] -> set_position(stuff[i] -> get_position() - new_map -> get_position());
+			}
+		}
+
+		for(vector<Item*>:: iterator it = stuff.begin(); it != stuff.end();){
+			sf::Vector2f po = (*it) -> get_position();
+			if((po.x < 0 || po.x > 800 || po.y < 0 || po.y > 800) && (*it) != new_map && (*it) -> get_kind() != type_Player){
+				delete (*it);
+				it = stuff.erase(it);
+			}else {
+				it++;
+			}
+		}	
+
+		map_change_flag = 0;
+		map_change_dir = sf::Vector2f(0,0);
+		new_map = NULL;
+
+		return 1;
+	}
+	return 0;
+}
+
 void Director::main_loop(){
 	window.create(sf::VideoMode(800,800), "My window");
 	window.setVerticalSyncEnabled(true);
 	window.setKeyRepeatEnabled(true);
 	while(window.isOpen()){
-		while(window.pollEvent(event)){
-			switch(event.type){
-				case sf::Event::Closed:
-					window.close();
-					break;
-				default: break;
-			}
+		deal_with_window_event();
+		if(map_change_flag == 0){
+			world_loop();
+		}else {
+			map_change_process();
 		}
-		window.clear(sf::Color(100,100,100));
-		bgm.next();
-		world_loop();
 		clock.restart();
-		for(int i = 0; i < stuff.size(); i++){
-			stuff[i] -> display();
-		}
-		window.display();
+		basic_work();
 	}
 }
 
@@ -115,7 +174,7 @@ void Director::new_stuff(int x,sf::Vector2f request_place){
 				break;
 		case type_Enemy: tmp = new Enemy(sample_type[x], sample[x], request_place,this);
 				 break;
-		case type_Background: tmp = new Background(sample_type[x], sample[x], request_place, this);
+		case type_Background: tmp = new Background(sample_type[x], sample[x], request_place, this, 0);
 				      break;
 		case type_Dialog: tmp = new Dialog(sample_type[x], sample[x], request_place, this);
 				  break;

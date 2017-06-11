@@ -10,6 +10,10 @@ using namespace std;
 
 class Director{
 	public:
+		int 			map_change_flag;
+		sf::Vector2f		map_change_dir;
+		Item*			new_map;
+
 		sf::RenderWindow 	window;
 		sf::Clock		clock;
 		sf::Event		event;
@@ -29,8 +33,12 @@ class Director{
 		void delete_stuff(Item* tmp);
 		void clear_request();
 		void update_player_position();
+		void deal_with_window_event();
 		int get_player_key();
+		void basic_work();
 		void draw();
+		int map_change_checker();
+		void map_change_process();
 		~Director();
 };
 
