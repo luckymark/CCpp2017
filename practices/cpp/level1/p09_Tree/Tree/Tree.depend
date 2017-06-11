@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1497193039 source:d:\ccpp2017\practices\cpp\level1\p09_tree\tree\graph.cpp
+	"graph.h"
+	<cstdio>
+	<vector>
+
+1497193016 d:\ccpp2017\practices\cpp\level1\p09_tree\tree\graph.h
+	<vector>
+
+1497193091 source:d:\ccpp2017\practices\cpp\level1\p09_tree\tree\main.cpp
+	"graph.h"
+	<cstdio>
+
