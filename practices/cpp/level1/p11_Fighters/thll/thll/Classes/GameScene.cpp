@@ -24,12 +24,12 @@ bool GameScene::init()
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 
 	// create backgroud
-	auto bg1 = Sprite::create("background.png");
+	auto bg1 = Sprite::create("ui/shoot_background/background.png");
 	bg1->setPosition(Vec2(visibleOrigin.x + visibleSize.width / 2, 0));
 	bg1->setAnchorPoint(Vec2(0.5, 0));
 	bg1->setTag(BG_1_TAG); 
 	this->addChild(bg1, 0);
-	auto bg2 = Sprite::create("background.png");
+	auto bg2 = Sprite::create("ui/shoot_background/background.png");
 	bg2->setPosition(Vec2(visibleOrigin.x + visibleSize.width / 2, bg1->getPositionY() + bg1->getContentSize().height));
 	bg2->setAnchorPoint(Vec2(0.5, 0));
 	bg2->setTag(BG_2_TAG);
@@ -305,7 +305,7 @@ void GameScene::planeBomb(Vec2 vec, int tag)
 	{
 		for (int i = 1; i<5; i++)
 		{
-			auto string = cocos2d::__String::createWithFormat("enemy1_down%d.png", i);
+			auto string = cocos2d::__String::createWithFormat("ui/shoot/enemy1_down%d.png", i);
 			SpriteFrame * sf = SpriteFrame::create(string->getCString(), Rect(0, 0, 57, 43));
 			animationframe.pushBack(sf);
 		}
@@ -314,7 +314,7 @@ void GameScene::planeBomb(Vec2 vec, int tag)
 	{
 		for (int i = 1; i<5; i++)
 		{
-			auto string = cocos2d::__String::createWithFormat("enemy2_down%d.png", i);
+			auto string = cocos2d::__String::createWithFormat("ui/shoot/enemy2_down%d.png", i);
 			SpriteFrame * sf = SpriteFrame::create(string->getCString(), Rect(0, 0, 69, 95));
 			animationframe.pushBack(sf);
 		}
@@ -333,7 +333,7 @@ void GameScene::planeBomb(Vec2 vec, int tag)
 		dt = 0.5;
 		for (int i = 1; i<5; i++)
 		{
-			auto string = cocos2d::__String::createWithFormat("hero_blowup_n%d.png", i);
+			auto string = cocos2d::__String::createWithFormat("ui/shoot/hero_blowup_n%d.png", i);
 			SpriteFrame * sf = SpriteFrame::create(string->getCString(), Rect(0, 0, 102, 126));
 			animationframe.pushBack(sf);
 		}

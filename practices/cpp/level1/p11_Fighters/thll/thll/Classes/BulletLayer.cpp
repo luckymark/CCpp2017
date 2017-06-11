@@ -129,9 +129,9 @@ void BulletLayer::bulletCreate()
 	{
 	case 1:
 	{
-		auto bullet1 = Bullet::create("bullet.png");
+		auto bullet1 = Bullet::create("ui/shoot/bullet1.png");
 
-		bullet1->setPosition(plane->getPositionX(), plane->getPositionY() + 30);
+		bullet1->setPosition(plane->getPositionX(), plane->getPositionY() + plane->getContentSize().height / 2 );
 		bullet1->setTag(PLANE_BULLET_TAG);
 		bullet1->setType(1);
 
@@ -141,14 +141,14 @@ void BulletLayer::bulletCreate()
 	}
 	case 2:
 	{
-		auto bullet1 = Bullet::create("bullet.png");
-		auto bullet2 = Bullet::create("bullet.png");
+		auto bullet1 = Bullet::create("ui/shoot/bullet1.png");
+		auto bullet2 = Bullet::create("ui/shoot/bullet1.png");
 
-		bullet1->setPosition(plane->getPositionX() - 5, plane->getPositionY() + 30);
+		bullet1->setPosition(plane->getPositionX() - plane->getContentSize().width / 4, plane->getPositionY() + plane->getContentSize().height / 2);
 		bullet1->setTag(PLANE_BULLET_TAG);
 		bullet1->setType(2);
 
-		bullet2->setPosition(plane->getPositionX() + 5, plane->getPositionY() + 30);
+		bullet2->setPosition(plane->getPositionX() + plane->getContentSize().width / 4, plane->getPositionY() + plane->getContentSize().height / 2);
 		bullet2->setTag(PLANE_BULLET_TAG);
 		bullet2->setType(2);
 
@@ -160,23 +160,23 @@ void BulletLayer::bulletCreate()
 	}
 	case 3:
 	{
-		auto bullet1 = Bullet::create("bullet.png");
-		auto bullet2 = Bullet::create("bullet.png");
-		auto bullet3 = Bullet::create("bullet.png");
+		auto bullet1 = Bullet::create("ui/shoot/bullet1.png");
+		auto bullet2 = Bullet::create("ui/shoot/bullet1.png");
+		auto bullet3 = Bullet::create("ui/shoot/bullet1.png");
 
-		bullet1->setPosition(plane->getPositionX() - 10, plane->getPositionY() + 30);
+		bullet1->setPosition(plane->getPositionX() - 10, plane->getPositionY() + plane->getContentSize().height / 2);
 		bullet1->setTag(PLANE_BULLET_TAG);
 		bullet1->setRotation(-30);
 		bullet1->setType(3);
 		bullet1->setDirection(0);
 
-		bullet2->setPosition(plane->getPositionX() + 10, plane->getPositionY() + 30);
+		bullet2->setPosition(plane->getPositionX() + 10, plane->getPositionY() + plane->getContentSize().height / 2);
 		bullet2->setTag(PLANE_BULLET_TAG);
 		bullet2->setRotation(30);
 		bullet2->setType(3);
 		bullet2->setDirection(2);
 
-		bullet3->setPosition(plane->getPositionX(), plane->getPositionY() + 30);
+		bullet3->setPosition(plane->getPositionX(), plane->getPositionY() + plane->getContentSize().height / 2);
 		bullet3->setTag(PLANE_BULLET_TAG);
 		bullet3->setType(3);
 		bullet3->setDirection(1);
@@ -226,7 +226,7 @@ void BulletLayer::autoBulletCreate()
 
 	if (plane->getLevel() >= 3)
 	{
-		auto bullet = Bullet::create("bullet.png");
+		auto bullet = Bullet::create("ui/shoot/bullet1.png");
 		bullet->setPosition(plane->getPosition());
 		bullet->setType(4);
 		bullet->setTag(PLANE_BULLET_TAG);
