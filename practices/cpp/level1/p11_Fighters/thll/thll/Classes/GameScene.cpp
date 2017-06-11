@@ -65,7 +65,7 @@ bool GameScene::init()
 	scoreLabel = LabelBMFont::create("0","font/font.fnt");
 	scoreLabel->setColor(Color3B::BLACK);
 	scoreLabel->setAnchorPoint(Vec2(0, 1));
-	scoreLabel->setPosition(Vec2(0 , visibleSize.height - scoreLabel->getContentSize().height));
+	scoreLabel->setPosition(Vec2(5 , visibleSize.height - scoreLabel->getContentSize().height));
 	this->addChild(scoreLabel);
 
 	this->schedule(schedule_selector(GameScene::gameUpdate), GAME_UPDATE_SEC);
@@ -120,9 +120,19 @@ void GameScene::gameUpdate(float dt)
 	}*/
 
 	// boss
-	if (TimeManager::getInstance()->JudgeTime(1))
+	if (TimeManager::getInstance()->JudgeTime(55))
 	{
 		bossLayer->bossCreate();
+
+		// set blood bar
+		bloodbar = new ProgressView();
+		bloodbar->setPosition(Vec2(visibleSize.width / 2  ,visibleSize.height -  50));
+		bloodbar->setBackgroundTexture("ui/shoot_background/back_bar.png");
+		bloodbar->setForegroundTexture("ui/shoot_background/back_bar_slider.png");
+		bloodbar->setTotalProgress(1000.0f);
+		bloodbar->setCurrentProgress(1000.0f);
+		this->addChild(bloodbar);
+
 		is_boss_create = true;
 	}
 	
@@ -241,6 +251,7 @@ void GameScene::collisionJudge()
 					if (!boss->isLifeEmpty())
 					{
 						boss->lifeDecreased(1);
+						bloodbar->setCurrentProgress(bloodbar->getCurrentProgress() - 1);
 						Vector<SpriteFrame*> animationframe;
 						SpriteFrame * sf = SpriteFrame::create("ui/shoot/enemy3_hit.png", Rect(0, 0, 169, 258));
 						animationframe.pushBack(sf);
@@ -250,6 +261,8 @@ void GameScene::collisionJudge()
 					}
 					else
 					{
+						bloodbar->removeFromParent();
+
 						is_boss_create = false;
 
 						boss->setDeleted(true);
@@ -275,19 +288,54 @@ void GameScene::collisionJudge()
 				if (enemy->getBoundingBox().intersectsRect(bullet->getBoundingBox())&&!enemy->isDeleted())
 				{
 					bulletLayer->bulletRemove(bullet);
-					enemy->setDeleted(true);
-					auto pos = enemy->getPosition();
-					int tag = enemy->getTag();
-					//pos.x += enemy->getBoundingBox().size.width / 2;
-					//pos.y -= enemy->getBoundingBox().size.height / 2;
-					system->setPosition(pos);	
-					enemy->removeFromParent();
-					this->planeBomb(pos, tag);					
-					enemyLayer->eraseEnemy(enemy);
-					flag = 1;
+					if (enemy->getTag() == ENEMY_TYPE_1_TAG)
+					{
+						enemy->setDeleted(true);
+						auto pos = enemy->getPosition();
+						int tag = enemy->getTag();
+						//pos.x += enemy->getBoundingBox().size.width / 2;
+						//pos.y -= enemy->getBoundingBox().size.height / 2;
+						system->setPosition(pos);	
+						enemy->removeFromParent();
+						this->planeBomb(pos, tag);					
+						enemyLayer->eraseEnemy(enemy);
+						flag = 1;
 
-					// update socre
-					plane->addScore(1000);
+						// update socre
+						plane->addScore(1000);
+					}
+					else if (enemy->getTag() == ENEMY_TYPE_2_TAG)
+					{
+						EnemyPlaneMedium* enemyM = (EnemyPlaneMedium *)enemy;
+						if (!enemyM->isLifeEmpty())
+						{
+							enemyM->lifeDecresed(1);
+							Vector<SpriteFrame*> animationframe;
+							SpriteFrame * sf = SpriteFrame::create("ui/shoot/enemy2_hit.png", Rect(0, 0, 69, 99));
+							SpriteFrame * sf2 = SpriteFrame::create("ui/shoot/enemy2.png", Rect(0, 0, 69, 99));
+							animationframe.pushBack(sf);
+							animationframe.pushBack(sf2);
+							Animation * ani = Animation::createWithSpriteFrames(animationframe, 0.1);
+							Action* act = Sequence::create(Animate::create(ani), NULL, NULL);
+							enemy->runAction(act);
+						}
+						else
+						{
+							enemy->setDeleted(true);
+							auto pos = enemy->getPosition();
+							int tag = enemy->getTag();
+							//pos.x += enemy->getBoundingBox().size.width / 2;
+							//pos.y -= enemy->getBoundingBox().size.height / 2;
+							system->setPosition(pos);
+							enemy->removeFromParent();
+							this->planeBomb(pos, tag);
+							enemyLayer->eraseEnemy(enemy);
+							flag = 1;
+
+							// update socre
+							plane->addScore(2000);
+						}
+					}
 					break;
 				}
 			}
@@ -316,6 +364,7 @@ void GameScene::collisionJudge()
 		}
 	}
 }
+
 void GameScene::planeBomb(Vec2 vec, int tag)
 {
 	float dt = 0.1;

@@ -86,9 +86,9 @@ void EnemyPlaneLayer::enemyCreate(int progress)
 	}
 	else if(progress == 2)
 	{ 
-		auto enemy1 = EnemyPlane::create("enemy2.png");
-		auto enemy2 = EnemyPlane::create("enemy2.png");
-		auto enemy3 = EnemyPlane::create("enemy2.png");
+		auto enemy1 = EnemyPlaneMedium::create("enemy2.png");
+		auto enemy2 = EnemyPlaneMedium::create("enemy2.png");
+		auto enemy3 = EnemyPlaneMedium::create("enemy2.png");
 
 		float height = enemy1->getContentSize().height;
 		float width = enemy1->getContentSize().width;
@@ -156,13 +156,13 @@ void EnemyPlaneLayer::enemyCreate(int progress)
 	else if (progress == 4)
 	{
 		//left enemy 
-		auto enemy1 = EnemyPlane::create("enemy2.png");
-		auto enemy2 = EnemyPlane::create("enemy2.png");
-		auto enemy3 = EnemyPlane::create("enemy2.png");
+		auto enemy1 = EnemyPlaneMedium::create("enemy2.png");
+		auto enemy2 = EnemyPlaneMedium::create("enemy2.png");
+		auto enemy3 = EnemyPlaneMedium::create("enemy2.png");
 		//right enemy 
-		auto enemy4 = EnemyPlane::create("enemy2.png");
-		auto enemy5 = EnemyPlane::create("enemy2.png");
-		auto enemy6 = EnemyPlane::create("enemy2.png");
+		auto enemy4 = EnemyPlaneMedium::create("enemy2.png");
+		auto enemy5 = EnemyPlaneMedium::create("enemy2.png");
+		auto enemy6 = EnemyPlaneMedium::create("enemy2.png");
 
 		float height = enemy1->getContentSize().height;
 		float width = enemy1->getContentSize().width;

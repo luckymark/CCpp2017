@@ -7,6 +7,7 @@
 #include "cocos2d.h"
 #include "EnemyPlane.h"
 #include "BulletLayer.h"
+#include "EnemyPlaneMedium.h"
 
 class EnemyPlaneLayer :public cocos2d::Layer
 {

@@ -25,9 +25,10 @@ public:
 	void lifeDecreased(int attack);
 
 	bool isLifeEmpty();
-int life = 100;
+
 private:
 	
+	int life = 1000;
 
 	bool deleted = false;
 };

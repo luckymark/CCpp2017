@@ -13,6 +13,7 @@
 #include "TextLayer.h"
 #include "TimeManager.h"
 #include "BossLayer.h"
+#include "ProgressView.h"
 #include <map>
 #include <vector>
 
@@ -29,6 +30,8 @@ private:
 	cocos2d::LabelBMFont *scoreLabel;
 
 	cocos2d::LabelBMFont *lifeLabel;
+
+	ProgressView *bloodbar;
 
 	void gameUpdate(float dt);
 
