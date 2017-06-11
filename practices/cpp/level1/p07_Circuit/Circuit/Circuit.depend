@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1497150507 source:d:\ccpp2017\practices\cpp\level1\p07_circuit\circuit\circuit.cpp
+	"Device.h"
+	"Circuit.h"
+	<cstdio>
+
+1497148750 d:\ccpp2017\practices\cpp\level1\p07_circuit\circuit\device.h
+	<vector>
+
+1497150459 d:\ccpp2017\practices\cpp\level1\p07_circuit\circuit\circuit.h
+	"Device.h"
+	<cstdio>
+
+1497149219 source:d:\ccpp2017\practices\cpp\level1\p07_circuit\circuit\device.cpp
+	"Device.h"
+	<vector>
+	<cstdio>
+
