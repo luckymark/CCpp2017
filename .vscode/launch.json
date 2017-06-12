@@ -5,7 +5,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${file}.exe",
+            "program": "plane.exe",
             "args": [],
             "stopAtEntry": false,
             "targetArchitecture": "x86",
