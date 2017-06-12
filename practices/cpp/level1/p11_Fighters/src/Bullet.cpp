@@ -12,17 +12,14 @@ void Bullet::be_impacted_from(Item *other){
 	animation[cur_animation].be_affected(other -> get_cur_animation());
 	if(other -> get_kind() == type_Room){//Room
 		if(!animation[cur_animation].is_affect()){
-			//dead();
 			int tp = animation[cur_animation].stand_at(other -> get_cur_animation());
 			int tagx = tp%3, tagy = tp/3;
 			if(tagy != 1){
 				sf::Vector2f tmp_mo = physics.get_motivation();
 				if(tagy == 0){
 					if(tmp_mo.y < 0) tmp_mo.y *= float(-1);
-					physics.set_position(sf::Vector2f(physics.get_position().x,50));
 				}else if(tagy == 2){
 					if(tmp_mo.y > 0) tmp_mo.y *= float(-1);
-					physics.set_position(sf::Vector2f(physics.get_position().x,750));
 				}
 				physics.set_motivation(tmp_mo);
 			}
@@ -30,24 +27,18 @@ void Bullet::be_impacted_from(Item *other){
 				sf::Vector2f tmp_mo = physics.get_motivation();
 				if(tagx == 0){
 					if(tmp_mo.x < 0) tmp_mo.x *= float(-1);
-					physics.set_position(sf::Vector2f(50,physics.get_position().y));
 				}else if(tagx == 2){
 					if(tmp_mo.x > 0) tmp_mo.x *= float(-1);
-					physics.set_position(sf::Vector2f(750,physics.get_position().y));
 				}
 				physics.set_motivation(tmp_mo);
 			}
 		}
 	}else if(other -> get_kind() == type_Bullet){
 		if(animation[cur_animation].is_affect() && (item_kind == type_Enemy_bullet || item_kind == type_Bullet)){
-			//dead();
-			//other -> dead();
 			collision(physics, other -> physics);
 		}
 	}else if(other -> get_kind() == type_Enemy_bullet){
 		if(animation[cur_animation].is_affect() && (item_kind == type_Bullet || item_kind == type_Enemy_bullet)){
-			//dead();
-			//other -> dead();
 			collision(physics, other -> physics);
 		}
 	}
@@ -56,6 +47,13 @@ void Bullet::be_impacted_from(Item *other){
 	  dead();
 	  }
 	  }*/
+
+	/*sf::Vector2f pp = physics.get_position();
+	if(pp.x < 50 || pp.x > 750 || pp.y < 50 || pp.y > 750) {
+		cerr << "dead" << endl;
+		dead();
+		return;
+	}*/
 }
 
 void Bullet::Action(sf::Time dt, sf::Vector2f pos){

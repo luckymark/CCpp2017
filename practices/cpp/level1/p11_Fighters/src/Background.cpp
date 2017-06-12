@@ -59,6 +59,7 @@ void Background::set_enemy_from_setting(string setting){
 	float x,y;
 	while(fscanf(in,"%d%f%f",&k,&x,&y) != EOF){
 		Item *tmp = new Enemy(world -> sample_type[k],world -> sample[k], sf::Vector2f(x,y) + physics.get_position(), world);
+		tmp -> physics.set_motivation(sf::Vector2f(0,0));
 		if(tmp == NULL){
 			cerr << "fail to get the memmory in Background.cpp" << endl;
 			exit(0);
