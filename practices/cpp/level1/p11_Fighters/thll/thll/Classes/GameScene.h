@@ -85,6 +85,8 @@ private:
 
 	bool isKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode);
 
+	void buttonBombCallBack();
+
 	int enemy_create_count = 0;
 
 	int enemy_move_count = 0;

@@ -83,9 +83,18 @@ bool GameScene::init()
 
 	// bomb label
 	Sprite* s_bomb = Sprite::create("ui/shoot/bomb.png");
-	s_bomb->setAnchorPoint(Vec2(0, 0));
+
+	auto menu_ = Menu::create();
+	auto menu_bomb = MenuItemImage::create("ui/shoot/bomb.png", "ui/shoot/bomb.png", CC_CALLBACK_0(GameScene::buttonBombCallBack, this));
+	menu_->addChild(menu_bomb);
+	menu_->setAnchorPoint(Vec2(0, 0));
+	menu_->setPosition(Vec2(s_bomb->getContentSize().width / 2, s_bomb->getContentSize().height / 2));
+	this->addChild(menu_);
+
+	
+	/*s_bomb->setAnchorPoint(Vec2(0, 0));
 	s_bomb->setPosition(Vec2(0, 0));
-	this->addChild(s_bomb);
+	this->addChild(s_bomb);*/
 
 	String* strBomb = String::createWithFormat("X%d", SelfPlane::sharedPlane->getBomb());
 	bombLabel = LabelBMFont::create(strLife->getCString(), "font/font.fnt");
@@ -653,6 +662,25 @@ void GameScene::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::
 bool GameScene::isKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode)
 {
 	return keys[keyCode];
+}
+
+void GameScene::buttonBombCallBack()
+{
+	if (plane->getBomb() > 0)
+	{
+		auto visibleSize = Director::getInstance()->getVisibleSize();
+
+		auto renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
+		renderTexture->begin();
+		this->getParent()->visit();
+		renderTexture->end();
+
+		Director::sharedDirector()->pushScene(BombSplashScreen::createScene(renderTexture));
+
+		EnemyPlaneLayer::sharedEnemy->emptyAllEnemy();
+		BulletLayer::sharedBulletLayer->emeptyAllEnemyBullet();
+		SelfPlane::sharedPlane->bombDecresed();
+	}
 }
 
 void GameScene::scoreUpdate()
