@@ -391,7 +391,8 @@
 	<string>
 	<vector>
 
-1497066985 source:d:\plane\plane\fighters.cpp
+1497280021 source:d:\plane\plane\fighters.cpp
+	<string>
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<iostream>
@@ -504,9 +505,9 @@
 	<SFML/Audio/Export.hpp>
 	<string>
 
-1497020438 d:\plane\plane\include\plane.h
+1497255725 d:\plane\plane\include\plane.h
 
-1497020521 source:d:\plane\plane\src\plane.cpp
+1497261775 source:d:\plane\plane\src\plane.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	"Plane.h"
@@ -519,9 +520,10 @@
 1495021438 source:d:\plane\plane\src\shoot.cpp
 	"Shoot.h"
 
-1497006215 d:\plane\plane\include\enemyplane.h
+1497237081 d:\plane\plane\include\enemyplane.h
 
-1497006215 source:d:\plane\plane\src\enemyplane.cpp
+1497254055 source:d:\plane\plane\src\enemyplane.cpp
+	<string>
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	"Fire.h"
@@ -530,9 +532,9 @@
 	<ctime>
 	<cstdlib>
 
-1496287639 d:\plane\plane\include\fire.h
+1497237958 d:\plane\plane\include\fire.h
 
-1496884448 source:d:\plane\plane\src\fire.cpp
+1497250116 source:d:\plane\plane\src\fire.cpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	<iostream>
