@@ -111,6 +111,9 @@ bool GameScene::init()
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
+	// Music
+	Audio::getInstance()->playBGM();
+
 	// LinkStart!
 	this->schedule(schedule_selector(GameScene::gameUpdate), GAME_UPDATE_SEC);
 
@@ -371,6 +374,14 @@ void GameScene::collisionJudge()
 
 			system->setPosition(enemy_pos);
 
+			if (enemy->getTag() == ENEMY_TYPE_1_TAG)
+			{
+				Audio::getInstance()->playEnemy1();
+			}
+			else
+			{
+				Audio::getInstance()->playEnemy2();
+			}
 			enemy->removeFromParent();
 			this->planeBomb(enemy_pos, enemy_tag);
 			enemyLayer->eraseEnemy(enemy);
@@ -411,6 +422,8 @@ void GameScene::collisionJudge()
 					}
 					else
 					{
+						Audio::getInstance()->playEnemy3();
+
 						bloodbar->removeFromParent();
 
 						is_boss_create = false;
@@ -443,8 +456,8 @@ void GameScene::collisionJudge()
 						enemy->setDeleted(true);
 						auto pos = enemy->getPosition();
 						int tag = enemy->getTag();
-						//pos.x += enemy->getBoundingBox().size.width / 2;
-						//pos.y -= enemy->getBoundingBox().size.height / 2;
+						
+						Audio::getInstance()->playEnemy1();
 						system->setPosition(pos);	
 						enemy->removeFromParent();
 						this->planeBomb(pos, tag);					
@@ -482,6 +495,9 @@ void GameScene::collisionJudge()
 							int tag = enemy->getTag();
 							//pos.x += enemy->getBoundingBox().size.width / 2;
 							//pos.y -= enemy->getBoundingBox().size.height / 2;
+
+							Audio::getInstance()->playEnemy2();
+
 							system->setPosition(pos);
 							enemy->removeFromParent();
 							this->planeBomb(pos, tag);

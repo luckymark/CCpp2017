@@ -8,6 +8,7 @@
 #include "SelfPlane.h"
 #include "BulletLayer.h"
 #include "BombSplashScreen.h"
+#include "Audio.h"
 
 class SelfPlaneLayer :public cocos2d::Layer
 {

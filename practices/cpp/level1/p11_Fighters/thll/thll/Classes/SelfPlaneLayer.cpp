@@ -209,6 +209,7 @@ bool SelfPlaneLayer::isKeyPressed(EventKeyboard::KeyCode keyCode)
 
 void SelfPlaneLayer::startShooting()
 {
+	Audio::getInstance()->playBullet();
 	auto key_z = EventKeyboard::KeyCode::KEY_Z;
 	auto bulletLayer = BulletLayer::sharedBulletLayer;
 	bulletLayer->bulletCreate();

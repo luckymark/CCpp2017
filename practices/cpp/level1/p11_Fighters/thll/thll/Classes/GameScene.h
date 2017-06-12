@@ -19,6 +19,7 @@
 #include "DropItemLayer.h"
 #include "GamePauseLayer.h"
 #include "GameOver.h"
+#include "Audio.h"
 #include <map>
 #include <vector>
 
