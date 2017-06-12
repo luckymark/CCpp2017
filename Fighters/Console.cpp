@@ -87,7 +87,7 @@ void Console::init_musics_and_sounds(){
     bgm.setVolume(10);
     bgm.setLoop(true);
     lost_music.openFromFile("lost.ogg");
-    lost_music.setVolume(10);
+//    lost_music.setVolume(10);
     warning_music.openFromFile("warning.wav");
 //    warning_music.setVolume(40);
     reward_music.openFromFile("reward.wav");
