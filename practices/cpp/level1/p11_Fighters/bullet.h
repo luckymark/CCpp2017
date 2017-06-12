@@ -1,18 +1,24 @@
 #pragma once
-#include<iostream>
 #include <SFML/Graphics.hpp>
-#include "plane.h"
-
+#include"plane.h"
 
 class Bullets
 {
 public:
 	void move();
-	Bullets();
+	void setpoint(int x,int y);
+	void append2(int x, int y);
+	Bullets(int num);
 	void append(int x,int y);
-	sf::Sprite draw(int i);
-	void pop();
+	sf::Sprite &draw(int i);
+	void destroy(int No);
 	bool exist(int i);
+	int getx(int No);
+	int gety(int No);
+	void setspeed(int speed);
 private:
-	Plane p[100];
+	Plane *p;
+	int speed;
+	int num;
+	int r = 0, a = 0, x, y;
 };

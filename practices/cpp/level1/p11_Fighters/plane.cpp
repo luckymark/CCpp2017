@@ -1,9 +1,4 @@
 #include "plane.h"
-#include <fstream>
-#include <cstdlib>
-#include<iostream>
-
-
 
 Plane::Plane()
 {
@@ -11,46 +6,64 @@ Plane::Plane()
 	positiony = 0;
 }
 
-Plane::Plane(int i, int positionx, int positiony, float x, float y)
+void Plane::initialization(int i, int positionx, int positiony, float x, float y)
 {
-	std::string p;
 	switch (i) {
 		case 1: {
-			p = "plane.jpg";
+			picture.loadFromFile("plane.jpg");
 			break;
 		}
 		case 2: {
-			p = "plane2.jpg";
+			picture.loadFromFile("enemy1.png");
 			break;
 		}
 		case 3: {
-			p = "Xiaoyueyue.jpg";
+			picture.loadFromFile("myplane1.png");
 			break;
 		}
 		case 4: {
-			p = "Fire1.png";
+			picture.loadFromFile("Fire1.png");
+			break;
+		}
+		case 5: {
+			picture.loadFromFile("enemy4.png");
 			break;
 		}
 	}
-	/*sf::ContextSettings glsettings;
-	glsettings.antialiasingLevel = 1;//上述两行代码保证窗口无法被更改
 
-	sf::RenderWindow window{ sf::VideoMode(1920,1080), "loadFromMemory Example", sf::Style::Titlebar | sf::Style::Close, glsettings };
-	*/
 
-	std::ifstream texture{ p, std::ifstream::binary };
-	std::vector<char> buffer;
-	texture.seekg(0, texture.end);
-	const auto length = texture.tellg();
+	plane.setTexture(picture);
+	this->positionx = positionx;
+	this->positiony = positiony;
+	plane.setPosition(positionx, positiony);
+	plane.scale(x, y);
+}
+
+Plane::Plane(int i, int positionx, int positiony, float x, float y)
+{
+	switch (i) {
+		case 1: {
+			picture.loadFromFile("plane.jpg");
+			break;
+		}
+		case 2: {
+			picture.loadFromFile("enemy1.png");
+			break;
+		}
+		case 3: {
+			picture.loadFromFile("myplane1.png");
+			break;
+		}
+		case 4: {
+			picture.loadFromFile("Fire1.png");
+			break;
+		}
+		case 5: {
+			picture.loadFromFile("enemy4.jpg");
+			break;
+		}
+	}
 	
-	buffer.resize(length); // reserve space
-	texture.seekg(0, texture.beg);
-
-	auto start = &*buffer.begin();
-	texture.read(start, length);
-	texture.close();
-
-	picture.loadFromMemory(&buffer[0], buffer.size());
 
 	plane.setTexture(picture);
 	this->positionx = positionx;
@@ -66,9 +79,14 @@ void Plane::move(int positionx, int positiony)
 	plane.setPosition(positionx, positiony);
 }
 
-void Plane::destroy()
+bool Plane::Isdestroy(sf::FloatRect boundry)
 {
-
+	sf::FloatRect boundingBox = plane.getGlobalBounds();
+	if (boundingBox.intersects(boundry))
+	{
+		return true;
+	}
+	return false;
 }
 
 int Plane::getx()
@@ -81,8 +99,41 @@ int Plane::gety()
 	return positiony;
 }
 
-sf::Sprite Plane::get()
+sf::Sprite &Plane::get()
 {
 	return plane;
 }
 
+sf::Texture &Plane::gettexture()
+{
+	return picture;
+}
+
+void Plane::copy(Plane another)
+{
+	this->picture = another.gettexture();
+	plane.setTexture(picture);
+	this->positionx = another.getx();
+	this->positiony = another.gety();
+}
+
+void Plane::destroy()
+{
+	plane.move(0, 0);
+}
+
+void Plane::setspeed(int speed)
+{
+	this->speed = speed;
+}
+
+void Plane::bingo_initialization()
+{
+	bingo = 0;
+}
+
+int Plane::is_bingo()
+{
+	bingo += 1;
+	return bingo;
+}
