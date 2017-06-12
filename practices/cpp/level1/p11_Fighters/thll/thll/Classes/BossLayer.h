@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Boss.h"
+#include "BulletLayer.h"
 
 class BossLayer :public cocos2d::Layer
 {
@@ -16,6 +17,12 @@ public:
 	void bossCreate();
 
 	void bossRunAction();
+
+	void bossMove(int progress);
+
+	void bossAttack(int progress);
+
+	void bossMoveAndAttack(int progress);
 
 private:
 	Boss* boss;

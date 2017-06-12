@@ -9,6 +9,7 @@
 #include "SelfPlaneLayer.h"
 #include "EnemyPlaneLayer.h"
 #include "Bullet.h"
+#include "Boss.h"
 
 class BulletLayer :public cocos2d::Layer
 {
@@ -32,6 +33,8 @@ public:
 	void bulletRemoveFromAction(Node * pNode);
 
 	void emeptyAllEnemyBullet();
+
+	void bossBulletCreate(int progress);
 
 	static BulletLayer* sharedBulletLayer;
 

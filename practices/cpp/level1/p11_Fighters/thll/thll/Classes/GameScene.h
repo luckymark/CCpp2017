@@ -4,6 +4,8 @@
 #define GAME_UPDATE_SEC 1.0 / 60.0f
 #define BG_1_TAG 101
 #define BG_2_TAG 102
+#define JUD_T(x) TimeManager::getInstance()->JudgeTime(x)
+#define JUD_T_A(x) TimeManager::getInstance()->JudgeTimeArray(std::vector<long double>{x})
 
 #include "cocos2d.h"
 #include "SelfPlaneLayer.h"
@@ -16,6 +18,7 @@
 #include "ProgressView.h"
 #include "DropItemLayer.h"
 #include "GamePauseLayer.h"
+#include "GameOver.h"
 #include <map>
 #include <vector>
 

@@ -306,3 +306,45 @@ void BulletLayer::emeptyAllEnemyBullet()
 		}
 	}
 }
+
+void BulletLayer::bossBulletCreate(int progress)
+{
+	if (progress == 1)
+	{
+		auto plane = SelfPlane::sharedPlane;
+		auto boss = Boss::sharedBoss;
+
+		auto pos = boss->getPosition();
+
+		auto bullet = Bullet::create("ui/shoot/bullet2.png");
+		bullet->setPosition(pos);
+		bullet->setTag(ENEMY_BULLET_TAG);
+
+		// calculate
+		auto plane_pos = plane->getPosition();
+
+		Point shootVector = pos - plane_pos;
+
+		Point normalizedVector = ccpNormalize(shootVector);
+
+		float radians = atan2(normalizedVector.y, -normalizedVector.x);
+
+		float degree = CC_RADIANS_TO_DEGREES(radians);
+
+		bullet->setRotation(bullet->getRotation() + degree - 90);
+
+		Point overShootVector = normalizedVector * 900;
+
+		Point offScreenPoint = bullet->getPosition() - overShootVector;
+
+		float moveSpeed = 150;
+
+		float moveDuration = std::max(overShootVector.x, overShootVector.y) / moveSpeed;
+
+		auto move = MoveTo::create(moveDuration, offScreenPoint);
+		this->bulletList.pushBack(bullet);
+		bullet->runAction(Sequence::create(move, CCCallFuncN::create(bullet, callfuncN_selector(BulletLayer::bulletRemoveFromAction)), NULL));
+		this->addChild(bullet);
+	}
+
+}

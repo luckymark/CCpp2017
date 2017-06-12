@@ -202,14 +202,14 @@ void GameScene::gameUpdate(float dt)
 		plane_auto_bullet_create_count = 0;
 	}*/
 
-	// boss
+	// Boss
 	if (TimeManager::getInstance()->JudgeTime(55))
 	{
 		bossLayer->bossCreate();
 
 		// set blood bar
 		bloodbar = new ProgressView();
-		bloodbar->setPosition(Vec2(visibleSize.width / 2  ,visibleSize.height -  50));
+		bloodbar->setPosition(Vec2(visibleSize.width / 2, visibleSize.height - 50));
 		bloodbar->setBackgroundTexture("ui/shoot_background/back_bar.png");
 		bloodbar->setForegroundTexture("ui/shoot_background/back_bar_slider.png");
 		bloodbar->setTotalProgress(1000.0f);
@@ -218,7 +218,35 @@ void GameScene::gameUpdate(float dt)
 
 		is_boss_create = true;
 	}
-	
+
+	// Boss status 1
+	if (JUD_T(56))
+	{
+		bossLayer->bossMove(1);
+	}
+	if (TimeManager::getInstance()->JudgeTimeArray(std::vector<long double>{56.2, 56.4, 56.6, 56.8, 57.0}))
+	{
+		bossLayer->bossAttack(1);
+	}
+	if (JUD_T(62))
+	{
+		bossLayer->bossMove(2);
+	}
+	if (TimeManager::getInstance()->JudgeTimeArray(std::vector<long double>{62.2, 62.4, 62.6, 62.8, 63.0}))
+	{
+		bossLayer->bossAttack(1);
+	}
+	// Boss status 2
+	if (JUD_T(68))
+	{
+		bossLayer->bossMove(3);
+	}
+	if (TimeManager::getInstance()->JudgeTimeArray(std::vector<long double>{68.5, 69, 69.5, 70, 71.5,72.5,73,73.5,74,74.5,75,75.5,76,76.5,77,77.5,78,78.5,79,79.5,80}))
+	{
+		bossLayer->bossAttack(1);
+	}
+
+
 
 	// Enemy
 	if (TimeManager::getInstance()->JudgeTimeArray(std::vector<long double> {1,1.5,2,2.5,3,3.5,4,4.5,5,5.5,6,6.5,7,7.5,8,8.5,9,9.5,10}))
@@ -550,12 +578,16 @@ void GameScene::bombRemove(Node * sprite)
 		auto plane = SelfPlane::sharedPlane;
 		if (plane->isLifeEmpty())
 		{
-
+			Director::getInstance()->replaceScene(GameOver::createScene());
 		}
 		else
 		{
 			plane->setReborn(getCurrentTime());
 		}
+	}
+	else if (sprite->getTag() == BOSS_TAG)
+	{
+		Director::getInstance()->replaceScene(GameOver::createScene());
 	}
 }
 
