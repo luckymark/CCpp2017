@@ -21,8 +21,6 @@ void Action::move(sf::Vector2f direction) {
 	this->setPosition(this->getPosition() + temp);
 
 
-
-
 }
 
 
