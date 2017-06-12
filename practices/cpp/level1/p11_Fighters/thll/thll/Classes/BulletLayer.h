@@ -25,11 +25,11 @@ public:
 
 	void autoBulletCreate();
 
-	void enemyBulletCreate();
+	void enemyBulletCreate(cocos2d::Vec2 vec);
 
 	void bulletRemove(Bullet* sprite);
 
-	void bulletRemoveFromActin(Node * pNode);
+	void bulletRemoveFromAction(Node * pNode);
 
 	void emeptyAllEnemyBullet();
 

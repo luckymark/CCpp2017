@@ -2,6 +2,7 @@
 #define _BOMB_SPLASH_SCREEN_H_
 
 #include "cocos2d.h"
+#include "SelfPlane.h"
 
 class BombSplashScreen :public cocos2d::Layer
 {

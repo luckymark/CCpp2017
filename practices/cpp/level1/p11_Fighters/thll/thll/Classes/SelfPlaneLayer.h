@@ -20,13 +20,15 @@ public:
 
 	cocos2d::Node* getPlane();
 
-	void planeUpdate(cocos2d::RenderTexture *renderTexture);
+	void planeUpdate(cocos2d::EventKeyboard::KeyCode keyCode);
 
 	void planeUpdate();
 
 	void startShooting();
 
 	void planeRunAction();
+
+	void setKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode);
 
 	bool isKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode);
 

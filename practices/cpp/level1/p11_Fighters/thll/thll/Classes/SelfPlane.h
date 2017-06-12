@@ -53,6 +53,10 @@ public:
 
 	void bombDecresed();
 
+	void setIsPlayBomb(bool is);
+
+	bool getIsPlayBomb();
+
 private:
 
 	int level = 1;
@@ -68,5 +72,7 @@ private:
 	bool is_dead = false;
 
 	long reborn_time = 0;
+
+	bool is_play_bomb = false;
 };
 #endif

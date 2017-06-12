@@ -27,7 +27,10 @@ public:
 	virtual bool init();
 
 	CREATE_FUNC(GameScene);
+
 private:
+
+	std::map<cocos2d::EventKeyboard::KeyCode, bool> keys;
 
 	cocos2d::LabelBMFont *scoreLabel;
 
@@ -61,6 +64,8 @@ private:
 
 	GamePauseLayer* pauseLayer;
 
+	SelfPlane* plane;
+
 	void planeBomb(cocos2d::Vec2 vec, int tag);
 
 	void bombRemove(cocos2d::Node * sprite);
@@ -68,6 +73,14 @@ private:
 	void buttonPauseCallBack();
 
 	long getCurrentTime();
+
+	bool isEnemyShoot();
+
+	void onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
+
+	void onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* event);
+
+	bool isKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode);
 
 	int enemy_create_count = 0;
 

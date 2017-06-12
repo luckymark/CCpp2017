@@ -48,12 +48,12 @@ bool SelfPlaneLayer::init()
 
 	planeRunAction();
 
-	auto listener = EventListenerKeyboard::create();
+	/*auto listener = EventListenerKeyboard::create();
 
 	listener->onKeyPressed = CC_CALLBACK_2(SelfPlaneLayer::onKeyPressed, this);
 	listener->onKeyReleased = CC_CALLBACK_2(SelfPlaneLayer::onKeyReleased, this);
 
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, plane);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, plane);*/
 
 	//this->scheduleUpdate();
 	//this->schedule(schedule_selector(SelfPlaneLayer::bulletCreate), 0.01);
@@ -61,28 +61,26 @@ bool SelfPlaneLayer::init()
 	return true;
 }
 
-void SelfPlaneLayer::planeUpdate(RenderTexture *renderTexture)
+void SelfPlaneLayer::planeUpdate(cocos2d::EventKeyboard::KeyCode keyCode)
 {
-	this->renderTexture = renderTexture;
-
 	auto left = EventKeyboard::KeyCode::KEY_LEFT_ARROW;
 	auto right = EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
 	auto up = EventKeyboard::KeyCode::KEY_UP_ARROW;
 	auto down = EventKeyboard::KeyCode::KEY_DOWN_ARROW;
 
-	if (isKeyPressed(left))
+	if (keyCode == left)
 	{
 		keyPressedDuration(left);
 	}
-	if (isKeyPressed(right))
+	if (keyCode == right)
 	{
 		keyPressedDuration(right);
 	}
-	if (isKeyPressed(up))
+	if (keyCode == up)
 	{
 		keyPressedDuration(up);
 	}
-	if (isKeyPressed(down))
+	if (keyCode == down)
 	{
 		keyPressedDuration(down);
 	}
@@ -175,16 +173,17 @@ void SelfPlaneLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 	// x 147
 	// space 59
 	// enter 164 & 35
-	if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
+
+	/*if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
 	{
 		if (SelfPlane::sharedPlane->getBomb() > 0)
 		{
 			auto visibleSize = Director::getInstance()->getVisibleSize();
-
+			// get the window picture
 			auto renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
 			renderTexture->begin();
-			this->getParent()->visit();
 			renderTexture->end();
+
 			Director::sharedDirector()->pushScene(BombSplashScreen::createScene(renderTexture));
 
 			EnemyPlaneLayer::sharedEnemy->emptyAllEnemy();
@@ -193,11 +192,9 @@ void SelfPlaneLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 		}
 	}
 	else
-	{
+	{*/
 		keys[keyCode] = true;
-	}
-	
-
+	//}
 }
 
 void SelfPlaneLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
@@ -214,15 +211,12 @@ void SelfPlaneLayer::startShooting()
 {
 	auto key_z = EventKeyboard::KeyCode::KEY_Z;
 	auto bulletLayer = BulletLayer::sharedBulletLayer;
-	if (isKeyPressed(key_z))
+	bulletLayer->bulletCreate();
+	/*if (EnemyPlaneLayer::sharedEnemy->getEnemyList().size() != 0)
 	{
-		bulletLayer->bulletCreate();
-		/*if (EnemyPlaneLayer::sharedEnemy->getEnemyList().size() != 0)
-		{
-			bulletLayer->autoBulletCreate();
-		}*/
+		bulletLayer->autoBulletCreate();
+	}*/
 		
-	}
 }
 
 void SelfPlaneLayer::planeRunAction()
@@ -238,6 +232,11 @@ void SelfPlaneLayer::planeRunAction()
 
 	Action * act = RepeatForever::create(Animate::create(ani));
 	SelfPlane::sharedPlane->runAction(act);
+}
+
+void SelfPlaneLayer::setKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode)
+{
+	this->keys[keyCode] = false;
 }
 
 Node* SelfPlaneLayer::getPlane()

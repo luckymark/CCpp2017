@@ -106,13 +106,13 @@ void BulletLayer::bulletMove()
 		}
 		else if (tag == ENEMY_BULLET_TAG)
 		{
-			bullet->setPositionY(bullet->getPositionY() - 3);
+			/*bullet->setPositionY(bullet->getPositionY() - 3);
 			if (bullet->getPositionY() < 0)
 			{
 				bulletList.eraseObject(bullet);
 				bullet->removeFromParent();
 				i--;
-			}
+			}*/
 		}
 
 	}
@@ -236,24 +236,40 @@ void BulletLayer::autoBulletCreate()
 	}
 }
 
-void BulletLayer::enemyBulletCreate()
+void BulletLayer::enemyBulletCreate(Vec2 pos)
 {
-	auto enemyList = EnemyPlaneLayer::sharedEnemy->getEnemyList();
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto plane = SelfPlane::sharedPlane;
 
-	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("enemy_bullet.plist");
+	auto bullet = Bullet::create("ui/shoot/bullet2.png");
+	bullet->setPosition(pos);
+	bullet->setTag(ENEMY_BULLET_TAG);
 
-	for (int i = 0; i < enemyList.size(); i++)
-	{
-		auto bullet = Bullet::createWithSpriteFrameName("W2.png");
+	// calculate
+	auto plane_pos = plane->getPosition();
+ 
+	Point shootVector = pos - plane_pos;
 
-		auto enemy = enemyList.at(i);
+	Point normalizedVector = ccpNormalize(shootVector);
+	
+	float radians = atan2(normalizedVector.y, -normalizedVector.x);
+	  
+	float degree = CC_RADIANS_TO_DEGREES(radians);
 
-		bullet->setPosition(enemy->getPositionX(), enemy->getPositionY() - 30);
-		bullet->setTag(ENEMY_BULLET_TAG);
+	bullet->setRotation(bullet->getRotation() + degree - 90);
 
-		this->addChild(bullet);
-		bulletList.pushBack(bullet);
-	}
+	Point overShootVector = normalizedVector * 900;
+
+	Point offScreenPoint = bullet->getPosition() - overShootVector;
+ 
+	float moveSpeed = 100;
+
+	float moveDuration = std::max(overShootVector.x, overShootVector.y) / moveSpeed;
+ 
+	auto move = MoveTo::create(moveDuration, offScreenPoint);
+	this->bulletList.pushBack(bullet);
+	bullet->runAction(Sequence::create(move, CCCallFuncN::create(bullet, callfuncN_selector(BulletLayer::bulletRemoveFromAction)), NULL));
+	this->addChild(bullet);
 }
 
 Vector<Bullet* > BulletLayer::getBulletList()
@@ -267,7 +283,7 @@ void BulletLayer::bulletRemove(Bullet* sprite)
 	this->bulletList.eraseObject(sprite);
 }
 
-void BulletLayer::bulletRemoveFromActin(Node * pNode)
+void BulletLayer::bulletRemoveFromAction(Node * pNode)
 {
 	if (NULL == pNode) {
 		return;

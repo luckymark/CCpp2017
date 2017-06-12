@@ -248,7 +248,7 @@ Vector<EnemyPlane* > EnemyPlaneLayer::getEnemyList()
 
 void EnemyPlaneLayer::enemyShoting()
 {
-	BulletLayer::sharedBulletLayer->enemyBulletCreate();
+	//BulletLayer::sharedBulletLayer->enemyBulletCreate();
 }
 
 void EnemyPlaneLayer::eraseEnemy(EnemyPlane* enemy)

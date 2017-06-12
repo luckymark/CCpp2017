@@ -147,3 +147,13 @@ void SelfPlane::bombDecresed()
 	this->bomb--;
 }
 
+void SelfPlane::setIsPlayBomb(bool is)
+{
+	this->is_play_bomb = is;
+}
+
+bool SelfPlane::getIsPlayBomb()
+{
+	return this->is_play_bomb;
+}
+

@@ -51,6 +51,9 @@ bool GameScene::init()
 	dropLayer = DropItemLayer::create();
 	this->addChild(dropLayer);
 
+	// plane instance
+	plane = SelfPlane::sharedPlane;
+
 	//life count
 	String* strLife = String::createWithFormat("X%d", SelfPlane::sharedPlane->getLife());
 	lifeLabel = LabelBMFont::create(strLife->getCString(), "font/font.fnt");
@@ -90,6 +93,14 @@ bool GameScene::init()
 	bombLabel->setAnchorPoint(Vec2(0, 0));
 	bombLabel->setPosition(Vec2(s_bomb->getContentSize().width + 3, s_bomb->getContentSize().height / 4));
 	this->addChild(bombLabel);
+
+	// controller
+	auto listener = EventListenerKeyboard::create();
+
+	listener->onKeyPressed = CC_CALLBACK_2(GameScene::onKeyPressed, this);
+	listener->onKeyReleased = CC_CALLBACK_2(GameScene::onKeyReleased, this);
+
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	// LinkStart!
 	this->schedule(schedule_selector(GameScene::gameUpdate), GAME_UPDATE_SEC);
@@ -131,24 +142,60 @@ void GameScene::gameUpdate(float dt)
 	plane_auto_bullet_create_count++;
 	enemy_bullet_create_count++;
 
-	// Plane 
-	if (planeLayer->isKeyPressed(EventKeyboard::KeyCode::KEY_SPACE))
+	//plane update
+	auto left = EventKeyboard::KeyCode::KEY_LEFT_ARROW;
+	auto right = EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
+	auto up = EventKeyboard::KeyCode::KEY_UP_ARROW;
+	auto down = EventKeyboard::KeyCode::KEY_DOWN_ARROW;
+
+	if (isKeyPressed(left))
 	{
-		// get the window picture
-		auto renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
-		renderTexture->begin();
-		this->visit();
-		renderTexture->end();
-		planeLayer->planeUpdate(renderTexture);
+		planeLayer->planeUpdate(left);
+	}
+	if (isKeyPressed(right))
+	{
+		planeLayer->planeUpdate(right);
+	}
+	if (isKeyPressed(up))
+	{
+		planeLayer->planeUpdate(up);
+	}
+	if (isKeyPressed(down))
+	{
+		planeLayer->planeUpdate(down);
+	}
+
+	/*if (planeLayer->isKeyPressed(EventKeyboard::KeyCode::KEY_SPACE) && !SelfPlane::sharedPlane->getIsPlayBomb())
+	{
+		planeLayer->planeUpdate();
+		if (SelfPlane::sharedPlane->getBomb() > 0)
+		{
+			planeLayer->setKeyReleased(EventKeyboard::KeyCode::KEY_SPACE);
+			SelfPlane::sharedPlane->setIsPlayBomb(true);
+			// get the window picture
+			auto renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
+			renderTexture->begin();
+			this->visit();
+			renderTexture->end();
+
+			Director::sharedDirector()->pushScene(BombSplashScreen::createScene(renderTexture));
+
+			EnemyPlaneLayer::sharedEnemy->emptyAllEnemy();
+			BulletLayer::sharedBulletLayer->emeptyAllEnemyBullet();
+			SelfPlane::sharedPlane->bombDecresed();
+		}
 	}
 	else
 	{
+		SelfPlane::sharedPlane->setIsPlayBomb(false);
 		planeLayer->planeUpdate();
+	}*/
+
+	// shooting
+	if (isKeyPressed(EventKeyboard::KeyCode::KEY_Z))
+	{
+		planeLayer->startShooting();
 	}
-
-
-	planeLayer->startShooting();
-
 	/*if (plane_auto_bullet_create_count % 360 == 0)
 	{
 		bulletLayer->autoBulletCreate();
@@ -197,7 +244,7 @@ void GameScene::gameUpdate(float dt)
 	// enemy bullet
 	if (enemy_bullet_create_count % 360 == 0)
 	{
-		enemyLayer->enemyShoting();
+		//enemyLayer->enemyShoting();
 		enemy_bullet_create_count = 0;
 	}
 
@@ -267,7 +314,7 @@ void GameScene::collisionJudge()
 		}
 	}
 
-	//check enemy and self
+	//check enemy and plane
 	for (int i = 0; i < enemyList.size(); i++)
 	{
 		auto enemy = enemyList.at(i);
@@ -367,6 +414,12 @@ void GameScene::collisionJudge()
 						enemyLayer->eraseEnemy(enemy);
 						flag = 1;
 
+						// enemy bullet
+						if (isEnemyShoot())
+						{
+							bulletLayer->enemyBulletCreate(enemy->getPosition());
+						}
+
 						// update socre
 						plane->addScore(1000);
 					}
@@ -397,6 +450,12 @@ void GameScene::collisionJudge()
 							this->planeBomb(pos, tag);
 							enemyLayer->eraseEnemy(enemy);
 							flag = 1;
+
+							// enemy bullet
+							if (isEnemyShoot())
+							{
+								bulletLayer->enemyBulletCreate(enemy->getPosition());
+							}
 
 							// update socre
 							plane->addScore(2000);
@@ -515,6 +574,53 @@ long GameScene::getCurrentTime()
 	struct timeval tv;
 	gettimeofday(&tv, NULL);
 	return tv.tv_sec * 1000 + tv.tv_usec / 1000;
+}
+
+bool GameScene::isEnemyShoot()
+{
+	srand(time(0));
+	int n = rand() % 2;
+	return n == 1;
+}
+
+void GameScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event * event)
+{
+	if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
+	{
+		if (plane->getBomb() > 0)
+		{
+			auto visibleSize = Director::getInstance()->getVisibleSize();
+
+			auto renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
+			renderTexture->begin();
+			this->getParent()->visit();
+			renderTexture->end();
+
+			Director::sharedDirector()->pushScene(BombSplashScreen::createScene(renderTexture));
+
+			EnemyPlaneLayer::sharedEnemy->emptyAllEnemy();
+			BulletLayer::sharedBulletLayer->emeptyAllEnemyBullet();
+			SelfPlane::sharedPlane->bombDecresed();
+
+			onKeyReleased(EventKeyboard::KeyCode::KEY_SPACE, event);
+		}
+
+	}
+	else
+	{
+		this->keys[keyCode] = true;
+	}
+	
+}
+
+void GameScene::onKeyReleased(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event * event)
+{
+	this->keys[keyCode] = false;
+}
+
+bool GameScene::isKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode)
+{
+	return keys[keyCode];
 }
 
 void GameScene::scoreUpdate()

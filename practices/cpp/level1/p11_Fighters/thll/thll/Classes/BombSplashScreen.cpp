@@ -63,7 +63,6 @@ bool BombSplashScreen::init()
 
 	this->addChild(splash);
 
-
 	return true;
 }
 
