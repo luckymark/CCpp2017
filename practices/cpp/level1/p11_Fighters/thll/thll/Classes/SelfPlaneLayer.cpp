@@ -61,7 +61,34 @@ bool SelfPlaneLayer::init()
 	return true;
 }
 
-void SelfPlaneLayer::planeUpdate(float  delta)
+void SelfPlaneLayer::planeUpdate(RenderTexture *renderTexture)
+{
+	this->renderTexture = renderTexture;
+
+	auto left = EventKeyboard::KeyCode::KEY_LEFT_ARROW;
+	auto right = EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
+	auto up = EventKeyboard::KeyCode::KEY_UP_ARROW;
+	auto down = EventKeyboard::KeyCode::KEY_DOWN_ARROW;
+
+	if (isKeyPressed(left))
+	{
+		keyPressedDuration(left);
+	}
+	if (isKeyPressed(right))
+	{
+		keyPressedDuration(right);
+	}
+	if (isKeyPressed(up))
+	{
+		keyPressedDuration(up);
+	}
+	if (isKeyPressed(down))
+	{
+		keyPressedDuration(down);
+	}
+}
+
+void SelfPlaneLayer::planeUpdate()
 {
 	auto left = EventKeyboard::KeyCode::KEY_LEFT_ARROW;
 	auto right = EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
@@ -148,7 +175,29 @@ void SelfPlaneLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 	// x 147
 	// space 59
 	// enter 164 & 35
-	keys[keyCode] = true;
+	if (keyCode == EventKeyboard::KeyCode::KEY_SPACE)
+	{
+		if (SelfPlane::sharedPlane->getBomb() > 0)
+		{
+			auto visibleSize = Director::getInstance()->getVisibleSize();
+
+			auto renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
+			renderTexture->begin();
+			this->getParent()->visit();
+			renderTexture->end();
+			Director::sharedDirector()->pushScene(BombSplashScreen::createScene(renderTexture));
+
+			EnemyPlaneLayer::sharedEnemy->emptyAllEnemy();
+			BulletLayer::sharedBulletLayer->emeptyAllEnemyBullet();
+			SelfPlane::sharedPlane->bombDecresed();
+		}
+	}
+	else
+	{
+		keys[keyCode] = true;
+	}
+	
+
 }
 
 void SelfPlaneLayer::onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event)
@@ -175,6 +224,7 @@ void SelfPlaneLayer::startShooting()
 		
 	}
 }
+
 void SelfPlaneLayer::planeRunAction()
 {
 	Vector<SpriteFrame*> animationframe;

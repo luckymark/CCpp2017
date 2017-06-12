@@ -32,6 +32,10 @@ public:
 
 	void eraseEnemy(EnemyPlane* enemy);
 
+	void emptyAllEnemy();
+
+	void aniRemove(cocos2d::Node * sprite);
+
 private:
 	cocos2d::Vector<EnemyPlane* > enemyList;
 };

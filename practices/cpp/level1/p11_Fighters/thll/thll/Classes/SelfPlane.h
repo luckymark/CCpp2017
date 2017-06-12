@@ -47,6 +47,12 @@ public:
 
 	int getLife();
 
+	void bombIncresed();
+
+	int getBomb();
+
+	void bombDecresed();
+
 private:
 
 	int level = 1;
@@ -56,6 +62,8 @@ private:
 	int life = 3;
 
 	int score = 0;
+
+	int bomb = 0;
 
 	bool is_dead = false;
 

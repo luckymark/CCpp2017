@@ -31,6 +31,8 @@ public:
 
 	void bulletRemoveFromActin(Node * pNode);
 
+	void emeptyAllEnemyBullet();
+
 	static BulletLayer* sharedBulletLayer;
 
 	cocos2d::Vector<Bullet* > getBulletList();

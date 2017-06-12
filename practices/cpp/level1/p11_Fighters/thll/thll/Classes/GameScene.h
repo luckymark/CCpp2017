@@ -14,6 +14,7 @@
 #include "TimeManager.h"
 #include "BossLayer.h"
 #include "ProgressView.h"
+#include "DropItemLayer.h"
 #include <map>
 #include <vector>
 
@@ -31,7 +32,11 @@ private:
 
 	cocos2d::LabelBMFont *lifeLabel;
 
+	cocos2d::LabelBMFont *bombLabel;
+
 	ProgressView *bloodbar;
+
+	cocos2d::Sprite* bombPic;
 
 	void gameUpdate(float dt);
 
@@ -41,6 +46,8 @@ private:
 
 	void lifeUpdate();
 
+	void bombUpdate();
+
 	SelfPlaneLayer* planeLayer;
 
 	EnemyPlaneLayer* enemyLayer;
@@ -48,6 +55,8 @@ private:
 	BulletLayer* bulletLayer;
 
 	BossLayer* bossLayer;
+
+	DropItemLayer* dropLayer;
 
 	void planeBomb(cocos2d::Vec2 vec, int tag);
 

@@ -48,6 +48,9 @@ bool GameScene::init()
 	bossLayer = BossLayer::create();
 	this->addChild(bossLayer);
 
+	dropLayer = DropItemLayer::create();
+	this->addChild(dropLayer);
+
 	//life count
 	String* strLife = String::createWithFormat("X%d", SelfPlane::sharedPlane->getLife());
 	lifeLabel = LabelBMFont::create(strLife->getCString(), "font/font.fnt");
@@ -61,14 +64,29 @@ bool GameScene::init()
 	s_plane->setPosition(Vec2(visibleSize.width - lifeLabel->getContentSize().width, visibleSize.height));
 	this->addChild(s_plane);
 
-	//label
+	//score label
 	scoreLabel = LabelBMFont::create("0","font/font.fnt");
 	scoreLabel->setColor(Color3B::BLACK);
 	scoreLabel->setAnchorPoint(Vec2(0, 1));
 	scoreLabel->setPosition(Vec2(5 , visibleSize.height - scoreLabel->getContentSize().height));
 	this->addChild(scoreLabel);
 
+	// bomb label
+	Sprite* s_bomb = Sprite::create("ui/shoot/bomb.png");
+	s_bomb->setAnchorPoint(Vec2(0, 0));
+	s_bomb->setPosition(Vec2(0, 0));
+	this->addChild(s_bomb);
+
+	String* strBomb = String::createWithFormat("X%d", SelfPlane::sharedPlane->getBomb());
+	bombLabel = LabelBMFont::create(strLife->getCString(), "font/font.fnt");
+	bombLabel->setColor(Color3B::BLACK);
+	bombLabel->setAnchorPoint(Vec2(0, 0));
+	bombLabel->setPosition(Vec2(s_bomb->getContentSize().width + 3, s_bomb->getContentSize().height / 4));
+	this->addChild(bombLabel);
+
+	// LinkStart!
 	this->schedule(schedule_selector(GameScene::gameUpdate), GAME_UPDATE_SEC);
+
 	return true;
 }
 
@@ -86,18 +104,21 @@ void GameScene::gameUpdate(float dt)
 	bg1->setPositionY(bg1->getPositionY() - 3);
 	bg2->setPositionY(bg1->getPositionY() + bg1->getContentSize().height);
 
+
+	
+
+
+
 	if (is_first_enter)
 	{
-		is_first_enter = false;
 
 		// get the window picture
-
 		auto renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
-
 		renderTexture->begin();
 		this->getParent()->visit();
 		renderTexture->end();
 
+		is_first_enter = false;
 		Director::sharedDirector()->pushScene(TextLayer::createScene(renderTexture));
 
 	}
@@ -109,7 +130,20 @@ void GameScene::gameUpdate(float dt)
 	enemy_bullet_create_count++;
 
 	// Plane 
-	planeLayer->planeUpdate(dt);
+	if (planeLayer->isKeyPressed(EventKeyboard::KeyCode::KEY_SPACE))
+	{
+		// get the window picture
+		auto renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
+		renderTexture->begin();
+		this->visit();
+		renderTexture->end();
+		planeLayer->planeUpdate(renderTexture);
+	}
+	else
+	{
+		planeLayer->planeUpdate();
+	}
+
 
 	planeLayer->startShooting();
 
@@ -174,6 +208,13 @@ void GameScene::gameUpdate(float dt)
 	// Bullet
 	bulletLayer->bulletMove();
 
+	// DropItem
+	if (TimeManager::getInstance()->JudgeTimeArray(std::vector<long double> {1, 2, 3, 4, 5,9,11}))
+	{
+		dropLayer->createDrop();
+	}
+	dropLayer->dropMove();
+
 	// Handle Game
 	collisionJudge();
 
@@ -182,12 +223,16 @@ void GameScene::gameUpdate(float dt)
 
 	// Handle life label
 	lifeUpdate();
+
+	// Handle bomb label
+	bombUpdate();
 }
 
 void GameScene::collisionJudge()
 {
 	Vector<Bullet* > bulletList = bulletLayer->getBulletList();
 	Vector<EnemyPlane* > enemyList = enemyLayer->getEnemyList();
+	Vector<Sprite* > dropList = dropLayer->getDropList();
 	auto plane = SelfPlane::sharedPlane;
 	auto system = ParticleExplosion::create();
 	auto boss = Boss::sharedBoss;
@@ -199,6 +244,25 @@ void GameScene::collisionJudge()
 	else
 	{
 		plane->setOpacity(255);
+	}
+
+	// check plane and dropitem
+	for (int i = 0; i < dropList.size(); i++)
+	{
+		auto drop = dropList.at(i);
+		if (plane->getBoundingBox().intersectsRect(drop->getBoundingBox()))
+		{
+			if (drop->getTag() == DROP_TYPE_2_TAG)
+			{
+				plane->bombIncresed();
+			}
+			else if(drop->getTag() == DROP_TYPE_1_TAG)
+			{
+				plane->addScore(100);
+			}
+			dropLayer->removeDrop(drop);
+			drop->removeFromParent();
+		}
 	}
 
 	//check enemy and self
@@ -451,4 +515,10 @@ void GameScene::lifeUpdate()
 {
 	String* strLife = String::createWithFormat("X%d", SelfPlane::sharedPlane->getLife());
 	lifeLabel->setString(strLife->_string.c_str());
+}
+
+void GameScene::bombUpdate()
+{
+	String* strBomb = String::createWithFormat("X%d", SelfPlane::sharedPlane->getBomb());
+	bombLabel->setString(strBomb->_string.c_str());
 }

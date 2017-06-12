@@ -79,6 +79,12 @@
     <ClCompile Include="..\Classes\ProgressView.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\DropItemLayer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BombSplashScreen.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -139,6 +145,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\ProgressView.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\DropItemLayer.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BombSplashScreen.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

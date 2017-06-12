@@ -132,3 +132,18 @@ int SelfPlane::getLife()
 	return this->life;
 }
 
+void SelfPlane::bombIncresed()
+{
+	this->bomb++;
+}
+
+int SelfPlane::getBomb()
+{
+	return this->bomb;
+}
+
+void SelfPlane::bombDecresed()
+{
+	this->bomb--;
+}
+

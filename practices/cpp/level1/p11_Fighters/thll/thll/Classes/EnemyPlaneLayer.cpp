@@ -256,6 +256,56 @@ void EnemyPlaneLayer::eraseEnemy(EnemyPlane* enemy)
 	this->enemyList.eraseObject(enemy);
 }
 
+void EnemyPlaneLayer::emptyAllEnemy()
+{
+	for (int i = enemyList.size() - 1; i >= 0; i--)
+	{
+		auto enemy = enemyList.at(i);
+		auto pos = enemy->getPosition();
+		int tag = enemy->getTag();
+
+		enemy->removeFromParent();
+		this->enemyList.eraseObject(enemy);
+
+		float dt = 0.1;
+		Vector<SpriteFrame*> animationframe;
+		if (tag == ENEMY_TYPE_1_TAG)
+		{
+			for (int i = 1; i<5; i++)
+			{
+				auto string = cocos2d::__String::createWithFormat("ui/shoot/enemy1_down%d.png", i);
+				SpriteFrame * sf = SpriteFrame::create(string->getCString(), Rect(0, 0, 57, 43));
+				animationframe.pushBack(sf);
+			}
+			SelfPlane::sharedPlane->addScore(1000);
+		}
+		else if (tag == ENEMY_TYPE_2_TAG)
+		{
+			for (int i = 1; i<5; i++)
+			{
+				auto string = cocos2d::__String::createWithFormat("ui/shoot/enemy2_down%d.png", i);
+				SpriteFrame * sf = SpriteFrame::create(string->getCString(), Rect(0, 0, 69, 95));
+				animationframe.pushBack(sf);
+			}
+			SelfPlane::sharedPlane->addScore(2000);
+		}
+
+		Animation * ani = Animation::createWithSpriteFrames(animationframe, dt);
+		auto blanksprite = Sprite::create();
+		blanksprite->setTag(tag);
+
+		Action * act = Sequence::create(Animate::create(ani), CCCallFuncN::create(blanksprite, callfuncN_selector(EnemyPlaneLayer::aniRemove)), NULL);
+		this->addChild(blanksprite);
+		blanksprite->setPosition(pos);
+		blanksprite->runAction(act);
+	}
+}
+
+void EnemyPlaneLayer::aniRemove(Node * sprite)
+{
+	sprite->removeFromParent();
+}
+
 void EnemyPlaneLayer::enemyRemove(Node * pNode)
 {
 	if (NULL == pNode) {

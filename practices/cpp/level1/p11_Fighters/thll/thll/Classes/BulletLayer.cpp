@@ -276,3 +276,17 @@ void BulletLayer::bulletRemoveFromActin(Node * pNode)
 	this->bulletRemove(plane);
 	this->removeChild(plane, true);
 }
+
+void BulletLayer::emeptyAllEnemyBullet()
+{
+
+	for (int i = bulletList.size() - 1; i >= 0; i--)
+	{
+		auto bullet = bulletList.at(i);
+		if (bullet->getTag() == ENEMY_BULLET_TAG)
+		{
+			bulletList.eraseObject(bullet);
+			bullet->removeFromParent();
+		}
+	}
+}
