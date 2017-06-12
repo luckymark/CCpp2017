@@ -14,6 +14,7 @@ class Fire
         sf::Sprite get_enemyShootSprite();
         void move_enemyShoot();
         bool enemy_active;
+        float level_enemyShoot;
     protected:
         int position_enemyBullet_x;
         int position_enemtBullet_y;

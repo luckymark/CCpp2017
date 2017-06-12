@@ -38,6 +38,7 @@ class EnemyPlane
         };
         Enemy_Plane enemyPlane;
         int explosion_status;
+        float level_enemyPlane;
     protected:
         int count_explosion;
         int temp;

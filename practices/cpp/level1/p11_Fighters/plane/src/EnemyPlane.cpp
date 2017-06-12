@@ -1,10 +1,13 @@
+#include <string>
 #include <SFML/Graphics.hpp>
+
 #include <SFML/Audio.hpp>
 #include "Fire.h"
 #include "EnemyPlane.h"
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+
 
 
 EnemyPlane::EnemyPlane()
@@ -14,6 +17,7 @@ EnemyPlane::EnemyPlane()
     enemyPlane.active=0;
     explosion_status=0;
     count_explosion=0;
+    level_enemyPlane=1.5;
     sprite_enemyPlane.setPosition(rand()%1100,0);
     texture_enemyPlane.loadFromFile("enemy1.png");//57*43
     textureExplosion1.loadFromFile("enemy1_down1.png");
@@ -38,10 +42,8 @@ void EnemyPlane::explosion(int positionExplosion_x,int positionExplosion_y)
     {
        case 1 :spriteExplosion1.setPosition(positionExplosion_x,positionExplosion_y);
        count_explosion++;
-       //soundExplosion_1.setBuffer(explosion_soundBuffer_1);
        break;
        case 2 :spriteExplosion2.setPosition(positionExplosion_x,positionExplosion_y);
-       //soundExplosion_2.setBuffer(explosion_soundBuffer_2);
        count_explosion++;
        break;
        case 3 :spriteExplosion3.setPosition(positionExplosion_x,positionExplosion_y);
@@ -55,7 +57,7 @@ void EnemyPlane::explosion(int positionExplosion_x,int positionExplosion_y)
 }
 void EnemyPlane::controlExplosion()
 {
-    if(count_explosion==4)
+    if(count_explosion==5)
     {
         explosion_status++;
         count_explosion=0;
@@ -75,7 +77,7 @@ void EnemyPlane::on_off()
 }
 void EnemyPlane::move_enemyPlane()
 {
-    sprite_enemyPlane.move(0,1.5);
+    sprite_enemyPlane.move(0,level_enemyPlane);
     if(sprite_enemyPlane.getPosition().y>900)
     {
         EnemyPlane::reset();
