@@ -154,7 +154,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\EnemyPlane.cpp" />
     <ClCompile Include="..\Classes\EnemyPlaneLayer.cpp" />
     <ClCompile Include="..\Classes\EnemyPlaneMedium.cpp" />
+    <ClCompile Include="..\Classes\GameLoading.cpp" />
     <ClCompile Include="..\Classes\GameMenu.cpp" />
+    <ClCompile Include="..\Classes\GamePauseLayer.cpp" />
     <ClCompile Include="..\Classes\GameScene.cpp" />
     <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="..\Classes\ProgressView.cpp" />
@@ -180,7 +182,9 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\EnemyPlane.h" />
     <ClInclude Include="..\Classes\EnemyPlaneLayer.h" />
     <ClInclude Include="..\Classes\EnemyPlaneMedium.h" />
+    <ClInclude Include="..\Classes\GameLoading.h" />
     <ClInclude Include="..\Classes\GameMenu.h" />
+    <ClInclude Include="..\Classes\GamePauseLayer.h" />
     <ClInclude Include="..\Classes\GameScene.h" />
     <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="..\Classes\ProgressView.h" />

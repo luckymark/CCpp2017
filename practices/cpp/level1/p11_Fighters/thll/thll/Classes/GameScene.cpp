@@ -64,11 +64,18 @@ bool GameScene::init()
 	s_plane->setPosition(Vec2(visibleSize.width - lifeLabel->getContentSize().width, visibleSize.height));
 	this->addChild(s_plane);
 
+	// pause button
+	auto menu = Menu::create();
+	auto button_pause = MenuItemImage::create("ui/shoot/game_pause_nor.png", "ui/shoot/game_pause_pressed.png", CC_CALLBACK_0(GameScene::buttonPauseCallBack,this));
+	menu->addChild(button_pause);
+	menu->setPosition(Vec2(button_pause->getContentSize().width / 2, visibleSize.height - button_pause->getContentSize().height / 2));
+	this->addChild(menu);
+
 	//score label
-	scoreLabel = LabelBMFont::create("0","font/font.fnt");
+	scoreLabel = LabelBMFont::create("0", "font/font.fnt");
 	scoreLabel->setColor(Color3B::BLACK);
 	scoreLabel->setAnchorPoint(Vec2(0, 1));
-	scoreLabel->setPosition(Vec2(5 , visibleSize.height - scoreLabel->getContentSize().height));
+	scoreLabel->setPosition(Vec2(button_pause->getContentSize().width + 5, visibleSize.height - scoreLabel->getContentSize().height / 2));
 	this->addChild(scoreLabel);
 
 	// bomb label
@@ -103,11 +110,6 @@ void GameScene::gameUpdate(float dt)
 	}
 	bg1->setPositionY(bg1->getPositionY() - 3);
 	bg2->setPositionY(bg1->getPositionY() + bg1->getContentSize().height);
-
-
-	
-
-
 
 	if (is_first_enter)
 	{
@@ -496,6 +498,16 @@ void GameScene::bombRemove(Node * sprite)
 			plane->setReborn(getCurrentTime());
 		}
 	}
+}
+
+void GameScene::buttonPauseCallBack()
+{
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height);
+	renderTexture->begin();
+	this->getParent()->visit();
+	renderTexture->end();
+	Director::getInstance()->pushScene(GamePauseLayer::createScene(renderTexture));
 }
 
 long GameScene::getCurrentTime()

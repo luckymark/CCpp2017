@@ -15,6 +15,7 @@
 #include "BossLayer.h"
 #include "ProgressView.h"
 #include "DropItemLayer.h"
+#include "GamePauseLayer.h"
 #include <map>
 #include <vector>
 
@@ -58,9 +59,13 @@ private:
 
 	DropItemLayer* dropLayer;
 
+	GamePauseLayer* pauseLayer;
+
 	void planeBomb(cocos2d::Vec2 vec, int tag);
 
 	void bombRemove(cocos2d::Node * sprite);
+
+	void buttonPauseCallBack();
 
 	long getCurrentTime();
 

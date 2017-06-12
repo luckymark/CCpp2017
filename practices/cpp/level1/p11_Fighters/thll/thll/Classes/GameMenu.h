@@ -2,6 +2,9 @@
 #define _GAME_MENU_H_
 
 #include "cocos2d.h"
+#include "GameScene.h"
+#include "GameLoading.h"
+
 class GameMenu : public cocos2d::Layer
 {
 public:
@@ -12,6 +15,8 @@ public:
 	void menuStartCallBack(cocos2d::Ref* ref);
 
 	void menuEndCallBack(cocos2d::Ref* ref);
+
+	void updateMenu(float dt);
 
 	CREATE_FUNC(GameMenu);
 };

@@ -1,19 +1,16 @@
-#include "GameMenu.h"
+#include "GameLoading.h"
 
 USING_NS_CC;
 
-Scene* GameMenu::createScene()
+Scene* GameLoading::createScene()
 {
 	auto scene = Scene::create();
-
-	auto layer = GameMenu::create();
-
+	auto layer = GameLoading::create();
 	scene->addChild(layer);
-
 	return scene;
 }
 
-bool GameMenu::init()
+bool GameLoading::init()
 {
 	if (!Layer::init())
 	{
@@ -35,42 +32,27 @@ bool GameMenu::init()
 	bg2->setTag(BG_2_TAG);
 	this->addChild(bg2, 0);
 
-	// create logo
-	auto logo = Sprite::create("ui/shoot_background/shoot_copyright.png");
-	logo->setPosition(Vec2(visibleSize.width / 2, visibleSize.height / 4 * 3));
-	this->addChild(logo);
+	float dt = 1;
+	Vector<SpriteFrame*> animationframe;
+	for (int i = 1; i <= 4; i++)
+	{
+		auto string = cocos2d::__String::createWithFormat("ui/shoot_background/game_loading%d.png", i);
+		SpriteFrame * sf = SpriteFrame::create(string->getCString(), Rect(0, 0, 186, 38));
+		animationframe.pushBack(sf);
+	}
+	this->schedule(schedule_selector(GameLoading::updateBackground), GAME_UPDATE_SEC);
+	Animation * ani = Animation::createWithSpriteFrames(animationframe, dt);
+	auto blanksprite = Sprite::create();
 
-	// create menu
-	auto menu = Menu::create();
+	Action * act = Sequence::create(Animate::create(ani), CCCallFunc::create(this, callfunc_selector(GameLoading::loadingFinishedCallBack)), NULL);
+	this->addChild(blanksprite);
+	blanksprite->setPosition(visibleSize / 2);
+	blanksprite->runAction(act);
 
-	auto menuStart = MenuItemImage::create("ui/shoot_background/game_start.png","ui/shoot_background/game_start2.png", CC_CALLBACK_1(GameMenu::menuStartCallBack, this));
-
-	auto menuEnd = MenuItemImage::create("ui/shoot_background/game_exit.png", "ui/shoot_background/game_exit.png", CC_CALLBACK_1(GameMenu::menuEndCallBack, this));
-
-	menu->addChild(menuStart);
-	menu->addChild(menuEnd);
-	menu->alignItemsVerticallyWithPadding(40);
-	menu->setPosition(Director::getInstance()->getVisibleSize().width / 2, Director::getInstance()->getVisibleSize().height / 2);
-
-	this->addChild(menu);
-
-	this->schedule(schedule_selector(GameMenu::updateMenu), GAME_UPDATE_SEC);
 	return true;
 }
 
-void GameMenu::menuStartCallBack(Ref* ref)
-{
-	auto game = GameLoading::createScene();
-	
-	Director::getInstance()->replaceScene(game);
-}
-
-void GameMenu::menuEndCallBack(Ref* ref)
-{
-
-}
-
-void GameMenu::updateMenu(float dt)
+void GameLoading::updateBackground(float dt)
 {
 	// background move
 	auto bg1 = this->getChildByTag(BG_1_TAG);
@@ -81,4 +63,9 @@ void GameMenu::updateMenu(float dt)
 	}
 	bg1->setPositionY(bg1->getPositionY() - 3);
 	bg2->setPositionY(bg1->getPositionY() + bg1->getContentSize().height);
+}
+
+void GameLoading::loadingFinishedCallBack()
+{
+	Director::getInstance()->replaceScene(GameScene::createScene());
 }
