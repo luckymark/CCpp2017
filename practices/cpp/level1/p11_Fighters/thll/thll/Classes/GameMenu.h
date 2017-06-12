@@ -4,6 +4,7 @@
 #include "cocos2d.h"
 #include "GameScene.h"
 #include "GameLoading.h"
+#include "Audio.h"
 
 class GameMenu : public cocos2d::Layer
 {

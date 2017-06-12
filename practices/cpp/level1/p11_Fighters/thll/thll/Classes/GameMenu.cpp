@@ -23,6 +23,9 @@ bool GameMenu::init()
 	auto visibleOrigin = Director::getInstance()->getVisibleOrigin();
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 
+	// music prepare
+	Audio::getInstance()->prepare();
+
 	// create backgroud
 	auto bg1 = Sprite::create("ui/shoot_background/background.png");
 	bg1->setPosition(Vec2(visibleOrigin.x + visibleSize.width / 2, 0));
