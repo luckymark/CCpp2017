@@ -30,6 +30,10 @@ private:
 
 	cocos2d::LabelTTF* labelLower;
 
+	cocos2d::LabelTTF* labelUpper;
+
+	cocos2d::Sprite* avatar = nullptr;
+
 	int textCount;
 
 	int wordCount = 0;

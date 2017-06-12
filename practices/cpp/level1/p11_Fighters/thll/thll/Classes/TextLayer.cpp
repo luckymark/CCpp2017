@@ -66,6 +66,12 @@ void TextLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 	{
 		if (wordCount > node->getContentLength())
 		{
+			if (avatar != nullptr)
+			{
+				avatar->removeFromParent();
+			}
+			isAvatarSetting = false;
+
 			if (!isTextOver)
 			{
 				wordCount = 0;
@@ -94,8 +100,16 @@ void TextLayer::onEnterTransitionDidFinish()
 	label = LabelTTF::create();
 	label->setColor(Color3B::WHITE);
 	label->setFontSize(36);
-	label->setPosition(Vec2(visibleSize.width / 2, 160));
+	label->setDimensions(Size(visibleSize.width, 160));
+	label->setPosition(Vec2(visibleSize.width / 2, 80));
 	this->addChild(label,2);
+
+	labelUpper = LabelTTF::create();
+	labelUpper->setColor(Color3B::WHITE);
+	labelUpper->setFontSize(16);
+	labelUpper->setAnchorPoint(Vec2(0, 1));
+	labelUpper->setPosition(Vec2(0, 200));
+	this->addChild(labelUpper, 2);
 
 	labelLower = LabelTTF::create();
 	labelLower->setColor(Color3B::WHITE);
@@ -109,7 +123,7 @@ void TextLayer::onEnterTransitionDidFinish()
 	layerColor->setContentSize(Size(visibleSize.width, visibleSize.height / 4.0));*/
 	auto layerText = Sprite::create("text/icon/text_box.png");
 	layerText->setOpacity(200);
-	layerText->setPosition(Vec2(layerText->getContentSize().width / 2, layerText->getContentSize().height / 2));
+	layerText->setPosition(Vec2(layerText->getContentSize().width / 2, layerText->getContentSize().height));
 	this->addChild(layerText,1);
 
 	readXml("/text/text1.xml");
@@ -151,35 +165,75 @@ void TextLayer::logic(float cTime)
 
 	WordNode* node = (WordNode*)textList[textIndex];
 
-	Sprite* avatar = nullptr;
+	if (node->getAnchor() == 0)
+	{
+		if (!isAvatarSetting)
+		{
+			avatar = Sprite::create(node->getIcon());
+			avatar->setPosition(Vec2(avatar->getContentSize().width/2.0, visibleSize.height / 4.0 + avatar->getContentSize().height / 2.0));
+			this->addChild(avatar);
+			isAvatarSetting = true;
+		}
+		if (wordCount > node->getContentLength())
+		{
+			label->setString(node->getContentByLength(wordCount));
+			labelUpper->setString(node->getName());
+			labelUpper->setAnchorPoint(Vec2(0, 1));
+			labelUpper->setPosition(Vec2(0, 200));
 
-	if (!isAvatarSetting)
-	{
-		avatar = Sprite::create(node->getIcon());
-		avatar->setPosition(Vec2(avatar->getContentSize().width/2.0, visibleSize.height / 4.0 + avatar->getContentSize().height / 2.0));
-		this->addChild(avatar);
-		isAvatarSetting = true;
-	}
-	if (wordCount > node->getContentLength())
-	{
+			
+			if (!isTextOver)
+			{
+				labelLower->setString("space to continue");
+			}
+			else
+			{
+				labelLower->setString("space to end");
+			}
+			return;
+		}
 		label->setString(node->getContentByLength(wordCount));
-
-		isAvatarSetting = false;
-		if (avatar != nullptr)
-		{
-			avatar->removeFromParent();
-		}
-		if (!isTextOver)
-		{
-			labelLower->setString("space to continue");
-		}
-		else
-		{
-			labelLower->setString("space to end");
-		}
-		return;
+		labelLower->setString("");
+		labelUpper->setString(node->getName());
+		labelUpper->setAnchorPoint(Vec2(0, 1));
+		labelUpper->setPosition(Vec2(0, 200));
+		wordCount++;
 	}
-	label->setString(node->getContentByLength(wordCount));
-	labelLower->setString("");
-	wordCount++;
+	else
+	{
+		if (!isAvatarSetting)
+		{
+			avatar = Sprite::create(node->getIcon());
+			avatar->setPosition(Vec2(visibleSize.width - avatar->getContentSize().width / 2.0, visibleSize.height / 4.0 + avatar->getContentSize().height / 2.0));
+			this->addChild(avatar);
+			isAvatarSetting = true;
+		}
+		if (wordCount > node->getContentLength())
+		{
+			label->setString(node->getContentByLength(wordCount));
+			labelUpper->setString(node->getName());
+			labelUpper->setAnchorPoint(Vec2(1, 1));
+			labelUpper->setPosition(Vec2(visibleSize.width, 200));
+
+			//isAvatarSetting = false;
+
+			if (!isTextOver)
+			{
+				labelLower->setString("space to continue");
+			}
+			else
+			{
+				labelLower->setString("space to end");
+			}
+			return;
+		}
+		label->setString(node->getContentByLength(wordCount));
+		labelLower->setString("");
+		labelUpper->setString(node->getName());
+		labelUpper->setAnchorPoint(Vec2(1, 1));
+		labelUpper->setPosition(Vec2(visibleSize.width, 200));
+		wordCount++;
+	}
+
+
 }

@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <plist version="1.0">
-  <talk anchor="0" icon="text/icon/icon.jpg" name="路人甲：" content="  wtmsb"/>
-  <talk anchor="1" icon="text/icon/icon.jpg" name="路人乙：" content="  wcnbb too"/>
-  <talk anchor="0" icon="text/icon/icon.jpg" name="路人甲：" content="  23333"/>
+  <talk anchor="0" icon="text/icon/timg.jpg" name="MAKI" content="这...这是哪？我为什么在这里？"/>
+  <talk anchor="1" icon="text/icon/hj.jpg" name="制作人" content="这里是滑稽界，你是被选召的孩子"/>
+  <talk anchor="0" icon="text/icon/timg.jpg" name="MAKI" content="大家...都在哪去了...矢泽同学...矢泽同学在哪！"/>
+  <talk anchor="1" icon="text/icon/hj.jpg" name="制作人" content="不用担心，缪斯的大家都在这滑稽界里，可是..."/>
+  <talk anchor="0" icon="text/icon/timg.jpg" name="MAKI" content="可是!我...很担心矢泽同学!"/>
+  <talk anchor="1" icon="text/icon/hj.jpg" name="制作人" content="想要找到NICO吗"/>
+  <talk anchor="0" icon="text/icon/timg.jpg" name="MAKI" content="我不想离开NICO酱!和NICO在一起的每一天都是那么明媚，我...已经离不开NICO了！！"/>
+  <talk anchor="1" icon="text/icon/hj.jpg" name="制作人" content="蛤蛤蛤，要想找回挚爱的人，你得先打败俸爷大魔王！"/>
+  <talk anchor="0" icon="text/icon/timg.jpg" name="MAKI" content="（有魔王希可怕吗...）"/>
+  <talk anchor="1" icon="text/icon/hj.jpg" name="制作人" content="蛤蛤蛤，那么游戏开始吧！"/>
 </plist>

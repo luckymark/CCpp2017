@@ -93,7 +93,7 @@ private:
 
 	int enemy_bullet_create_count = 0;
 
-	bool is_first_enter = false;
+	bool is_first_enter = true;
 
 	bool is_boss_create = false;
 };
