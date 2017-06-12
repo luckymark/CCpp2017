@@ -20,11 +20,6 @@ void Action::move(sf::Vector2f direction) {
 	temp.y = this->direction.y*speed;
 	this->setPosition(this->getPosition() + temp);
 
-
-
-
-
-
 }
 
 
