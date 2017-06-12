@@ -53,6 +53,11 @@ bool GamePauseLayer::init()
 	auto btn_resume = MenuItemImage::create("ui/shoot_background/btn_finish.png", "ui/shoot_background/btn_finish.png", CC_CALLBACK_0(GamePauseLayer::buttonResumeCallBack, this));
 	menu->addChild(btn_resume);
 
+	auto btn_return = MenuItemImage::create("ui/shoot/game_resume_nor.png", "ui/shoot/game_resume_pressed.png", CC_CALLBACK_0(GamePauseLayer::buttonReturnCallBack, this));
+	btn_return->setRotation(180);
+	menu->addChild(btn_return);
+
+	menu->alignItemsVerticallyWithPadding(40);
 	menu->setPosition(visibleSize / 2);
 
 	this->addChild(menu,3);
@@ -63,4 +68,9 @@ bool GamePauseLayer::init()
 void GamePauseLayer::buttonResumeCallBack()
 {
 	Director::getInstance()->popScene();
+}
+
+void GamePauseLayer::buttonReturnCallBack()
+{
+	//Director::getInstance()->replaceScene(GameMenu::createScene());
 }

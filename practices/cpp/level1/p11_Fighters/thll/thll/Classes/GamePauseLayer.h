@@ -13,6 +13,8 @@ public:
 	virtual bool init();
 
 	void buttonResumeCallBack();
+
+	void buttonReturnCallBack();
 };
 #endif // !_GAME_PAUSE_LAYER_H_
 
