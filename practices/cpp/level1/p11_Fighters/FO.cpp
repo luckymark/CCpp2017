@@ -3,10 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
-void FO::crash()
-{
-	;
-}
 
 FO::FO()
 {
@@ -19,6 +15,7 @@ FO::FO()
 	score = 0;
 	damage = 1.0;
 	isSym = false;
+	HealthPoint = 1;
 }
 
 FO::FO(int flag)
@@ -32,7 +29,7 @@ FO::FO(int flag)
 	score = 0;
 	damage = 1.0;
 	isSym = false;
-	
+	HealthPoint = 1;
 
 	switch (flag)
 	{

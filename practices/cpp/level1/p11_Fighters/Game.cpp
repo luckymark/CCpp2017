@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
-#include <windows.h>//Delete it when project completes
 #include <algorithm>
 #include <list>
 #include <vector>
@@ -49,8 +48,6 @@ Game::Game()
 	text.setCharacterSize(50);
 
 	loadMusicAndSounds();
-
-	Sleep(1000);//Cancel it when Game project completes
 
 }
 //
@@ -123,6 +120,10 @@ void Game::loadBackgrounds()
 	{
 		puts("Error: Load stg01logo failed!");
 	}
+	if (!Title2.loadFromFile("E:\\Media\\Sources\\Jpg&Png\\TH\\Ex.15\\front\\front01.png"))
+	{
+		puts("Error: Load clear failed!");
+	}
 	if (!whiteSpark.loadFromFile("E:\\Media\\Sources\\Jpg&Png\\TH\\Ex.15\\front\\White.png"))
 	{
 		puts("Error: Load White failed!");
@@ -175,11 +176,11 @@ void Game::loadPointsAndEffs()
 	}
 	if (!allBullets1.loadFromFile("E:\\Media\\Sources\\Jpg&Png\\TH\\Ex.15\\bullet\\bullet1.png"))
 	{
-		puts("Error: Load deathCircle failed!");
+		puts("Error: Load bullet1 failed!");
 	}
 	if (!allBullets2.loadFromFile("E:\\Media\\Sources\\Jpg&Png\\TH\\Ex.15\\bullet\\bullet2.png"))
 	{
-		puts("Error: Load deathCircle failed!");
+		puts("Error: Load bullet2 failed!");
 	}
 	if (!magicSquare.loadFromFile("E:\\Media\\Sources\\Jpg&Png\\TH\\Ex.15\\effect\\eff_magicsquare.png"))
 	{
@@ -200,7 +201,7 @@ void Game::loadEnemy()
 	}
 	if (!Enemy3.loadFromFile("E:\\Media\\Sources\\Jpg&Png\\TH\\Ex.15\\enemy\\enemy5.png"))
 	{
-		puts("Error: Load enemy2 failed!");
+		puts("Error: Load enemy3 failed!");
 	}
 }
 //
@@ -251,7 +252,7 @@ void Game::loadMusicAndSounds()
 	SCAnounce.setBuffer(SCAnounceBuffer);
 	if (!cardGetBuffer.loadFromFile("E:\\Media\\Sources\\Jpg&Png\\TH\\Ex.143\\se_cardget.wav"))
 	{
-		puts("Error: Open se_cat00.wav failed!");
+		puts("Error: Open se_cardget.wav failed!");
 	}
 	cardGet.setBuffer(cardGetBuffer);
 }
@@ -306,7 +307,7 @@ void Game::Stage1()
 		curTime++;
 	}
 
-	switch ((int)elapsed1.asSeconds()+0)
+	switch ((int)elapsed1.asSeconds() + 0)//for testing
 	{
 	case 1:
 		//pre
@@ -329,7 +330,7 @@ void Game::Stage1()
 		//wave
 		evts[6] = 1;
 		break;
-	case 41:
+	case 42:
 		evts[7] = 1;
 		break;
 	case 49:
@@ -337,7 +338,7 @@ void Game::Stage1()
 		evts[8] = 1;
 		break;
 	case 75:
-		//help
+		//reinforce
 		evts[9] = 1;
 		break;
 	case 81:
@@ -347,7 +348,7 @@ void Game::Stage1()
 		evts[11] = 1;
 		break;
 	case 100:
-		//boss
+		//Scene switching
 		evts[12] = 1;
 		break;
 	case 105:
@@ -445,6 +446,14 @@ void Game::Stage1()
 		if (S1E13())
 		{
 			evts[13] = 0;
+			evts[14] = 1;
+		}
+	}
+	if (evts[14])
+	{
+		if (S1E14())
+		{
+			evts[14] = 0;
 		}
 	}
 }
@@ -616,11 +625,9 @@ int Game::S1E3()
 		sButterfly.hero.setScale(sf::Vector2f(1.5, 1.5));
 		sButterfly.hero.setPosition(sf::Vector2f(600.0, 20.0));
 		sButterfly.speed = 3.0;
-		//sButterfly.setSButterfly(400 + pow(-1.0, i1 / gapFrame) * i1, 20.0);
 		sButterfly.born = i1;
 		sButterfly.gap = gap;
 		gap++;
-		//printf("Now %x\n", sButterfly.hero);
 
 		wave1.push_back(sButterfly);
 	}
@@ -915,6 +922,7 @@ int Game::S1E5()//mButter quit anime dierction
 		mButterfly.hero.setOrigin(mButterfly.width*0.5, mButterfly.height*0.5 - 24);
 		mButterfly.born = i1;
 		mButterfly.hero.setPosition(sf::Vector2f(600.0, -20.0));
+		mButterfly.HealthPoint = 60;
 		wave2.push_back(mButterfly);
 	}
 	if (i1 % gapFrame == 1 && i1 < 10 * gapFrame)
@@ -1082,9 +1090,6 @@ int Game::S1E5()//mButter quit anime dierction
 		{
 			it->hero.setTextureRect(sf::IntRect((int)(temp / 32 % 4 + 3) * it->width, 320 + 2 * it->height, it->width, it->height));
 		}
-
-
-
 		enemyCollisionProcessing(it);
 
 		enemiesPushToDraw(it);
@@ -1295,9 +1300,6 @@ int Game::S1E7()
 	static int i1 = 0;
 	i1++;
 	static list<FO> wave1;
-	double gapTime = 0.2;
-	int gapFrame = gapTime * 60;
-	static int gap = 0, temp = 0;
 	
 	if (i1 == 1)
 	{
@@ -1325,7 +1327,7 @@ int Game::S1E7()
 		{
 			it->speed = 0.0;
 			
-				setSharpFlower1(it, 4.0, 4, 0);
+			setSharpFlower1(it, 4.0, 4, 0);
 			
 		}
 		else
@@ -1351,9 +1353,6 @@ int Game::S1E8()
 	static int i1 = 0, stp = 0;
 	i1++;
 	static list<FO> wave1, wave2;
-	double gapTime = 0.2;
-	int gapFrame = gapTime * 60;
-	static int gap = 0, temp = 0;
 
 	if (i1 == 1)
 	{
@@ -1523,11 +1522,11 @@ int Game::S1E10()
 	static int i1 = 0;
 	i1++;
 	static list<FO> wave1, wave2;
-	double gapTime = 1.5;
+	double gapTime = 1.8;
 	int gapFrame = gapTime * 60;
 	static int gap = 0, temp = 0;
 
-	if (i1 % gapFrame == 1 && i1 < 6 * gapFrame)
+	if (i1 % gapFrame == 1 && i1 < 5 * gapFrame)
 	{
 		FO mButterfly(5);
 		mButterfly.hero.setTexture(Enemy1);
@@ -1549,7 +1548,6 @@ int Game::S1E10()
 		{
 			it->speed = 70.0 / (temp + 1.0);
 			it->theta = 0.5*PI;
-			//it->hero.setTextureRect(sf::IntRect(i1 % 35 / 7 * it->width, 320, it->width, it->height));
 		}
 		else//phase2
 		{
@@ -1588,7 +1586,6 @@ int Game::S1E10()
 		return 1;
 	}
 	return 0;
-	return 0;
 }
 
 int Game::S1E11()
@@ -1607,11 +1604,9 @@ int Game::S1E11()
 		sButterfly.hero.setTextureRect(sf::IntRect(0, 320, sButterfly.width, sButterfly.height));
 		sButterfly.hero.setScale(sf::Vector2f(1.5, 1.5));
 		sButterfly.hero.setPosition(sf::Vector2f(rand() * 30 % 650 + 100, 20.0));
-		//sButterfly.setSButterfly(400 + pow(-1.0, i1 / gapFrame) * i1, 20.0);
 		sButterfly.born = i1;
 		sButterfly.gap = gap;
 		gap++;
-		//printf("Now %x\n", sButterfly.hero);
 
 		wave1.push_back(sButterfly);
 	}
@@ -1680,7 +1675,6 @@ int Game::S1E12()
 		FO mainTitle(0);
 		mainTitle.hero.setTexture(whiteSpark);
 		mainTitle.hero.setTextureRect(sf::IntRect(0, 0, 1280, 960));
-		//mainTitle.hero.setScale(sf::Vector2f(1.5, 1.5));
 		mainTitle.speed = 0.0;
 		mainTitle.hero.setPosition(sf::Vector2f(0, 0));
 		mainTitle.hero.setColor(sf::Color(255, 255, 255, 0));
@@ -1722,31 +1716,6 @@ int Game::S1E12()
 		return 1;
 	}
 	return 0;
-	/*static int i1 = 0;
-	i1++;
-	static list<FO> backGroundTrans;
-
-	if (i1 == 1)
-	{
-		FO mainTitle(0);
-		mainTitle.hero.setTexture(Title1);
-		mainTitle.speed = 0.0;
-		mainTitle.hero.setPosition(sf::Vector2f(100, 100));
-		mainTitle.hero.setColor(sf::Color(255, 255, 255, 0));
-		backGroundTrans.push_back(mainTitle);
-	}
-	printf("1");
-	for (list<FO>::iterator it = backGroundTrans.begin(); it != backGroundTrans.end(); it++)
-	{
-		it->hero.setColor(sf::Color(255, 255, 255, -i1*(i1 - 301) / (151.0*150.0) * 255));
-		enemiesPushToDraw(it);
-	}
-	if (i1 > 5 * 60)
-	{
-		backGroundTrans.clear();//Final clear for accident
-		return 1;
-	}
-	return 0;*/
 }
 
 int Game::S1E13()
@@ -1754,9 +1723,6 @@ int Game::S1E13()
 	static int i1 = 0, stp = 0;
 	i1++;
 	static list<FO> wave1, wave2;
-	double gapTime = 0.2;
-	int gapFrame = gapTime * 60;
-	static int gap = 0, temp = 0;
 
 	if (i1 == 1)
 	{
@@ -1773,6 +1739,7 @@ int Game::S1E13()
 		spellBoard.hero.setPosition(ghost.hero.getPosition());
 		spellBoard.theta = 0;
 		spellBoard.hero.setColor(sf::Color(255, 255, 255, 127));
+		ghost.phase = 10;
 		wave1.push_back(ghost);
 		wave2.push_back(spellBoard);
 	}
@@ -1786,15 +1753,16 @@ int Game::S1E13()
 	{
 		it->hero.setPosition(wave1.begin()->hero.getPosition().x, wave1.begin()->hero.getPosition().y + 32);
 		it->theta += PI / 100.0;
+		it->hero.setScale(1.0 + 0.1*sin(i1 / 11.0), 1.0 + 0.1*sin(i1 / 11.0));
 		it->hero.setRotation(it->theta / PI * 180.0 + 90);
 		backEsPushToDraw(it);
 	}
 	wave1.remove_if(isFOOutOfBoard);
 	for (list<FO>::iterator it = wave1.begin(); it != wave1.end(); it++)
 	{
-		if (it->phase == 1 && stp == 0)
+		if (it->phase + stp == 9)
 		{
-			stp = 1;
+			stp++;
 			i1 = 80;
 		}
 		it->hero.setTextureRect(sf::IntRect(i1 % 80 / 10 * it->width, 64, it->width, it->height));
@@ -1803,39 +1771,169 @@ int Game::S1E13()
 			it->speed = (80 - i1) / 16.0;
 			it->theta = 0.5 * PI;
 		}
-		else if (i1 >= 80 && i1 < 1200)
+		else if (i1 >= 80 && i1 < 12000)
 		{
 			it->speed = 0.0;
 			switch (it->phase)
 			{
-			case 2:
-				nonSpellCard1(it);
+			case 10:
+				nonSpellCard2(it);
 				break;
-			case 1:
-				if (i1 == 141)
+			case 9:
+				if (i1 == 241)
 				{
 					SCAnounce.play();
 				}
-				if (i1 > 3 * 60)
+				if (i1 > 6 * 60)
 				{
-					spellCard1(it);
+					spellCard2(it);
+				}
+				break;
+			case 8:
+				if (i1 == 241)
+				{
+					SCAnounce.play();
+				}
+				if (i1 > 6 * 60)
+				{
+					nonSpellCard3(it);
+				}
+				break;
+			case 7:
+				if (i1 == 241)
+				{
+					SCAnounce.play();
+				}
+				if (i1 > 6 * 60)
+				{
+					spellCard3(it);
+				}
+				break;
+			case 6:
+				if (i1 == 241)
+				{
+					SCAnounce.play();
+				}
+				if (i1 > 6 * 60)
+				{
+					nonSpellCard4(it);
+				}
+				break;
+			case 5:
+				if (i1 == 241)
+				{
+					SCAnounce.play();
+				}
+				if (i1 > 6 * 60)
+				{
+					spellCard4(it);
+				}
+				break;
+			case 4:
+				if (i1 == 241)
+				{
+					SCAnounce.play();
+				}
+				if (i1 > 6 * 60)
+				{
+					nonSpellCard5(it);
+				}
+				break;
+			case 3:
+				if (i1 == 241)
+				{
+					SCAnounce.play();
+				}
+				if (i1 > 6 * 60)
+				{
+					spellCard5(it);
+				}
+				break;
+			case 2:
+				if (i1 == 241)
+				{
+					SCAnounce.play();
+				}
+				if (i1 > 6 * 60)
+				{
+					nonSpellCard6(it);
+				}
+				break;
+			case 1:
+				if (i1 == 241)
+				{
+					SCAnounce.play();
+				}
+				if (i1 > 6 * 60)
+				{
+					spellCard6(it);
 				}
 				break;
 			}
-
-
 		}
 		else
 		{
-			it->speed = (i1 - 1200) / 60.0;
+			it->speed = (i1 - 12000) / 60.0;
 			it->theta = 1.5 * PI;
 		}
 
 		enemyCollisionProcessing(it);
 
 		enemiesPushToDraw(it);
+
+		if (i1 > 120 * 60)
+		{
+			if (it->phase >= 2)
+			{
+				cardGet.play();
+				breakSound.play();
+				score += it->score;
+				deathEff.setTexture(deathCircle);
+				deathEff.setTextureRect(sf::IntRect(64, 0, 64, 64));
+				deathEff.setOrigin(32, 32);
+				deathEff.setPosition(it->hero.getPosition().x + it->width * 0.25, it->hero.getPosition().y + it->height * 0.25);
+				deathEff.setScale(0.1, 0.1);
+				deathEffs.push_back(deathEff);
+				deathEff.setScale(0.3, 0.06);
+				deathEff.setRotation(rand() % 360);
+				deathEffs.push_back(deathEff);
+				it->HealthPoint += 1500;
+			}
+			else
+			{
+				wave1.clear();//Final clear for accident
+			}
+				
+			return 1;
+		}
 	}
-	if (i1 > 60 * 60)
+	return 0;
+}
+
+int Game::S1E14()
+{
+	static int i1 = 0;
+	i1++;
+	static list<FO> wave1;
+
+	if (i1 == 1)
+	{
+		FO mainTitle(0);
+		mainTitle.hero.setTexture(Title2);
+		mainTitle.hero.setTextureRect(sf::IntRect(0, 0, 512, 256));
+		mainTitle.speed = 0.0;
+		mainTitle.hero.setPosition(sf::Vector2f(200.0, 150.0));
+		mainTitle.hero.setColor(sf::Color(255, 255, 255, 0));
+
+		wave1.push_back(mainTitle);
+	}
+
+	for (list<FO>::iterator it = wave1.begin(); it != wave1.end(); it++)
+	{
+		it->hero.setColor(sf::Color(255, 255, 255, -i1*(i1 - 301) / (151.0*150.0) * 255));
+		enemiesPushToDraw(it);
+	}
+	if (i1 > 5 * 60)
 	{
 		wave1.clear();//Final clear for accident
 		return 1;
@@ -1856,6 +1954,63 @@ void Game::enemiesPushToDraw(list<FO>::iterator it)
 				it->bounds++;
 			}
 		}
+		break;
+	case 103:
+		it->HealthPoint++;
+		if (it->HealthPoint > 60 && it->phase > 0)
+		{
+			enemyBulletSound.play();
+			FO nonSpell1;
+			nonSpell1.speed = it->speed;
+			nonSpell1.width = 16;
+			nonSpell1.height = 16;
+			nonSpell1.hero.setTexture(allBullets1);
+			switch (it->phase)
+			{
+			case 4:
+				nonSpell1.hero.setTextureRect(sf::IntRect(32, 16, 16, 16));
+				break;
+			case 3:
+				nonSpell1.hero.setTextureRect(sf::IntRect(32, 16, 16, 16));
+				break;
+			case 2:
+				nonSpell1.hero.setTextureRect(sf::IntRect(240, 16, 16, 16));
+				break;
+			case 1:
+				nonSpell1.hero.setTextureRect(sf::IntRect(160, 16, 16, 16));
+				break;
+			}
+			nonSpell1.hero.setOrigin(8, 8);
+			nonSpell1.hero.setScale(1.5, 1.5);
+			nonSpell1.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y);
+			nonSpell1.type = 103;
+			nonSpell1.phase = it->phase-1;
+			for (int i = 0; i < 5; i++)
+			{
+				nonSpell1.speed += i / 10.0;
+				nonSpell1.theta = it->theta + PI - 18 / 180.0*PI + i*18.0 / 180.0*PI;
+				nonSpell1.hero.setRotation(nonSpell1.theta / PI * 180.0 + 90);
+				enemyBullets.push_back(nonSpell1);
+			}
+			it->hero.setPosition(-100, -100);
+			return;
+		}
+		break;
+	case 104:
+		it->HealthPoint++;
+		if (it->speed > EPS)
+		{
+			it->velocity.x = it->speed * cos(it->theta);
+			it->velocity.y = it->speed * sin(it->theta) + 4.9*it->HealthPoint*it->HealthPoint/7200.0;
+			it->hero.setRotation(atan2(it->velocity.y, it->velocity.x) / PI * 180.0 + 90);
+			if (it->velocity.y >= 8)
+			{
+				it->velocity.y = 8;
+			}
+			it->hero.move(it->velocity);
+		}
+		enemies.push_back(it->hero);
+		return;
 		break;
 	}
 	if (it->speed > EPS)
@@ -1956,7 +2111,6 @@ void Game::playerAmmoDisplay()
 	playerBullets.remove_if(isOutOfBoard);
 	for (list<sf::Sprite>::iterator it = playerBullets.begin(); it != playerBullets.end(); it++)
 	{
-		//it->setPosition(it->getPosition().x, it->getPosition().y - 60);
 		it->move(0.0, - 60.0);
 		mWindow.draw(*it);
 	}
@@ -1992,8 +2146,6 @@ void Game::enemyBulletsDisplay()
 	{
 		enemiesPushToDraw(it);
 	}
-	
-	
 }
 //
 void Game::playerDisplay()
@@ -2014,7 +2166,7 @@ void Game::playerDisplay()
 		}
 		else
 		{
-			printf("Game Over!\n");
+			GameOver();//printf("Game Over!\n");
 		}
 		
 	}
@@ -2067,11 +2219,6 @@ void Game::effsDisplay()
 		i += 0.1;
 		it->setScale(i, i*j);
 		it->setColor(sf::Color(255, 255, 255, 255 * (1.2 - 0.5*i)));
-		/*if (it->getRotation() > EPS)
-		{
-		//	it->setScale(i + 0.3, (i + 0.3)*j);
-			it->setColor(sf::Color(255, 255, 255, 255 * (1 - 0.5*(i - 0.3))));
-		}*/
 		
 		mWindow.draw(*it);
 	}
@@ -2144,7 +2291,7 @@ void Game::enemyCollisionProcessing(list<FO>::iterator it)
 					deathEff.setScale(0.3, 0.06);
 					deathEff.setRotation(rand() % 360);
 					deathEffs.push_back(deathEff);
-					it->HealthPoint += 1200;
+					it->HealthPoint += 1500;
 				}
 			}
 		}
@@ -2153,7 +2300,6 @@ void Game::enemyCollisionProcessing(list<FO>::iterator it)
 
 void Game::enemyUnderAttack(list<FO>::iterator it, list<sf::Sprite>::iterator itAmmo)
 {
-	//printf("%d\n", it->HealthPoint);
 	score++;
 	it->HealthPoint -= player.damage;
 	AmmoEff.setTexture(buffetsEff);
@@ -2250,20 +2396,18 @@ void Game::standardMButterflyFrame(list<FO>::iterator it, int temp)
 void Game::setSnipe(list<FO>::iterator it, double speed, int type, int color)
 {
 	enemyBulletSound.play();
-	FO RoundSnipe;
-	RoundSnipe.speed = speed;
-	RoundSnipe.width = 16;
-	RoundSnipe.height = 16;
-	RoundSnipe.hero.setTexture(allBullets1);
-	RoundSnipe.hero.setTextureRect(sf::IntRect(color * 16, type * 16, 16, 16));
-	RoundSnipe.hero.setOrigin(8, 8);
-	RoundSnipe.hero.setScale(1.5, 1.5);
-	RoundSnipe.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
-	RoundSnipe.theta = atan2(julgePoint.getPosition().y - RoundSnipe.hero.getPosition().y, julgePoint.getPosition().x - RoundSnipe.hero.getPosition().x);
+	FO Snipe;
+	Snipe.speed = speed;
+	Snipe.width = 16;
+	Snipe.height = 16;
+	Snipe.hero.setTexture(allBullets1);
+	Snipe.hero.setTextureRect(sf::IntRect(color * 16, type * 16, 16, 16));
+	Snipe.hero.setOrigin(8, 8);
+	Snipe.hero.setScale(1.5, 1.5);
+	Snipe.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
+	Snipe.theta = atan2(julgePoint.getPosition().y - Snipe.hero.getPosition().y, julgePoint.getPosition().x - Snipe.hero.getPosition().x);
 
-	//RoundSnipe.hero.setColor(sf::Color(255, 255, 255, 0));
-	//RoundSnipe.hero.setScale(2.0, 2.0);
-	enemyBullets.push_back(RoundSnipe);
+	enemyBullets.push_back(Snipe);
 }
 
 void Game::setRoundSnipe(list<FO>::iterator it, double speed)
@@ -2280,66 +2424,64 @@ void Game::setRoundSnipe(list<FO>::iterator it, double speed)
 	RoundSnipe.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
 	RoundSnipe.theta = atan2(julgePoint.getPosition().y - RoundSnipe.hero.getPosition().y, julgePoint.getPosition().x - RoundSnipe.hero.getPosition().x);
 	
-	//RoundSnipe.hero.setColor(sf::Color(255, 255, 255, 0));
-	//RoundSnipe.hero.setScale(2.0, 2.0);
 	enemyBullets.push_back(RoundSnipe);
 }
 
 void Game::setMultiRoundSnipe(list<FO>::iterator it, double speed, int color)
 {
 	enemyBulletSound.play();
-	FO RoundSnipe;
-	RoundSnipe.speed = speed;
-	RoundSnipe.width = 16;
-	RoundSnipe.height = 16;
-	RoundSnipe.hero.setTexture(allBullets1);
-	RoundSnipe.hero.setTextureRect(sf::IntRect(color * 16, 48, 16, 16));
-	RoundSnipe.hero.setOrigin(8, 8);
-	RoundSnipe.hero.setScale(1.5, 1.5);
-	RoundSnipe.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
-	RoundSnipe.theta = atan2(julgePoint.getPosition().y - RoundSnipe.hero.getPosition().y, julgePoint.getPosition().x - RoundSnipe.hero.getPosition().x);
-	enemyBullets.push_back(RoundSnipe);
-	RoundSnipe.theta += 0.4 * PI;
-	enemyBullets.push_back(RoundSnipe);
-	RoundSnipe.theta -= 0.8 * PI;
-	enemyBullets.push_back(RoundSnipe);
+	FO MultiRoundSnipe;
+	MultiRoundSnipe.speed = speed;
+	MultiRoundSnipe.width = 16;
+	MultiRoundSnipe.height = 16;
+	MultiRoundSnipe.hero.setTexture(allBullets1);
+	MultiRoundSnipe.hero.setTextureRect(sf::IntRect(color * 16, 48, 16, 16));
+	MultiRoundSnipe.hero.setOrigin(8, 8);
+	MultiRoundSnipe.hero.setScale(1.5, 1.5);
+	MultiRoundSnipe.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
+	MultiRoundSnipe.theta = atan2(julgePoint.getPosition().y - MultiRoundSnipe.hero.getPosition().y, julgePoint.getPosition().x - MultiRoundSnipe.hero.getPosition().x);
+	enemyBullets.push_back(MultiRoundSnipe);
+	MultiRoundSnipe.theta += 0.4 * PI;
+	enemyBullets.push_back(MultiRoundSnipe);
+	MultiRoundSnipe.theta -= 0.8 * PI;
+	enemyBullets.push_back(MultiRoundSnipe);
 }
 
 void Game::setGeneralMultiSnipe(list<FO>::iterator it, double speed, int type, int color, double angle)
 {
 	enemyBulletSound.play();
-	FO RoundSnipe;
-	RoundSnipe.speed = speed;
-	RoundSnipe.width = 16;
-	RoundSnipe.height = 16;
-	RoundSnipe.hero.setTexture(allBullets1);
-	RoundSnipe.hero.setTextureRect(sf::IntRect(color * 16, type * 16, 16, 16));
-	RoundSnipe.hero.setOrigin(8, 8);
-	RoundSnipe.hero.setScale(1.5, 1.5);
-	RoundSnipe.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
-	RoundSnipe.theta = atan2(julgePoint.getPosition().y - RoundSnipe.hero.getPosition().y, julgePoint.getPosition().x - RoundSnipe.hero.getPosition().x) + (rand() % 5 * 0.01 - 0.02) * PI;
-	enemyBullets.push_back(RoundSnipe);
-	RoundSnipe.theta += angle * PI;
-	enemyBullets.push_back(RoundSnipe);
-	RoundSnipe.theta -= angle * 2 * PI;
-	enemyBullets.push_back(RoundSnipe);
+	FO GeneralMultiSnipe;
+	GeneralMultiSnipe.speed = speed;
+	GeneralMultiSnipe.width = 16;
+	GeneralMultiSnipe.height = 16;
+	GeneralMultiSnipe.hero.setTexture(allBullets1);
+	GeneralMultiSnipe.hero.setTextureRect(sf::IntRect(color * 16, type * 16, 16, 16));
+	GeneralMultiSnipe.hero.setOrigin(8, 8);
+	GeneralMultiSnipe.hero.setScale(1.5, 1.5);
+	GeneralMultiSnipe.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
+	GeneralMultiSnipe.theta = atan2(julgePoint.getPosition().y - GeneralMultiSnipe.hero.getPosition().y, julgePoint.getPosition().x - GeneralMultiSnipe.hero.getPosition().x) + (rand() % 5 * 0.01 - 0.02) * PI;
+	enemyBullets.push_back(GeneralMultiSnipe);
+	GeneralMultiSnipe.theta += angle * PI;
+	enemyBullets.push_back(GeneralMultiSnipe);
+	GeneralMultiSnipe.theta -= angle * 2 * PI;
+	enemyBullets.push_back(GeneralMultiSnipe);
 }
 
 void Game::setRandom(list<FO>::iterator it, double speed, int type, int color, double leftBoarder, double range)
 {
 	enemyBulletSound.play();
-	FO RoundRandom;
-	RoundRandom.speed = speed;
-	RoundRandom.theta = rand() % (int)range + leftBoarder;
-	RoundRandom.width = 16;
-	RoundRandom.height = 16;
-	RoundRandom.hero.setTexture(allBullets1);
-	RoundRandom.hero.setTextureRect(sf::IntRect(color * 16, type * 16, 16, 16));
-	RoundRandom.hero.setOrigin(8, 8);
-	RoundRandom.hero.setScale(1.5, 1.5);
-	RoundRandom.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
-	RoundRandom.hero.setRotation(RoundRandom.theta / PI * 180.0 + 90);
-	enemyBullets.push_back(RoundRandom);
+	FO Random;
+	Random.speed = speed;
+	Random.theta = rand() % (int)range + leftBoarder;
+	Random.width = 16;
+	Random.height = 16;
+	Random.hero.setTexture(allBullets1);
+	Random.hero.setTextureRect(sf::IntRect(color * 16, type * 16, 16, 16));
+	Random.hero.setOrigin(8, 8);
+	Random.hero.setScale(1.5, 1.5);
+	Random.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
+	Random.hero.setRotation(Random.theta / PI * 180.0 + 90);
+	enemyBullets.push_back(Random);
 }
 
 void Game::setRoundRandom(list<FO>::iterator it, double speed, int color, double leftBoarder, double range)
@@ -2379,26 +2521,26 @@ void Game::setSharpRandom(list<FO>::iterator it, double speed)
 void Game::setSharpLine(list<FO>::iterator it, double speed)
 {
 	enemyBulletSound.play();
-	FO SharpRandom;
-	SharpRandom.speed = speed;
-	SharpRandom.theta = 0.5 * PI;
+	FO SharpLine;
+	SharpLine.speed = speed;
+	SharpLine.theta = 0.5 * PI;
 	if (it->theta > 0.5 * PI)
 	{
-		SharpRandom.theta += it->speed * 0.04 * PI;
+		SharpLine.theta += it->speed * 0.04 * PI;
 	}
 	else
 	{
-		SharpRandom.theta -= it->speed * 0.04 * PI;
+		SharpLine.theta -= it->speed * 0.04 * PI;
 	}
-	SharpRandom.width = 16;
-	SharpRandom.height = 16;
-	SharpRandom.hero.setTexture(allBullets1);
-	SharpRandom.hero.setTextureRect(sf::IntRect(64, 64, 16, 16));//80 96
-	SharpRandom.hero.setOrigin(8, 8);
-	SharpRandom.hero.setScale(1.5, 1.5);
-	SharpRandom.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
-	SharpRandom.hero.setRotation(SharpRandom.theta / PI * 180.0 + 90);
-	enemyBullets.push_back(SharpRandom);
+	SharpLine.width = 16;
+	SharpLine.height = 16;
+	SharpLine.hero.setTexture(allBullets1);
+	SharpLine.hero.setTextureRect(sf::IntRect(64, 64, 16, 16));//80 96
+	SharpLine.hero.setOrigin(8, 8);
+	SharpLine.hero.setScale(1.5, 1.5);
+	SharpLine.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
+	SharpLine.hero.setRotation(SharpLine.theta / PI * 180.0 + 90);
+	enemyBullets.push_back(SharpLine);
 }
 
 void Game::setSharpFlower1(list<FO>::iterator it, double speed, int type, int color)//sound Reform
@@ -2486,51 +2628,236 @@ void Game::nonSpellCard1(list<FO>::iterator it)
 		nonSpell1.hero.setRotation(nonSpell1.theta / PI * 180.0 + 90);
 		enemyBullets.push_back(nonSpell1);
 	}
-	
-	/*SharpFlower1.hero.setTextureRect(sf::IntRect(176, 64, 16, 16));
-	SharpFlower1.hero.setOrigin(8, 8);
-	SharpFlower1.hero.setScale(1.5, 1.5);
-	SharpFlower1.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
-	if (temp >= 0 && temp <= PI)
-	{
-		SharpFlower1.speed /= 2.0;
-		SharpFlower1.speed += 9.0 / (temp + 1.5);
-		for (int i = 0; i < 3; i++)
-		{
-			SharpFlower1.theta = theta2 + PI * 2 * i / 3.0 + temp;
-			SharpFlower1.hero.setRotation(SharpFlower1.theta / PI * 180.0 + 90);
-			enemyBullets.push_back(SharpFlower1);
-			SharpFlower1.theta = theta2 + PI * 2 * i / 3.0 - temp;
-			SharpFlower1.hero.setRotation(SharpFlower1.theta / PI * 180.0 + 90);
-			enemyBullets.push_back(SharpFlower1);
-		}
-	}*/
 
 	theta1 += 0.04 * PI * sin(temp);
 	temp += PI / 120.0;
-	/*if (sin(temp) < EPS)
+}
+
+void Game::nonSpellCard2(list<FO>::iterator it)
+{
+	static double theta1 = PI / 6.0;
+	static double theta2 = PI / 2.0;
+	static double temp = 0.0;
+	static int cts = 0;
+	cts++;
+	if (fabs(temp - 2 * PI) < EPS)
 	{
-		theta2 = theta1 + PI / 6.0;
-	}*/
+		temp = 0.0;
+	}
+	
+	FO nonSpell2;
+	nonSpell2.speed = 4.0;
+	nonSpell2.width = 16;
+	nonSpell2.height = 16;
+	nonSpell2.hero.setTexture(allBullets1);
+	nonSpell2.hero.setTextureRect(sf::IntRect(80, 128, 16, 16));
+	nonSpell2.hero.setOrigin(8, 8);
+	nonSpell2.hero.setScale(1.5, 1.5);
+	nonSpell2.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
+	if (cts % 360 <= 120)
+	{
+		if (cts % 24 == 0)
+		{
+			enemyBulletSound.play();
+			nonSpell2.hero.setPosition((rand() % 300) * 2 + 100, (rand() % 100) + 60);
+			for (int i = 0; i < 72; i++)
+			{
+				nonSpell2.theta = theta1 + PI * 2 * i / 72.0;
+				nonSpell2.hero.setRotation(nonSpell2.theta / PI * 180.0 + 90);
+				enemyBullets.push_back(nonSpell2);
+			}
+		}
+	}
+	theta1 += 0.04 * PI * sin(temp);
+	temp += PI / 240.0;
+}
+
+void Game::nonSpellCard3(list<FO>::iterator it)
+{
+	static double theta1 = PI / 6.0;
+	static double theta2 = PI / 2.0;
+	static double temp = 0.0;
+	static int cts = 0;
+	cts++;
+	if (fabs(temp - 2 * PI) < EPS)
+	{
+		temp = 0.0;
+	}
+	enemyBulletSound.play();
+	FO nonSpell3;
+	nonSpell3.speed = 6.0;
+	nonSpell3.width = 16;
+	nonSpell3.height = 16;
+	nonSpell3.hero.setTexture(allBullets1);
+	nonSpell3.hero.setTextureRect(sf::IntRect(80, 128, 16, 16));
+	nonSpell3.hero.setOrigin(8, 8);
+	nonSpell3.hero.setScale(1.5, 1.5);
+	nonSpell3.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
+	if (cts % 2 == 0)
+	{
+		for (int i = 0; i < 10; i++)
+		{
+			nonSpell3.theta = theta1 + PI * 2 * i / 10.0;
+			nonSpell3.hero.setRotation(nonSpell3.theta / PI * 180.0 + 90);
+			enemyBullets.push_back(nonSpell3);
+		}
+	}
+	theta1 += 0.04 * PI * sin(temp);
+	temp += PI / 240.0;
+}
+//waiting for redoing
+void Game::nonSpellCard4(list<FO>::iterator it)
+{
+	static double theta1 = PI / 6.0;
+	static double theta2 = PI / 2.0;
+	static double temp = 0.0;
+	static int cts = 0;
+	cts++;
+	if (fabs(temp - 2 * PI) < EPS)
+	{
+		temp = 0.0;
+	}
+	enemyBulletSound.play();
+	FO nonSpell4;
+	nonSpell4.speed = 6.0;
+	nonSpell4.width = 16;
+	nonSpell4.height = 16;
+	nonSpell4.hero.setTexture(allBullets1);
+	nonSpell4.hero.setTextureRect(sf::IntRect(80, 128, 16, 16));
+	nonSpell4.hero.setOrigin(8, 8);
+	nonSpell4.hero.setScale(1.5, 1.5);
+	if (cts % 2 == 0)
+	{
+		for (int i = 0; i < 3; i++)
+		{
+			nonSpell4.theta = theta1 + PI * 2 * i / 3.0;
+			nonSpell4.hero.setRotation(nonSpell4.theta / PI * 180.0 + 90);
+			nonSpell4.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
+			enemyBullets.push_back(nonSpell4);
+			if (cts % 7 == 0)
+			{
+				nonSpell4.hero.setTextureRect(sf::IntRect(160, 128, 16, 16));
+				nonSpell4.hero.setPosition(it->hero.getPosition().x + 200, it->hero.getPosition().y + it->height + 100);
+				enemyBullets.push_back(nonSpell4);
+				nonSpell4.hero.setPosition(it->hero.getPosition().x - 200, it->hero.getPosition().y + it->height + 100);
+				enemyBullets.push_back(nonSpell4);
+			}
+		}
+	}
+	theta1 += 0.04 * PI * sin(temp);
+	temp += PI / 240.0;
+}
+
+void Game::nonSpellCard5(list<FO>::iterator it)
+{
+	static double theta1 = PI / 6.0;
+	static double theta2 = PI / 2.0;
+	static double temp = 0.0;
+	static int cts = 0;
+	cts++;
+	if (fabs(temp - 2 * PI) < EPS)
+	{
+		temp = 0.0;
+	}
+
+	FO nonSpell5;
+	nonSpell5.speed = 4.0;
+	nonSpell5.width = 16;
+	nonSpell5.height = 16;
+	nonSpell5.hero.setTexture(allBullets1);
+	nonSpell5.hero.setTextureRect(sf::IntRect(80, 128, 16, 16));
+	nonSpell5.hero.setOrigin(8, 8);
+	nonSpell5.hero.setScale(1.5, 1.5);
+	nonSpell5.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
+	if (cts % 360 <= 240)
+	{
+		if (cts % 8 == 0)
+		{
+			enemyBulletSound.play();
+			nonSpell5.hero.setPosition(it->hero.getPosition().x + 100*sin(cts/20.0), it->hero.getPosition().y + it->height);
+			for (int i = 0; i < 36; i++)
+			{
+				nonSpell5.theta = theta1 + PI * 2 * i / 36.0;
+				nonSpell5.hero.setRotation(nonSpell5.theta / PI * 180.0 + 90);
+
+				enemyBullets.push_back(nonSpell5);
+			}
+		}
+	}
+	theta1 += 0.04 * PI * sin(temp);
+	temp += PI / 240.0;
+}
+
+void Game::nonSpellCard6(list<FO>::iterator it)
+{
+	static double theta1 = PI / 6.0;
+	static double theta2 = -PI / 6.0;
+	static double temp = 0.0;
+	static int cts = 0;
+	cts++;
+	if (fabs(temp - 2 * PI) < EPS)
+	{
+		temp = 0.0;
+	}
+
+	FO nonSpell6;
+	nonSpell6.speed = 4.0;
+	nonSpell6.width = 16;
+	nonSpell6.height = 16;
+	nonSpell6.hero.setTexture(allBullets1);
+	nonSpell6.hero.setTextureRect(sf::IntRect(32, 16, 16, 16));
+	nonSpell6.hero.setOrigin(8, 8);
+	nonSpell6.hero.setScale(1.5, 1.5);
+	nonSpell6.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
+	if (cts % 48 == 0)
+	{
+		enemyBulletSound.play();
+		for (int i = 0; i < 48; i++)
+		{
+			nonSpell6.theta = theta1 + PI * 2 * i / 48.0;
+			nonSpell6.hero.setRotation(nonSpell6.theta / PI * 180.0 + 90);
+			enemyBullets.push_back(nonSpell6);
+		}
+	}
+	if (cts % 2 == 0)
+	{
+		for (int i = 0; i < 5; i++)
+		{
+			nonSpell6.hero.setTextureRect(sf::IntRect(128, 16, 16, 16));
+			nonSpell6.theta = theta2 + PI * 2 * i / 5.0;
+			nonSpell6.hero.setRotation(nonSpell6.theta / PI * 180.0 + 90);
+			enemyBullets.push_back(nonSpell6);
+		}
+		for (int i = 0; i < 5; i++)
+		{
+			nonSpell6.hero.setTextureRect(sf::IntRect(208, 16, 16, 16));
+			nonSpell6.theta = theta1 + PI * 2 * i / 5.0;
+			nonSpell6.hero.setRotation(nonSpell6.theta / PI * 180.0 + 90);
+			enemyBullets.push_back(nonSpell6);
+		}
+	}
+	theta1 += 0.02 * PI;
+	theta2 -= 0.02 * PI;
+	temp += PI / 240.0;
 }
 
 void Game::spellCard1(list<FO>::iterator it)
 {
 	static double range = 0, x1 = rand() % 200 + 250;
 	static int ct = 0, temp = 0;
-	
+
 	FO Card1;
 	Card1.speed = 8.0;
 	Card1.width = 16;
 	Card1.height = 16;
 	Card1.hero.setTexture(allBullets1);
-	Card1.hero.setTextureRect(sf::IntRect(16, 7*16, 16, 16));
+	Card1.hero.setTextureRect(sf::IntRect(16, 7 * 16, 16, 16));
 	Card1.hero.setOrigin(8, 8);
 	Card1.hero.setScale(1.5, 1.5);
 	Card1.theta = 1.5 * PI;
 	Card1.type = 101;
 	if (temp % 10 == 0)
-	{	
+	{
 		enemyBulletSound.play();
 		Card1.hero.setPosition(it->hero.getPosition().x + range, it->hero.getPosition().y + it->height);
 		enemyBullets.push_back(Card1);
@@ -2542,12 +2869,239 @@ void Game::spellCard1(list<FO>::iterator it)
 		enemyBullets.push_back(Card1);
 	}
 
-	(ct % 2) ? range-=16 : range+=16;
+	(ct % 2) ? range -= 16 : range += 16;
 	temp++;
 	if (range >= 350 || range <= 0)
 	{
 		ct++;
 	}
+}
+
+void Game::spellCard2(list<FO>::iterator it)
+{
+	double speed = 4;
+	int type = 4, color = 0;
+	static double theta1 = PI / 6.0;
+	static double theta2 = PI / 2.0;
+	static double temp = 0.0;
+	static int cts = 0;
+	cts++;
+	if (fabs(temp - 2 * PI) < EPS)
+	{
+		temp = 0.0;
+	}
+	enemyBulletSound.play();
+	FO Card2;
+	Card2.speed = speed;
+	Card2.width = 16;
+	Card2.height = 16;
+	Card2.hero.setTexture(allBullets1);
+	Card2.hero.setTextureRect(sf::IntRect(0, 64, 16, 16));
+	Card2.hero.setOrigin(8, 8);
+	Card2.hero.setScale(1.5, 1.5);
+	Card2.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
+
+	for (int i = 0; i < 3; i++)
+	{
+		Card2.theta = theta1 + PI * 2 * i / 3.0;
+		Card2.hero.setRotation(Card2.theta / PI * 180.0 + 90);
+		enemyBullets.push_back(Card2);
+	}
+
+	Card2.hero.setTextureRect(sf::IntRect(176, 64, 16, 16));
+	Card2.hero.setOrigin(8, 8);
+	Card2.hero.setScale(1.5, 1.5);
+	Card2.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
+	if (temp >= 0 && temp <= PI)
+	{
+		Card2.speed /= 2.0;
+		Card2.speed += 9.0 / (temp + 1.5);
+		for (int i = 0; i < 3; i++)
+		{
+			Card2.theta = theta2 + PI * 2 * i / 3.0 + temp;
+			Card2.hero.setRotation(Card2.theta / PI * 180.0 + 90);
+			enemyBullets.push_back(Card2);
+			Card2.theta = theta2 + PI * 2 * i / 3.0 - temp;
+			Card2.hero.setRotation(Card2.theta / PI * 180.0 + 90);
+			enemyBullets.push_back(Card2);
+		}
+	}
+
+	theta1 += 0.02 * PI;
+	temp += PI / 24.0;
+	if (sin(temp) < EPS)
+	{
+		theta2 = theta1 + PI / 6.0;
+	}
+}
+
+void Game::spellCard3(list<FO>::iterator it)
+{
+	static double theta1 = PI / 6.0;
+	static double theta2 = PI / 2.0;
+	static double temp = 0.0;
+	static int cts = 0;
+	cts++;
+	if (fabs(temp - 2 * PI) < EPS)
+	{
+		temp = 0.0;
+	}
+	
+	FO Card3;
+	Card3.speed = 2.0;
+	Card3.width = 16;
+	Card3.height = 16;
+	Card3.hero.setTexture(allBullets1);
+	Card3.hero.setTextureRect(sf::IntRect(80, 16, 16, 16));
+	Card3.hero.setOrigin(8, 8);
+	Card3.hero.setScale(1.5, 1.5);
+	Card3.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
+	Card3.type = 103;
+	Card3.phase = 3;
+	if (cts % 360 == 1)
+	{
+		enemyBulletSound.play();
+		for (int i = 0; i < 6; i++)
+		{
+			Card3.theta = theta1 + PI * 2 * i / 6.0;
+			Card3.hero.setRotation(Card3.theta / PI * 180.0 + 90);
+			enemyBullets.push_back(Card3);
+		}
+	}
+	theta1 += 0.04 * PI * sin(temp);
+	temp += PI / 240.0;
+}
+
+void Game::spellCard4(list<FO>::iterator it)
+{
+	enemyBulletSound.play();
+	FO Card4;
+	Card4.speed = 4.0;
+	Card4.theta = rand() % 360;
+	Card4.width = 16;
+	Card4.height = 16;
+	Card4.hero.setTexture(allBullets1);
+	Card4.hero.setTextureRect(sf::IntRect(rand()%15 * 16, 4 * 16, 16, 16));
+	Card4.hero.setOrigin(8, 8);
+	Card4.hero.setScale(1.5, 1.5);
+	Card4.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
+	Card4.hero.setRotation(Card4.theta / PI * 180.0 + 90);
+	Card4.type = 104;
+	enemyBullets.push_back(Card4);
+	Card4.theta = rand() % 360;
+	enemyBullets.push_back(Card4);
+}
+
+void Game::spellCard5(list<FO>::iterator it)
+{
+	static double theta1 = PI / 2.0;
+	static double theta2 = PI / 2.0;
+	static double temp = 0.0;
+	static int cts = 0;
+	cts++;
+	if (fabs(temp - 2 * PI) < EPS)
+	{
+		temp = 0.0;
+	}
+
+	FO Card5;
+	Card5.speed = 4.0;
+	Card5.width = 16;
+	Card5.height = 16;
+	Card5.hero.setTexture(allBullets1);
+	Card5.hero.setTextureRect(sf::IntRect(32, 16, 16, 16));
+	Card5.hero.setOrigin(8, 8);
+	Card5.hero.setScale(1.5, 1.5);
+	Card5.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
+	if (cts % 72 == 0)
+	{
+		enemyBulletSound.play();
+		for (int i = 0; i < 72; i++)
+		{
+			Card5.theta = theta1 + PI * 2 * i / 72.0;
+			Card5.hero.setRotation(Card5.theta / PI * 180.0 + 90);
+			enemyBullets.push_back(Card5);
+		}
+	}
+	if (cts % 8 == 0)
+	{
+		Card5.speed = 7.0;
+		for (int i = 0; i < 8; i++)
+		{
+			Card5.hero.setTextureRect(sf::IntRect(128, 16, 16, 16));
+			Card5.theta = theta2 + PI * 2 * i / 8.0;
+			Card5.hero.setRotation(Card5.theta / PI * 180.0 + 90);
+			enemyBullets.push_back(Card5);
+		}
+		for (int i = 0; i < 8; i++)
+		{
+			Card5.hero.setTextureRect(sf::IntRect(208, 16, 16, 16));
+			Card5.theta = theta1 + PI * 2 * i / 8.0;
+			Card5.hero.setRotation(Card5.theta / PI * 180.0 + 90);
+			enemyBullets.push_back(Card5);
+		}
+	}
+	theta1 += 0.003 * PI;
+	theta2 -= 0.003 * PI;
+	temp += PI / 240.0;
+}
+
+void Game::spellCard6(list<FO>::iterator it)
+{
+	static double theta1 = PI / 6.0;
+	static double theta2 = PI / 2.0;
+	static double temp = 0.0;
+	static int cts = 0, cc = 40;
+	cts++;
+	if (fabs(temp - 2 * PI) < EPS)
+	{
+		temp = 0.0;
+	}
+
+	FO Card6;
+	Card6.speed = 4.0;
+	Card6.width = 32;
+	Card6.height = 32;
+	Card6.hero.setTexture(allBullets2);
+	Card6.hero.setTextureRect(sf::IntRect(64, 96, 32, 32));
+	Card6.hero.setOrigin(16, 16);
+	Card6.hero.setScale(1.5, 1.5);
+	Card6.hero.setPosition(it->hero.getPosition().x, it->hero.getPosition().y + it->height);
+
+	if (cts % 60 == 0)
+	{
+		enemyBulletSound.play();
+		for (int i = 0; i < 36; i++)//(rand() % 500)+ 100
+		{
+			Card6.theta = theta1 + PI * 2 * i / 36.0;
+			Card6.hero.setRotation(Card6.theta / PI * 180.0 + 90);
+			enemyBullets.push_back(Card6);
+		}
+	}
+	if ((cts % (2*cc)) < cc)
+	{
+		if (cts % 19 == 0)
+		{
+			Card6.hero.setTextureRect(sf::IntRect(224, 96, 32, 32));
+			Card6.speed = 8.0;
+			enemyBulletSound.play();
+			Card6.hero.setPosition(it->hero.getPosition().x+100, it->hero.getPosition().y + it->height);
+			Card6.theta = atan2(julgePoint.getPosition().y - Card6.hero.getPosition().y, julgePoint.getPosition().x - Card6.hero.getPosition().x);
+			Card6.hero.setRotation(Card6.theta / PI * 180.0 + 90);
+			enemyBullets.push_back(Card6);
+			Card6.hero.setPosition(it->hero.getPosition().x-100, it->hero.getPosition().y + it->height);
+			Card6.theta = atan2(julgePoint.getPosition().y - Card6.hero.getPosition().y, julgePoint.getPosition().x - Card6.hero.getPosition().x);
+			Card6.hero.setRotation(Card6.theta / PI * 180.0 + 90);
+			enemyBullets.push_back(Card6);
+			if (cc <= 300)
+			{
+				cc++;
+			}	
+		}
+	}
+	
+	theta1 += 0.04 * PI * sin(temp);
+	temp += PI / 240.0;
 }
 
 void Game::processTaps()
@@ -2629,6 +3183,7 @@ void Game::mainProcessing()
 		//player.theta = 0.0;
 		player.hero.move(float(player.speed), 0.0);
 	}
+
 	/*if ((mIsMovingDown || mIsMovingLeft || mIsMovingRight || mIsMovingUp) && !isOutOfBoard(player.hero))
 	{
 		player.velocity.x = player.speed * cos(player.theta);
@@ -2636,7 +3191,6 @@ void Game::mainProcessing()
 		player.hero.move(player.velocity);
 	}*/
 	
-
 	if (mIsFire)
 	{
 		if (playerBulletSound.getStatus() != playerBulletSound.Playing)
@@ -2685,6 +3239,12 @@ bool Game::checkPlayerCollision()
 		}
 	}
 	return false;
+}
+
+void Game::GameOver()
+{
+	//希望简单粗暴的GameOver不会给你带来很糟糕的游戏体验（逃
+	exit(0);
 }
 
 /*DWORD WINAPI BGMPlay(LPVOID lpParameter)

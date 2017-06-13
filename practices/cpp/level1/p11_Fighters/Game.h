@@ -38,6 +38,7 @@ public:
 
 	int S1E13();
 
+	int S1E14();
 	void enemiesPushToDraw(list<FO>::iterator it);
 	void backEsPushToDraw(list<FO>::iterator it);
 	void frameDisplay();
@@ -74,7 +75,17 @@ public:
 	void setSharpFlower1(list<FO>::iterator it, double speed, int type, int color);
 
 	void nonSpellCard1(list<FO>::iterator it);
+	void nonSpellCard2(list<FO>::iterator it);
+	void nonSpellCard3(list<FO>::iterator it);
+	void nonSpellCard4(list<FO>::iterator it);
+	void nonSpellCard5(list<FO>::iterator it);
+	void nonSpellCard6(list<FO>::iterator it);
 	void spellCard1(list<FO>::iterator it);
+	void spellCard2(list<FO>::iterator it);
+	void spellCard3(list<FO>::iterator it);
+	void spellCard4(list<FO>::iterator it);
+	void spellCard5(list<FO>::iterator it);
+	void spellCard6(list<FO>::iterator it);
 
 	void processTaps();
 	void playerInput(sf::Keyboard::Key key, bool isPressed);
@@ -83,6 +94,7 @@ public:
 	void mainProcessing();
 	bool checkCollision(sf::Sprite obj1, sf::Sprite obj2);
 	bool checkPlayerCollision();
+	void GameOver();
 	/*friend DWORD WINAPI BGMPlay(LPVOID lpParameter);*/
 	~Game();
 
@@ -92,7 +104,7 @@ private:
 	sf::RenderWindow mWindow;
 	sf::Font font;
 	sf::Text text, tempScore;
-	sf::Texture loading, nowLoading, stageSelect, front00, julgePointArray, Title1, allBullets1, allBullets2, whiteSpark;
+	sf::Texture loading, nowLoading, stageSelect, front00, julgePointArray, Title1, Title2, allBullets1, allBullets2, whiteSpark;
 	sf::Texture bullets, buffetsEff, deathCircle, bg1, bgEff1, bg2, bgEff2, bg3, bgEff3, Enemy1, Enemy2, Enemy3, lifePieces, magicSquare;
 	sf::Sprite loadingUI, loadingUISub, back[6], backEff[6], front01, front02, front03, front04;
 	sf::Sprite julgePoint, playerAmmo, AmmoEff, deathEff, lifeBoard;
