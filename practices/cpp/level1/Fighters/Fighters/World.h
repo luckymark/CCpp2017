@@ -2,9 +2,7 @@
 #define MAINLOOP_H
 #include <SFML/Graphics.hpp>
 #include "Hero.h"
-#include<unordered_set>
-#include<vector>
-#include "Bullet.h"
+#include<unordered_set#include "Bullet.h"
 #include "RTexture.h"
 #include "Enemy.h"
 #include "Bonus.h"
