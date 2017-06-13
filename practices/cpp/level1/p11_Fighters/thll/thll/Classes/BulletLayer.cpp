@@ -355,7 +355,7 @@ void BulletLayer::emeptyAllEnemyBullet()
 		if (bullet->getTag() == ENEMY_BULLET_TAG)
 		{
 			bulletList.eraseObject(bullet);
-			if (bullet != nullptr && !bullet->isWilder() )
+			if (bullet != nullptr )
 			{
 				bullet->removeFromParent();
 			}

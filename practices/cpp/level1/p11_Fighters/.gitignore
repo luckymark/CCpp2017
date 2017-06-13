@@ -3,6 +3,7 @@
 /thll/thll/proj.win32/thll.VC.db
 /thll/thll/proj.win32/.vs/*
 /thll/thll/proj.win32/Debug.win32/*
+/thll/thll/proj.win32/Release.win32/*
 /thll/thll/proj.android/*
 /thll/thll/proj.android-studio/*
 /thll/thll/proj.ios_mac/*
