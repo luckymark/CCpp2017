@@ -67,6 +67,14 @@ void BulletLayer::bulletMove()
 					bullet->setPositionX(bullet->getPositionX() + sqrt(PLANE_BULLET_SPEED));
 					bullet->setPositionY(bullet->getPositionY() + PLANE_BULLET_SPEED);
 				}	
+
+				if (bullet->getPositionY() > winSize.height)
+				{
+					bulletList.eraseObject(bullet);
+					bullet->removeFromParent();
+					i--;
+				}
+
 			}
 			else if (bullet->getType() == 4)
 			{
@@ -95,14 +103,14 @@ void BulletLayer::bulletMove()
 			else
 			{
 				bullet->setPositionY(bullet->getPositionY() + PLANE_BULLET_SPEED);
+
+				if (bullet->getPositionY() > winSize.height)
+				{
+					bulletList.eraseObject(bullet);
+					bullet->removeFromParent();
+					i--;
+				}
 			}		
-			
-			if (bullet->getPositionY() > winSize.height)
-			{
-				bulletList.eraseObject(bullet);
-				bullet->removeFromParent();
-				i--;
-			}
 		}
 		else if (tag == ENEMY_BULLET_TAG)
 		{
@@ -223,16 +231,61 @@ void BulletLayer::bulletCreate()
 void BulletLayer::autoBulletCreate()
 {
 	auto plane = SelfPlane::sharedPlane;
+	auto visibleSize = Director::getInstance()->getVisibleSize();
+	auto plane_pos = plane->getPosition();
 
 	if (plane->getLevel() >= 3)
 	{
 		auto bullet = Bullet::create("ui/shoot/bullet1.png");
-		bullet->setPosition(plane->getPosition());
+		auto enemyList = EnemyPlaneLayer::sharedEnemy->getEnemyList();
+		bullet->setPosition(plane_pos);
 		bullet->setType(4);
 		bullet->setTag(PLANE_BULLET_TAG);
 
-		this->addChild(bullet);
+		// approch
+		float minY = 100000.0, minAbsX = 1000000.0;
+		Vec2 minVec;
+		for (int i = 0; i < enemyList.size(); i++)
+		{
+			auto enemy = enemyList.at(i);
+			if (enemy->getPositionY() < minY && enemy->getPositionY() > plane->getPositionY() && minAbsX > fabs(plane->getPositionX() - enemy->getPositionX()))
+			{
+				minY = enemy->getPositionY();
+				minAbsX = fabs(plane->getPositionX() - enemy->getPositionX());
+				minVec = enemy->getPosition();
+			}
+		}
+
+		if (minY >= 1000000.0 || minAbsX >= 1000000.0)
+		{
+			minVec = Vec2(plane_pos.x, visibleSize.height);
+		}
+
+		minVec = minVec - Vec2(0, 5);
+		// calculate
+
+		Point shootVector = plane_pos - minVec;
+
+		Point normalizedVector = ccpNormalize(shootVector);
+
+		float radians = atan2(normalizedVector.y, -normalizedVector.x);
+
+		float degree = CC_RADIANS_TO_DEGREES(radians);
+
+		bullet->setRotation(bullet->getRotation() + degree - 90);
+
+		Point overShootVector = normalizedVector * 900;
+
+		Point offScreenPoint = bullet->getPosition() - overShootVector;
+
+		float moveSpeed = 100;
+
+		float moveDuration = std::max(overShootVector.x, overShootVector.y) / moveSpeed;
+
+		auto move = MoveTo::create(moveDuration, offScreenPoint);
 		this->bulletList.pushBack(bullet);
+		bullet->runAction(Sequence::create(move, CCCallFuncN::create(bullet, callfuncN_selector(BulletLayer::bulletRemoveFromAction)), NULL));
+		this->addChild(bullet);
 	}
 }
 
@@ -302,7 +355,10 @@ void BulletLayer::emeptyAllEnemyBullet()
 		if (bullet->getTag() == ENEMY_BULLET_TAG)
 		{
 			bulletList.eraseObject(bullet);
-			bullet->removeFromParent();
+			if (bullet != nullptr)
+			{
+				bullet->removeFromParent();
+			}
 		}
 	}
 }

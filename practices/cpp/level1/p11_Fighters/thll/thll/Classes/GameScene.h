@@ -94,7 +94,7 @@ private:
 
 	int plane_auto_bullet_create_count = 0;
 
-	int enemy_bullet_create_count = 0;
+	int auto_bullet_create = 0;
 
 	bool is_first_enter = true;
 

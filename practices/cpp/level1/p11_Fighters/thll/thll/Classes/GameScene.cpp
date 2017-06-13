@@ -152,7 +152,7 @@ void GameScene::gameUpdate(float dt)
 	enemy_create_count++;
 	enemy_move_count++;
 	plane_auto_bullet_create_count++;
-	enemy_bullet_create_count++;
+	auto_bullet_create++;
 
 	//plane update
 	auto left = EventKeyboard::KeyCode::KEY_LEFT_ARROW;
@@ -282,10 +282,10 @@ void GameScene::gameUpdate(float dt)
 	}
 
 	// enemy bullet
-	if (enemy_bullet_create_count % 360 == 0)
+	if (auto_bullet_create % 60 == 0)
 	{
-		//enemyLayer->enemyShoting();
-		enemy_bullet_create_count = 0;
+		bulletLayer->autoBulletCreate();
+		auto_bullet_create = 0;
 	}
 
 	if (enemy_move_count % 5 == 0)
@@ -298,7 +298,7 @@ void GameScene::gameUpdate(float dt)
 	bulletLayer->bulletMove();
 
 	// DropItem
-	if (TimeManager::getInstance()->JudgeTimeArray(std::vector<long double> {1, 2, 3, 4, 5,9,11}))
+	if (TimeManager::getInstance()->JudgeTimeArray(std::vector<long double> {1, 2, 3, 4, 5,9,11,13,17,28,36}))
 	{
 		dropLayer->createDrop();
 	}
@@ -696,6 +696,7 @@ void GameScene::buttonBombCallBack()
 		EnemyPlaneLayer::sharedEnemy->emptyAllEnemy();
 		BulletLayer::sharedBulletLayer->emeptyAllEnemyBullet();
 		SelfPlane::sharedPlane->bombDecresed();
+
 	}
 }
 

@@ -68,7 +68,7 @@ void TextLayer::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 		{
 			if (avatar != nullptr)
 			{
-				avatar->removeFromParent();
+ 				avatar->removeFromParent();
 			}
 			isAvatarSetting = false;
 
