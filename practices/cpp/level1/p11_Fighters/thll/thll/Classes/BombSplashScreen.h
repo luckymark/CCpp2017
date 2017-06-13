@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 #include "SelfPlane.h"
+#include "EnemyPlaneLayer.h"
+#include "BulletLayer.h"
 
 class BombSplashScreen :public cocos2d::Layer
 {

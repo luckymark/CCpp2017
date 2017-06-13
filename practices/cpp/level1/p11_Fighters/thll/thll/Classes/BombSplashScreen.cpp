@@ -68,5 +68,8 @@ bool BombSplashScreen::init()
 
 void BombSplashScreen::callBackFade()
 {
+	EnemyPlaneLayer::sharedEnemy->emptyAllEnemy();
+	BulletLayer::sharedBulletLayer->emeptyAllEnemyBullet();
+	SelfPlane::sharedPlane->bombDecresed();
 	Director::getInstance()->popScene();
 }

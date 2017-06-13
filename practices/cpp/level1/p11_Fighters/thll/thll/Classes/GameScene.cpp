@@ -655,9 +655,9 @@ void GameScene::onKeyPressed(cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::E
 
 			Director::sharedDirector()->pushScene(BombSplashScreen::createScene(renderTexture));
 
-			EnemyPlaneLayer::sharedEnemy->emptyAllEnemy();
-			BulletLayer::sharedBulletLayer->emeptyAllEnemyBullet();
-			SelfPlane::sharedPlane->bombDecresed();
+			//EnemyPlaneLayer::sharedEnemy->emptyAllEnemy();
+			//BulletLayer::sharedBulletLayer->emeptyAllEnemyBullet();
+			//SelfPlane::sharedPlane->bombDecresed();
 
 			onKeyReleased(EventKeyboard::KeyCode::KEY_SPACE, event);
 		}
@@ -693,9 +693,9 @@ void GameScene::buttonBombCallBack()
 
 		Director::sharedDirector()->pushScene(BombSplashScreen::createScene(renderTexture));
 
-		EnemyPlaneLayer::sharedEnemy->emptyAllEnemy();
-		BulletLayer::sharedBulletLayer->emeptyAllEnemyBullet();
-		SelfPlane::sharedPlane->bombDecresed();
+		//EnemyPlaneLayer::sharedEnemy->emptyAllEnemy();
+		//BulletLayer::sharedBulletLayer->emeptyAllEnemyBullet();
+		//SelfPlane::sharedPlane->bombDecresed();
 
 	}
 }
