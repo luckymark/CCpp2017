@@ -1,10 +1,10 @@
-#include "ParticleNode.h"
-#include "Foreach.h"
-#include "DataTables.h"
-#include "ResourceHolder.h"
+#include <Book/ParticleNode.hpp>
+#include <Book/Foreach.hpp>
+#include <Book/DataTables.hpp>
+#include <Book/ResourceHolder.hpp>
 
-#include <SFML\Graphics\RenderTarget.hpp>
-#include <SFML\Graphics\Texture.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 #include <algorithm>
 
@@ -15,12 +15,12 @@ namespace
 }
 
 ParticleNode::ParticleNode(Particle::Type type, const TextureHolder& textures)
-	: SceneNode()
-	, mParticles()
-	, mTexture(textures.get(Textures::Particle))
-	, mType(type)
-	, mVertexArray(sf::Quads)
-	, mNeedsVertexUpdate(true)
+: SceneNode()
+, mParticles()
+, mTexture(textures.get(Textures::Particle))
+, mType(type)
+, mVertexArray(sf::Quads)
+, mNeedsVertexUpdate(true)
 {
 }
 
@@ -41,7 +41,7 @@ Particle::Type ParticleNode::getParticleType() const
 
 unsigned int ParticleNode::getCategory() const
 {
-	return Category::ParticleSystem;
+	return Category::ParticleSystem;	
 }
 
 void ParticleNode::updateCurrent(sf::Time dt, CommandQueue&)
@@ -67,7 +67,7 @@ void ParticleNode::drawCurrent(sf::RenderTarget& target, sf::RenderStates states
 
 	// Apply particle texture
 	states.texture = &mTexture;
-
+	
 	// Draw vertices
 	target.draw(mVertexArray, states);
 }
@@ -87,6 +87,7 @@ void ParticleNode::computeVertices() const
 	sf::Vector2f size(mTexture.getSize());
 	sf::Vector2f half = size / 2.f;
 
+	// Refill vertex array
 	mVertexArray.clear();
 	FOREACH(const Particle& particle, mParticles)
 	{
@@ -96,9 +97,9 @@ void ParticleNode::computeVertices() const
 		float ratio = particle.lifetime.asSeconds() / Table[mType].lifetime.asSeconds();
 		color.a = static_cast<sf::Uint8>(255 * std::max(ratio, 0.f));
 
-		addVertex(pos.x - half.x, pos.y - half.y, 0.f, 0.f, color);
-		addVertex(pos.x + half.x, pos.y - half.y, size.x, 0.f, color);
+		addVertex(pos.x - half.x, pos.y - half.y, 0.f,    0.f,    color);
+		addVertex(pos.x + half.x, pos.y - half.y, size.x, 0.f,    color);
 		addVertex(pos.x + half.x, pos.y + half.y, size.x, size.y, color);
-		addVertex(pos.x - half.x, pos.y + half.y, 0.f, size.y, color);
+		addVertex(pos.x - half.x, pos.y + half.y, 0.f,    size.y, color);
 	}
 }

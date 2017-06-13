@@ -1,13 +1,13 @@
-#include "MusicPlayer.h"
+#include <Book/MusicPlayer.hpp>
 
 
 MusicPlayer::MusicPlayer()
-	: mMusic()
-	, mFilenames()
-	, mVolume(100.f)
+: mMusic()
+, mFilenames()
+, mVolume(100.f)
 {
-	mFilenames[Music::MenuTheme] = "MenuTheme.ogg";
-	mFilenames[Music::MissionTheme] = "MissionTheme.ogg";
+	mFilenames[Music::MenuTheme]    = "Media/Music/MenuTheme.ogg";
+	mFilenames[Music::MissionTheme] = "Media/Music/MissionTheme.ogg";
 }
 
 void MusicPlayer::play(Music::ID theme)

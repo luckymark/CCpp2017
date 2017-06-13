@@ -1,19 +1,20 @@
-#include "StateStack.h"
-#include "Foreach.h"
+#include <Book/StateStack.hpp>
+#include <Book/Foreach.hpp>
 
 #include <cassert>
 
 
 StateStack::StateStack(State::Context context)
-	: mStack()
-	, mPendingList()
-	, mContext(context)
-	, mFactories()
+: mStack()
+, mPendingList()
+, mContext(context)
+, mFactories()
 {
 }
 
 void StateStack::update(sf::Time dt)
 {
+	// Iterate from top to bottom, stop as soon as update() returns false
 	for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)
 	{
 		if (!(*itr)->update(dt))
@@ -25,12 +26,14 @@ void StateStack::update(sf::Time dt)
 
 void StateStack::draw()
 {
+	// Draw all active states from bottom to top
 	FOREACH(State::Ptr& state, mStack)
 		state->draw();
 }
 
 void StateStack::handleEvent(const sf::Event& event)
 {
+	// Iterate from top to bottom, stop as soon as handleEvent() returns false
 	for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)
 	{
 		if (!(*itr)->handleEvent(event))
@@ -74,17 +77,17 @@ void StateStack::applyPendingChanges()
 	{
 		switch (change.action)
 		{
-		case Push:
-			mStack.push_back(createState(change.stateID));
-			break;
+			case Push:
+				mStack.push_back(createState(change.stateID));
+				break;
 
-		case Pop:
-			mStack.pop_back();
-			break;
+			case Pop:
+				mStack.pop_back();
+				break;
 
-		case Clear:
-			mStack.clear();
-			break;
+			case Clear:
+				mStack.clear();
+				break;
 		}
 	}
 
@@ -92,7 +95,7 @@ void StateStack::applyPendingChanges()
 }
 
 StateStack::PendingChange::PendingChange(Action action, States::ID stateID)
-	: action(action)
-	, stateID(stateID)
+: action(action)
+, stateID(stateID)
 {
 }

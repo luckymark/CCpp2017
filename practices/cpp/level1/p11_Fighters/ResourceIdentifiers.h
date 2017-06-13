@@ -1,4 +1,3 @@
-#pragma once
 
 namespace sf
 {
@@ -72,3 +71,4 @@ typedef ResourceHolder<sf::Texture, Textures::ID>			TextureHolder;
 typedef ResourceHolder<sf::Font, Fonts::ID>					FontHolder;
 typedef ResourceHolder<sf::Shader, Shaders::ID>				ShaderHolder;
 typedef ResourceHolder<sf::SoundBuffer, SoundEffect::ID>	SoundBufferHolder;
+

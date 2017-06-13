@@ -1,28 +1,28 @@
-#include "Animation.h"
+#include <Book/Animation.hpp>
 
-#include <SFML\Graphics\RenderTarget.hpp>
-#include <SFML\Graphics\Texture.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 
 Animation::Animation()
-	: mSprite()
-	, mFrameSize()
-	, mNumFrames(0)
-	, mCurrentFrame(0)
-	, mDuration(sf::Time::Zero)
-	, mElapsedTime(sf::Time::Zero)
-	, mRepeat(false)
+: mSprite()
+, mFrameSize()
+, mNumFrames(0)
+, mCurrentFrame(0)
+, mDuration(sf::Time::Zero)
+, mElapsedTime(sf::Time::Zero)
+, mRepeat(false)
 {
 }
 
 Animation::Animation(const sf::Texture& texture)
-	: mSprite(texture)
-	, mFrameSize()
-	, mNumFrames(0)
-	, mCurrentFrame(0)
-	, mDuration(sf::Time::Zero)
-	, mElapsedTime(sf::Time::Zero)
-	, mRepeat(false)
+: mSprite(texture)
+, mFrameSize()
+, mNumFrames(0)
+, mCurrentFrame(0)
+, mDuration(sf::Time::Zero)
+, mElapsedTime(sf::Time::Zero)
+, mRepeat(false)
 {
 }
 
@@ -106,7 +106,7 @@ void Animation::update(sf::Time dt)
 
 	if (mCurrentFrame == 0)
 		textureRect = sf::IntRect(0, 0, mFrameSize.x, mFrameSize.y);
-
+	
 	// While we have a frame to process
 	while (mElapsedTime >= timePerFrame && (mCurrentFrame <= mNumFrames || mRepeat))
 	{

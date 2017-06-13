@@ -1,12 +1,11 @@
-#pragma once
 
 #include "ResourceHolder.h"
 #include "ResourceIdentifiers.h"
 #include "SceneNode.h"
-#include "Aircraft.h"
 #include "SpriteNode.h"
-#include "Command.h"
+#include "Aircraft.h"
 #include "CommandQueue.h"
+#include "Command.h"
 #include "BloomEffect.h"
 #include "SoundPlayer.h"
 
@@ -25,78 +24,77 @@ namespace sf
 
 class World : private sf::NonCopyable
 {
-public:
-										World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sounds);
-	void								update(sf::Time dt);
-	void								draw();
+	public:
+											World(sf::RenderTarget& outputTarget, FontHolder& fonts, SoundPlayer& sounds);
+		void								update(sf::Time dt);
+		void								draw();
+		
+		CommandQueue&						getCommandQueue();
 
-	CommandQueue&						getCommandQueue();
-
-	bool 								hasAlivePlayer() const;
-	bool 								hasPlayerReachedEnd() const;
-
-
-private:
-	void								loadTextures();
-	void								adaptPlayerPosition();
-	void								adaptPlayerVelocity();
-	void								handleCollisions();
-	void								updateSounds();
-
-	void								buildScene();
-	void								addEnemies();
-	void								addEnemy(Aircraft::Type type, float relX, float relY);
-	void								spawnEnemies();
-	void								destroyEntitiesOutsideView();
-	void								guideMissiles();
-	sf::FloatRect						getViewBounds() const;
-	sf::FloatRect						getBattlefieldBounds() const;
+		bool 								hasAlivePlayer() const;
+		bool 								hasPlayerReachedEnd() const;
 
 
-private:
-	enum Layer
-	{
-		Background,
-		LowerAir,
-		UpperAir,
-		LayerCount
-	};
+	private:
+		void								loadTextures();
+		void								adaptPlayerPosition();
+		void								adaptPlayerVelocity();
+		void								handleCollisions();
+		void								updateSounds();
 
-	struct SpawnPoint
-	{
-		SpawnPoint(Aircraft::Type type, float x, float y)
+		void								buildScene();
+		void								addEnemies();
+		void								addEnemy(Aircraft::Type type, float relX, float relY);
+		void								spawnEnemies();
+		void								destroyEntitiesOutsideView();
+		void								guideMissiles();
+		sf::FloatRect						getViewBounds() const;
+		sf::FloatRect						getBattlefieldBounds() const;
+
+
+	private:
+		enum Layer
+		{
+			Background,
+			LowerAir,
+			UpperAir,
+			LayerCount
+		};
+
+		struct SpawnPoint 
+		{
+			SpawnPoint(Aircraft::Type type, float x, float y)
 			: type(type)
 			, x(x)
 			, y(y)
-		{
-		}
+			{
+			}
 
-		Aircraft::Type type;
-		float x;
-		float y;
-	};
+			Aircraft::Type type;
+			float x;
+			float y;
+		};
 
 
-private:
-	sf::RenderTarget&					mTarget;
-	sf::RenderTexture					mSceneTexture;
-	sf::View							mWorldView;
-	TextureHolder						mTextures;
-	FontHolder&							mFonts;
-	SoundPlayer&						mSounds;
+	private:
+		sf::RenderTarget&					mTarget;
+		sf::RenderTexture					mSceneTexture;
+		sf::View							mWorldView;
+		TextureHolder						mTextures;
+		FontHolder&							mFonts;
+		SoundPlayer&						mSounds;
 
-	SceneNode							mSceneGraph;
-	std::array<SceneNode*, LayerCount>	mSceneLayers;
-	CommandQueue						mCommandQueue;
+		SceneNode							mSceneGraph;
+		std::array<SceneNode*, LayerCount>	mSceneLayers;
+		CommandQueue						mCommandQueue;
 
-	sf::FloatRect						mWorldBounds;
-	sf::Vector2f						mSpawnPosition;
-	float								mScrollSpeed;
-	Aircraft*							mPlayerAircraft;
+		sf::FloatRect						mWorldBounds;
+		sf::Vector2f						mSpawnPosition;
+		float								mScrollSpeed;
+		Aircraft*							mPlayerAircraft;
 
-	std::vector<SpawnPoint>				mEnemySpawnPoints;
-	std::vector<Aircraft*>				mActiveEnemies;
+		std::vector<SpawnPoint>				mEnemySpawnPoints;
+		std::vector<Aircraft*>				mActiveEnemies;
 
-	BloomEffect							mBloomEffect;
+		BloomEffect							mBloomEffect;
 };
-

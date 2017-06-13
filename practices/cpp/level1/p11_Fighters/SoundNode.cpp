@@ -1,10 +1,10 @@
-#include "SoundNode.h"
-#include "SoundPlayer.h"
+#include <Book/SoundNode.hpp>
+#include <Book/SoundPlayer.hpp>
 
 
 SoundNode::SoundNode(SoundPlayer& player)
-	: SceneNode()
-	, mSounds(player)
+: SceneNode()
+, mSounds(player)
 {
 }
 

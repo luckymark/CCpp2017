@@ -1,20 +1,21 @@
-#pragma once
+
 #include "ResourceIdentifiers.h"
 
-#include <SFML/System/Time.hpp>
-#include <SFML/Graphics/Color.hpp>
-#include <SFML/Graphics/Rect.hpp>
+#include <SFML\System\Time.hpp>
+#include <SFML\Graphics\Color.hpp>
+#include <SFML\Graphics\Rect.hpp>
 
 #include <vector>
 #include <functional>
+
 
 class Aircraft;
 
 struct Direction
 {
 	Direction(float angle, float distance)
-		: angle(angle)
-		, distance(distance)
+	: angle(angle)
+	, distance(distance)
 	{
 	}
 
@@ -22,8 +23,8 @@ struct Direction
 	float distance;
 };
 
-struct AircraftData 
-{ 
+struct AircraftData
+{
 	int								hitpoints;
 	float							speed;
 	Textures::ID					texture;
@@ -48,14 +49,14 @@ struct PickupData
 	sf::IntRect						textureRect;
 };
 
-	struct ParticleData
-	{
-		sf::Color						color;
-		sf::Time						lifetime;
-	};
+struct ParticleData
+{
+	sf::Color						color;
+	sf::Time						lifetime;
+};
 
 
-	std::vector<AircraftData>	initializeAircraftData();
-	std::vector<ProjectileData>	initializeProjectileData();
-	std::vector<PickupData>		initializePickupData();
-	std::vector<ParticleData>	initializeParticleData();
+std::vector<AircraftData>	initializeAircraftData();
+std::vector<ProjectileData>	initializeProjectileData();
+std::vector<PickupData>		initializePickupData();
+std::vector<ParticleData>	initializeParticleData();

@@ -1,4 +1,4 @@
-#pragma once
+
 #include "SceneNode.h"
 #include "ResourceIdentifiers.h"
 
@@ -7,13 +7,15 @@ class SoundPlayer;
 
 class SoundNode : public SceneNode
 {
-public:
-	explicit				SoundNode(SoundPlayer& player);
-	void					playSound(SoundEffect::ID sound, sf::Vector2f position);
+	public:
+		explicit				SoundNode(SoundPlayer& player);
+		void					playSound(SoundEffect::ID sound, sf::Vector2f position);
 
-	virtual unsigned int	getCategory() const;
+		virtual unsigned int	getCategory() const;
 
 
-private:
-	SoundPlayer&			mSounds;
+	private:
+		SoundPlayer&			mSounds;
 };
+
+

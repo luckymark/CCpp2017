@@ -1,4 +1,4 @@
-#pragma once
+
 #include "ResourceHolder.h"
 #include "ResourceIdentifiers.h"
 #include "Player.h"
@@ -13,33 +13,35 @@
 
 class Application
 {
-public:
-							Application();
-	void					run();
+	public:
+								Application();
+		void					run();
+		
+
+	private:
+		void					processInput();
+		void					update(sf::Time dt);
+		void					render();
+
+		void					updateStatistics(sf::Time dt);
+		void					registerStates();
 
 
-private:
-	void					processInput();
-	void					update(sf::Time dt);
-	void					render();
+	private:
+		static const sf::Time	TimePerFrame;
 
-	void					updateStatistics(sf::Time dt);
-	void					registerStates();
+		sf::RenderWindow		mWindow;
+		TextureHolder			mTextures;
+	  	FontHolder				mFonts;
+		Player					mPlayer;
 
+		MusicPlayer				mMusic;
+		SoundPlayer				mSounds;
+		StateStack				mStateStack;
 
-private:
-	static const sf::Time	TimePerFrame;
-
-	sf::RenderWindow		mWindow;
-	TextureHolder			mTextures;
-	FontHolder				mFonts;
-	Player					mPlayer;
-
-	MusicPlayer				mMusic;
-	SoundPlayer				mSounds;
-	StateStack				mStateStack;
-
-	sf::Text				mStatisticsText;
-	sf::Time				mStatisticsUpdateTime;
-	std::size_t				mStatisticsNumFrames;
+		sf::Text				mStatisticsText;
+		sf::Time				mStatisticsUpdateTime;
+		std::size_t				mStatisticsNumFrames;
 };
+
+

@@ -1,4 +1,4 @@
-#pragma once
+
 #include "ResourceHolder.h"
 #include "ResourceIdentifiers.h"
 
@@ -11,18 +11,20 @@
 
 class MusicPlayer : private sf::NonCopyable
 {
-public:
-								MusicPlayer();
+	public:
+									MusicPlayer();
 
-	void						play(Music::ID theme);
-	void						stop();
+		void						play(Music::ID theme);
+		void						stop();
 
-	void						setPaused(bool paused);
-	void						setVolume(float volume);
+		void						setPaused(bool paused);
+		void						setVolume(float volume);
 
 
-private:
-	sf::Music							mMusic;
-	std::map<Music::ID, std::string>	mFilenames;
-	float								mVolume;
+	private:
+		sf::Music							mMusic;
+		std::map<Music::ID, std::string>	mFilenames;
+		float								mVolume;
 };
+
+

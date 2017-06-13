@@ -1,11 +1,11 @@
-#include "Pickup.h"
-#include "DataTables.h"
-#include "Category.h"
-#include "CommandQueue.h"
-#include "Utility.h"
-#include "ResourceHolder.h"
+#include <Book/Pickup.hpp>
+#include <Book/DataTables.hpp>
+#include <Book/Category.hpp>
+#include <Book/CommandQueue.hpp>
+#include <Book/Utility.hpp>
+#include <Book/ResourceHolder.hpp>
 
-#include <SFML\Graphics\RenderTarget.hpp>
+#include <SFML/Graphics/RenderTarget.hpp>
 
 
 namespace
@@ -14,9 +14,9 @@ namespace
 }
 
 Pickup::Pickup(Type type, const TextureHolder& textures)
-	: Entity(1)
-	, mType(type)
-	, mSprite(textures.get(Table[type].texture))
+: Entity(1)
+, mType(type)
+, mSprite(textures.get(Table[type].texture), Table[type].textureRect)
 {
 	centerOrigin(mSprite);
 }
@@ -40,3 +40,4 @@ void Pickup::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) cons
 {
 	target.draw(mSprite, states);
 }
+

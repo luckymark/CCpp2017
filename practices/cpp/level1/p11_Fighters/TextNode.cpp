@@ -1,9 +1,9 @@
-#include "TextNode.h"
-#include "Utility.h"
+#include <Book/TextNode.hpp>
+#include <Book/Utility.hpp>
 
 #include <SFML/Graphics/RenderTarget.hpp>
 
-
+    
 TextNode::TextNode(const FontHolder& fonts, const std::string& text)
 {
 	mText.setFont(fonts.get(Fonts::Main));

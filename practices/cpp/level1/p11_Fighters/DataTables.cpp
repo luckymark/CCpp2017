@@ -1,10 +1,11 @@
-#include "DataTables.h"
-#include "Aircraft.h"
-#include "Projectile.h"
-#include "Pickup.h"
-#include "Particle.h"
+#include <Book/DataTables.hpp>
+#include <Book/Aircraft.hpp>
+#include <Book/Projectile.hpp>
+#include <Book/Pickup.hpp>
+#include <Book/Particle.hpp>
 
 
+// For std::bind() placeholders _1, _2, ...
 using namespace std::placeholders;
 
 std::vector<AircraftData> initializeAircraftData()
@@ -32,11 +33,11 @@ std::vector<AircraftData> initializeAircraftData()
 	data[Aircraft::Avenger].speed = 50.f;
 	data[Aircraft::Avenger].texture = Textures::Entities;
 	data[Aircraft::Avenger].textureRect = sf::IntRect(228, 0, 60, 59);
-	data[Aircraft::Avenger].directions.push_back(Direction(+45.f, 50.f));
-	data[Aircraft::Avenger].directions.push_back(Direction(0.f, 50.f));
+	data[Aircraft::Avenger].directions.push_back(Direction(+45.f,  50.f));
+	data[Aircraft::Avenger].directions.push_back(Direction(  0.f,  50.f));
 	data[Aircraft::Avenger].directions.push_back(Direction(-45.f, 100.f));
-	data[Aircraft::Avenger].directions.push_back(Direction(0.f, 50.f));
-	data[Aircraft::Avenger].directions.push_back(Direction(+45.f, 50.f));
+	data[Aircraft::Avenger].directions.push_back(Direction(  0.f,  50.f));
+	data[Aircraft::Avenger].directions.push_back(Direction(+45.f,  50.f));
 	data[Aircraft::Avenger].fireInterval = sf::seconds(2);
 	data[Aircraft::Avenger].hasRollAnimation = false;
 
@@ -68,19 +69,19 @@ std::vector<ProjectileData> initializeProjectileData()
 std::vector<PickupData> initializePickupData()
 {
 	std::vector<PickupData> data(Pickup::TypeCount);
-
+	
 	data[Pickup::HealthRefill].texture = Textures::Entities;
 	data[Pickup::HealthRefill].textureRect = sf::IntRect(0, 64, 40, 40);
-	data[Pickup::HealthRefill].action = [](Aircraft& a) { a.repair(25); };
-
+	data[Pickup::HealthRefill].action = [] (Aircraft& a) { a.repair(25); };
+	
 	data[Pickup::MissileRefill].texture = Textures::Entities;
 	data[Pickup::MissileRefill].textureRect = sf::IntRect(40, 64, 40, 40);
 	data[Pickup::MissileRefill].action = std::bind(&Aircraft::collectMissiles, _1, 3);
-
+	
 	data[Pickup::FireSpread].texture = Textures::Entities;
 	data[Pickup::FireSpread].textureRect = sf::IntRect(80, 64, 40, 40);
 	data[Pickup::FireSpread].action = std::bind(&Aircraft::increaseSpread, _1);
-
+	
 	data[Pickup::FireRate].texture = Textures::Entities;
 	data[Pickup::FireRate].textureRect = sf::IntRect(120, 64, 40, 40);
 	data[Pickup::FireRate].action = std::bind(&Aircraft::increaseFireRate, _1);

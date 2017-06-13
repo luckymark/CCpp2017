@@ -1,10 +1,10 @@
-#pragma once
+
 #include <SFML\System\Vector2.hpp>
 #include <SFML\System\Time.hpp>
 #include <SFML\Graphics\Color.hpp>
 
 
-struct Particle
+struct Particle 
 {
 	enum Type
 	{
@@ -17,3 +17,4 @@ struct Particle
 	sf::Color		color;
 	sf::Time		lifetime;
 };
+
