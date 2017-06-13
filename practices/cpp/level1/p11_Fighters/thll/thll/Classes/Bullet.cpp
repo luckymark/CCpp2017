@@ -2,6 +2,16 @@
 
 USING_NS_CC;
 
+Bullet::Bullet() :value(0x123456789ABCDE0)
+{
+
+}
+
+Bullet::~Bullet()
+{
+	value = 0;
+}
+
 Bullet* Bullet::create(const std::string& filename)
 {
 	Bullet *sprite = new (std::nothrow) Bullet();
@@ -45,6 +55,11 @@ int Bullet::getDirection()
 void Bullet::setDirection(int dir)
 {
 	this->direction = dir;
+}
+
+bool Bullet::isWilder()
+{
+	return value == 0x123456789ABCDE0;
 }
 
 bool Bullet::init()

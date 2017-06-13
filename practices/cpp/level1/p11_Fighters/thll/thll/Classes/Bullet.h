@@ -21,9 +21,15 @@ public:
 
 	void setDirection(int dir);
 
+	bool isWilder();
 private:
 	int type;
 
 	int direction;
+
+	long long value;
+	Bullet();
+
+	~Bullet();
 };
 #endif
