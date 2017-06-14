@@ -6,6 +6,7 @@
 class plane {
 
 	public:
+		bool godmode;
 		bullet * plane_bullet;
 		plane(float x=0, float y=0,char type='e');
 		void setPlane(float x,float y);
@@ -17,6 +18,7 @@ class plane {
 		void lifeChange(int delta);
 		void freshBulletCD();
 		void Count();
+		void deleteBullet();
 		char showType();
 		int showLife();
 		bool isExist();
@@ -25,6 +27,7 @@ class plane {
 		bool collision(plane & p);
 	protected:
 		bool bulletCD;
+		
 		char type;
 		int count;
 		int fireRate;
@@ -39,4 +42,5 @@ class plane {
 void appendEnemy(plane * enemy,int index);
 void moveEnemy(plane * enemy, plane & player,int max, int & ifCollision);
 void showEnemy(sf::RenderWindow &thisWindow,plane * enemy,int max);
+void clearBullet(plane * emeny,int max);
 #endif

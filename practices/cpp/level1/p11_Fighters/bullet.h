@@ -15,6 +15,7 @@ class bullet {
 		info * bulletInfo;
 		bullet(int max=50);
 		void appendBullet(float x, float y, char type);
+		
 		void moveBullet();
 		void showBullet(sf::RenderWindow &thisWindow);
 		bool isExist(int index);

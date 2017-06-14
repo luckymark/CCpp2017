@@ -20,13 +20,13 @@ void bullet::appendBullet(float x, float y, char type) {
 	float ispeed;
 	switch (type) {
 		case 'p':
-			tex.loadFromFile("UFO.psd");
-			bulletInfo[tail].bullet_sprite.setScale(sf::Vector2f(0.05f, 0.2f));
+			tex.loadFromFile("bullet.png");
+			bulletInfo[tail].bullet_sprite.setScale(sf::Vector2f(0.2f, 0.3f));
 			ispeed = -10;
 			break;
 		case 'e':
-			tex.loadFromFile("UFO.psd");
-			bulletInfo[tail].bullet_sprite.setScale(sf::Vector2f(0.05f, 0.2f));
+			tex.loadFromFile("bullet_e.psd");
+			bulletInfo[tail].bullet_sprite.setScale(sf::Vector2f(0.02f, 0.03f));
 			ispeed = 5;
 			break;
 		default:

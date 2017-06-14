@@ -10,28 +10,32 @@ plane::plane(float x,float y,char type) {
 	this->type = type;
 	switch (type) {
 		case 'p':
-			plane_texture.loadFromFile("UFO.psd");
+			plane_texture.loadFromFile("player.psd");
 			plane_bullet=new bullet(25);
 			speed =8;
-			life = 3;
-			half_sizeX = 30;
-			half_sizeY = 10;
+			life = 12;
+			half_sizeX = 37.5;
+			half_sizeY = 15;
 			this->x = x;
 			this->y = y;
-			plane_sprite.setScale(sf::Vector2f(0.5f, 0.5f));
+			plane_sprite.setTextureRect(sf::IntRect(0, 0, 200, 101));
+			plane_sprite.setScale(sf::Vector2f(0.375f, 0.3f));
 			fireRate = 5;
+			godmode = 1;
 			break;
 		case 'e':
-			plane_texture.loadFromFile("UFO.psd");
+			plane_texture.loadFromFile("enemy.psd");
 			plane_bullet = new bullet(20);
 			speed = 1;
 			life = 0;
-			half_sizeX = 18;
-			half_sizeY = 6;
+			half_sizeX = 16;
+			half_sizeY = 12;
 			this->x = rand()%Xmax-half_sizeX;
 			this->y = y;
+			plane_sprite.setTextureRect(sf::IntRect(0, 0, 107, 80));
 			plane_sprite.setScale(sf::Vector2f(0.3f, 0.3f));
 			fireRate = 50;
+			godmode = 0;
 			break;
 	}
 	bulletCD = 0;
@@ -59,7 +63,7 @@ void plane::movePlane() {
 	if (life<=0)return;
 	this->y = this->y + speed;
 	if (this->x < -half_sizeX || this->x > Xmax - half_sizeX ||
-		this->y < -half_sizeY || this->y > Ymax - 2 * half_sizeY) {
+		this->y < -half_sizeY || this->y > Ymax ) {
 		life = 0;
 		return;
 	}
@@ -67,17 +71,54 @@ void plane::movePlane() {
 }
 void plane::showPlane(sf::RenderWindow &thisWindow) {
 	switch (this->life) {
-		case 1:
-		case 2:
+		case 11:
+		case 7:
 		case 3:
+			plane_sprite.setTextureRect(sf::IntRect(0, 101, 200, 101));
+			thisWindow.draw(plane_sprite);
+			plane_bullet->showBullet(thisWindow);
+			this->life = this->life - 1;
+			break;
+		case 10:
+		case 6:
+			plane_sprite.setTextureRect(sf::IntRect(0, 202, 200, 101));
+			thisWindow.draw(plane_sprite);
+			plane_bullet->showBullet(thisWindow);
+			this->life = this->life - 1;
+			break;
+		case 2:
+			plane_sprite.setTextureRect(sf::IntRect(0, 202, 200, 101));
+			thisWindow.draw(plane_sprite);
+			plane_bullet->showBullet(thisWindow);
+			this->life = 0;
+			break;
+		case 9:
+		case 5:
+			plane_sprite.setTextureRect(sf::IntRect(0, 0, 200,101));
+			thisWindow.draw(plane_sprite);
+			plane_bullet->showBullet(thisWindow);
+			plane_sprite.setPosition(sf::Vector2f(350, 500));
+			this->x = 350, this->y = 500;
+			this->godmode = 1;
+			this->life = this->life - 1;
+			break;
+		case 12:
+		case 8:
+		case 4:
+		case 1:
+			if (this->godmode) {
+				plane_sprite.setTextureRect(sf::IntRect(0, 303, 200, 101));
+			}
+			else if('p'==this->type){
+				plane_sprite.setTextureRect(sf::IntRect(0, 0, 200, 101));
+			}
 			thisWindow.draw(plane_sprite);
 			plane_bullet->showBullet(thisWindow);
 			break;
 		case -1:
 		case -2:
 		case -3:
-			this->plane_texture.loadFromFile("UFOc1.psd");
-			plane_sprite.setTexture(plane_texture);
+			plane_sprite.setTextureRect(sf::IntRect(0, 80, 107, 80));
 			thisWindow.draw(plane_sprite);
 			plane_bullet->showBullet(thisWindow);
 			this->life = this->life - 1;
@@ -85,13 +126,13 @@ void plane::showPlane(sf::RenderWindow &thisWindow) {
 		case -4:
 		case -5:
 		case -6:
-			this->plane_texture.loadFromFile("UFOc2.psd");
-			plane_sprite.setTexture(plane_texture);
+			plane_sprite.setTextureRect(sf::IntRect(0, 160, 107,100));
 			thisWindow.draw(plane_sprite);
 			plane_bullet->showBullet(thisWindow);
 			this->life = this->life - 1;
 			break;
 		case -7:
+
 			this->life = 0;
 			break;
 		case 0:
@@ -104,8 +145,19 @@ void plane::showPlane(sf::RenderWindow &thisWindow) {
 }
 void plane::Fire(char type) {
 	if (this->life <= 0)return;
+	if (this->life % 4 != 0 && this->life != 1)return;
 	if (!bulletCD) {
-		plane_bullet->appendBullet(this->x + this->half_sizeX, this->y, type);
+		switch (this->type) {
+		case 'p':
+			plane_bullet->appendBullet(this->x + this->half_sizeX , this->y, type);
+			break;
+		case 'e':
+			plane_bullet->appendBullet(this->x + this->half_sizeX, this->y + 2 * this->half_sizeY, type);
+			break;
+		default:
+			;
+		}
+		
 		bulletCD = 1;
 	}
 	
@@ -144,18 +196,20 @@ bool plane::collision(bullet & bp) {
 			bp.bulletInfo[i].x < this->x + 2*this->half_sizeX) &&
 			(bp.bulletInfo[i].y > this->y  &&
 				bp.bulletInfo[i].y < this->y + 2*this->half_sizeY)) {
+			bp.bulletInfo[i].ifExist = 0;
 			switch (this->showType()) {
 				case 'e':
 					this->lifeChange(-2);
 					break;
 				case 'p':
+					if (this->godmode)return false;
 					this->lifeChange(-1);
 					break;
 				default:
 					;
 			}
 			
-			bp.bulletInfo[i].ifExist = 0;
+			
 			return true;
 		}
 	}
@@ -166,6 +220,7 @@ bool plane::collision(plane & p) {
 	if (!p.isExist())return false;
 	if (p.isCollision(this->x, this->y,this->half_sizeX,this->half_sizeY)) {
 		this->lifeChange(-2);
+		if (p.godmode)return true;
 		p.lifeChange(-1);
 		return true;
 	}
@@ -200,5 +255,26 @@ void showEnemy(sf::RenderWindow &thisWindow,plane * enemy,int max) {
 		enemy[i].showPlane(thisWindow);
 		enemy[i].Count();
 		enemy[i].freshBulletCD();
+	}
+}
+void plane::deleteBullet() {
+	int max;
+	switch (this->type) {
+		case 'p':
+			max = 25;
+			break;
+		case 'e':
+			max = 20;
+			break;
+		default:
+			;
+	}
+	for (int i = 0; i < max; i++) {
+		this->plane_bullet->bulletInfo[i].ifExist = 0;
+	}
+}
+void clearBullet(plane * enemy,int max) {
+	for (int i = 0; i < max; i++) {
+		enemy[i].deleteBullet();
 	}
 }
