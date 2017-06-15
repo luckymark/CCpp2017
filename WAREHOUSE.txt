@@ -1,0 +1,5 @@
+Tabbaco 40
+Computer 20
+Laptop 20
+Air-Conditioner 10
+Book 150
