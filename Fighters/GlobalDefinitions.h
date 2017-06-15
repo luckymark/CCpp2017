@@ -33,7 +33,7 @@
 #define STAGE3 3000
 #define ENEMYRANGE 1500
 #define BOSSRANGE 15000
-#define IS_WIN 10000
+#define IS_WIN 8000
 #define PILLRANGE 200
 #define PILLRANGE2 400
 #define CONSTHP 3
