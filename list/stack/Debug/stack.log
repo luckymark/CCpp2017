@@ -1,0 +1,18 @@
+﻿生成启动时间为 2017/6/15 16:38:34。
+     1>项目“C:\Users\YP\Documents\Visual Studio 2015\Projects\stack\stack\stack.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\stack.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt stack.cpp
+         stack.cpp
+       Link:
+         D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\YP\Documents\Visual Studio 2015\Projects\stack\Debug\stack.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\YP\Documents\Visual Studio 2015\Projects\stack\Debug\stack.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\YP\Documents\Visual Studio 2015\Projects\stack\Debug\stack.lib" /MACHINE:X86 Debug\List.obj
+         Debug\stack.obj
+         Debug\stdafx.obj
+     1>stack.obj : error LNK2019: 无法解析的外部符号 "public: __thiscall List<float>::~List<float>(void)" (??1?$List@M@@QAE@XZ)，该符号在函数 _main 中被引用
+     1>stack.obj : error LNK2019: 无法解析的外部符号 "public: __thiscall List<float>::List<float>(int)" (??0?$List@M@@QAE@H@Z)，该符号在函数 _main 中被引用
+     1>stack.obj : error LNK2019: 无法解析的外部符号 "public: void __thiscall List<float>::insert(int,float)" (?insert@?$List@M@@QAEXHM@Z)，该符号在函数 _main 中被引用
+     1>C:\Users\YP\Documents\Visual Studio 2015\Projects\stack\Debug\stack.exe : fatal error LNK1120: 3 个无法解析的外部命令
+     1>已完成生成项目“C:\Users\YP\Documents\Visual Studio 2015\Projects\stack\stack\stack.vcxproj”(Build 个目标)的操作 - 失败。
+
+生成失败。
+
+已用时间 00:00:02.68
