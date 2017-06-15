@@ -133,9 +133,9 @@ int main()
 	sf::Clock clock7;
 	sf::Clock clock8;
 	int if_my_aircraft_exist;
-	float renew_aircraft_time = 2;
+	float renew_aircraft_time = 2, speed_multiple = 1;
 	int  renew_boss_1_time = 18, renew_boss_2_time = 15;
-	int your_blood_number, your_energy_number, your_protected_blood, if_protect_exist, your_score=0, your_life = 3;
+	int your_blood_number, your_energy_number, your_protected_blood, if_protect_exist, your_score=200, your_life = 3;
 	sf::RenderWindow window(sf::VideoMode(window_lenth, window_width), "SFML works!");
 	while (your_life > 0) {
 		your_blood_number = 300;
@@ -186,7 +186,7 @@ int main()
 				clock2.restart();
 			}
 			sf::Time elapsed8 = clock8.getElapsedTime();
-			if (elapsed8.asSeconds() > 5*renew_aircraft_time) {
+			if (elapsed8.asSeconds() > 3*renew_aircraft_time) {
 				for (int j = 0; j < max_enemy_num; j++) {
 					if ((0 == enemy_aircraft_2[j].if_exist) && (0 == enemy_missile_2[j].if_exist)) {
 						enemy_aircraft_2[j].if_exist = 1;
@@ -209,15 +209,15 @@ int main()
 			for (int j = 0; j<max_enemy_num; j++) {
 				while(1 == enemy_aircraft_2[j].if_exist) {
 					if (1 == enemy_aircraft_2[j].fly_way) {
-						enemy_aircraft_2[j].aircraft.move(2*move_speed_enemy_aircraft, move_speed_enemy_aircraft);
+						enemy_aircraft_2[j].aircraft.move(3*move_speed_enemy_aircraft, move_speed_enemy_aircraft);
 					}
 					if (2 == enemy_aircraft_2[j].fly_way) {
-						enemy_aircraft_2[j].aircraft.move(-2*move_speed_enemy_aircraft,move_speed_enemy_aircraft);
+						enemy_aircraft_2[j].aircraft.move(-3*move_speed_enemy_aircraft,move_speed_enemy_aircraft);
 					}
-					if (enemy_aircraft_2[j].aircraft.getPosition().x == 0) {
+					if (enemy_aircraft_2[j].aircraft.getPosition().x <= 0) {
 						enemy_aircraft_2[j].fly_way = 1;
 					}
-					if (enemy_aircraft_2[j].aircraft.getPosition().x == window_lenth) {
+					if (enemy_aircraft_2[j].aircraft.getPosition().x >= window_lenth) {
 						enemy_aircraft_2[j].fly_way = 2;
 					}
 					if (enemy_aircraft_2[j].aircraft.getPosition().y > window_width) {
@@ -279,7 +279,6 @@ int main()
 				}
 				if (1 == boss_1.if_exist) {
 					for (int i = 0; i < 10; i++) {
-						std::cout << i << std::endl;
 						for (int j = 0; j < max_enemy_missile_num; j++) {
 							if (boss_1_missile[j].if_exist == 0) {
 								boss_1_missile[j].if_exist = 1;
@@ -313,8 +312,8 @@ int main()
 				}
 			}
 			for (int i = 0; i < max_enemy_missile_num; i++) {
-				float vx = 0.5*cos(PI*(i % 18) / 9.0);
-				float vy = 0.5*sin(PI*(i % 18) / 9.0);
+				float vx = speed_multiple*0.5*cos(PI*(i % 18) / 9.0);
+				float vy = speed_multiple*0.5*sin(PI*(i % 18) / 9.0);
 				if (boss_2_missile[i].if_exist == 1) {
 					boss_2_missile[i].missile.move(vx, vy);
 				}
@@ -322,7 +321,7 @@ int main()
 			//敌机子弹出边界处理
 			for (int i = 0; i < max_enemy_missile_num; i++) {
 				if (enemy_missile[i].if_exist == 1) {
-					enemy_missile[i].missile.move(0, move_speed_enemy_missile);
+					enemy_missile[i].missile.move(0, 1.5*move_speed_enemy_missile);
 				}
 				if (enemy_missile_2[i].if_exist == 1) {
 					enemy_missile_2[i].missile.move(0, move_speed_enemy_missile);
@@ -658,6 +657,8 @@ int main()
 			quad2[3].color = sf::Color::Green;
 			window.clear();
 			window.draw(background);
+			window.draw(quad1);
+			window.draw(quad2);
 			window.draw(my_aircraft->aircraft);
 			window.draw(text3);
 			window.draw(text4);
@@ -714,7 +715,7 @@ int main()
 					window.draw(quad5);
 				}
 			}
-			if (your_protected_blood <= 0);{
+			if (your_protected_blood <= 0){
 				if_protect_exist = 0;
 				}
 			if (1 == if_protect_exist) {
@@ -794,8 +795,6 @@ int main()
 			if (1 == boss_2.if_exist) {
 				window.draw(boss_2.aircraft);
 			}
-			window.draw(quad1);
-			window.draw(quad2);
 			//绘制能量
 			for (int j = 0; j < max_enemy_num; j++) {
 				if (1 == energy[j].if_exist) {
@@ -823,6 +822,7 @@ int main()
 			//改变boss_2刷新时间
 			if ((your_score % 200 == 0) && (your_score <= 1200)) {
 				renew_boss_2_time -= 1;
+				speed_multiple += 0.2;
 				your_score += 5;
 			}
 			if ((0 == if_my_aircraft_exist) &&(your_life!=0)){
