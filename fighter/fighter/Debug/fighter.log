@@ -1,0 +1,32 @@
+﻿生成启动时间为 2017/6/13 0:28:31。
+     1>项目“C:\Users\YP\documents\visual studio 2015\Projects\fighter\fighter\fighter.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Yu"stdafx.h" /Fp"Debug\fighter.pch" /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Object_manage.cpp
+         Object_manage.cpp
+     1>c:\users\yp\documents\visual studio 2015\projects\fighter\fighter\object_manage.cpp(309): warning C4244: “参数”: 从“int”转换到“float”，可能丢失数据
+     1>c:\users\yp\documents\visual studio 2015\projects\fighter\fighter\object_manage.cpp(711): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>c:\users\yp\documents\visual studio 2015\projects\fighter\fighter\object_manage.cpp(738): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+       Link:
+         D:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\YP\documents\visual studio 2015\Projects\fighter\Debug\fighter.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\YP\Desktop\最近作业\英语\新建文件夹\SFML-2.4.2\lib" "sfml-system-d.lib" "sfml-window-d.lib" "sfml-graphics-d.lib" "sfml-network-d.lib" "sfml-audio-d.lib" "sfml-main-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\YP\documents\visual studio 2015\Projects\fighter\Debug\fighter.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\YP\documents\visual studio 2015\Projects\fighter\Debug\fighter.lib" /MACHINE:X86 Debug\fighter.res
+         Debug\background.obj
+         Debug\Enermy.obj
+         Debug\Enermy_Bullet.obj
+         Debug\Explode.obj
+         Debug\Explode_enermy.obj
+         Debug\fighter.obj
+         Debug\Fly_BUlllet.obj
+         Debug\MyBullet.obj
+         Debug\MyPlane_explode.obj
+         Debug\My_plane.obj
+         Debug\Object_manage.obj
+         Debug\Quicker_killer.obj
+         Debug\Resolve_interface.obj
+         Debug\rocket.obj
+         Debug\start_interface.obj
+         Debug\stdafx.obj
+         fighter.vcxproj -> C:\Users\YP\documents\visual studio 2015\Projects\fighter\Debug\fighter.exe
+     1>已完成生成项目“C:\Users\YP\documents\visual studio 2015\Projects\fighter\fighter\fighter.vcxproj”(Build 个目标)的操作。
+
+已成功生成。
+
+已用时间 00:00:04.46
