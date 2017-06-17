@@ -47,7 +47,7 @@ class Player
 		void					setPlayerDead();
 		void					setPlayerAlive();
 		void					gameContinue();
-		void					restart();
+		void					Reborn();
 		Aircraft*                               mAircraft;
 	private:
 		void					initializeActions();

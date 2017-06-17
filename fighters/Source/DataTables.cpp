@@ -203,7 +203,7 @@ std::vector<AircraftData> initializeAircraftData()
 	data[Aircraft::AvengerD2].directions.push_back(Direction(-90.f, 500.f));
 	data[Aircraft::AvengerD2].fireInterval = sf::seconds(1.5);
 
-	data[Aircraft::EagleA1].hitpoints = 250;
+	data[Aircraft::EagleA1].hitpoints = 200;
 	data[Aircraft::EagleA1].speed = 170.f;
 	data[Aircraft::EagleA1].texture = Textures::Eagle;
 	data[Aircraft::EagleA1].directions.push_back(Direction(0.f, 100.f));
@@ -216,7 +216,7 @@ std::vector<AircraftData> initializeAircraftData()
 	data[Aircraft::EagleA1].directions.push_back(Direction(-90.f, 200.f));
 	data[Aircraft::EagleA1].fireInterval = sf::seconds(2);
 
-	data[Aircraft::EagleA2].hitpoints = 250;
+	data[Aircraft::EagleA2].hitpoints = 200;
 	data[Aircraft::EagleA2].speed = 170.f;
 	data[Aircraft::EagleA2].texture = Textures::Eagle;
 	data[Aircraft::EagleA2].directions.push_back(Direction(0.f, 100.f));
@@ -229,7 +229,7 @@ std::vector<AircraftData> initializeAircraftData()
 	data[Aircraft::EagleA2].directions.push_back(Direction(+90.f, 200.f));
 	data[Aircraft::EagleA2].fireInterval = sf::seconds(2);
 
-	data[Aircraft::EagleB1].hitpoints = 250;
+	data[Aircraft::EagleB1].hitpoints = 200;
 	data[Aircraft::EagleB1].speed = 170.f;
 	data[Aircraft::EagleB1].texture = Textures::Eagle;
 	data[Aircraft::EagleB1].directions.push_back(Direction(0.f, 100.f));
@@ -256,7 +256,7 @@ std::vector<AircraftData> initializeAircraftData()
 
 
 
-	data[Aircraft::EagleB2].hitpoints = 250;
+	data[Aircraft::EagleB2].hitpoints = 200;
 	data[Aircraft::EagleB2].speed = 170.f;
 	data[Aircraft::EagleB2].texture = Textures::Eagle;
 	data[Aircraft::EagleB2].directions.push_back(Direction(0.f, 100.f));

@@ -112,9 +112,9 @@ void Player::gameContinue()
 
 }
 
-void Player::restart()
+void Player::Reborn()
 {
-
+	mAircraft->reborn();
 }
 
 sf::Keyboard::Key Player::getAssignedKey(Action action) const

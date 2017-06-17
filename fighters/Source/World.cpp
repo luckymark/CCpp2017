@@ -5,22 +5,23 @@
 
 #include <SFML/Graphics/RenderWindow.hpp>
 
-
+#include<ctime>
 #include <algorithm>
 #include <cmath>
 #include <limits>
 
 bool matchesCategories(SceneNode::Pair& colliders, Category::Type type1, Category::Type type2);
 
-World::World(sf::RenderWindow& window, int& mScore, sf::Time* mTime, Player* player)
+World::World(sf::RenderWindow& window, int& mScore, Player* player)
 	: mWindow(window)
 	, mWorldView(window.getDefaultView())
 	, mFonts(mFonts)
+	, mWorldLength(20000.f)
 	, mSounds()
 	, mTextures()
 	, mSceneGraph()
 	, mSceneLayers()
-	, mWorldBounds(0.f, 0.f, mWorldView.getSize().x, 20000.f)
+	, mWorldBounds(0.f, 0.f, mWorldView.getSize().x, mWorldLength)
 	, mSpawnPosition(mWorldView.getSize().x / 2.f, mWorldBounds.height - mWorldView.getSize().y / 2.f)
 	, mViewCenter(mSpawnPosition)
 	, mScrollSpeed(-50.f)
@@ -30,10 +31,10 @@ World::World(sf::RenderWindow& window, int& mScore, sf::Time* mTime, Player* pla
 	, mActiveEnemies()
 	, mRandomEvents(sf::seconds(5), sf::seconds(10), sf::seconds(0))
 	, mScore(mScore)
-	, mTime(mTime)
-//	, mBloom(NULL)
 	, mPlayer(player)
 {
+	srand(time(0));
+
 	loadTextures();
 	buildScene();
 
@@ -82,7 +83,7 @@ void World::update(sf::Time dt)
 
 
 	mFlashNode.update(dt);
-	mFlashNode.removeWrecks();		//移除过期爆炸节点
+	mFlashNode.removeWrecks();		//移除过期Flash节点
 
 
 	mScore = mPlayerAircraft->getScore();
@@ -119,6 +120,10 @@ void World::loadTextures()
 	mTextures.load(Textures::Raptor, "Media/Textures/Raptor.png");
 	mTextures.load(Textures::Avenger, "Media/Textures/Avenger.png");
 	mTextures.load(Textures::Desert, "Media/Textures/Desert.png");
+	mTextures.load(Textures::Jungle, "Media/Textures/Jungle.png");
+	mTextures.load(Textures::UpCloud, "Media/Textures/UpCloud.png");
+	mTextures.load(Textures::DownCloud, "Media/Textures/DownCloud.png");
+	mTextures.load(Textures::MidCloud, "Media/Textures/MidCloud.png");
 
 	mTextures.load(Textures::Bullet, "Media/Textures/Bullet.png");
 	mTextures.load(Textures::Missile, "Media/Textures/Missile.png");
@@ -129,6 +134,8 @@ void World::loadTextures()
 	mTextures.load(Textures::FireRate, "Media/Textures/FireRate.png");
 
 	mTextures.load(Textures::Explosion, "Media/Textures/Explosion.png");
+	mTextures.load(Textures::Spark, "Media/Textures/Spark.png");
+	mTextures.load(Textures::Explosion_missile, "Media/Textures/Explosion_missile.png");
 }
 
 void World::adaptPlayerPosition()
@@ -183,14 +190,49 @@ void World::buildScene()
 	}
 
 	// Prepare the tiled background
-	sf::Texture& texture = mTextures.get(Textures::Desert);
+
+	sf::Texture& texture1 = mTextures.get(Textures::Desert);
+	sf::Texture& texture2 = mTextures.get(Textures::Jungle);
+	sf::Texture& DowncloudsTexture = mTextures.get(Textures::DownCloud );
+	sf::Texture& UpcloudsTexture = mTextures.get(Textures::UpCloud);
+	sf::Texture& MidCloudTexture = mTextures.get(Textures::MidCloud);
+
 	sf::IntRect textureRect(mWorldBounds);
-	texture.setRepeated(true);
+
+	texture1.setRepeated(true);
+	texture2.setRepeated(true);
+	DowncloudsTexture.setRepeated(true);
+	UpcloudsTexture.setRepeated(false);
+	MidCloudTexture.setRepeated(false);
 
 	// Add the background sprite to the scene
-	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(texture, textureRect));
-	backgroundSprite->setPosition(mWorldBounds.left, mWorldBounds.top);
-	mSceneLayers[Background]->attachChild(std::move(backgroundSprite));
+
+	std::unique_ptr<SpriteNode> backgroundSprite2(new SpriteNode(texture2, textureRect));
+	backgroundSprite2->setPosition(mWorldBounds.left, mWorldBounds.top);
+	mSceneLayers[Background]->attachChild(std::move(backgroundSprite2));
+
+	std::unique_ptr<SpriteNode> backgroundSprite1(new SpriteNode(texture1, textureRect));
+	backgroundSprite1->setPosition(mWorldBounds.left, mWorldBounds.top+ mWorldLength/2);
+	mSceneLayers[Background]->attachChild(std::move(backgroundSprite1));
+
+	std::unique_ptr<SpriteNode> mDownCloud(new SpriteNode(DowncloudsTexture, textureRect));
+	mDownCloud->setPosition(mWorldBounds.left, mWorldBounds.top );
+	mSceneLayers[DownCloud]->attachChild(std::move(mDownCloud));
+
+	for (float y = 0; y < mWorldBounds.top + mWorldLength / 2- UpcloudsTexture.getSize().y; y += UpcloudsTexture.getSize().y)	//后半个关卡覆盖上层云
+	{
+		std::unique_ptr<SpriteNode> mUpCloud(new SpriteNode(UpcloudsTexture, textureRect));
+		mUpCloud->setPosition(mWorldBounds.left, y);
+		mSceneLayers[UpCloud]->attachChild(std::move(mUpCloud));
+	}
+
+	std::unique_ptr<SpriteNode> mMidCloud(new SpriteNode(MidCloudTexture, textureRect));
+	mMidCloud->setPosition(mWorldBounds.left, mWorldBounds.top + mWorldLength / 2- MidCloudTexture.getSize().y/2);
+	mSceneLayers[UpCloud]->attachChild(std::move(mMidCloud));
+
+
+
+
 
 	// Add player's aircraft
 	std::unique_ptr<Aircraft> player(new Aircraft(mWindow,Aircraft::Eagle, mTextures, mFonts,mSounds,true,mPlayer));
@@ -205,6 +247,7 @@ void World::buildScene()
 
 void World::updateScore(Aircraft& mAircraft)
 {
+	
 	if (!mAircraft.isAllied() && mAircraft.isDestroyed())
 	{
 		switch (mAircraft.getType())
@@ -231,7 +274,7 @@ void World::updateScore(Aircraft& mAircraft)
 		case Aircraft::Type::AvengerD1:
 		case Aircraft::Type::AvengerD2:
 			mScore += 15;
-			mPlayerAircraft->addPoints(3);
+			mPlayerAircraft->addPoints(4);
 			break;
 		case Aircraft::Type::EagleA1:
 		case Aircraft::Type::EagleA2:
@@ -297,15 +340,15 @@ void World::addEnemies()
 	addEnemy(Aircraft::Avenger, +140.f, 4700.f);
 	addEnemy(Aircraft::Avenger, -140.f, 4700.f);
 
-	addTroopE2(5000);
+	addTroopE2(5500);
 
 
 
 
 
-	addEnemy(Aircraft::Raptor, +100.f, 6500.f);
-	addEnemy(Aircraft::Raptor, -100.f, 6500.f);
-	addEnemy(Aircraft::Avenger, -70.f, 6800.f);
+	addEnemy(Aircraft::Raptor, +100.f, 7000.f);
+	addEnemy(Aircraft::Raptor, -100.f, 7500.f);
+	addEnemy(Aircraft::Avenger, -70.f, 7800.f);
 
 
 	addTroopA1(8000);
@@ -314,51 +357,25 @@ void World::addEnemies()
 
 	addTroopD1(9000);
 
-	addEnemy(Aircraft::Raptor, 0.f, 500.f+8000);
-	addEnemy(Aircraft::Raptor, 0.f, 700.f + 8000);
-	addEnemy(Aircraft::Raptor, 0.f, 700.f + 8000);
-	addEnemy(Aircraft::Raptor, 0.f, 1000.f + 8000);
 
 
-	addTroopA1(1500 + 8000);
+
+	addTroopE2(5000 + 9000);
 
 
-	addEnemy(Aircraft::Raptor, +300.f, 2000.f + 8000);
-	addEnemy(Aircraft::Raptor, -300.f, 2000.f + 8000);
-	addEnemy(Aircraft::Raptor, 0.f, 2100.f + 8000);
-
-	addEnemy(Aircraft::Avenger, +140.f, 2600.f + 8000);
-	addEnemy(Aircraft::Avenger, -140.f, 2600.f + 8000);
-
-	addTroopA2(3000 + 8000);
-
-	addEnemy(Aircraft::Raptor, +200.f, 3300.f + 8000);
-	addEnemy(Aircraft::Raptor, -200.f, 3300.f + 8000);
-	addEnemy(Aircraft::Raptor, 0.f, 3500.f);
-	addEnemy(Aircraft::Raptor, +400.f, 3700.f + 8000);
-	addEnemy(Aircraft::Raptor, -400.f, 3700.f + 8000);
-	addEnemy(Aircraft::Raptor, 0.f, 3900.f + 8000);
-
-	addTroopB1(4500 + 8000);
-	addTroopB2(4500 + 8000);
 
 
-	addEnemy(Aircraft::Avenger, +70.f, 5000.f + 8000);
-	addEnemy(Aircraft::Avenger, -70.f, 5000.f + 8000);
-	addEnemy(Aircraft::Avenger, +140.f, 5200.f + 8000);
-	addEnemy(Aircraft::Avenger, -140.f, 5200.f + 8000);
 
-	addTroopA1(5500 + 8000);
-	addTroopA2(5500 + 8000);
+	addEnemy(Aircraft::Raptor, +100.f, 6500.f + 9000);
+	addEnemy(Aircraft::Raptor, -100.f, 6500.f + 9000);
+	addEnemy(Aircraft::Avenger, -70.f, 6800.f + 9000);
 
-	addTroopD1(6000 + 8000);
 
-	addEnemy(Aircraft::Raptor, +100.f, 6500.f + 8000);
-	addEnemy(Aircraft::Raptor, -100.f, 6500.f + 8000);
-	addEnemy(Aircraft::Avenger, -70.f, 6800.f + 8000);
-	addEnemy(Aircraft::Avenger, -70.f, 7000.f + 8000);
-	addEnemy(Aircraft::Avenger, 70.f, 7400.f + 8000);
-	addEnemy(Aircraft::Avenger, 70.f, 7600.f + 8000);
+	addTroopA1(8000 + 9000);
+	addTroopA2(8000 + 9000);
+
+
+	addTroopD1(9000 + 9000);
 
 
 
@@ -747,7 +764,11 @@ void World::handleCollisions()
 			
 			if (projectile.isGuided())
 			{
-				addFlash(Textures::Explosion,aircraft.getPosition().x, aircraft.getPosition().y);
+				addFlash(Textures::Explosion_missile, projectile.getPosition().x, projectile.getPosition().y);
+			}
+			else
+			{
+				addFlash(Textures::Spark, projectile.getPosition().x, projectile.getPosition().y);
 			}
 
 			updateScore(aircraft);
@@ -764,34 +785,20 @@ void World::randomEvents(sf::Time dt)
 
 void World::randomEnemys(sf::Time dt)
 {
+
 	static int randomLevel = 1;
 
-	if (mPlayerAircraft->getPosition().y < 18000 && randomLevel == 1)
+	if (mPlayerAircraft->getPosition().y < mWorldLength-5000 && randomLevel == 1)
 	{
 		mRandomEvents.RandomEnemyInterval -= sf::seconds(0.3);
 		randomLevel++;
 	}
-	else if (mPlayerAircraft->getPosition().y < 16000 && randomLevel == 2)
+	else if (mPlayerAircraft->getPosition().y < mWorldLength - 10000 && randomLevel == 2)
 	{
 		mRandomEvents.RandomEnemyInterval -= sf::seconds(0.3);
 		randomLevel++;
 	}
-	else if (mPlayerAircraft->getPosition().y < 14000 && randomLevel == 3)
-	{
-		mRandomEvents.RandomEnemyInterval -= sf::seconds(0.3);
-		randomLevel++;
-	}
-	else if (mPlayerAircraft->getPosition().y < 12000 && randomLevel == 4)
-	{
-		mRandomEvents.RandomEnemyInterval -= sf::seconds(0.3);
-		randomLevel++;
-	}
-	else if (mPlayerAircraft->getPosition().y < 10000 && randomLevel == 5)
-	{
-		mRandomEvents.RandomEnemyInterval -= sf::seconds(0.3);
-		randomLevel++;
-	}
-	else if (mPlayerAircraft->getPosition().y < 12000 && randomLevel == 6)
+	else if (mPlayerAircraft->getPosition().y < mWorldLength - 15000 && randomLevel == 3)
 	{
 		mRandomEvents.RandomEnemyInterval -= sf::seconds(0.3);
 		randomLevel++;
@@ -802,7 +809,7 @@ void World::randomEnemys(sf::Time dt)
 
 	if (mRandomEvents.RandomEventsCountdown > mRandomEvents.RandomEnemyInterval)
 	{
-//		addTroopC();
+		
 		int Rand = rand();
 
 		if (Rand % 6 == 0)
@@ -845,32 +852,36 @@ void World::randomEnemys(sf::Time dt)
 
 
 			int Rand = rand();
-			if (Rand % 9 == 0)
+			if (Rand % 2 == 0)
 			{
-				if (rand() % 2 == 0)addTroopE1();
-				else addTroopE2();
+				if (Rand % 9 == 0)
+				{
+					if (rand() % 2 == 0)addTroopE1();
+					else addTroopE2();
 
+				}
+				else if (Rand % 9 > 6)
+				{
+					if (rand() % 2 == 0)addTroopA1();
+					else addTroopA2();
+				}
+				else if (Rand % 9 > 4)
+				{
+					if (rand() % 2 == 0)addTroopB1();
+					else addTroopB2();
+				}
+				else if (Rand % 9 > 2)
+				{
+					if (rand() % 2 == 0)addTroopC1();
+					else addTroopC2();
+				}
+				else if (Rand % 9 > 0)
+				{
+					addTroopD1();
+				}
 			}
-			else if (Rand % 9 > 6)
-			{
-				if (rand() % 2 == 0)addTroopA1();
-				else addTroopA2();
 			}
-			else if (Rand % 9 > 4)
-			{
-				if (rand() % 2 == 0)addTroopB1();
-				else addTroopB2();
-			}
-			else if (Rand % 9 > 2)
-			{
-				if (rand() % 2 == 0)addTroopC1();
-				else addTroopC2();
-			}
-			else if (Rand % 9 > 0)
-			{
-				addTroopD1();
-			}
-		}
+
 
 		mRandomEvents.RandomEventsCountdown -= mRandomEvents.RandomEnemyInterval;
 
@@ -903,6 +914,11 @@ void World :: addFlash(Textures::ID type,float x,float y)
 	mflash->setPosition(x,y);
 	mFlashNode.attachChild(std::move(mflash));
 
+}
+
+float World::getWorldLength()
+{
+	return mWorldLength;
 }
 
 sf::Vector2f World::getViewCenter()

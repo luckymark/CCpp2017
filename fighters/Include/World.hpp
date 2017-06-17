@@ -30,7 +30,7 @@ class World : private sf::NonCopyable
 {
 public:
 
-	explicit							World(sf::RenderWindow& window,int& mScore, sf::Time* mTime, Player* player);
+	explicit							World(sf::RenderWindow& window,int& mScore, Player* player);
 	void								update(sf::Time dt);
 	void								draw();
 
@@ -39,6 +39,7 @@ public:
 	bool 								hasAlivePlayer() const;
 	bool 								hasPlayerReachedEnd() const;
 	sf::Vector2f						getViewCenter();
+	float								getWorldLength();
 
 private:
 	void								loadTextures();
@@ -92,11 +93,14 @@ private:
 	void								addFlash(Textures::ID type,float x, float y);
 
 
+
 private:
 	enum Layer
 	{
 		Background,
+		DownCloud,
 		Air,
+		UpCloud,
 		LayerCount
 	};
 
@@ -142,6 +146,7 @@ private:
 	std::array<SceneNode*, LayerCount>	mSceneLayers;
 	CommandQueue						mCommandQueue;
 
+	float								mWorldLength;
 	sf::FloatRect						mWorldBounds;
 	sf::Vector2f						mSpawnPosition;
 	float								mScrollSpeed;
@@ -153,10 +158,9 @@ private:
 	std::vector<Aircraft*>				mActiveEnemies;
 
 	int&								mScore;
-	sf::Time*							mTime;
 	SceneNode							mFlashNode;
-	sf::Sprite							bm;
 	Player*								mPlayer;
+
 
 };
 #endif // BOOK_WORLD_HPP

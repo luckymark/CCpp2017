@@ -110,7 +110,7 @@ private:
 	bool 					mIsMarkedForRemoval;
 	bool					isPlayerAircraft;
 
-	int						mFireRateLevel;
+	float					mFireRateLevel;
 	int						mSpreadLevel;
 	int						mMissileAmmo;
 	int						mPoints;
@@ -123,6 +123,7 @@ private:
 	float					mTravelledDistance;
 	std::size_t				mDirectionIndex;
 
+	
 
 	PlayerStatusMenu		mMenu;
 	Player*					mPlayer;

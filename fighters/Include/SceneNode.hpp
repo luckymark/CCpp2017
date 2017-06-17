@@ -33,7 +33,7 @@ public:
 	void					update(sf::Time dt, CommandQueue& commands);
 	void					update(sf::Time dt);
 	virtual void			updateFlash(sf::Time dt);
-	virtual bool			toRemove();
+	virtual bool			toRemove();				
 
 	sf::Vector2f			getWorldPosition() const;
 	sf::Transform			getWorldTransform() const; 

@@ -32,7 +32,8 @@ namespace Music
 	enum ID
 	{
 		IntroTheme,
-		BattleTheme,
+		BattleTheme1,
+		BattleTheme2,
 		DefeatedTheme,
 		PauseTheme,
 	};
@@ -48,6 +49,7 @@ namespace Textures
 		Bullet,
 		Missile,
 		Desert,
+		Jungle,
 		HealthRefill,
 		MissileRefill,
 		FireSpread,
@@ -58,6 +60,11 @@ namespace Textures
 		ButtonPressed,
 		Explosion,
 		Spark,
+		Explosion_missile,
+		RebornCircle,
+		UpCloud,
+		DownCloud,
+		MidCloud,
 	};
 }
 

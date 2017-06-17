@@ -309,7 +309,7 @@ void Aircraft::checkProjectileLaunch(sf::Time dt, CommandQueue& commands)
 	{
 		// Interval expired: We can fire a new bullet
 		commands.push(mFireCommand);
-		mFireCountdown += Table[mType].fireInterval / (mFireRateLevel + 1.f);
+		mFireCountdown += Table[mType].fireInterval / (mFireRateLevel + 0.8f);
 		mIsFiring = false;
 		if (!isAllied())
 		{
@@ -411,7 +411,7 @@ void Aircraft::GetMissileORUpgradeFire()
 			{
 				mPoints -= FireRateCost;
 				mSounds.play(SoundEffect::Upgrade);
-				FireRateCost = FireRateCost / 3 + 5 + FireRateCost;		//升级所需点数增加
+				FireRateCost = FireRateCost / 4 + 5 + FireRateCost;		//升级所需点数增加
 			}
 				
 		}
@@ -438,7 +438,7 @@ void Aircraft::GetHpOrFirePile()
 			{
 				mPoints -= FireSpreadCost;
 				mSounds.play(SoundEffect::Upgrade);
-				FireSpreadCost = FireSpreadCost*2 + 5;
+				FireSpreadCost = FireSpreadCost/2 + 5+ FireSpreadCost;
 			}
 				
 		}
@@ -485,10 +485,7 @@ bool Aircraft::reborn()
 
 void Aircraft::restart()
 {
-	if (getHitpoints() <= 0)
-	{
-		mPlayer->restart();
-	}
+
 
 }
 

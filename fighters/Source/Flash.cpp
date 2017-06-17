@@ -7,23 +7,67 @@ Flash::Flash(const sf::Texture & texture, Textures::ID type)
 	, mIsMarkedForRemoval(false)
 	, curTime(sf::seconds(0))
 	, clock()
-	, timePerFrame(sf::seconds(1.f / 20.f))
 	, curFrame(1)
 	, frameShifter(sf::seconds(0))
+	, mType(type)
 {
-	if (Textures::Explosion == type)
+
+
+
+	if (Textures::Explosion == type)		//写入不同flash的动画信息
 	{
-		frameSize.x = texture.getSize().x / 4;
-		frameSize.y = texture.getSize().y / 4;
+		xframes = 4;
+		yframes = 4;
 
-		frameRect.top = 0;
-		frameRect.left = 0;
-		frameRect.width = frameSize.x;
-		frameRect.height = frameSize.y;
+		timePerFrame=sf::seconds(1.f / 20.f);
 
-		flashTime = sf::seconds(1);
+		mSprite.setPosition(-100, -100);	//矫正flash位置
+
+		
+
+	}
+	else if (Textures::Spark == type)
+	{
+		xframes = 4;
+		yframes = 4;
+
+		timePerFrame=sf::seconds(1.f / 40.f);
+
+		mSprite.setPosition(-25, -45);
+
+	}
+	else if (Textures::Explosion_missile == type)
+	{
+		xframes = 4;
+		yframes = 4;
+
+		timePerFrame= sf::seconds(1.f / 35.f);
+
+		mSprite.setPosition(-45, -45);
+	}
+	else if (Textures::RebornCircle == type)
+	{
+		xframes = 7;
+		yframes = 7;
+
+		timePerFrame= sf::seconds(1.f/7.f);
+
+		mSprite.setPosition(0,0);
 	}
 
+	frameSize.x = texture.getSize().x / xframes;
+	frameSize.y = texture.getSize().y / yframes;
+
+	frameRect.top = 0;
+	frameRect.left = 0;
+	frameRect.width = frameSize.x;
+	frameRect.height = frameSize.y;
+
+
+	flashTime = sf::seconds(xframes*yframes*timePerFrame.asSeconds());
+
+
+	mSprite.setTextureRect(frameRect);
 
 }
 
@@ -37,7 +81,25 @@ void Flash::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 
 bool Flash::isMarkedForRemoval() const
 {
+	if (mType == Textures::RebornCircle)
+	{
+		if (mIsMarkedForRemoval)
+		{
+			int i = mIsMarkedForRemoval;
+			 i = mIsMarkedForRemoval;
+		}
+	}
 	return mIsMarkedForRemoval;
+}
+
+void Flash::loadTexture(sf::Texture texture)
+{
+	mSprite.setTexture(texture);
+}
+
+void Flash::remove()
+{
+	mIsMarkedForRemoval = true;
 }
 
 
@@ -47,13 +109,16 @@ void Flash::updateFlash(sf::Time dt)
 	curTime += dt;
 	frameShifter += dt;
 
+
+
 	if (frameShifter > timePerFrame)
 	{
 		curFrame++;
 		frameShifter -= timePerFrame;
 
-		if (curFrame / 4 == 1)		//到下一行
+		if (curFrame % xframes== 1)		//到下一行
 		{
+			float t = xframes;
 			frameRect.left = 0;
 			frameRect.top += frameRect.height;
 		}
@@ -64,7 +129,7 @@ void Flash::updateFlash(sf::Time dt)
 	}
 
 	mSprite.setTextureRect(frameRect);
-	mSprite.setPosition(-100, -100);
+	
 
 	if (curTime > flashTime)
 	{

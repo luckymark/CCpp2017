@@ -8,6 +8,7 @@
 #include"World.hpp"
 #include"Player.hpp"
 #include"MusicPlayer.h"
+#include"Flash.h"
 
 class Game 
 {
@@ -15,18 +16,43 @@ public:
 					Game();        
 	void			run();
 	void			processInput();
+	void			updateGameStatus(sf::Time dt);
+	void			loadMedia();
+	void			initialize();
+	void			buildWorld();
+	void			Restart();
+	void			getReborn();
+
+
 private:        
+	void            introInterface(sf::Keyboard::Key key);
+	void			startInterface(sf::Keyboard::Key key);
+	void			handleGameOutput();
 	void			processEvents();             
 	void			update(sf::Time deltaTime);
 	void			updateStatistics(sf::Time elapsedTime);
 	void			render();
 
+	void			drawCurScene();
+
 	void					handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
-	void					handlePlayerOption();
+	void					updateStatus();
 private:    
-	Player						mPlayer;
-	sf::RenderWindow			mWindow;     
-	World						mWorld;
+	enum gameStatus
+	{
+		Intro,
+		Start,
+		Pause,
+		Reborn,
+		Over,
+	};
+
+
+	Player*						mPlayer;
+	sf::RenderWindow*			mWindow;     
+	World*						mWorld;
+	sf::VideoMode				mMode;
+	sf::String					mTitle;
 	sf::Clock									clock;		//该clock原本在事件循环内
 	MusicPlayer		IntroTheme;
 	MusicPlayer		BattleTheme;
@@ -43,6 +69,8 @@ private:
 
 	sf::Font					mFont;
 	sf::Text					mStatisticsText;
+	sf::Text					mGameOver;
+	sf::Text					mReborn;
 	sf::Time					mStatisticsUpdateTime;
 	std::size_t					mStatisticsNumFrames;
 	sf::Time					TimePerFrame;
@@ -54,10 +82,13 @@ private:
 	int							myScore;
 	sf::Time					myTime;
 
-	bool						isPaused;
-	bool						isStarted;
+	int							curStatus;
 	int							introCount;
+	bool						BattleThemeShifted;
 
+	sf::Texture					mRebornTexture;
+	SceneNode*					mRebornNode;
+	Flash*						mRebornCircle;
 
 };
 
