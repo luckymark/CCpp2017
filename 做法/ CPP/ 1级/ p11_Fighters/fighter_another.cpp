@@ -2,22 +2,11 @@
 #include<SFML/Audio.hpp>
 #include<iostream>
 #include<windows.h>
-#include"move_aircraft.h"
-#include"missile.h"
-#include"aircraft.h"
-#include"my_aircraft.h"
-#include"my_missile.h"
-#include"enemy_aircraft.h"
-#include"enemy_aircraft_2.h"
-#include"enemy_missile.h"
-#include"boss_1.h"
-#include"boss_2.h"
-#include"energy.h"
-#include"blood_plus.h"
-#define move_speed_my_missle 0.6
-#define move_speed_enemy_aircraft 0.25
-#define move_speed_enemy_missile 0.3
-#define move_speed_energy 0.5
+#include"classes.h"
+#define move_speed_my_missle 1.2
+#define move_speed_enemy_aircraft 0.5
+#define move_speed_enemy_missile 0.6
+#define move_speed_energy 1
 #define max_enemy_num 50
 #define max_enemy_missile_num 200
 #define max_my_missile_num 80
@@ -135,7 +124,7 @@ int main()
 	int if_my_aircraft_exist;
 	float renew_aircraft_time = 2, speed_multiple = 1;
 	int  renew_boss_1_time = 18, renew_boss_2_time = 15;
-	int your_blood_number, your_energy_number, your_protected_blood, if_protect_exist, your_score=200, your_life = 3;
+	int your_blood_number, your_energy_number, your_protected_blood, if_protect_exist, your_score=300, your_life = 3;
 	sf::RenderWindow window(sf::VideoMode(window_lenth, window_width), "SFML works!");
 	while (your_life > 0) {
 		your_blood_number = 300;
