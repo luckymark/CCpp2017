@@ -27,7 +27,8 @@
 
 
 
-#define bulnumber 5
+#define bulnumber 10
 #define enenumber 5
+#define bossnumber 10
 
 	

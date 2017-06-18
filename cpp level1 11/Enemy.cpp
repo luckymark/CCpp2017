@@ -26,7 +26,7 @@ void Enemy::move(float timeDelta)
 
 	if (EnemyPointY >-height)
 	{
-		EnemyPointY = EnemyPointY - 40 * timeDelta;
+		EnemyPointY = EnemyPointY - LevelControl::enemyMoveSpeed * timeDelta;
 	}
 	else
 	{
@@ -43,9 +43,11 @@ void Enemy::UseEnemy()
 		srand((unsigned)time(NULL));
 		mark = 1;
 	}
+
 	EnemyPointX = -rand()%(width-70);
-	EnemyPointY = 0 ;
+	EnemyPointY = 120;
 }
 
 int Enemy::right[enenumber] = { 0 };
 int Enemy::left[enenumber] = { 0 };
+int Enemy::efflag = 0;

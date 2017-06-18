@@ -21,9 +21,8 @@ extern sf::RenderWindow mainWindow;
 	{
 		if (pointX<0)
 		{
-			pointX = pointX +400*timeDelta;
+			pointX = pointX +300*timeDelta;
 			draw();
-		
 		}
 		
 	}
@@ -31,7 +30,7 @@ extern sf::RenderWindow mainWindow;
 	{
 		if (pointX>-width+80)
 		{
-			pointX = pointX -400* timeDelta;
+			pointX = pointX -300* timeDelta;
 			draw();	
 		}
 		
@@ -41,7 +40,7 @@ extern sf::RenderWindow mainWindow;
 	{
 		if (pointY<0)
 		{
-			pointY = pointY +400*timeDelta;
+			pointY = pointY +600*timeDelta;
 			draw();
 
 		}
@@ -52,7 +51,7 @@ extern sf::RenderWindow mainWindow;
 	{
 		if (pointY>-height + 80)
 		{
-			pointY = pointY -400*timeDelta;
+			pointY = pointY -600*timeDelta;
 			draw();
 
 		}
@@ -65,8 +64,14 @@ extern sf::RenderWindow mainWindow;
 		mainWindow.draw(sprite);
 	}
 
+	void Plane::WeaponChange()
+	{
+		weaponStatus = (weaponStatus + 1) % weaponnumber;
+	}
 	float Plane::pointX = 0;
 	float Plane::pointY = 0;
 	float Plane::width = 0;
 	float Plane::height = 0;
-
+	int Plane::weaponStatus = 0;
+	int Plane::efflag = 0;
+	int Plane::mefflag = 0;

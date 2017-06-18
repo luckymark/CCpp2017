@@ -1,10 +1,10 @@
 #include "stdafx.h"
-#include "Bullet.h"
+#include "NormalBullet.h"
 #include "game.h"
 #include "math.h"
 
 extern sf::RenderWindow mainWindow;
-Bullet::Bullet()
+NormalBullet::NormalBullet()
 {
 	if (image.loadFromFile("images/bullet1.png") != true)
 	{
@@ -13,19 +13,19 @@ Bullet::Bullet()
 	
 }
 
-void Bullet::draw()
+void NormalBullet::draw()
 {
 	sf::Sprite sprite(image);
 	sprite.setOrigin(BulletPointX, BulletPointY);
 	mainWindow.draw(sprite);
 }
 
-void Bullet::move(float timeDelta)
+void NormalBullet::move(float timeDelta)
 {
 	
 	if (BulletPointY < 0)
 	{
-		BulletPointY = BulletPointY + 100*timeDelta;
+		BulletPointY = BulletPointY + 150*timeDelta;
 	}
 	else
 	{
@@ -34,12 +34,12 @@ void Bullet::move(float timeDelta)
 	}
 }
 
-void Bullet::UseBullet()
+void NormalBullet::UseBullet()
 {
 	BulletPointX = Plane::pointX - 30;
 	BulletPointY = Plane::pointY + 50;
 }
 
 
-int Bullet::right[bulnumber] = { 0 };
-int Bullet::left[bulnumber] = { 0 };
+int NormalBullet::right[bulnumber] = { 0 };
+int NormalBullet::left[bulnumber] = { 0 };

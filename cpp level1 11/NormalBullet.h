@@ -2,13 +2,13 @@
 #include "stdafx.h"
 #include "Plane.h"
 #include "Enemy.h"
-class Bullet
+#include "MyBullet.h"
+class NormalBullet :public MyBullet
 {
 public:
+	
 	sf::Texture image;
-	float BulletPointX;
-	float BulletPointY;
-	Bullet();
+	NormalBullet();
 	void draw();
 	void move(float timeDelta);
 	void UseBullet();

@@ -2,6 +2,7 @@
 #include "EnemyBullet.h"
 #include "game.h"
 #include "math.h"
+#include "LevelControl.h"
 #define pi 3.14
 extern sf::RenderWindow mainWindow;
 EnemyBullet::EnemyBullet(Enemy *enemy)
@@ -11,7 +12,7 @@ EnemyBullet::EnemyBullet(Enemy *enemy)
 	{
 		return;
 	}
-	//flag[0] = flag[1] = flag[2] = 1;
+	
 }
 
 void EnemyBullet::draw()
@@ -38,19 +39,19 @@ void EnemyBullet::move(float timeDelta)
 		mark = 1;
 	}
 	sf::Time time1 = clock3.getElapsedTime();
-	if (time1.asSeconds() > 3.0&&enemyExist==1&&total<eneonce*enebulnumber)
+	if (time1.asSeconds() >LevelControl::enemyBulletAppearTime&&enemyExist==1&&total<eneonce*enebulnumber)
 	{
 		for (int i = total; i < total + 3; i++)
 		{
 			BulletPointX[i] =enemy->EnemyPointX-10;
 			BulletPointY[i] = enemy->EnemyPointY-100;
-			//printf("%f", BulletPointY[i]);
+		
 		}
 		flag[total] = flag[total + 1] = flag[total + 2] = 1;
 		total = total + 3;
 		mark = 0;
 	}
-	//printf("%d", total);
+	//printf(" %d ", total);
 	for (int num = 0; num < total;)
 	{
 		//if(enemyExist)
@@ -60,18 +61,18 @@ void EnemyBullet::move(float timeDelta)
 			
 				if (num % 3 == 0)
 				{
-					BulletPointY[num] = BulletPointY[num] - 100 * timeDelta;
+					BulletPointY[num] = BulletPointY[num] - 155 * timeDelta;
 
 				}
 				else if (num % 3 == 1)
 				{
-					BulletPointY[num] = BulletPointY[num] - 100 * timeDelta*0.7;
-					BulletPointX[num] = BulletPointX[num] + 100 * timeDelta*0.7;
+					BulletPointY[num] = BulletPointY[num] - 155 * timeDelta*0.7;
+					BulletPointX[num] = BulletPointX[num] + 130 * timeDelta*0.7;
 				}
 				else if (num % 3 == 2)
 				{
-					BulletPointY[num] = BulletPointY[num] - 100 * timeDelta*0.7;
-					BulletPointX[num] = BulletPointX[num] - 100 * timeDelta*0.7;
+					BulletPointY[num] = BulletPointY[num] - 155 * timeDelta*0.7;
+					BulletPointX[num] = BulletPointX[num] - 130 * timeDelta*0.7;
 				}
 			num++;
 			

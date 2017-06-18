@@ -10,11 +10,14 @@ public:
 	sf::Texture image;
 	float EnemyPointX;
 	float EnemyPointY;
-	Enemy::Enemy();
+	int life = 6;
+	static int right[enenumber];
+	static int left[enenumber];
+	static int efflag ;
+	Enemy();
 	void draw();
 	void move(float timeDelta);
 	void UseEnemy();
-	static int right[enenumber];
-	static int left[enenumber];
+	
 	
 };
