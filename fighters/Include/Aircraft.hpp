@@ -10,6 +10,7 @@
 #include"CommandQueue.hpp"
 #include "PlayerStatusMenu.h"
 #include"Player.hpp"
+#include"Flash.h"
 
 #include<SFML/Graphics.hpp>
 
@@ -66,6 +67,7 @@ public:
 
 	bool					increaseFireRate();
 	bool					increaseSpread();
+	bool					increaseMissileSlot();
 	void					GetMissileORUpgradeFire();
 	void					GetHpOrFirePile();
 	void					collectMissiles(unsigned int count);
@@ -76,7 +78,7 @@ public:
 	void					openEMenu();
 	void					openQMenu();
 
-	void					closeMenu();
+	void					closeMenuOrUpgradeMissileSlot();
 	void					addPoints(int points);
 	void					updateScore(int scores);
 	bool					reborn();
@@ -92,6 +94,7 @@ private:
 	void					createBullets(SceneNode& node, const TextureHolder& textures) const;
 	void					createProjectile(SceneNode& node, Projectile::Type type, float xOffset, float yOffset, const TextureHolder& textures) const;
 	void					setAllyVelocity(float x, float y);
+	void					addCountDowm();
 
 
 private:
@@ -99,25 +102,32 @@ private:
 	sf::Sprite				mSprite;
 	sf::Texture				mDamaged;
 	sf::Texture				mOrigin;
+
 	Command 				mFireCommand;
 	Command					mMissileCommand;
 	SoundHolder&			mSounds;
 	sf::RenderWindow&       mWindow;
+	sf::Clock				mPlayerClock;
 
 	sf::Time				mFireCountdown;
+	sf::Time				mPurchaseCountDown;
+	sf::Time				mTimeSincePurchase;
 	bool 					mIsFiring;
 	bool					mIsLaunchingMissile;
 	bool 					mIsMarkedForRemoval;
 	bool					isPlayerAircraft;
+	bool					callingReborn = false;
 
 	float					mFireRateLevel;
 	int						mSpreadLevel;
 	int						mMissileAmmo;
+	int						mMissileSlot;
 	int						mPoints;
 	int						mScore;
 
 	int						FireRateCost;
 	int						FireSpreadCost;
+	int						MissileSlotCost;
 
 	Command 				mDropPickupCommand;
 	float					mTravelledDistance;
@@ -127,6 +137,9 @@ private:
 
 	PlayerStatusMenu		mMenu;
 	Player*					mPlayer;
+	SceneNode*				mCountDownNode;
+	sf::Texture*			mCountDownTexture;
+	Flash*					mCountDown;
 
 };
 

@@ -14,6 +14,7 @@ public:
 	void				accelerate(sf::Vector2f velocity);
 	void				accelerate(float vx, float vy);
 	sf::Vector2f		getVelocity() const;
+	void				setHP(int HP);
 
 	int					getHitpoints() const;
 	void				increaseHP(int increase);

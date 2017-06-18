@@ -106,7 +106,6 @@ void Game::render()
 
 	mWindow->setView(mWindow->getDefaultView());
 	mWindow->draw(mStatisticsText);
-
 	drawCurScene();		//显示当前界面
 
 	mWindow->display();
@@ -153,14 +152,17 @@ void Game::handleGameOutput()
 
 	if (mWorld->getViewCenter().y < mWorld->getWorldLength()/2 +1500 &&!BattleThemeShifted)
 	{
-		BattleTheme.setVolume(10);
-		if (mWorld->getViewCenter().y < mWorld->getWorldLength() / 2 + 1000 && !BattleThemeShifted)
-		{
-			BattleThemeShifted = true;
-			BattleTheme.setVolume(50);
-			BattleTheme.play(Music::BattleTheme2);
-		}
+		BattleTheme.setVolume(-50.f);
 
+			if (mWorld->getViewCenter().y < mWorld->getWorldLength() / 2 + 800 && !BattleThemeShifted)
+			{
+				BattleThemeShifted = true;
+				BattleTheme.setVolume(50);
+				BattleTheme.play(Music::BattleTheme2);
+			}
+
+
+		
 	}
 }
 
@@ -208,12 +210,12 @@ void Game::updateGameStatus(sf::Time dt)
 void Game::loadMedia()
 {
 	mFont.loadFromFile("Media/Sansation.ttf");
-	pauseTexture.loadFromFile("Media/Textures/pause.png");
-	Intro1.loadFromFile("Media/Textures/intro1.png");
-	Intro2.loadFromFile("Media/Textures/intro2.png");
-	Intro3.loadFromFile("Media/Textures/intro3.png");
-	Intro4.loadFromFile("Media/Textures/intro4.png");
-	Intro5.loadFromFile("Media/Textures/intro5.png");
+	pauseTexture.loadFromFile("Media/Textures/Interface/pause.png");
+	Intro1.loadFromFile("Media/Textures/Interface/intro1.png");
+	Intro2.loadFromFile("Media/Textures/Interface/intro2.png");
+	Intro3.loadFromFile("Media/Textures/Interface/intro3.png");
+	Intro4.loadFromFile("Media/Textures/Interface/intro4.png");
+	Intro5.loadFromFile("Media/Textures/Interface/intro5.png");
 	mRebornTexture.loadFromFile("Media/Flash/circles.png");
 }
 
@@ -228,31 +230,24 @@ void Game::initialize()
 	mStatisticsText.setPosition(5.f, 5.f);
 	mStatisticsText.setCharacterSize(30);
 
-	mGameOver.setFont(mFont);
-	mGameOver.setPosition(15.f, 320.f);
-	mGameOver.setCharacterSize(40);
-	mGameOver.setString("Press SPACE KEY to restart...");
+	mGameOver.loadFromFile("Media/Textures/Interface/GameOver.png");
+	GameoverSprite.setTexture(mGameOver);
+	GameoverSprite.setPosition(15.f, 310.f);
 
-	mReborn.setFont(mFont);
-	mReborn.setPosition(15.f, 320.f);
-	mReborn.setCharacterSize(40);
-	mReborn.setString("Press 1 KEY to reborn...\n (500 Score required)");
+	mReborn.loadFromFile("Media/Textures/Interface/Reborn.png");
+	RebornSprite.setTexture(mReborn);
+	RebornSprite.setPosition(15.f, 320.f);
 
 
-	TimePerFrame = sf::seconds(1.f /45.f);
+	TimePerFrame = sf::seconds(1.f /60.f);
 
 
 	pauseSprite.setTexture(pauseTexture);
 	pauseSprite.setPosition(210, 100);
 
 
-	Intro1.setRepeated(true);
-	Intro2.setRepeated(true);
-	Intro3.setRepeated(true);
-	Intro4.setRepeated(true);
-
 	introSprite.setTexture(Intro1);
-	introSprite.setPosition(0, 50);
+	introSprite.setPosition(0, 0);
 
 	IntroTheme.play(Music::IntroTheme);
 
@@ -305,11 +300,11 @@ void Game::drawCurScene()
 	else if (curStatus == gameStatus::Reborn)
 	{
 		mWindow->draw(*mRebornNode);
-		mWindow->draw(mReborn);
+		mWindow->draw(RebornSprite);
 	}
 	else if (curStatus == gameStatus::Over)
 	{
-		mWindow->draw(mGameOver);
+		mWindow->draw(GameoverSprite);
 	}
 }
 
@@ -326,17 +321,10 @@ void Game::introInterface(sf::Keyboard::Key key)
 				introCount = 2;
 				introSprite.setTexture(Intro2);
 			}
-			break;
-		case sf::Keyboard::Down:
-			if (introCount == 2)
+			else if (introCount == 2)
 			{
 				introCount = 3;
 				introSprite.setTexture(Intro3);
-			}
-			else if (introCount == 4)
-			{
-				introCount = 5;
-				introSprite.setTexture(Intro5);
 			}
 			break;
 		case sf::Keyboard::E:
@@ -344,6 +332,11 @@ void Game::introInterface(sf::Keyboard::Key key)
 			{
 				introCount = 4;
 				introSprite.setTexture(Intro4);
+			}
+			else if (introCount == 4)
+			{
+				introCount = 5;
+				introSprite.setTexture(Intro5);
 			}
 			break;
 		case sf::Keyboard::Up:

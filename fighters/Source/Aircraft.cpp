@@ -34,10 +34,13 @@ Aircraft::Aircraft(sf::RenderWindow& window, Type type, const TextureHolder& tex
 	, mPoints(0)
 	, mMenu(window)
 	, FireRateCost(10)
-	, FireSpreadCost(15)
+	, FireSpreadCost(20)
+	, MissileSlotCost(15)
+	, mMissileSlot(2)
 	, mWindow(window)
 	, isPlayerAircraft(isPlayer)
 	, mOrigin(textures.get(Table[type].texture))
+	, mPurchaseCountDown(sf::seconds(1.5))
 {
 	centerOrigin(mSprite);
 
@@ -55,9 +58,14 @@ Aircraft::Aircraft(sf::RenderWindow& window, Type type, const TextureHolder& tex
 
 	if (isPlayer)
 	{
+		mPlayerClock.restart();
 		mDamaged.loadFromFile("Media/Textures/EagleDamaged.png");
 		mPlayer = player;
-//		mPlayer->asignAircraft();
+
+		mCountDownNode = new SceneNode;
+		mCountDownTexture = new sf::Texture;
+		mCountDownTexture->loadFromFile("Media/Flash/Loop.png");
+
 	}
 
 }
@@ -70,7 +78,6 @@ void Aircraft::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) co
 	{
 		mMenu.showMenu();
 	}
-
 	target.draw(mSprite, states);
 }
 
@@ -80,17 +87,18 @@ void Aircraft::updateCurrent(sf::Time dt, CommandQueue& commands)
 
 	if (isPlayerAircraft)
 	{
-		mMenu.updateMenu(getPosition(), getHitpoints(), mPoints, mMissileAmmo, FireRateCost, FireSpreadCost);
+		mMenu.updateMenu(getPosition(), getHitpoints(), mPoints, mMissileAmmo, FireRateCost, FireSpreadCost,MissileSlotCost);
+		update(dt);			//更新Aircraft的子Flash节点
 
 		if (getHitpoints() <= 0)
 		{
 			mPlayer->setPlayerDead();
-			bool t=mPlayer->isPlayerAlive();
 
 			mMenu.closeMenus();
 			mSprite.setTexture(mDamaged);
-
 		}
+		if(callingReborn)
+		callingReborn = false;
 	}
 
 
@@ -222,6 +230,16 @@ bool Aircraft::increaseSpread()
 
 }
 
+bool Aircraft::increaseMissileSlot()
+{
+	if (mMissileSlot < 4)
+	{
+		mMissileSlot++;
+		return true;
+	}
+	return false;
+}
+
 
 void Aircraft::collectMissiles(unsigned int count)
 {
@@ -284,7 +302,6 @@ void Aircraft::updateMovementPattern(sf::Time dt)
 				setVelocity(getMaxSpeed(), 0);
 			}
 		}
-
 		mTravelledDistance += getMaxSpeed() * dt.asSeconds();
 	}
 }
@@ -386,6 +403,18 @@ void Aircraft::setAllyVelocity(float x,float y)
 //	this->mch
 }
 
+void Aircraft::addCountDowm()
+{
+//	mCountDownNode->removeWrecks();
+
+	std::unique_ptr<Flash> mflash(new Flash(*mCountDownTexture, Textures::Loop));		//清空之前的circle，创建新的
+//	mflash->setPosition(getPosition().x, getPosition().y-500);
+	mCountDown = mflash.get();
+//	mCountDownNode->attachChild(std::move(mflash));
+
+	this->attachChild(std::move(mflash));
+}
+
 int Aircraft::getScore()
 {
 	return mScore;
@@ -393,71 +422,127 @@ int Aircraft::getScore()
 
 void Aircraft::GetMissileORUpgradeFire()
 {
-	if (mMenu.isEOpened())
+	mTimeSincePurchase += mPlayerClock.restart();
+
+	if (mTimeSincePurchase > mPurchaseCountDown)
 	{
-		if (mPoints - 2 >= 0 && mMissileAmmo < 4)
+		if (mMenu.isEOpened())
 		{
-			mPoints -= 2;
-			mMissileAmmo++;
-			mSounds.play(SoundEffect::Purchase);
-		}
-	}
-	else if (mMenu.isQOpened())
-	{
-		if (mPoints - FireRateCost >= 0)
-		{
-			
-			if (increaseFireRate())
+			if (mPoints - 2 >= 0 && mMissileAmmo < mMissileSlot)
 			{
-				mPoints -= FireRateCost;
-				mSounds.play(SoundEffect::Upgrade);
-				FireRateCost = FireRateCost / 4 + 5 + FireRateCost;		//升级所需点数增加
+				mPoints -= 2;
+				mMissileAmmo++;
+				mSounds.play(SoundEffect::Purchase);
+				mTimeSincePurchase = sf::seconds(0);
+				addCountDowm();
 			}
-				
+		}
+		else if (mMenu.isQOpened() && mTimeSincePurchase>mPurchaseCountDown)
+		{
+			if (mPoints - FireRateCost >= 0)
+			{
+
+				if (increaseFireRate())
+				{
+					mPoints -= FireRateCost;
+					mSounds.play(SoundEffect::Upgrade);
+					FireRateCost = FireRateCost / 3 + 5 + FireRateCost;		//升级所需点数增加
+					mTimeSincePurchase = sf::seconds(0);
+					addCountDowm();
+				}
+
+			}
 		}
 	}
+
 }
 
 void Aircraft::GetHpOrFirePile()
 {
-	if (mMenu.isEOpened())
-	{
-		if (mPoints - 5 >= 0&&getHitpoints()<100)
+	mTimeSincePurchase += mPlayerClock.restart();
+		if (mMenu.isEOpened())
 		{
-			repair(20);
-			mPoints -= 5;
-			mSounds.play(SoundEffect::Purchase);
-		}
-	}
-	else if (mMenu.isQOpened())
-	{
-		if (mPoints - FireSpreadCost >= 0)
-		{
-			
-			if (increaseSpread())
+			if (mPoints - 5 >= 0 && getHitpoints()<100&& mTimeSincePurchase>mPurchaseCountDown)
 			{
-				mPoints -= FireSpreadCost;
-				mSounds.play(SoundEffect::Upgrade);
-				FireSpreadCost = FireSpreadCost/2 + 5+ FireSpreadCost;
+				repair(20);
+				mPoints -= 5;
+				mSounds.play(SoundEffect::Purchase);
+				mTimeSincePurchase = sf::seconds(0);
+				addCountDowm();
 			}
-				
 		}
-	}
+		else if (mMenu.isQOpened())
+		{
+			if (mPoints - FireSpreadCost >= 0 && mTimeSincePurchase>mPurchaseCountDown)
+			{
+
+				if (increaseSpread())
+				{
+					mPoints -= FireSpreadCost;
+					mSounds.play(SoundEffect::Upgrade);
+					FireSpreadCost = FireSpreadCost / 2 + 5 + FireSpreadCost;
+					mTimeSincePurchase = sf::seconds(0);
+					addCountDowm();
+				}
+
+			}
+		}
+
+
 }
 
 void Aircraft::openEMenu()
 {
-	if (!mMenu.isQOpened()) mMenu.openMenu(PlayerStatusMenu::Menus::EMenu);
+	if (!mMenu.isEOpened())
+	{
+		mMenu.closeMenus();
+		mMenu.openMenu(PlayerStatusMenu::Menus::EMenu);
+	}
+	else
+	{
+		mMenu.closeMenus();
+	}
 }
 
 void Aircraft::openQMenu()
 {
-	if (!mMenu.isEOpened()) mMenu.openMenu(PlayerStatusMenu::Menus::QMenu);
+	if (!mMenu.isQOpened())
+	{
+		mMenu.closeMenus();
+		mMenu.openMenu(PlayerStatusMenu::Menus::QMenu);
+	}
+	else
+	{
+		mMenu.closeMenus();
+	}
+
 }
 
-void Aircraft::closeMenu()
+void Aircraft::closeMenuOrUpgradeMissileSlot()
 {
-	mMenu.closeMenus();
+	mTimeSincePurchase += mPlayerClock.restart();
+	if (mMenu.isEOpened())
+	{
+		mMenu.closeMenus();
+	}
+	else if (mMenu.isQOpened())
+	{
+		if ( mTimeSincePurchase>mPurchaseCountDown && mPoints - MissileSlotCost >= 0)
+		{
+			if (increaseMissileSlot())
+			{
+				mPoints -= MissileSlotCost;
+				mSounds.play(SoundEffect::Upgrade);
+				MissileSlotCost = 2*MissileSlotCost ;
+				mTimeSincePurchase = sf::seconds(0);
+				addCountDowm();
+			}
+
+		}
+		
+	}
+
+
 }
 
 void Aircraft::addPoints(int points)
@@ -474,8 +559,8 @@ bool Aircraft::reborn()
 {
 	if (mScore >=500&& getHitpoints() <= 0)
 	{
+		setHP(60);
 		mPlayer->setPlayerAlive();
-		repair(60);
 		mScore -= 500;
 		mSprite.setTexture(mOrigin);
 		return true;

@@ -8,15 +8,18 @@ PlayerStatusMenu::PlayerStatusMenu(sf::RenderWindow& window)
 	, isEMenuOpened(false)
 	, isRingAChanged(false)
 	, isRingBChanged(false)
+	, Speedcount(1)
+	, Pilecount(1)
+	, Slotcount(1)
 {
 	initializeTexts();
 }
 
-void PlayerStatusMenu::updateMenu(sf::Vector2f position, int HP, int points, int missiles, int fireRateCost, int fireSpreadCost)
+void PlayerStatusMenu::updateMenu(sf::Vector2f position, int HP, int points, int missiles, int fireRateCost, int fireSpreadCost,int mMissileSlotCost)
 {
-	updateTexts(position, HP, points,missiles,fireRateCost,fireSpreadCost);
-	updateTextsColor(HP, points, missiles, fireRateCost, fireSpreadCost);
-	updateRings(position,fireRateCost, fireSpreadCost);
+	updateTexts(position, HP, points,missiles,fireRateCost,fireSpreadCost, mMissileSlotCost);
+	updateTextsColor(HP, points, missiles, fireRateCost, fireSpreadCost, mMissileSlotCost);
+	updateRings(position,fireRateCost, fireSpreadCost, mMissileSlotCost);
 
 	EMenuSprite.setPosition(position.x + 15, position.y - 100);
 	QMenuSprite.setPosition(position.x - 200, position.y - 100);
@@ -28,13 +31,16 @@ void PlayerStatusMenu::showMenu()const
 	{
 		mWindow.draw(mHPCost);
 		mWindow.draw(mMissileCost);
+		mWindow.draw(Slot);
 
 
 		mWindow.draw(EMenuSprite);
 		mWindow.draw(mStatusText);
 		mWindow.draw(Missiles);
+		mWindow.draw(Slot);
 		mWindow.draw(mHPText);
 		mWindow.draw(mPoints);
+
 
 
 
@@ -43,7 +49,8 @@ void PlayerStatusMenu::showMenu()const
 	{
 		mWindow.draw(mFireRateCost);
 		mWindow.draw(mFireSpreadCost);
-
+		mWindow.draw(mMissileSlotCost);
+		mWindow.draw(Slot);
 
 		mWindow.draw(QMenuSprite);
 		mWindow.draw(mStatusText);
@@ -52,6 +59,7 @@ void PlayerStatusMenu::showMenu()const
 		mWindow.draw(mPoints);
 		mWindow.draw(RingA);
 		mWindow.draw(RingB);
+		mWindow.draw(RingC);
 	}
 
 
@@ -108,6 +116,16 @@ void PlayerStatusMenu::initializeTexts()
 	missileFrame.height= MissileTexture.getSize().y;
 	missileFrame.width= MissileTexture.getSize().x / 4;
 
+	SlotTexture.loadFromFile("Media/Textures/Slot4.png");
+	Slot.setTexture(SlotTexture);
+	slotSize.x = SlotTexture.getSize().x / 4;
+	slotSize.y = missileFrame.height = SlotTexture.getSize().y;
+	slotFrame.left = 0;
+	slotFrame.top = 0;
+	slotFrame.height = SlotTexture.getSize().y;
+	slotFrame.width = SlotTexture.getSize().x / 4;
+
+
 	EMenuTexture.loadFromFile("Media/Textures/EMenu.png");
 	EMenuSprite.setTexture(EMenuTexture);
 
@@ -128,14 +146,24 @@ void PlayerStatusMenu::initializeTexts()
 	mFireSpreadCost.setFont(mFont);
 	mFireSpreadCost.setCharacterSize(12);
 
+	mMissileSlotCost.setFont(mFont);
+	mMissileSlotCost.setCharacterSize(12);
+
 	RingATexture.loadFromFile("Media/Textures/RingA1.png");
 	RingA.setTexture(RingATexture);
 
 	RingBTexture.loadFromFile("Media/Textures/RingB1.png");
 	RingB.setTexture(RingBTexture);
+
+	RingCTexture.loadFromFile("Media/Textures/RingC1.png");
+	RingC.setTexture(RingCTexture);
+
+
+
+
 }
 
-void PlayerStatusMenu::updateTexts(sf::Vector2f position, int HP, int points, int missiles, int fireRateCost, int fireSpreadCost)
+void PlayerStatusMenu::updateTexts(sf::Vector2f position, int HP, int points, int missiles, int fireRateCost, int fireSpreadCost, int MissileSlotCost)
 {
 	mStatusText.setPosition(position.x - 65, position.y + 60);
 	mStatusText.setString("HP:           " + toString("   Points:") + "\n\n" + "      Missiles:");
@@ -152,6 +180,9 @@ void PlayerStatusMenu::updateTexts(sf::Vector2f position, int HP, int points, in
 	mHPCost.setPosition(position.x + 13, position.y - 55);
 	mMissileCost.setPosition(position.x + 150, position.y - 55);
 
+	mMissileSlotCost.setString("(" + toString(MissileSlotCost) + "Points)");
+	mMissileSlotCost.setPosition(position.x - 135, position.y + 15);
+
 
 	mFireRateCost.setString("(" + toString(fireRateCost) + " Points" + ")");
 	mFireRateCost.setPosition(position.x - 70, position.y - 55);
@@ -159,7 +190,8 @@ void PlayerStatusMenu::updateTexts(sf::Vector2f position, int HP, int points, in
 	mFireSpreadCost.setString("(" + toString(fireSpreadCost) + " Points" + ")");
 	mFireSpreadCost.setPosition(position.x - 210, position.y - 55);
 
-	switch (missiles)
+
+	switch (missiles)		//更新导弹数量
 	{
 	case 0:
 		missileFrame.width = 0;
@@ -172,19 +204,36 @@ void PlayerStatusMenu::updateTexts(sf::Vector2f position, int HP, int points, in
 		break;
 	case 3:
 		missileFrame.width = missileSize.x * 3;
+		slotFrame.width = slotSize.x * 3;
 		break;
 	case 4:
 		missileFrame.width = missileSize.x * 4;
+		slotFrame.width = slotSize.x * 4;
+		break;
+	}
+
+	switch (Slotcount)		//导弹槽
+	{
+	case 1:
+		slotFrame.width = missileSize.x * 2;
+		break;
+	case 2:
+		slotFrame.width = slotSize.x * 3;
+		break;
+	case 3:
+		slotFrame.width = slotSize.x * 4;
 		break;
 	}
 
 	Missiles.setTextureRect(missileFrame);
 	Missiles.setPosition(position.x + 20, position.y + 83);
-	
+
+	Slot.setTextureRect(slotFrame);
+	Slot.setPosition(position.x + 20, position.y + 83);
 
 }
 
-void PlayerStatusMenu::updateTextsColor(int HP, int points, int missiles, int fireRateCost, int fireSpreadCost)
+void PlayerStatusMenu::updateTextsColor(int HP, int points, int missiles, int fireRateCost, int fireSpreadCost,int missileSlotCost)
 {
 	sf::Color color;
 	mPoints.setFillColor(color.Green);
@@ -238,19 +287,27 @@ void PlayerStatusMenu::updateTextsColor(int HP, int points, int missiles, int fi
 	{
 		mFireSpreadCost.setFillColor(color.Cyan);
 	}
+	if (points < missileSlotCost)
+	{
+		mMissileSlotCost.setFillColor(color.Red);
+	}
+	else
+	{
+		mMissileSlotCost.setFillColor(color.Cyan);
+	}
 }
 
-void PlayerStatusMenu::updateRings(sf::Vector2f position, int fireRateCost, int fireSpreadCost)
+void PlayerStatusMenu::updateRings(sf::Vector2f position, int fireRateCost, int fireSpreadCost,int SlotCost)
 {
 	static int preFireSpread;
-	if (fireSpreadCost != 15)	//15是初始cost
+	if (fireSpreadCost != 20)	//20是初始cost
 	{
 		if (fireSpreadCost != preFireSpread)
 		{
-			static int count = 2;
-			RingATexture.loadFromFile("Media/Textures/RingA" + toString(count) + ".png");
+			Speedcount++;
+			RingATexture.loadFromFile("Media/Textures/RingA" + toString(Speedcount) + ".png");
 			RingA.setTexture(RingATexture);
-			count++;
+			
 		}
 	}
 	RingA.setPosition(position.x - 215, position.y - 45);
@@ -261,12 +318,24 @@ void PlayerStatusMenu::updateRings(sf::Vector2f position, int fireRateCost, int 
 	{
 		if (fireRateCost != preFireRate)
 		{
-			static int count = 2;
-			RingBTexture.loadFromFile("Media/Textures/RingB" + toString(count) + ".png");
+			Pilecount ++;
+			RingBTexture.loadFromFile("Media/Textures/RingB" + toString(Pilecount) + ".png");
 			RingB.setTexture(RingBTexture);
-			count++;
 		}
 	}
 	RingB.setPosition(position.x - 80, position.y - 45);
 	preFireRate = fireRateCost;
+
+	static int preSlot;
+	if (SlotCost != 15)		//10是初始cost
+	{
+		if (SlotCost != preSlot)
+		{
+			Slotcount++;
+			RingCTexture.loadFromFile("Media/Textures/RingC" + toString(Slotcount) + ".png");
+			RingC.setTexture(RingCTexture);
+		}
+	}
+	RingC.setPosition(position.x - 130, position.y +30);
+	preSlot = SlotCost;
 }

@@ -26,6 +26,12 @@ struct AircraftMover
 
 Player::Player()
 	:playerAlive(true)
+	, RaptorPoint(2)
+	, AvengerPoint(3)
+	, EaglePoint(5)
+	, RaptorScore(10)
+	, AvengerScore(15)
+	, EagleScore(25)
 
 //	: mCurrentMissionStatus(MissionRunning)
 {
@@ -40,7 +46,7 @@ Player::Player()
 	mKeyBinding[sf::Keyboard::E] = EMenu,
 	mKeyBinding[sf::Keyboard::Right] = GetMissileORUpgradeFire;		//设法给一个键绑定两个功能
 	mKeyBinding[sf::Keyboard::Left] = GetHpOrFirePile;
-	mKeyBinding[sf::Keyboard::Down] = CloseMenu;
+	mKeyBinding[sf::Keyboard::Down] = CloseMenuOrUpgradeMissileSlot;
 	mKeyBinding[sf::Keyboard::Num1] = Continue;
 	mKeyBinding[sf::Keyboard::Num2] = Restart;
 	mKeyBinding[sf::Keyboard::Num3] = Exit;
@@ -139,7 +145,7 @@ void Player::initializeActions()		//载入函数，将commands与对应函数关联
 
 	mActionBinding[EMenu].action = derivedAction<Aircraft>([](Aircraft& a,sf::Time) {a.openEMenu(); });
 	mActionBinding[QMenu].action= derivedAction<Aircraft>([](Aircraft& a, sf::Time) {a.openQMenu(); });
-	mActionBinding[CloseMenu].action= derivedAction<Aircraft>([](Aircraft& a, sf::Time) {a.closeMenu(); });
+	mActionBinding[CloseMenuOrUpgradeMissileSlot].action= derivedAction<Aircraft>([](Aircraft& a, sf::Time) {a.closeMenuOrUpgradeMissileSlot(); });
 	mActionBinding[GetMissileORUpgradeFire].action = derivedAction<Aircraft>([](Aircraft& a, sf::Time) {a.GetMissileORUpgradeFire(); });
 	mActionBinding[GetHpOrFirePile].action= derivedAction<Aircraft>([](Aircraft& a, sf::Time) {a.GetHpOrFirePile(); });
 
@@ -156,8 +162,8 @@ bool Player::isRealtimeAction(Action action)
 	case MoveDown:
 	case MoveUp:
 	case Fire:
-	case EMenu:
-	case QMenu:
+//	case EMenu:
+//	case QMenu:
 //	case GetMissileANDUpgradeFire:
 		return true;
 

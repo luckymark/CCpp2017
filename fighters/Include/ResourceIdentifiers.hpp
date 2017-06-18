@@ -60,6 +60,7 @@ namespace Textures
 		ButtonPressed,
 		Explosion,
 		Spark,
+		Loop,
 		Explosion_missile,
 		RebornCircle,
 		UpCloud,

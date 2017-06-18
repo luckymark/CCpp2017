@@ -12,48 +12,41 @@ Flash::Flash(const sf::Texture & texture, Textures::ID type)
 	, mType(type)
 {
 
-
-
-	if (Textures::Explosion == type)		//写入不同flash的动画信息
+	switch (type)
 	{
+	case Textures::Explosion:
 		xframes = 4;
 		yframes = 4;
-
-		timePerFrame=sf::seconds(1.f / 20.f);
-
+		timePerFrame = sf::seconds(1.f / 20.f);
 		mSprite.setPosition(-100, -100);	//矫正flash位置
-
-		
-
-	}
-	else if (Textures::Spark == type)
-	{
+		break;
+	case Textures::Spark:
 		xframes = 4;
 		yframes = 4;
-
-		timePerFrame=sf::seconds(1.f / 40.f);
-
+		timePerFrame = sf::seconds(1.f / 40.f);
 		mSprite.setPosition(-25, -45);
-
-	}
-	else if (Textures::Explosion_missile == type)
-	{
+		break;
+	case Textures::Loop:
+		xframes = 5;
+		yframes = 5;
+		timePerFrame = sf::seconds(1.5f / 25.f);
+		mSprite.setPosition(-20, -10);
+		break;
+	case Textures::Explosion_missile:
 		xframes = 4;
 		yframes = 4;
-
-		timePerFrame= sf::seconds(1.f / 35.f);
-
+		timePerFrame = sf::seconds(1.f / 35.f);
 		mSprite.setPosition(-45, -45);
-	}
-	else if (Textures::RebornCircle == type)
-	{
+		break;
+	case Textures::RebornCircle:
 		xframes = 7;
 		yframes = 7;
+		timePerFrame = sf::seconds(1.f / 7.f);
+		mSprite.setPosition(0, 0);
+		break;
 
-		timePerFrame= sf::seconds(1.f/7.f);
-
-		mSprite.setPosition(0,0);
 	}
+
 
 	frameSize.x = texture.getSize().x / xframes;
 	frameSize.y = texture.getSize().y / yframes;

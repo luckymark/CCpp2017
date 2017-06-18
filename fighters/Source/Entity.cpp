@@ -23,6 +23,11 @@ sf::Vector2f Entity::getVelocity() const
 	return mVelocity;
 }
 
+void Entity::setHP(int HP)
+{
+	mHitpoints = HP;
+}
+
 void Entity::accelerate(sf::Vector2f velocity)
 {
 	mVelocity += velocity;

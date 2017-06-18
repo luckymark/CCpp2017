@@ -69,8 +69,8 @@ private:
 
 	sf::Font					mFont;
 	sf::Text					mStatisticsText;
-	sf::Text					mGameOver;
-	sf::Text					mReborn;
+	sf::Texture					mGameOver;
+	sf::Texture					mReborn;
 	sf::Time					mStatisticsUpdateTime;
 	std::size_t					mStatisticsNumFrames;
 	sf::Time					TimePerFrame;
@@ -78,6 +78,8 @@ private:
 	sf::Texture					pauseTexture;
 
 	sf::Sprite					pauseSprite;
+	sf::Sprite					GameoverSprite;
+	sf::Sprite					RebornSprite;
 
 	int							myScore;
 	sf::Time					myTime;
