@@ -1,0 +1,195 @@
+#include<iostream>
+#include<conio.h>
+#include<cstdlib>
+#include<fstream>
+#include<cstring>
+using namespace std;
+int i,j,p,c,x[2],o1[6],o2[6];
+string l;
+char a[10][20],b,e;
+void read(string n)
+{
+    ifstream fin(n+".txt");
+    for(i=0;i<10;i++)
+    {
+        fin.getline(a[i],20);
+    }
+    fin>>x[0]>>x[1];
+    fin>>c;
+    for(i=0;i<c;i++)
+    {
+        fin>>o1[i]>>o2[i];
+    }
+    
+}
+void prt()
+{
+    cout<<"Map:"+l<<endl;
+    for(int k=0;k<c;k++)
+    {
+        if(a[o1[k]][o2[k]]!='x' and a[o1[k]][o2[k]]!='#' and a[o1[k]][o2[k]]!='+')
+        {
+            a[o1[k]][o2[k]]='o';
+        }
+        if(a[o1[k]][o2[k]]=='#')
+        {
+            a[o1[k]][o2[k]]='+';
+        }
+    }
+    for(int m=0;m<10;m++)
+    {
+        for(int n=0;n<20;n++)
+        {
+            cout<<a[m][n];
+        }
+        cout<<endl;
+    }
+    cout<<"Move times:"<<p<<endl<<"Move \"x\" to push boxes into spots using \"W,A,S,D\"."<<endl<<"\"x\":You."<<endl<<"\"o\":Spots."<<endl<<"\"#\":Boxes out of spots."<<endl<<"\"+\":Boxes in spots."<<endl<<"Press \"Q\" to change maps"<<endl;
+}
+void mov()
+{
+    i=x[0];j=x[1];
+    while(true)
+    {
+        b=getch();
+        if(b==113)
+        {
+            system("cls");
+            break;
+        }
+        else if(b==119)
+        {
+            if(a[i-1][j]=='*')
+            {
+                continue;
+            }
+            else if(a[i-1][j]=='#' or a[i-1][j]=='+')
+            {
+                if(a[i-2][j]==' ' or a[i-2][j]=='o')
+                {
+                    a[i-2][j]='#';
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            a[i][j]=' ';
+            i--;
+            a[i][j]='x';
+            p++;
+            system("cls");
+            prt();
+        }
+        else if(b==115)
+        {
+            if(a[i+1][j]=='*')
+            {
+                continue;
+            }
+            else if(a[i+1][j]=='#' or a[i+1][j]=='+')
+            {
+                if(a[i+2][j]==' ' or a[i+2][j]=='o')
+                {
+                    a[i+2][j]='#';
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            a[i][j]=' ';
+            i++;
+            a[i][j]='x';
+            p++;
+            system("cls");
+            prt();
+        }
+        else if(b==97)
+        {
+            if(a[i][j-2]=='*')
+            {
+                continue;
+            }
+            else if(a[i][j-2]=='#' or a[i][j-2]=='+')
+            {
+                if(a[i][j-4]==' ' or a[i][j-4]=='o')
+                {
+                    a[i][j-4]='#';
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            a[i][j]=' ';
+            j-=2;
+            a[i][j]='x';
+            p++;
+            system("cls");
+            prt();
+        }
+        else if(b==100)
+        {
+            if(a[i][j+2]=='*')
+            {
+                continue;
+            }
+            else if(a[i][j+2]=='#' or a[i][j+2]=='+')
+            {
+                if(a[i][j+4]==' ' or a[i][j+4]=='o')
+                {
+                    a[i][j+4]='#';
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            a[i][j]=' ';
+            j+=2;
+            a[i][j]='x';
+            p++;
+            system("cls");
+            prt();
+        }
+        int d=0;
+        for(int k=0;k<c;k++)
+        {
+            if(a[o1[k]][o2[k]]=='+')
+            {
+                d++;
+            }
+        }
+        if(d==c)
+        {
+            cout<<"Yes! You dmade it!"<<endl;
+            break;
+        }
+    }
+}
+int main()
+{
+    while(true)
+    {
+        l="0";
+        p=0;
+        for(i=0;i<6;i++)
+        {
+            o1[i]=' ';
+            o2[i]=' ';
+        }
+        while(l!="1" or l!="2")
+        {
+            cout<<"Map:";
+            l=getch();
+        }
+        system("cls");
+        read(l);
+        prt();
+        mov();
+        ofstream fout("point.txt");
+        fout<<"Map"<<l<<": "<<p<<"moves."<<endl;
+    }
+    return 0;
+}

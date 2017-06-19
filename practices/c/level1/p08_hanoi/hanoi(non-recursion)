@@ -1,0 +1,53 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+int num(int n)
+{
+    int i;
+    unsigned long long sum;
+    for(i=1;i<=64;i++)
+    {
+        sum=pow(2,i-1);
+        while(sum<n+1)
+        {
+            sum+=pow(2,i);
+        }
+        if(sum==n+1) break;
+    }
+    return i;
+}
+char move(int m,char now)
+{
+    if(m%2!=0)
+    {
+        if(now=='A') return 'B';
+        else if(now=='B') return 'C';
+        else return 'A';
+    }
+    else
+    {
+        if(now=='A') return 'C';
+        else if(now=='B') return 'A';
+        else return 'B';
+    }
+}
+int main()
+{
+    int a;
+    cout<<"total plates: ";
+    cin>>a;
+    char now[a];
+    unsigned long long n;
+    int m;
+    for(int i=0;i<a;i++)
+    {
+        now[i]='A';
+    }
+    n=pow(2,a);
+    for(int i=0;i<n-1;i++)
+    {
+        m=num(i);
+        cout<<i+1<<": move "<<m<<" from "<<now[m-1]<<" to "<<move(m,now[m-1])<<endl;
+        now[m-1]=move(m,now[m-1]);
+    }
+}
