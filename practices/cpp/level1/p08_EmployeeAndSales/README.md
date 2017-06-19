@@ -8,3 +8,25 @@
 2. 实现一个销售员类：
 	3. 记录sales的销售额
 	4. 计算工资时需要在级别工资基础上，加上销售提成（按20%核算）
+	
+	class father{
+private: 
+	int a,b;
+public:
+	father(int _a,int _b);
+};
+
+father::father(int _a,int _b){
+	a=_a;b=_b;
+}
+
+class son:public father{
+private:
+	int a,b,c;
+public:
+	son(); 
+};
+
+son::son()
+
+
