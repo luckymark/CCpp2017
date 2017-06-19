@@ -10,6 +10,11 @@ using namespace std;
 
 class Director{
 	public:
+		/*test*/
+		sf::Clock		frame_time;
+		int 			frame_num;
+		/*test*/
+
 		int 			map_change_flag;
 		sf::Vector2f		map_change_dir;
 		Item*			new_map;

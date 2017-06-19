@@ -5,6 +5,10 @@
 #include <cstdlib>
 using namespace std;
 
+void Physics::add_force(sf::Vector2f f, sf::Time dt){
+	add_motivation(f * dt.asSeconds());
+}
+
 float Physics::get_mass(){
 	return mass;
 }

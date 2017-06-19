@@ -12,6 +12,9 @@
 using namespace std;
 
 Director::Director(){
+	frame_time.restart();
+	frame_num = 0;
+
 	map_change_flag = 0;
 	stuff.clear();
 	sample.clear();
@@ -224,6 +227,12 @@ void Director::main_loop(){
 		}
 		clock.restart();
 		basic_work();
+
+		frame_num++;
+		if(frame_num >= 10){
+			cerr << (double)10/frame_time.restart().asSeconds() << endl;
+			frame_num = 0;
+		}
 	}
 }
 

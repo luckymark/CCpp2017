@@ -40,6 +40,7 @@ class Physics{
 		void add_motivation(sf::Time dt);
 		void add_motivation(sf::Vector2f mo);
 		void add_force(sf::Vector2f f);
+		void add_force(sf::Vector2f f, sf::Time dt);
 		float get_length_of_vector(sf::Vector2f vec);
 		void add_power_ratio(sf::Vector2f pr,sf::Time dt);
 		void add_position(sf::Vector2f del_pos);

@@ -8,51 +8,51 @@ main: main.cpp Animation.o Item.o Character.o Director.o Player.o Bullet.o Room.
 Director.o: Director.cpp Director.h
 	clang++ -I /usr/local/include Director.cpp -c -g
 
-Player.o: Player.h Player.cpp
+Player.o: Player.h Player.cpp Character.o
 	clang++ -I /usr/local/include Player.cpp -c -g
 
-Enemy.o: Enemy.h Enemy.cpp
+Enemy.o: Enemy.h Enemy.cpp Character.o
 	clang++ -I /usr/local/include Enemy.cpp -c -g
 
-Character.o: Character.cpp Character.h
+Character.o: Character.cpp Character.h Item.o
 	clang++ -I /usr/local/include Character.cpp -c -g
 
-Bullet.o: Bullet.h Bullet.cpp
+Bullet.o: Bullet.h Bullet.cpp Item.o
 	clang++ -I /usr/local/include Bullet.cpp -c -g
 
-Room.o: Room.h Room.cpp
+Room.o: Room.h Room.cpp Item.o
 	clang++ -I /usr/local/include Room.cpp -c -g
 
-PureAnimationItem.o: PureAnimationItem.cpp PureAnimationItem.h
+PureAnimationItem.o: PureAnimationItem.cpp PureAnimationItem.h Item.o
 	clang++ -I /usr/local/include PureAnimationItem.cpp -c -g
 
-Background.o: Background.cpp Background.h 
+Background.o: Background.cpp Background.h Item.o
 	clang++ -I /usr/local/include Background.cpp -c -g
 
-Dialog.o: Dialog.cpp Dialog.h
+Dialog.o: Dialog.cpp Dialog.h Item.o
 	clang++ -I /usr/local/include Dialog.cpp -c -g
 
 
-Begin.o: Begin.cpp Begin.h
+Begin.o: Begin.cpp Begin.h CG.o
 	clang++ -I/usr/local/include Begin.cpp -c -g
 
-CG.o: CG.cpp CG.h
+CG.o: CG.cpp CG.h Item.o MusicAnimation.o
 	clang++ -I/usr/local/include CG.cpp -c -g
 
-Door.o: Door.cpp Door.h
+Door.o: Door.cpp Door.h Item.o
 	clang++ -I/usr/local/include Door.cpp -c -g
 
 
-Item.o:	Item.cpp Item.h Concept.h
+Item.o:	Item.cpp Item.h Concept.h Animation.o Physics.o
 	clang++ -I /usr/local/include Item.cpp -c -g
 
-MusicAnimation.o: MusicAnimation.cpp MusicAnimation.h
+MusicAnimation.o: MusicAnimation.cpp MusicAnimation.h Animation.o
 	clang++ -I /usr/local/include MusicAnimation.cpp -c -g
 
-Animation.o: Animation.cpp Animation.h
+Animation.o: Animation.cpp Animation.h Frame.o
 	clang++ -I /usr/local/include Animation.cpp -c -g
 
-LifeBar.o: LifeBar.cpp LifeBar.h
+LifeBar.o: LifeBar.cpp LifeBar.h Frame.o
 	clang++ -I /usr/local/include LifeBar.cpp -c -g
 
 Frame.o: Frame.cpp Frame.h

@@ -136,15 +136,17 @@ void Player::fire(sf::Time dt,sf::Vector2f dir){
 	Item *tmp = NULL;
 	life.w[0] -= 10;
 	dir = physics.make_one(dir);
-	dir *= float(25000);
+	//dir *= float(25000);
+	dir *= float(500);
 	tmp = new Bullet(world -> sample_type[type_Bullet], world -> sample[type_Bullet], physics.get_position(), world);
 	if(tmp == NULL){
 		cerr << "get memery fail" << endl;
 		exit(0);
 	}
 	tmp -> physics.add_motivation(physics.get_speed() * (tmp -> physics.get_mass()));
-	tmp -> physics.add_force(dir);
-	//physics.add_force(dir * float(-1));
+	//tmp -> physics.add_force(dir);
+	tmp -> physics.add_motivation(dir);
+	physics.add_force(dir * float(-100));
 
 	world -> stuff.push_back(tmp);
 }
