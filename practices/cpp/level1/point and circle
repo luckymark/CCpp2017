@@ -1,0 +1,64 @@
+#include <iostream>
+#include "pac.h"
+using namespace std;
+
+int main()
+{
+	Point Onepoint;
+	Onepoint.define(1,1,1);
+	
+	Onepoint.move(3,5);
+	Onepoint.show();
+	
+	Onepoint.expand(20);
+	Onepoint.show();
+}
+
+
+#include <iostream>
+#include "pac.h"
+using namespace std;
+
+void Point::move(float dx,float dy)
+{
+	cout<<"x�����ƶ���";
+	cin>>dx;
+	cout<<"y�����ƶ���";
+	cin>>dy;
+	x=x+dx;
+	y=y+dy;
+}
+
+void Point::expand(float multiple)
+{
+	cout<<"������:";
+	cin>>multiple;
+	r=r*multiple;
+}
+
+void Point::show()
+{
+	cout<<"Բ��Ϊ��"<<x<<","<<y<<endl; 
+	cout<<"�뾶Ϊ:"<<r<<endl;
+}
+
+void Point::define(float a,float b,float c)
+{
+	x=a;
+	y=b;
+	r=c;
+}
+
+
+#include <iostream>
+using namespace std;
+
+class Point
+{
+	public:
+		float x,y,r;
+		void define(float a,float b,float c);
+		void move(float dx,float dy);
+		void expand(float multiple);
+		void show();
+};

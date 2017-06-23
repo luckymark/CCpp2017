@@ -1,0 +1,901 @@
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+#include <math.h>
+#include "music.h"
+#include "plane.h"
+#include "enemy.h"
+#include "menu.h"
+#include "enbullet.h"
+#include <string>
+#include <iostream>
+#include <sstream>
+#include "small.h"
+#include "big.h"
+#include "bigbullet.h"
+#include "gift.h"
+#include "super.h"
+
+
+std::string Int_to_String(int n)
+{
+    std::stringstream ss;
+    ss<<n;
+    return ss.str();
+}
+
+
+void move(sf::Sprite *thing)
+{
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+    {
+        thing->move(-4,0);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+    {
+        thing->move(4,0);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    {
+        thing->move(0,-4);
+    }
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    {
+        thing->move(0,4);
+    }
+}
+
+
+
+int main()
+{
+
+    sf::RenderWindow window(sf::VideoMode(1000,800), "play plane");
+    window.setFramerateLimit(60);
+    double const pi=3.1415926;
+
+
+
+    //����
+    Music mymusic;
+    mymusic.play();
+
+    //����
+    sf::Texture a;
+    sf::Sprite b;
+    a.loadFromFile("bg2.png");
+    b.setTexture(a);
+
+    //�ɻ�
+    sf::Texture texture;
+    sf::Sprite self;
+    texture.loadFromFile("feiji1.png");
+    self.setTexture(texture);
+    int myblood=100;
+    int energy=0;
+
+    //�ӵ�
+    Bullet mybullet[200];
+
+    //�л�
+    Enemy enemy[100];
+    int ennum=0;
+
+    //СBOSS
+    Smallen small[100];
+    int smallnum=0;
+
+    //��BOSS
+    Bigen big;
+
+    //�л��ӵ�
+    Enbullet enbullet[200];
+
+    //СBOSS�ӵ�
+    Enbullet smbullet1[200];
+    Enbullet smbullet2[200];
+    Enbullet smbullet3[200];
+
+    //��BOSS�ӵ�
+    Bigbullet bigbullet[100][9];
+
+    //����
+    Gift gift;
+
+    //�ɻ�����
+    Super super[25];
+
+    //��ʼλ��
+    self.setOrigin(50,50);
+    self.setPosition(500,750);
+
+    int key=1;
+
+    //ʱ��
+    sf::Clock clock1;//�л�����
+    sf::Clock clock2;//�ӵ��ٶ�
+    sf::Clock clock3;//�л��ٶ�
+    sf::Clock clock4;//�ӵ�Ƶ��
+    sf::Clock clock5;//�о��ӵ�Ƶ��
+    sf::Clock clock6;//�о��ӵ��ٶ�
+    sf::Clock clock7;//СBOSS�ٶ�
+    sf::Clock clock8;//СBOSS�ӵ�
+    sf::Clock clock9;//СBOSS�ӵ��ٶ�
+    sf::Clock clock10;//��BOSS�ٶ�
+    sf::Clock clock11;//��BOSS�ӵ�
+    sf::Clock clock12;//��BOSS�ӵ��ٶ�
+    sf::Clock clock13;//���Ʒɻ��ƶ�
+    sf::Clock clock14;//Ѫ������Ƶ��
+
+
+    //BLOOD��ʾ
+    sf::Font font;
+    font.loadFromFile("Arial.ttf");
+
+    sf::Text blood;
+    blood.setFont(font);//����
+    blood.setString("Blood");
+    blood.setCharacterSize(18);
+    blood.setFillColor(sf::Color::Red);
+    blood.setStyle(sf::Text::Bold);
+    blood.setPosition(10,700);
+
+    //Ѫ����ʾ
+    sf::RectangleShape rectangle(sf::Vector2f(12, 5));
+
+    //��������ʾ
+    sf::RectangleShape energyshape(sf::Vector2f(12, 5));
+
+    //�Ʒ�
+    double score=0;
+
+
+    sf::Text showscore;
+    showscore.setFont(font);//����
+
+    showscore.setCharacterSize(18);
+    showscore.setFillColor(sf::Color::Red);
+    showscore.setStyle(sf::Text::Bold);
+    showscore.setPosition(10,720);
+
+
+
+    while (window.isOpen())
+    {
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            if (event.type == sf::Event::Closed)
+            {
+                window.close();
+            }
+
+            //���ӵ�
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+            {
+                sf::Time elapsed4 = clock4.getElapsedTime();
+                if(elapsed4.asSeconds()>=0.2)
+                {
+                    for(int i=0;i<200;i++)
+                    {
+                        if(mybullet[i].statement==0)
+                        {
+                            mybullet[i].convex.setPosition(self.getPosition());
+                            mybullet[i].convex.move(0,-60);
+                            mybullet[i].convex.move(-13,0);
+                            mybullet[i].statement=1;
+                            break;
+                        }
+
+                    }
+                    clock4.restart();
+                }
+
+            }//���ӵ�
+        }// while event
+         //���ɻ�
+        if(self.getPosition().x>42&&self.getPosition().x<958&&self.getPosition().y>52&&self.getPosition().y<800)
+        {
+            move(&self);
+        }//���ɻ�
+
+
+
+        //�л�����
+        sf::Time elapsed1 = clock1.getElapsedTime();
+
+        if(elapsed1.asSeconds()>=1.2)
+        {
+            for(int i=0;i<100;i++)
+            {
+                if(enemy[i].statement==0)
+                {
+                    enemy[i].convex.setPosition(100+rand()%600,0);
+                    enemy[i].statement=1;
+                    ennum++;
+                    break;
+                }
+            }
+            clock1.restart();
+        }
+
+
+        sf::Time elapsed3 = clock3.getElapsedTime();
+
+        if(elapsed3.asSeconds()>=0.02)
+        {
+            for(int i=0;i<100;i++)
+            {
+                if(enemy[i].statement==1)
+                {
+                    enemy[i].convex.move(0,2);
+                }
+                if(enemy[i].convex.getPosition().y>800)
+                {
+                    enemy[i].statement=0;
+                }
+            }
+            clock3.restart();
+        }
+        //�л�����
+
+        //СBOSS��������
+
+        if(ennum%15==0&&ennum>0)
+        {
+            for(int i=0;i<100;i++)
+            {
+                if(small[i].statement==0)
+                {
+                    small[i].convex.setPosition(100+rand()%600,0);
+                    small[i].statement=1;
+                    small[i].blood=6;
+                    smallnum++;
+                    break;
+                }
+                break;
+            }
+        }
+
+        //�ƶ�СBOSS
+        sf::Time elapsed7 = clock7.getElapsedTime();
+
+        if(elapsed7.asSeconds()>=0.02)
+        {
+            for(int i=0;i<100;i++)
+            {
+                if(small[i].statement==1)
+                {
+                    small[i].convex.move(0,0.5);
+                }
+                if(small[i].convex.getPosition().y>800)
+                {
+                    small[i].statement=0;
+                }
+            }
+            clock7.restart();
+        }
+        //СBOSS����
+
+        //��BOSS����
+        if(smallnum==6&&big.statement==0)
+        {
+            big.convex.setPosition(410,-180);
+            big.statement=1;
+            big.blood=50;
+        }
+
+        //�ƶ���BOSS
+        sf::Time elapsed10 = clock10.getElapsedTime();
+
+        if(elapsed10.asSeconds()>=0.02)
+        {
+            if(big.statement==1)
+            {
+                big.convex.move(0,0.1);
+            }
+            clock10.restart();
+        }
+
+
+        //�ɻ��ӵ��ٶȴ���
+        sf::Time elapsed2 = clock2.getElapsedTime();
+
+        if(elapsed2.asSeconds()>=0.02)
+        {
+            for(int i=0;i<200;i++)
+            {
+                if(mybullet[i].statement==1)
+                {
+                    mybullet[i].convex.move(0,-8);
+
+                }
+
+                if(mybullet[i].convex.getPosition().y<-20)
+                {
+                    mybullet[i].statement=0;
+                }
+
+            }
+            clock2.restart();
+        }
+        //�ɻ��ӵ��ٶȴ���
+
+        //�л��ӵ�����
+
+        //�����о��ӵ�
+        sf::Time elapsed5 = clock5.getElapsedTime();
+
+        if(elapsed5.asSeconds()>=1.5)
+        {
+            clock5.restart();
+            if(rand()%2)
+            {
+                for(int i=0;i<100;i++)
+                {
+                    if(enemy[i].statement==1)
+                    {
+                        for(int m=0;m<200;m++)
+                        {
+                            if(smbullet1[m].statement==0)
+                            {
+                                smbullet1[m].shape.setPosition(enemy[i].convex.getPosition());
+                                smbullet1[m].shape.move(22,70);
+                                smbullet1[m].statement=1;
+                                break;
+                            }
+                        }
+
+                    }
+                }
+            }
+
+        }
+
+        //�о��ӵ��ٶ�
+        sf::Time elapsed6 = clock6.getElapsedTime();
+
+        if(elapsed6.asSeconds()>=0.02)
+        {
+            for(int i=0;i<200;i++)
+            {
+                if(enbullet[i].statement==1)
+                {
+                    enbullet[i].shape.move(0,3);
+
+                }
+
+                if(enbullet[i].shape.getPosition().y>800)
+                {
+                    enbullet[i].statement=0;
+                }
+
+            }
+            clock6.restart();
+        }
+
+        //����СBOSS�ӵ�
+        sf::Time elapsed8 = clock8.getElapsedTime();
+
+        if(elapsed8.asSeconds()>=1.5)
+        {
+            clock8.restart();
+            if(rand()%3)
+            {
+                for(int i=0;i<100;i++)
+                {
+                    if(small[i].statement==1)
+                    {
+                        for(int m=0;m<200;m++)
+                        {
+                            if(smbullet1[m].statement==0)
+                            {
+                                smbullet1[m].shape.setPosition(small[i].convex.getPosition());
+                                smbullet1[m].shape.move(50,120);
+                                smbullet1[m].statement=1;
+                                break;
+                            }
+                        }
+                        for(int m=0;m<200;m++)
+                        {
+                            if(smbullet2[m].statement==0)
+                            {
+                                smbullet2[m].shape.setPosition(small[i].convex.getPosition());
+                                smbullet2[m].shape.move(50,120);
+                                smbullet2[m].statement=1;
+                                break;
+                            }
+                        }
+                        for(int m=0;m<200;m++)
+                        {
+                            if(smbullet3[m].statement==0)
+                            {
+                                smbullet3[m].shape.setPosition(small[i].convex.getPosition());
+                                smbullet3[m].shape.move(50,120);
+                                smbullet3[m].statement=1;
+                                break;
+                            }
+                        }
+
+                    }
+                }
+            }
+
+        }
+        //����СBOSS�ӵ�
+
+        //������BOSS�ӵ�
+        sf::Time elapsed11 = clock11.getElapsedTime();
+
+        if(elapsed11.asSeconds()>=3&&big.statement==1)
+        {
+            for(int i=0;i<100;i++)
+            {
+                if(bigbullet[i][0].statement==0)
+                {
+                    for(int m=0;m<9;m++)
+                    {
+                        bigbullet[i][m].statement=1;
+                        bigbullet[i][m].shape.setPosition(big.convex.getPosition());
+                        bigbullet[i][m].shape.move(90,90);
+                        bigbullet[i][m].shape.move(-90*cos(((30+15*m)*pi)/180),90*sin(((30+15*m)*pi)/180));
+                    }
+                    break;
+                }
+            }
+            clock11.restart();
+        }
+        //������BOSS�ӵ�
+
+        //СBOSS�ӵ��ٶ�
+        sf::Time elapsed9 = clock9.getElapsedTime();
+
+        if(elapsed9.asSeconds()>=0.03)
+        {
+            for(int i=0;i<200;i++)
+            {
+                if(smbullet1[i].statement==1)
+                {
+                    smbullet1[i].shape.move(0,4);
+
+                }
+                if(smbullet1[i].shape.getPosition().y>800)
+                {
+                    smbullet1[i].statement=0;
+                }
+
+            }
+
+            for(int i=0;i<200;i++)
+            {
+                if(smbullet2[i].statement==1)
+                {
+                    smbullet2[i].shape.move(-3,4);
+
+                }
+                if(smbullet2[i].shape.getPosition().y>800)
+                {
+                    smbullet2[i].statement=0;
+                }
+
+            }
+
+            for(int i=0;i<200;i++)
+            {
+                if(smbullet3[i].statement==1)
+                {
+                    smbullet3[i].shape.move(3,4);
+
+                }
+                if(smbullet3[i].shape.getPosition().y>800)
+                {
+                    smbullet3[i].statement=0;
+                }
+
+            }
+            clock9.restart();
+        }
+
+        //��BOSS�ӵ��ٶ�
+        sf::Time elapsed12 = clock12.getElapsedTime();
+
+        if(elapsed12.asSeconds()>=0.03)
+        {
+            for(int i=0;i<100;i++)
+            {
+                if(bigbullet[i][0].statement==1)
+                {
+                    for(int m=0;m<9;m++)
+                    {
+                        bigbullet[i][m].shape.move(-3*cos(((30+15*m)*pi)/180),3*sin(((30+15*m)*pi)/180));
+                    }
+                }
+                if(bigbullet[i][0].shape.getPosition().y>800)
+                {
+                    for(int m=0;m<9;m++)
+                    {
+                        bigbullet[i][m].statement=0;
+                    }
+                }
+            }
+            clock12.restart();
+        }
+
+
+
+        //�ӵ���л���ײ
+        for(int i=0;i<100;i++)
+        {
+            if(enemy[i].statement==1)
+            {
+                for(int m=0;m<200;m++)
+                {
+                    if(mybullet[m].statement==1)
+                    {
+                        if(mybullet[m].convex.getGlobalBounds().intersects(enemy[i].convex.getGlobalBounds()))
+                        {
+                            mybullet[m].statement=0;
+                            enemy[i].statement=0;
+                            score=score+30;
+                            energy++;
+                        }
+                    }
+                }
+            }
+        }
+
+        //�ӵ���СBOSS��ײ
+        for(int i=0;i<100;i++)
+        {
+            if(small[i].statement==1)
+            {
+                for(int m=0;m<200;m++)
+                {
+                    if(mybullet[m].statement==1)
+                    {
+                        if(mybullet[m].convex.getGlobalBounds().intersects(small[i].convex.getGlobalBounds()))
+                        {
+                            mybullet[m].statement=0;
+                            small[i].blood--;
+                            energy++;
+                        }
+                    }
+                    if(small[i].blood<1)
+                    {
+                        small[i].statement=0;
+                        score=score+1;
+                    }
+                }
+            }
+        }
+
+        //�ӵ����BOSS��ײ
+        for(int m=0;m<200;m++)
+        {
+            if(mybullet[m].statement==1)
+            {
+                if(mybullet[m].convex.getGlobalBounds().intersects(big.convex.getGlobalBounds()))
+                    {
+                        mybullet[m].statement=0;
+                        big.blood--;
+                    }
+            }
+            if(big.blood<1)
+            {
+                big.statement=0;
+                key=0;
+            }
+        }
+
+
+        //�е�����
+        for(int i=0;i<=200;i++)
+        {
+            if(enbullet[i].statement==1)
+            {
+                if(self.getGlobalBounds().intersects(enbullet[i].shape.getGlobalBounds()))
+                {
+                    myblood=myblood-5;
+                    enbullet[i].statement=0;
+                }
+            }
+        }
+
+        //��СBOSS�ӵ�
+        for(int i=0;i<=200;i++)
+        {
+            if(smbullet1[i].statement==1)
+            {
+                if(self.getGlobalBounds().intersects(smbullet1[i].shape.getGlobalBounds()))
+                {
+                    myblood=myblood-5;
+                    smbullet1[i].statement=0;
+                }
+            }
+        }
+
+        for(int i=0;i<=200;i++)
+        {
+            if(smbullet2[i].statement==1)
+            {
+                if(self.getGlobalBounds().intersects(smbullet2[i].shape.getGlobalBounds()))
+                {
+                    myblood=myblood-5;
+                    smbullet2[i].statement=0;
+                }
+            }
+        }
+
+        for(int i=0;i<=200;i++)
+        {
+            if(smbullet3[i].statement==1)
+            {
+                if(self.getGlobalBounds().intersects(smbullet3[i].shape.getGlobalBounds()))
+                {
+                    myblood=myblood-5;
+                    smbullet3[i].statement=0;
+                }
+            }
+        }
+        //��СBOSS�ӵ�
+
+
+        //�д�BOSS�ӵ�
+        for(int i=0;i<100;i++)
+        {
+            for(int m=0;m<9;m++)
+            {
+                if(bigbullet[i][m].statement==1)
+                {
+                    if(self.getGlobalBounds().intersects(bigbullet[i][m].shape.getGlobalBounds()))
+                    {
+                        myblood=myblood-5;
+                        bigbullet[i][m].statement=0;
+                    }
+                }
+
+            }
+        }
+
+
+
+        //�ɻ���л�����ײ
+        for(int i=0;i<100;i++)
+        {
+            if(enemy[i].statement==1)
+            {
+                if(self.getGlobalBounds().intersects(enemy[i].convex.getGlobalBounds()))
+                {
+                    myblood=myblood-8;
+                    enemy[i].statement=0;
+                }
+            }
+        }
+
+        //�ɻ���СBOSS����ײ
+        for(int i=0;i<100;i++)
+        {
+            if(small[i].statement==1)
+            {
+                if(self.getGlobalBounds().intersects(small[i].convex.getGlobalBounds()))
+                {
+                    myblood=myblood-15;
+                    small[i].statement=0;
+                }
+            }
+        }
+
+        //����Ѫ��
+        sf::Time elapsed14 = clock14.getElapsedTime();
+
+        if(elapsed14.asSeconds()>=15)
+        {
+            gift.statement=1;
+            gift.convex.setPosition(100+rand()%600,0);
+
+            clock14.restart();
+        }
+
+        //Ѫ���ƶ�
+        if(gift.statement==1)
+        {
+            gift.convex.move(0,3);
+        }
+        if(gift.convex.getPosition().y>800)
+        {
+            gift.statement=0;
+        }
+
+        //��Ѫ��
+        if(gift.statement==1)
+        {
+            if(self.getGlobalBounds().intersects(gift.convex.getGlobalBounds()))
+            {
+                myblood=myblood+20;
+                gift.statement=0;
+            }
+        }
+
+        //�ɻ����д���
+        if(energy>10)
+        {
+            for(int i=0;i<25;i++)
+            {
+                super[i].statement=1;
+                super[i].shape.setPosition(100+32*i,800);
+            }
+            energy=0;
+        }
+
+
+        for(int i=0;i<25;i++)
+        {
+            if(super[i].statement==1)
+            {
+                super[i].shape.move(0,-3);
+            }
+            if(super[i].shape.getPosition().y<0)
+            {
+                super[i].statement=0;
+            }
+        }
+
+        //�ɻ�����ײ���л�
+        for(int i=0;i<25;i++)
+        {
+            for(int m=0;m<100;m++)
+            {
+                if(super[i].shape.getGlobalBounds().intersects(enemy[m].convex.getGlobalBounds()))
+                {
+                    super[i].statement=0;
+                    enemy[m].statement=0;
+
+                }
+            }
+        }
+
+        //�ɻ�����ײ��Сboss
+        for(int i=0;i<25;i++)
+        {
+            for(int m=0;m<100;m++)
+            {
+                if(super[i].shape.getGlobalBounds().intersects(small[m].convex.getGlobalBounds()))
+                {
+                    super[i].statement=0;
+                    small[m].statement=0;
+
+                }
+            }
+        }
+
+
+
+
+
+
+        //��ʾ����
+        showscore.setString("Score:"+Int_to_String(score));
+
+        //��Ѫ��
+        rectangle.setSize(sf::Vector2f(1.5*myblood, 10));
+        rectangle.setPosition(62,708);
+        rectangle.setFillColor(sf::Color::Red);
+
+        //��������
+        energyshape.setSize(sf::Vector2f(1.5*energy, 10));
+        energyshape.setPosition(10,745);
+        energyshape.setFillColor(sf::Color::Yellow);
+
+
+        window.clear();
+        window.draw(b);
+        window.draw(blood);
+        window.draw(showscore);
+        window.draw(rectangle);
+        window.draw(self);
+        window.draw(energyshape);
+
+        //���ӵ�
+        for(int i=0;i<200;i++)
+        {
+            if(mybullet[i].statement==1)
+            {
+                window.draw(mybullet[i].convex);
+            }
+        }
+
+        //���о��ӵ�
+        for(int i=0;i<200;i++)
+        {
+            if(enbullet[i].statement==1)
+            {
+                window.draw(enbullet[i].shape);
+            }
+        }
+
+        //���л�
+        for(int i=0;i<100;i++)
+        {
+            if(enemy[i].statement==1)
+            {
+                window.draw(enemy[i].convex);
+            }
+        }
+
+        //��СBOSS
+        for(int i=0;i<100;i++)
+        {
+            if(small[i].statement==1)
+            {
+                window.draw(small[i].convex);
+            }
+        }
+
+        //����BOSS
+        if(big.statement==1)
+        {
+            window.draw(big.convex);
+        }
+
+        //��СBOSS�ӵ�
+        for(int i=0;i<200;i++)
+        {
+            if(smbullet1[i].statement==1)
+            {
+                window.draw(smbullet1[i].shape);
+            }
+        }
+
+        for(int i=0;i<200;i++)
+        {
+            if(smbullet2[i].statement==1)
+            {
+                window.draw(smbullet2[i].shape);
+            }
+        }
+
+        for(int i=0;i<200;i++)
+        {
+            if(smbullet3[i].statement==1)
+            {
+                window.draw(smbullet3[i].shape);
+            }
+        }
+
+        //����BOSS�ӵ�
+        for(int i=0;i<100;i++)
+        {
+            for(int m=0;m<9;m++)
+            {
+                if(bigbullet[i][m].statement==1)
+                {
+                    window.draw(bigbullet[i][m].shape);
+                }
+            }
+
+        }
+
+        //��Ѫ��
+        if(gift.statement==1)
+        {
+            window.draw(gift.convex);
+        }
+
+        //���ɻ�����
+        for(int i=0;i<25;i++)
+        {
+            if(super[i].statement==1)
+            {
+                window.draw(super[i].shape);
+            }
+        }
+
+
+        window.display();
+    }
+
+
+
+
+        return 0;
+}
+

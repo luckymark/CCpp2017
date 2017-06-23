@@ -1,0 +1,16 @@
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
+
+class Super
+{
+    public:
+        sf::Sprite shape;
+        sf::Texture pic;
+        int statement=0;
+        Super()
+        {
+            pic.loadFromFile("super.png");
+            shape.setTexture(pic);
+        }
+};

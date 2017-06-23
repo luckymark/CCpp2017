@@ -1,0 +1,21 @@
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
+class Smbullet
+{
+    public:
+        sf::ConvexShape shape;
+        int statement=0;
+        sf::FloatRect Smbulletbounding;
+        Enbullet()
+        {
+            shape.setPointCount(3);
+            shape.setPoint(0, sf::Vector2f(10, 10));
+            shape.setPoint(1, sf::Vector2f(20, 0));
+            shape.setPoint(2, sf::Vector2f(0, 0));
+
+            shape.setFillColor(sf::Color(150, 50, 250));
+            shape.setOutlineThickness(1);
+            shape.setOutlineColor(sf::Color(250, 150, 100));
+        }
+};

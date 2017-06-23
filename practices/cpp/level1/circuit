@@ -1,0 +1,96 @@
+#include <iostream>
+#include "circuit.h"
+using namespace std;
+
+void PowerOn::Circuit()
+{
+	Allstate=1;
+}
+
+void PowerOff::Circuit()
+{
+	Allstate=0;
+}
+
+void ShowState()
+{
+	printf("��״̬Ϊ%d",Allstate);
+}
+
+void On::Fan()
+{#include <iostream>
+using namespace std;
+
+class Circuit
+{
+	public:
+		int Allstate;
+		void PowerOn();
+		void PowerOff();
+		void ShowState();
+};
+
+class Item
+{
+	public:
+		int num;	
+};
+
+class Fan:public Item
+{
+	public:
+		int state;
+		void On();
+		void AddFan();
+};
+
+class Lamp:public Item
+{
+	public:
+		int state;
+		void On();
+		void AddLamp();
+};
+
+	state=1;
+}
+
+void AddFan::Fan()
+{
+	num++;
+}
+
+void On::Lamp()
+{
+	state=1;
+}
+
+void AddLamp::Lamp()
+{
+	num++;
+} 
+
+
+#include <iostream>
+#include "circuit.h"
+using namespace std;
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+	Circuit Onecircuit;
+	Item item[10];
+	Fan Myfan;
+	Lamp Mylamp;
+	
+	Onecircuit.PowerOn();
+	Myfan.AddFan();
+	Mylamp.AddLamp();
+	
+	Myfan.On();
+	Mylamp.On();
+	
+	Onecircuit.PowerOff();
+	return 0;
+}

@@ -1,0 +1,20 @@
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
+
+class Smallen
+{
+    public:
+        sf::Sprite convex;
+        sf::Texture pic;
+        int statement=0;
+        int blood;
+        sf::FloatRect Smallenbounding;
+
+    Smallen()
+    {
+
+        pic.loadFromFile("small3.png");
+        convex.setTexture(pic);
+    }
+};

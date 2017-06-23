@@ -1,0 +1,138 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+char map[6][6];
+int X,Y,M,N;
+
+void move(char i)
+{
+	if(i=='w')
+	{
+		  if(map[M-1][N]!='*')
+		  {
+		      map[M][N]=' ';
+		      M--;
+		      map[M][N]='A';
+		  }
+	}
+	else if(i=='s')
+	{
+		  if(map[M+1][N]!='*')
+		  {
+			    map[M][N]=' ';
+			    M++;
+			    map[M][N]='A';
+		  }
+	}
+	else if(i=='a')
+	{
+		  if(map[M][N-1]!='*')
+		  {
+			    map[M][N]=' ';
+			    N--;
+			    map[M][N]='A';
+		  }
+  }
+  else if(i=='d')
+  {
+    	if(map[M][N+1]!='*')
+    	{
+    		  map[M][N]=' ';
+    		  N++;
+			    map[M][N]='A';
+		  }
+	}
+	
+}
+
+void main()
+{
+	for(X=0;X<6;X++)
+	{
+	    for(Y=0;Y<6;Y++)
+		  {
+			    map[X][Y]=' ';
+		  }
+	}
+	M=0,N=1;
+	map[M][N]='A';
+	
+	for(Y=0;Y<6;Y++)
+	{
+	  	if(Y!=1)
+	    {
+	    	  map[0][Y]='*';		
+		  }
+	}
+	
+	for(Y=0;Y<6;Y++)
+	{
+	    if(Y!=1&&Y!=2)
+	    {
+	    	  map[1][Y]='*';		
+		  }
+	}
+	
+	for(Y=0;Y<6;Y++)
+	{
+	    if(Y!=2&&Y!=3)
+	    {
+	    	  map[2][Y]='*';	
+		  }
+	}
+	
+	for(Y=0;Y<6;Y++)
+	{
+	    if(Y!=1&&Y!=2)
+	    {
+	    	map[3][Y]='*';		
+		  }
+	}
+	
+	
+	
+	
+	for(Y=0;Y<6;Y++)
+	{
+	    if(Y!=2&&Y!=3)
+	    {
+	        map[4][Y]='*';		
+		  }
+	}
+	
+  for(Y=0;Y<6;Y++)
+	{
+	    if(Y!=3)
+	    {
+	        map[5][Y]='*';		
+		  }
+	}
+	map[5][3]='x';
+	
+	int m,n;
+	char i;
+	for(m=0;m<6;m++)
+	{
+		for(n=0;n<6;n++)
+		{
+		    printf("%c",map[m][n]);
+		}
+		printf("\n");
+	}
+	while(map[5][3]!='A')
+	{
+        scanf("%c",&i);
+		move(i);
+		system("cls");
+		for(m=0;m<6;m++)
+	  {
+		    for(n=0;n<6;n++)
+		    {
+		        printf("%c",map[m][n]);
+			  }
+		printf("\n");
+	  }
+	    
+	}
+	printf("nice!");
+}

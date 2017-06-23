@@ -1,0 +1,92 @@
+#include <iostream>
+#include "queue.h"
+using namespace std;
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) 
+{
+	Queue MyQueue;
+	MyQueue.append(2);
+	MyQueue.pop();
+	MyQueue.show();
+	
+}
+
+#include <iostream>
+#include "queue.h"
+using namespace std;
+
+bool Queue::IsFull()
+{
+	if(tail==100)
+	{
+		return 1;
+	}
+	else
+	{
+	return 0;
+	}
+}
+
+bool Queue::IsEmpty()
+{
+	if(tail==0)
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+void Queue::append(int add)
+{
+	if(!IsFull)
+	{
+		tail++;
+		num[tail] =add;
+	}
+	else
+	{
+		printf("full");
+	}
+}
+
+void Queue::pop()
+{
+	if(!Isempty)
+	{
+		num[tail] ='0';
+		tail--;
+		return 1;
+	}
+	else
+	{
+		printf("empty");
+	}
+}
+
+void show()
+{
+	printf("����Ϊ��%d",tail); 
+}
+
+
+#include <iostream>
+#include "queue.h"
+using namespace std;
+
+#define SIZE 100	
+Class Queue
+{
+	private:
+		int tail;
+		int num[100];
+		bool IsFull();
+		bool IsEmpty();
+	public:
+		void append(int add);
+		void pop();
+		void show();
+};
