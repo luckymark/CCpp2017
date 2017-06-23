@@ -1,10 +1,10 @@
-#include <iostream>
+#include <stdio.h>
 
-#include "queue.h"
+#include "stack.h"
 
 
 
-bool Queue::isEmpty()
+bool Stack::isEmpty()
 {
 	if(tail == head)
 	{
@@ -13,16 +13,16 @@ bool Queue::isEmpty()
 	return false;
 }
 
-bool Queue::isFull()
+bool Stack::isFull()
 {
-	if((tail + 1) % 100 == head)
+	if((tail == 100)
 	{
 		return true;
 	}
 	return false;
 }
 
-int Queue::append(int x)
+int Stack::append(int x)
 {
 	if(isFull())
 	{
@@ -30,19 +30,18 @@ int Queue::append(int x)
 		return -1;
 	}
 	data[tail++] = x;
-	tail = tail % 100;
 	return 0;
 }
-int Queue::pop()
+
+int Stack::pop()
 {
-	int ans = data[head];
 	if(isEmpty())
 	{
 		puts("Error: List is empty, poping failed.");
 		return -1;
 	}
-	data[head++] = 0;
-	head = head % 100;
+	int ans = data[--tail];
+	data[tail] = 0;
 	return ans;
 }	
 	
