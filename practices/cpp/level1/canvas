@@ -1,0 +1,81 @@
+#include <iostream>
+using namespace std;
+#include "Shape.h"
+#include "Canvas.h"
+
+
+Canvas::Canvas()
+{
+	Shape* data[20]={0};
+	num=0;
+}
+void Canvas::add(Shape* shape_0)
+{
+	data[num]=shape_0;
+	num++;
+}
+void Canvas::showall()
+{
+	for(int i=1;i<=num;i++)
+	{
+		data[i]->show();#ifndef CIRCLE_H
+#define CIRCLE_H
+
+class Circle :public Shape
+{
+	public:
+		void add();#include <iostream>
+using namespace std;
+#include "Shape.h"
+#include "Circle.h"
+#include "Rect.h"
+#include "Canvas.h"
+
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) {
+	Canvas canvas;
+	Shape shape;
+	Circle circle;
+	Rect rect;
+	canvas.showall();
+	rect.add();
+	circle.add();
+	#ifndef RECT_H
+#define RECT_H
+
+class Rect :public Shape 
+{
+	public:
+		void add();
+		virtual void show();
+	protected:
+		int a,b,c,d;
+};#ifndef SHAPE_H
+#define SHAPE_H
+
+class Shape
+{
+	public:
+		virtual void show(){};
+	protected:
+		
+};
+
+#endif
+
+
+#endif
+
+	return 0;
+}
+
+		virtual void show();
+	protected:
+		int x,y,r;
+};
+
+#endif
+
+	}
+}
