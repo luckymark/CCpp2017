@@ -1,0 +1,15 @@
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
+class Gift
+{
+    public:
+    sf::Sprite convex;
+    sf::Texture pic;
+    int statement=0;
+    Gift()
+    {
+        pic.loadFromFile("gift.png");
+        convex.setTexture(pic);
+    }
+};
