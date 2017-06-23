@@ -9,7 +9,9 @@ class Staff{
 		int age,level;
 	public:
 		Staff(string name, int age,int level):name(name),age(age),level(level){}
-		int get_salary();
+		int get_salary(){
+			return level * 1000;
+		}
 };
 
 class Saleman: public Staff{
@@ -19,7 +21,9 @@ class Saleman: public Staff{
 		Saleman(string name = "", int age = 0, int level = 0,int price_ = 0):Staff(name,age,level){
 			price = price_;
 		}
-		int get_salary();
+		int get_salary(){
+			return Staff::get_salary() + 0.2*price;
+		}
 };
 
 #endif
