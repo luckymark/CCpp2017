@@ -1,0 +1,16 @@
+#include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
+
+class Enemy
+{
+    public:
+        sf::Texture pic;
+        sf::Sprite convex;
+        int statement=0;
+
+        Enemy()
+        {
+            pic.loadFromFile("enemy.png");
+            convex.setTexture(pic);
+        }
+};
